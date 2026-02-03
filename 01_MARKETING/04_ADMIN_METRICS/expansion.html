@@ -197,7 +197,7 @@
             if (!supabaseClient) initializeSupabase();
 
             const lang = getActiveLanguage ? getActiveLanguage() : 'en';
-            const redirectToLogin = () => { window.location.href = "../01_MARKETING/login.html?lang=" + lang; };
+            const redirectToLogin = () => { window.location.href = "../login.html?lang=" + lang; };
 
             const { data: { session }, error } = await supabaseClient.auth.getSession();
             if (error || !session) return redirectToLogin();

@@ -33,13 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
             let stripeUrl = "";
             switch (userData.planId) {
                 case 'basico': 
-                    stripeUrl = "https://buy.stripe.com/test_aFabJ1dNzeOc5lr2Fkb3q00"; 
+                    stripeUrl = "https://buy.stripe.com/fZu6oHdNz5dCdRX2Fkb3q06"; 
                     break;
                 case 'pro': 
-                    stripeUrl = "https://buy.stripe.com/test_3cI5kD4cZ9tS6pv0xcb3q01"; 
+                    stripeUrl = "https://buy.stripe.com/8x29AT5h30Xm6pveo2b3q07"; 
                     break;
                 case 'familiar': 
-                    stripeUrl = "https://buy.stripe.com/test_9B6cN54cZ7lK9BH3Job3q02"; 
+                    stripeUrl = "https://buy.stripe.com/cNi14nbFr35u6pv5Rwb3q08"; 
                     break;
                 default:
                     alert('Please select a plan');

@@ -270,7 +270,7 @@
         async function checkUser() {
             const { data: { user } } = await supabaseClient.auth.getUser();
             if (!user) {
-                window.location.href = "../01_MARKETING/login.html";
+                window.location.href = "../login.html";
                 return;
             }
 

@@ -239,9 +239,9 @@
 
         async function checkAdmin() {
             const { data: { session } } = await supabaseClient.auth.getSession();
-            if (!session) { window.location.href = "../01_MARKETING/login.html"; return; }
+            if (!session) { window.location.href = "../login.html"; return; }
             const { data: profile } = await supabaseClient.from('profiles').select('role').eq('id', session.user.id).single();
-            if (profile?.role !== 'admin') { window.location.href = "../01_MARKETING/login.html"; return; }
+            if (profile?.role !== 'admin') { window.location.href = "../login.html"; return; }
             loadFinanceData();
         }
 

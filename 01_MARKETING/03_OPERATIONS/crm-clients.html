@@ -221,17 +221,17 @@
         async function checkAdmin() {
             if (!supabaseClient) initializeSupabase();
             const { data: { session } } = await supabaseClient.auth.getSession();
-            if (!session) return window.location.href = "../01_MARKETING/login.html";
+            if (!session) return window.location.href = "../login.html";
 
             const { data: profile } = await supabaseClient.from('profiles').select('role').eq('id', session.user.id).single();
-            if (profile?.role !== 'admin') window.location.href = "../01_MARKETING/login.html";
+            if (profile?.role !== 'admin') window.location.href = "../login.html";
             
             loadMembers();
         }
 
         async function handleLogout() {
             await supabaseClient.auth.signOut();
-            window.location.href = "../01_MARKETING/login.html";
+            window.location.href = "../login.html";
         }
 
         function toggleMobileMenu() {

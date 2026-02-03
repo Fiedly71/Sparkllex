@@ -98,12 +98,12 @@
 
         async function handleLogout() {
             await supabaseClient.auth.signOut();
-            window.location.href = "../01_MARKETING/login.html";
+            window.location.href = "../login.html";
         }
 
         async function loadData() {
             const { data: { session } } = await supabaseClient.auth.getSession();
-            if (!session) return window.location.href = "../01_MARKETING/login.html";
+            if (!session) return window.location.href = "../login.html";
 
             // 1. Get Staff Profile
             const { data: staffProfile, error: staffError } = await supabaseClient

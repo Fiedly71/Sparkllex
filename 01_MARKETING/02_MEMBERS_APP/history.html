@@ -161,7 +161,7 @@
             const container = document.getElementById('appointments-container');
             try {
                 const { data: { session } } = await supabaseClient.auth.getSession();
-                if (!session) return window.location.href = "../01_MARKETING/login.html";
+                if (!session) return window.location.href = "../login.html";
                 
                 document.getElementById('userEmailNav').textContent = session.user.email;
 

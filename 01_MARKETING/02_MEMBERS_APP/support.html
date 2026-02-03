@@ -201,7 +201,7 @@
             const { data: { user } } = await supabaseClient.auth.getUser();
             if (!user) {
                 const lang = (typeof getActiveLanguage === 'function') ? getActiveLanguage() : 'en';
-                window.location.href = "../01_MARKETING/login.html?lang=" + lang;
+                window.location.href = "../login.html?lang=" + lang;
                 return;
             }
 

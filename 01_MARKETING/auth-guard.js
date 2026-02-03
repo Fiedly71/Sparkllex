@@ -11,9 +11,9 @@ async function checkAuth() {
     // 3. Si pas de session, on redirige vers le login
     if (!session || error) {
         console.warn("Accès non autorisé. Redirection...");
-        // On remonte d'un niveau pour trouver le dossier marketing et le login
+        // Redirection vers login (depuis les sous-dossiers, on remonte d'un niveau)
         const lang = window.getActiveLanguage ? window.getActiveLanguage() : 'en';
-        window.location.href = "../01_MARKETING/login.html?lang=" + lang;
+        window.location.href = "../login.html?lang=" + lang;
     } else {
         console.log("Accès autorisé pour :", session.user.email);
         // Optionnel : On peut afficher le nom de l'utilisateur sur la page
