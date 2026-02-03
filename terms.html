@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions - Sparkllex</title>
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    
+    <script src="./translations.js"></script>
+    <script src="./apply-translations.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-primary': '#008080',
+                        'teal-dark': '#006666',
+                        'light-bg': '#F4F9F9',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F4F9F9; color: #1f2937; }
+        .content-card { 
+            background: #FFFFFF;
+            box-shadow: 0 10px 40px rgba(0, 77, 77, 0.04);
+            border-radius: 32px;
+            border: 1px solid rgba(0, 128, 128, 0.05);
+        }
+        .policy-box {
+            border-left: 4px solid #EAB308;
+            background-color: #FEFCE8;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/80 border-b border-teal-primary/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <a href="index.html" class="hover:opacity-80 transition">
+                <img src="./images/logo.png" alt="Sparkllex Logo" class="h-10">
+            </a>
+            <a href="index.html" class="text-teal-primary font-black text-[10px] uppercase tracking-widest hover:text-teal-dark flex items-center gap-2 transition">
+                <i class="fas fa-chevron-left text-[8px]"></i> <span data-translate="backHome">Back</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="h-24"></div>
+
+    <main class="py-12 px-6">
+        <div class="max-w-4xl mx-auto content-card p-8 md:p-16">
+            
+            <header class="mb-12 border-b border-gray-100 pb-10">
+                <h1 class="text-4xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight" data-translate="termsTitle">Terms & Conditions</h1>
+                <p class="text-gray-400 font-medium italic text-sm">
+                    <span data-translate="lastUpdated">Last updated: </span>
+                    <span class="text-teal-primary">January 21, 2026</span>
+                </p>
+            </header>
+
+            <div class="space-y-16">
+                
+                <section>
+                    <div class="section-header">
+                        <i class="fas fa-file-contract text-teal-primary text-xl"></i>
+                        <h2 class="text-xl font-black text-teal-dark uppercase tracking-wide">1. Acceptance of Terms</h2>
+                    </div>
+                    <p class="leading-relaxed text-gray-600 font-medium">
+                        By accessing and using <strong>Sparkllex</strong> services, you agree to be legally bound by these Terms and Conditions. If you do not agree with any part, please do not use our services.
+                    </p>
+                </section>
+
+                <section>
+                    <div class="section-header">
+                        <i class="fas fa-sparkles text-teal-primary text-xl"></i>
+                        <h2 class="text-xl font-black text-teal-dark uppercase tracking-wide">2. Services Offered</h2>
+                    </div>
+                    <p class="mb-6 text-gray-600 font-medium">Sparkllex provides premium maintenance services including:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="flex items-center gap-3 p-4 bg-teal-50/30 rounded-2xl border border-teal-100/50">
+                            <i class="fas fa-check-circle text-teal-primary"></i>
+                            <span class="text-sm font-bold text-gray-700">Residential & Commercial Cleaning</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-4 bg-teal-50/30 rounded-2xl border border-teal-100/50">
+                            <i class="fas fa-check-circle text-teal-primary"></i>
+                            <span class="text-sm font-bold text-gray-700">Professional Laundry</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-4 bg-teal-50/30 rounded-2xl border border-teal-100/50">
+                            <i class="fas fa-check-circle text-teal-primary"></i>
+                            <span class="text-sm font-bold text-gray-700">Ironing & Finishing</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-4 bg-teal-50/30 rounded-2xl border border-teal-100/50">
+                            <i class="fas fa-check-circle text-teal-primary"></i>
+                            <span class="text-sm font-bold text-gray-700">Home Repairs</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="policy-box p-8 rounded-[2rem] shadow-sm">
+                    <h2 class="text-lg font-black mb-4 text-yellow-800 flex items-center gap-3">
+                        <i class="fas fa-exclamation-triangle text-xl"></i> Fair Use Policy
+                    </h2>
+                    <p class="text-sm text-yellow-900/80 mb-6 font-bold">
+                        To guarantee service quality, each plan has a maximum surface area limit per visit:
+                    </p>
+                    <div class="grid gap-3">
+                        <div class="flex justify-between p-4 bg-white/60 rounded-xl text-sm border border-yellow-200/50">
+                            <span class="font-black text-yellow-900 uppercase tracking-wider">Basic Plan</span>
+                            <span class="font-black text-yellow-700">Up to 111 m� (1,200 sq ft)</span>
+                        </div>
+                        <div class="flex justify-between p-4 bg-white/60 rounded-xl text-sm border border-yellow-200/50">
+                            <span class="font-black text-yellow-900 uppercase tracking-wider">Pro Plan</span>
+                            <span class="font-black text-yellow-700">Up to 139 m� (1,500 sq ft)</span>
+                        </div>
+                        <div class="flex justify-between p-4 bg-white/60 rounded-xl text-sm border border-yellow-200/50">
+                            <span class="font-black text-yellow-900 uppercase tracking-wider">Family Plan</span>
+                            <span class="font-black text-yellow-700">Up to 186 m� (2,000 sq ft)</span>
+                        </div>
+                    </div>
+                    <p class="mt-6 text-[10px] italic text-yellow-800 font-bold uppercase tracking-widest">
+                        * Properties exceeding these limits may require a plan adjustment or additional fees.
+                    </p>
+                </section>
+
+                <section>
+                    <div class="section-header">
+                        <i class="fas fa-credit-card text-teal-primary text-xl"></i>
+                        <h2 class="text-xl font-black text-teal-dark uppercase tracking-wide">3. Payments & Subscriptions</h2>
+                    </div>
+                    <p class="leading-relaxed text-gray-600 font-medium">
+                        Memberships are billed monthly automatically via <strong>Stripe</strong>. 
+                        There are no refunds for partial months, but you can cancel your subscription at any time to avoid the next billing cycle.
+                    </p>
+                </section>
+
+                <section class="bg-gray-50 p-8 md:p-12 rounded-[2.5rem] border border-gray-100 text-center md:text-left shadow-inner">
+                    <h2 class="text-2xl font-black text-gray-900 mb-2">Questions?</h2>
+                    <p class="text-gray-400 mb-8 text-sm font-medium">Our legal and support team is here to help you.</p>
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <a href="mailto:contact@sparkllex.com" class="flex-1 px-6 py-4 bg-white border border-teal-primary/20 text-teal-primary font-black text-xs uppercase tracking-widest rounded-2xl hover:bg-teal-primary hover:text-white transition shadow-sm text-center">
+                            contact@sparkllex.com
+                        </a>
+                        <a href="#" class="flex-1 px-6 py-4 bg-teal-primary text-white font-black text-xs uppercase tracking-widest rounded-2xl hover:bg-teal-dark transition shadow-xl shadow-teal-primary/20 text-center">
+                            WhatsApp Support
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-gray-50 py-16 text-center">
+        <div class="max-w-7xl mx-auto px-6">
+            <p class="text-gray-300 text-[10px] font-black uppercase tracking-[0.3em]" data-translate="footerRights">&copy; 2026 Sparkllex. All rights reserved.</p>
+            <div class="mt-8 flex justify-center gap-10 text-[10px] font-black uppercase tracking-widest text-teal-primary">
+                <a href="privacy.html" class="hover:text-teal-dark transition">Privacy</a>
+                <a href="terms.html" class="hover:text-teal-dark transition underline decoration-2 underline-offset-8" data-translate="navTerms">Terms</a>
+                <a href="cookies.html" class="hover:text-teal-dark transition" data-translate="navCookies">Cookies</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            applyTranslations();
+        });
+    </script>
+</body>
+</html>

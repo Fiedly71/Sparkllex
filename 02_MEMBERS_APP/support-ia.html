@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Support - Sparkllex Premium</title>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    
+    <script src="../translations.js"></script>
+    <script src="../apply-translations.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-primary': '#008080',
+                        'teal-dark': '#006666',
+                        'gold-accent': '#D4AF37',
+                        'light-bg': '#F8FAFA',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { 
+            background: radial-gradient(circle at top right, #fdfdfd, #eef6f6);
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .glass-header {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0, 128, 128, 0.1);
+        }
+
+        /* Chat Styles */
+        #chat-messages::-webkit-scrollbar { width: 5px; }
+        #chat-messages::-webkit-scrollbar-thumb { background: #00808022; border-radius: 10px; }
+
+        .message-anim { animation: fadeInUp 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .ai-bubble {
+            background: white;
+            border: 1px solid rgba(0, 128, 128, 0.08);
+            border-radius: 1.5rem 1.5rem 1.5rem 0.3rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+        }
+
+        .user-bubble {
+            background: #008080;
+            color: white;
+            border-radius: 1.5rem 1.5rem 0.3rem 1.5rem;
+            box-shadow: 0 8px 20px rgba(0, 128, 128, 0.15);
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 14px;
+            color: #64748b;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-link.active {
+            background: #008080;
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 128, 128, 0.2);
+        }
+
+        .typing-dot {
+            width: 4px; height: 4px; background: #008080; border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes bounce { 0%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-4px); } }
+        
+        @media (max-width: 1023px) {
+            aside { 
+                position: fixed !important; 
+                left: 0; 
+                top: 0; 
+                transform: translateX(-100%); 
+                transition: transform 0.3s ease;
+                z-index: 100 !important;
+                height: 100vh;
+                width: 280px;
+                padding-top: 80px;
+            }
+            aside.mobile-open { transform: translateX(0); }
+            .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 99; }
+            .mobile-overlay.active { display: block; }
+            main { max-width: 100%; }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <button id="mobile-menu-btn" class="lg:hidden fixed top-4 left-4 z-[101] w-12 h-12 bg-teal-primary text-white rounded-xl shadow-lg flex items-center justify-center">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <div id="mobile-overlay" class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-header">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <a href="membership-status.html">
+                <img src="../images/logo.png" alt="Logo" class="h-10 w-auto">
+            </a>
+            <div class="flex items-center gap-4">
+                <span class="text-[10px] font-black text-teal-primary px-4 py-2 bg-teal-50 rounded-full tracking-widest" data-translate="activeVipSupport">VIP SUPPORT ACTIVE</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-28 pb-6 max-w-7xl mx-auto px-4 md:px-6 flex flex-col lg:flex-row gap-10 h-full">
+        
+        <aside id="sidebar" class="w-full lg:w-64 flex-shrink-0 lg:block">
+            <div class="bg-white/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-sm border border-white/50">
+                <nav class="space-y-2">
+                    <a href="membership-status.html" class="sidebar-link hover:bg-teal-50">
+                        <i class="fas fa-th-large text-sm"></i> <span data-translate="membershipStatus">Dashboard</span>
+                    </a>
+                    <a href="appointments.html" class="sidebar-link hover:bg-teal-50">
+                        <i class="fas fa-calendar-plus text-sm"></i> <span data-translate="booking">Book</span>
+                    </a>
+                    <a href="history.html" class="sidebar-link hover:bg-teal-50">
+                        <i class="fas fa-history text-sm"></i> <span data-translate="yourHistory">Historial</span>
+                    </a>
+                    <a href="support-ia.html" class="sidebar-link active">
+                        <i class="fas fa-robot text-sm"></i> <span data-translate="aISupport">Soporte IA</span>
+                    </a>
+                    <a href="support.html" id="vip-support-link" class="sidebar-link hover:bg-teal-50">
+                        <i class="fas fa-headset text-sm"></i> <span>Soporte VIP</span> <i class="fas fa-lock ml-auto text-[10px] opacity-50"></i>
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="flex-1 flex flex-col bg-white/80 backdrop-blur-md rounded-[2.5rem] border border-white shadow-2xl overflow-hidden mb-8">
+            <div class="p-6 border-b border-gray-100 flex items-center justify-between bg-white/50">
+                <div class="flex items-center gap-4">
+                    <div class="relative">
+                        <div class="w-12 h-12 bg-teal-primary rounded-2xl flex items-center justify-center text-white text-xl shadow-lg shadow-teal-primary/20">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-4 border-white rounded-full"></div>
+                    </div>
+                    <div>
+                        <h2 class="font-black text-gray-900 tracking-tight" data-translate="aIAssistant">Sparkllex Bot</h2>
+                        <p class="text-[10px] font-bold text-teal-primary uppercase tracking-widest" data-translate="onlineAI">Online • 24/7 Support</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="chat-messages" class="flex-1 overflow-y-auto p-8 space-y-6">
+                <div class="flex gap-4 message-anim">
+                    <div class="w-9 h-9 rounded-xl bg-teal-50 text-teal-primary flex items-center justify-center flex-shrink-0 shadow-sm">
+                        <i class="fas fa-robot text-xs"></i>
+                    </div>
+                    <div class="ai-bubble p-5 max-w-[85%]">
+                        <p class="text-sm font-medium leading-relaxed" id="ai-greeting"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 bg-white/50 border-t border-gray-100">
+                <div class="flex gap-3 p-2 bg-white rounded-[2rem] shadow-inner border border-gray-100 focus-within:border-teal-primary focus-within:ring-4 focus-within:ring-teal-primary/5 transition-all">
+                    <input type="text" id="chat-input" data-translate="typeQuestion" placeholder="Type your question here..." 
+                        class="flex-1 bg-transparent px-6 py-2 outline-none text-sm font-semibold text-gray-700">
+                    <button id="send-btn" class="w-12 h-12 bg-teal-primary text-white rounded-full flex items-center justify-center shadow-xl shadow-teal-primary/30 hover:scale-105 active:scale-95 transition">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="flex gap-2 mt-4 flex-wrap">
+                    <button onclick="quickQuery('Planes')" class="text-[9px] font-black uppercase tracking-widest px-4 py-2 bg-white border border-gray-100 rounded-full hover:border-teal-primary hover:text-teal-primary transition shadow-sm" data-translate="whatPlans">What plans?</button>
+                    <button onclick="quickQuery('Reservar')" class="text-[9px] font-black uppercase tracking-widest px-4 py-2 bg-white border border-gray-100 rounded-full hover:border-teal-primary hover:text-teal-primary transition shadow-sm" data-translate="howToBook">How to book?</button>
+                    <button onclick="quickQuery('Horario')" class="text-[9px] font-black uppercase tracking-widest px-4 py-2 bg-white border border-gray-100 rounded-full hover:border-teal-primary hover:text-teal-primary transition shadow-sm" data-translate="schedules">Schedules</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="py-10 text-center text-gray-600 text-[9px] font-bold uppercase tracking-[0.3em] mt-12 border-t border-gray-200">
+        <div class="text-[7px] uppercase tracking-[0.3em]">Designed by <a href="https://gui-fiedly.vercel.app" target="_blank" rel="noopener noreferrer" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">GF Digital Studio</a> | <a href="mailto:isteah.gffilsaime@gmail.com" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">Gui Fiedly Fils-aime</a></div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../database-config.js"></script>
+
+    <script>
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+
+        // Set initial AI greeting based on language
+        function setGreeting() {
+            const lang = (typeof getActiveLanguage === 'function') ? getActiveLanguage() : 'en';
+            const greeting = lang === 'es'
+                ? '¡Hola! Soy tu asistente de <b>Sparkllex</b>. Estoy aquí para ayudarte con tus dudas sobre limpieza, planes y reservas. ¿En qué puedo servirte hoy? ?'
+                : 'Hello! I\'m your <b>Sparkllex</b> assistant. I\'m here to help you with questions about cleaning, plans and bookings. How can I help you today? ?';
+            document.getElementById('ai-greeting').innerHTML = greeting;
+        }
+
+        const responsesEn = {
+            'plan': 'We offer 3 luxury levels:\n\n1. **Basic**: Essential cleaning.\n2. **Pro**: Laundry and ironing included.\n3. **Family**: Everything above plus home repairs.\n\nWould you like to see the prices?',
+            'book': 'It\'s very simple. Just go to the **"Book"** section in your sidebar, choose the service and time. We take care of the rest!',
+            'schedule': 'Our team works **Monday to Saturday, from 8:00 AM to 8:00 PM**. The app is available 24/7 to schedule services.',
+            'price': 'Plans start from very competitive prices. Would you like me to send you the PDF catalog to your email?',
+            'hello': 'Hello again! It\'s a pleasure to greet you. How can I make your life easier today?',
+            'default': 'That\'s an excellent question. Let me connect you with a human agent if you need very specific details, or try asking me about "plans", "booking" or "schedules".'
+        };
+
+        const responsesEs = {
+            'planes': 'Ofrecemos 3 niveles de lujo:\n\n1. **Basic**: Limpieza esencial.\n2. **Pro**: Lavado y planchado incluido.\n3. **Family**: Todo lo anterior más reparaciones de sastrería.\n\n¿Te gustaría ver los precios?',
+            'reservar': 'Es muy sencillo. Solo ve a la sección de **"Reservar"** en tu panel lateral, elige el servicio y la hora. ¡Nosotros nos encargamos del resto!',
+            'horario': 'Nuestro equipo trabaja de **Lunes a Sábado, de 8:00 AM a 8:00 PM**. La app está disponible 24/7 para programar servicios.',
+            'precio': 'Los planes comienzan desde precios muy competitivos. ¿Quieres que te envíe el catálogo PDF a tu correo?',
+            'hola': '¡Hola de nuevo! Es un placer saludarte. ¿Cómo puedo hacer tu vida más fácil hoy?',
+            'default': 'Esa es una excelente pregunta. Permíteme conectarte con un agente humano si necesitas detalles muy específicos, o intenta preguntarme sobre "planes", "reservas" o "horarios".'
+        };
+
+        function addMessage(text, type = 'ai') {
+            const div = document.createElement('div');
+            div.className = `flex gap-4 message-anim ${type === 'user' ? 'flex-row-reverse' : ''}`;
+            
+            const icon = type === 'ai' ? '<i class="fas fa-robot text-xs"></i>' : '<i class="fas fa-user text-xs"></i>';
+            const iconBg = type === 'ai' ? 'bg-teal-50 text-teal-primary' : 'bg-gold-accent text-white';
+            const bubbleClass = type === 'ai' ? 'ai-bubble' : 'user-bubble';
+            
+            div.innerHTML = `
+                <div class="w-9 h-9 rounded-xl ${iconBg} flex items-center justify-center flex-shrink-0 shadow-sm">
+                    ${icon}
+                </div>
+                <div class="${bubbleClass} p-5 max-w-[85%]">
+                    <p class="text-sm font-medium leading-relaxed">${text.replace(/\n/g, '<br>')}</p>
+                </div>
+            `;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const div = document.createElement('div');
+            div.id = 'typing-indicator';
+            div.className = 'flex gap-4 message-anim';
+            div.innerHTML = `
+                <div class="w-9 h-9 rounded-xl bg-teal-50 text-teal-primary flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-robot text-xs"></i>
+                </div>
+                <div class="ai-bubble p-5 flex gap-1 items-center">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            `;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function handleSend() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            const msg = text.toLowerCase();
+            addMessage(text, 'user');
+            chatInput.value = '';
+
+            showTypingIndicator();
+
+            setTimeout(() => {
+                const indicator = document.getElementById('typing-indicator');
+                if (indicator) indicator.remove();
+
+                const lang = (typeof getActiveLanguage === 'function') ? getActiveLanguage() : 'en';
+                const responses = lang === 'es' ? responsesEs : responsesEn;
+
+                let response = responses.default;
+                for (let key in responses) {
+                    if (msg.includes(key)) {
+                        response = responses[key];
+                        break;
+                    }
+                }
+                addMessage(response, 'ai');
+            }, 1500);
+        }
+
+        function quickQuery(topic) {
+            chatInput.value = topic;
+            handleSend();
+        }
+
+        sendBtn.addEventListener('click', handleSend);
+        chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSend(); });
+        
+        // VIP Access Check
+        async function checkVIPAccess() {
+            const { data: { user } } = await supabaseClient.auth.getUser();
+            if (!user) return;
+
+            const { data: profile } = await supabaseClient
+                .from('profiles')
+                .select('plan')
+                .eq('id', user.id)
+                .single();
+
+            const currentPlan = (profile?.plan || 'BASIC').toUpperCase();
+            const vipLink = document.getElementById('vip-support-link');
+            
+            if (currentPlan !== 'FAMILY' && currentPlan !== 'FAMILIAR') {
+                vipLink.style.opacity = '0.5';
+                vipLink.style.cursor = 'not-allowed';
+                vipLink.style.pointerEvents = 'none';
+            } else {
+                vipLink.querySelector('.fa-lock').remove();
+            }
+        }
+        
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobile-overlay');
+            sidebar.classList.toggle('mobile-open');
+            overlay.classList.toggle('active');
+        }
+        
+        // Set greeting on page load
+        setGreeting();
+        checkVIPAccess();
+        
+        // Mobile menu event listener
+        document.getElementById('mobile-menu-btn')?.addEventListener('click', toggleMobileMenu);
+    </script>
+</body>
+</html>

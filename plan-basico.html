@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Plan - Sparkllex</title>
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    
+    <script src="./translations.js"></script>
+    <script src="./apply-translations.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-primary': '#008080',
+                        'teal-dark': '#006666',
+                        'light-bg': '#F4F9F9',
+                        'gold-accent': '#D4AF37',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .plan-card {
+            background: #FFFFFF;
+            box-shadow: 0 25px 50px -12px rgba(0, 128, 128, 0.1);
+            border-radius: 3rem;
+            border-top: 12px solid #008080;
+        }
+        .feature-icon {
+            background: rgba(0, 128, 128, 0.05);
+            color: #008080;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            margin-right: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-light-bg text-gray-800 antialiased font-sans">
+
+    <nav class="p-6 bg-white/80 backdrop-blur-md sticky top-0 z-50 flex justify-between items-center border-b border-teal-primary/5">
+        <a href="index.html#planes" class="text-teal-primary font-black flex items-center group">
+            <i class="fas fa-arrow-left mr-2 group-hover:-translate-x-1 transition"></i> 
+            <span data-translate="backHome">Back</span>
+        </a>
+        <img src="./images/logo.png" alt="Sparkllex" class="h-8 md:h-10">
+        <div class="w-10 md:w-20"></div> </nav>
+
+    <main class="max-w-4xl mx-auto px-6 py-12 md:py-24">
+        <div class="plan-card p-8 md:p-16">
+            
+            <div class="text-center mb-16">
+                <span class="uppercase tracking-[0.3em] text-xs font-black text-gray-400 block mb-4" data-translate="planBasicoSubtitle">Entry Level</span>
+                <h1 class="text-4xl md:text-6xl font-black teal-dark mb-6 italic tracking-tight" data-translate="basicPlan">Basic Plan</h1>
+                <div class="text-6xl font-black text-teal-primary">
+                    $79<span class="text-xl text-gray-400 font-medium ml-2" data-translate="perMonth">/month</span>
+                </div>
+            </div>
+
+            <div class="space-y-10 mb-16">
+                <h2 class="text-sm font-black uppercase tracking-widest border-b border-gray-100 pb-4 text-gray-400" data-translate="whatsIncluded">What's included?</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+                    <div class="flex items-start">
+                        <div class="feature-icon"><i class="fas fa-broom"></i></div>
+                        <div>
+                            <p class="font-bold text-gray-800" data-translate="basicIncl1Title">1 Standard Cleaning / month</p>
+                            <p class="text-sm text-gray-400 italic" data-translate="basicIncl1Desc">Up to 1 bed + 1 bath (or 1,200 sq ft).</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="feature-icon"><i class="fas fa-tshirt"></i></div>
+                        <div>
+                            <p class="font-bold text-gray-800" data-translate="basicIncl2Title">1 Laundry or Ironing</p>
+                            <p class="text-sm text-gray-400 italic" data-translate="basicIncl2Desc">Up to 15 lb or 1 standard bag.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="feature-icon"><i class="fas fa-tags"></i></div>
+                        <div>
+                            <p class="font-bold text-gray-800" data-translate="basicIncl3Title">Preferential Pricing</p>
+                            <p class="text-sm text-gray-400 italic" data-translate="basicIncl3Desc">Member discounts on all extra services.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
+                        <div>
+                            <p class="font-bold text-gray-800" data-translate="basicIncl4Title">Standard Scheduling</p>
+                            <p class="text-sm text-gray-400 italic" data-translate="basicIncl4Desc">Regular monthly programming.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-light-bg p-6 rounded-2xl mb-16 text-xs text-gray-400 font-medium leading-relaxed">
+                <p><i class="fas fa-info-circle mr-2 opacity-50"></i> <span data-translate="fairUseNote">Note: Each plan is subject to a fair use policy. Spaces exceeding the mentioned limits may incur additional charges.</span></p>
+            </div>
+
+            <div class="text-center">
+                <a href="signup.html?plan=basico" class="inline-block bg-teal-primary text-white px-16 py-5 rounded-full font-black text-xl hover:bg-teal-dark transition transform hover:scale-105 shadow-xl shadow-teal-primary/20 mb-12" data-translate="choosePlan">
+                    Choose this Plan
+                </a>
+                
+                <div class="pt-12 border-t border-gray-50">
+                    <p class="text-gray-400 font-black text-[10px] uppercase tracking-[0.3em] mb-6">Explore other tiers</p>
+                    <div class="flex justify-center gap-12">
+                        <a href="plan-pro.html" class="text-teal-primary font-black hover:text-gold-accent transition text-sm">View Pro Plan</a>
+                        <a href="plan-familiar.html" class="text-teal-primary font-black hover:text-gold-accent transition text-sm">View Family Plan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            applyTranslations();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../translations.js"></script>
+    <script src="../apply-translations.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda Global - Sparkllex Admin</title>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-admin': '#004D4D',
+                        'teal-accent': '#008080',
+                        'gold-accent': '#D4AF37',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; }
+        .sidebar-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 12px; color: #94a3b8; transition: all 0.3s ease; text-decoration: none; }
+        .sidebar-item:hover { background: rgba(255,255,255,0.05); color: white; }
+        .sidebar-item.active { background: #008080; color: white; box-shadow: 0 4px 12px rgba(0,128,128,0.3); }
+        .admin-card { background: white; border-radius: 1.5rem; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 10px 25px rgba(0,0,0,0.02); }
+        .status-badge { padding: 4px 10px; border-radius: 8px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        @media (max-width: 1023px) {
+            aside { 
+                position: fixed; 
+                left: 0; 
+                top: 0; 
+                transform: translateX(-100%); 
+                transition: transform 0.3s ease;
+                z-index: 100;
+            }
+            aside.mobile-open { transform: translateX(0); }
+            .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 99; }
+            .mobile-overlay.active { display: block; }
+            body { display: block; }
+            main { width: 100% !important; padding: 1rem !important; }
+            .admin-card { overflow-x: auto; }
+        }
+    </style>
+</head>
+<body class="lg:flex min-h-screen">
+
+    <button id="mobile-menu-btn" class="lg:hidden fixed top-4 left-4 z-[101] w-12 h-12 bg-teal-accent text-white rounded-xl shadow-lg flex items-center justify-center">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <div id="mobile-overlay" class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+
+    <aside id="sidebar" class="w-72 bg-teal-admin text-white flex flex-col lg:sticky lg:top-0 h-screen shadow-2xl lg:z-50">
+        <div class="p-8 border-b border-white/10 text-center">
+            <h1 class="text-xl font-black tracking-tighter italic">SPARKLLEX <span class="text-teal-accent">PRO</span></h1>
+        </div>
+        <nav class="flex-1 p-6 space-y-8 overflow-y-auto">
+            <div>
+                <p class="text-[10px] font-black text-teal-accent uppercase tracking-[2px] mb-4 opacity-70" data-translate="operationalControl">Control Operativo</p>
+                <div class="space-y-2">
+                    <a href="agenda.html" class="sidebar-item active">
+                        <i class="fas fa-calendar-alt w-5"></i><span data-translate="agendaTitle">Global Agenda</span>
+                    </a>
+                    <a href="crm-clients.html" class="sidebar-item">
+                        <i class="fas fa-users w-5"></i><span data-translate="crmTitle">CRM Clients</span>
+                    </a>
+                    <a href="team-manager.html" class="sidebar-item">
+                        <i class="fas fa-user-shield w-5"></i><span data-translate="teamManager">Team Management</span>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <p class="text-[10px] font-black text-teal-accent uppercase tracking-[2px] mb-4 opacity-70" data-translate="globalStrategy">Global Strategy</p>
+                <div class="space-y-2">
+                    <a href="../04_ADMIN_METRICS/executive-finance.html" class="sidebar-item">
+                        <i class="fas fa-chart-line w-5"></i><span data-translate="finances">Finances</span>
+                    </a>
+                    <a href="../04_ADMIN_METRICS/expansion.html" class="sidebar-item">
+                        <i class="fas fa-rocket w-5"></i><span data-translate="expansion">Expansion</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <div class="p-6 border-t border-white/10">
+            <button onclick="handleLogout()" class="w-full p-3 text-red-300 hover:text-white transition font-bold text-sm flex items-center justify-center gap-2">
+                <i class="fas fa-power-off"></i><span data-translate="logout">Logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <main class="flex-1 p-4 lg:p-10 overflow-y-auto relative pt-20 lg:pt-10">
+        <header class="mb-10">
+            <h2 class="text-4xl font-black text-gray-900 tracking-tight italic" data-translate="agendaTitle">Global Agenda</h2>
+            <p class="text-gray-500 font-medium italic" data-translate="todayAgenda">Central service control</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="admin-card p-6 border-l-4 border-orange-400">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest" data-translate="pending">Pending</p>
+                <h3 id="count-pending" class="text-3xl font-black text-gray-800">0</h3>
+            </div>
+            <div class="admin-card p-6 border-l-4 border-teal-accent">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest" data-translate="confirmed">Confirmed</p>
+                <h3 id="count-confirmed" class="text-3xl font-black text-gray-800">0</h3>
+            </div>
+            <div class="admin-card p-6 border-l-4 border-gold-accent">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest" data-translate="todayCount">Today</p>
+                <h3 id="count-today" class="text-3xl font-black text-gray-800">0</h3>
+            </div>
+        </div>
+
+        <div class="admin-card overflow-hidden">
+            <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse min-w-[600px]">
+                <thead class="bg-gray-50/50 border-b border-gray-100">
+                    <tr>
+                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">Schedule</th>
+                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">Service / Client / Address</th>
+                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest text-center">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-table-body" class="divide-y divide-gray-50 bg-white"></tbody>
+            </table>
+        </div>
+
+        <div id="taskModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
+            <div class="bg-white p-8 rounded-[2rem] shadow-2xl w-full max-w-md">
+                <h3 class="text-2xl font-black mb-6 text-gray-800 italic">Dispatch Mission</h3>
+                <div class="space-y-4">
+                    <input type="text" id="task-service" placeholder="Service Type" class="w-full p-4 bg-gray-50 rounded-2xl outline-none">
+                    <input type="text" id="task-client-manual" placeholder="Client Name" class="w-full p-4 bg-gray-50 rounded-2xl outline-none">
+                    <div class="flex gap-4">
+                        <input type="date" id="task-date" class="w-1/2 p-4 bg-gray-50 rounded-2xl outline-none">
+                        <input type="time" id="task-time" class="w-1/2 p-4 bg-gray-50 rounded-2xl outline-none">
+                    </div>
+                    <button onclick="saveTask()" class="w-full bg-teal-admin text-white py-4 rounded-2xl font-black hover:bg-teal-accent transition">CREATE SERVICE</button>
+                    <button onclick="closeModal()" class="w-full text-gray-400 text-[10px] font-black uppercase tracking-widest">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="openModal()" class="fixed bottom-10 right-10 bg-teal-accent text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center text-2xl hover:rotate-90 transition-all z-50">
+            <i class="fas fa-plus"></i>
+        </button>
+
+        <footer class="py-10 text-center text-gray-600 text-[9px] font-bold uppercase tracking-[0.3em] mt-12 border-t border-gray-200">
+            <div class="text-[7px] uppercase tracking-[0.3em]">Designed by <a href="https://gui-fiedly.vercel.app" target="_blank" rel="noopener noreferrer" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">GF Digital Studio</a> | <a href="mailto:isteah.gffilsaime@gmail.com" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">Gui Fiedly Fils-aime</a></div>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../database-config.js"></script>
+    <script>
+        async function checkAdmin() {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (!session) return window.location.href = "../login.html";
+            const { data: profile } = await supabaseClient.from('profiles').select('role').eq('id', session.user.id).single();
+            if (profile?.role !== 'admin') window.location.href = "../login.html";
+            loadData();
+        }
+
+        async function loadData() {
+            // Récupération avec jointure Profiles pour le Nom et l'Adresse
+            const { data, error } = await supabaseClient
+                .from('appointments')
+                .select(`
+                    *,
+                    profiles:client_id (
+                        full_name,
+                        address
+                    )
+                `)
+                .order('appointment_date', {ascending: true});
+
+            if (error) return;
+
+            const todayStr = new Date().toISOString().split('T')[0];
+            document.getElementById('count-pending').textContent = data.filter(a => a.status === 'pendiente' || a.status === 'pending').length;
+            document.getElementById('count-confirmed').textContent = data.filter(a => a.status === 'confirmed').length;
+            document.getElementById('count-today').textContent = data.filter(a => a.appointment_date === todayStr).length;
+
+            const tableBody = document.getElementById('admin-table-body');
+            tableBody.innerHTML = data.map(appo => {
+                // FALLBACKS TO AVOID NULL
+                const service = appo.service_type || appo.service_name || 'General Service';
+                const clientName = appo.profiles?.full_name || appo.client_name || 'Manual Client';
+                const address = appo.profiles?.address || 'No address';
+
+                return `
+                <tr class="hover:bg-teal-50/30 transition-colors">
+                    <td class="p-6">
+                        <div class="flex flex-col">
+                            <span class="font-black text-gray-800">${appo.appointment_date || '---'}</span>
+                            <span class="text-xs font-bold text-teal-accent italic">
+                                <i class="far fa-clock mr-1"></i> ${appo.appointment_time || ''}
+                            </span>
+                        </div>
+                    </td>
+                    <td class="p-6">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-gray-800 text-lg">${service}</span>
+                            <span class="text-sm font-semibold text-teal-accent">${clientName}</span>
+                            <span class="text-xs text-gray-400 italic">
+                                <i class="fas fa-map-marker-alt mr-1"></i> ${address}
+                            </span>
+                        </div>
+                    </td>
+                    <td class="p-6 text-center">
+                        <span class="status-badge ${appo.status === 'pendiente' || appo.status === 'pending' ? 'bg-orange-100 text-orange-600' : 'bg-teal-100 text-teal-accent'}">
+                            ${appo.status}
+                        </span>
+                    </td>
+                </tr>
+                `;
+            }).join('');
+        }
+
+        function openModal() { document.getElementById('taskModal').classList.remove('hidden'); }
+        function closeModal() { document.getElementById('taskModal').classList.add('hidden'); }
+
+        async function saveTask() {
+            const task = {
+                service_type: document.getElementById('task-service').value,
+                client_name: document.getElementById('task-client-manual').value,
+                appointment_date: document.getElementById('task-date').value,
+                appointment_time: document.getElementById('task-time').value,
+                status: 'pending'
+            };
+            const { error } = await supabaseClient.from('appointments').insert([task]);
+            if (!error) { closeModal(); loadData(); }
+        }
+
+        async function handleLogout() { 
+            await supabaseClient.auth.signOut();
+            window.location.href = "../login.html"; 
+        }
+
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobile-overlay');
+            sidebar.classList.toggle('mobile-open');
+            overlay.classList.toggle('active');
+        }
+        
+        if(document.getElementById('mobile-menu-btn')) {
+            document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
+        }
+
+        checkAdmin();
+    </script>
+</body>
+</html>

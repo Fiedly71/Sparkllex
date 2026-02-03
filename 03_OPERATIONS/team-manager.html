@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Manager - Sparkllex Admin</title>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-admin': '#004D4D',
+                        'teal-accent': '#008080',
+                        'gold-accent': '#D4AF37',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; }
+        .sidebar-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 12px; color: #94a3b8; transition: all 0.3s ease; text-decoration: none; }
+        .sidebar-item:hover { background: rgba(255,255,255,0.05); color: white; }
+        .sidebar-item.active { background: #008080; color: white; box-shadow: 0 4px 12px rgba(0,128,128,0.3); }
+        .modal-active { display: flex !important; }
+        .info-label { font-size: 9px; font-weight: 900; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.05em; margin-bottom: 2px; }
+        .info-value { font-weight: 700; color: #1e293b; font-size: 13px; }
+        
+        @media (max-width: 1023px) {
+            aside { 
+                position: fixed !important; 
+                left: 0; 
+                top: 0; 
+                transform: translateX(-100%); 
+                transition: transform 0.3s ease;
+                z-index: 100 !important;
+            }
+            aside.mobile-open { transform: translateX(0); }
+            .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 99; }
+            .mobile-overlay.active { display: block; }
+            body { display: block; }
+            main { width: 100% !important; padding: 1rem !important; }
+            .bg-white.rounded-\[2\.5rem\] { overflow-x: auto; }
+        }
+    </style>
+</head>
+<body class="lg:flex min-h-screen">
+
+    <button id="mobile-menu-btn" class="lg:hidden fixed top-4 left-4 z-[101] w-12 h-12 bg-teal-accent text-white rounded-xl shadow-lg flex items-center justify-center">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <div id="mobile-overlay" class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+
+    <aside id="sidebar" class="w-72 bg-teal-admin text-white flex flex-col lg:sticky lg:top-0 h-screen shadow-2xl lg:z-50">
+        <div class="p-8 border-b border-white/10 text-center">
+            <h1 class="text-xl font-black tracking-tighter italic uppercase">SPARKLLEX <span class="text-teal-accent">PRO</span></h1>
+        </div>
+        <nav class="flex-1 p-6 space-y-7 overflow-y-auto">
+            <div>
+                <p class="text-[10px] font-black text-teal-accent uppercase tracking-[2px] mb-4 opacity-70">Operations</p>
+                <div class="space-y-1">
+                    <a href="agenda.html" class="sidebar-item"><i class="fas fa-calendar-alt w-5"></i><span>Agenda Global</span></a>
+                    <a href="crm-clients.html" class="sidebar-item"><i class="fas fa-users w-5"></i><span>CRM Clients</span></a>
+                    <a href="team-manager.html" class="sidebar-item active"><i class="fas fa-user-shield w-5"></i><span>Team Manager</span></a>
+                </div>
+            </div>
+            <div>
+                <p class="text-[10px] font-black text-teal-accent uppercase tracking-[2px] mb-4 opacity-70">Metrics</p>
+                <div class="space-y-1">
+                    <a href="../04_ADMIN_METRICS/executive-finance.html" class="sidebar-item"><i class="fas fa-chart-line w-5"></i><span>Finance</span></a>
+                </div>
+            </div>
+        </nav>
+        <div class="p-6 border-t border-white/10">
+            <button onclick="handleLogout()" class="w-full p-3 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-xl transition font-bold text-sm flex items-center justify-center gap-2">
+                <i class="fas fa-power-off"></i> Log Out
+            </button>
+        </div>
+    </aside>
+
+    <main class="flex-1 p-4 lg:p-10 overflow-y-auto pt-20 lg:pt-10">
+        <header class="flex justify-between items-center mb-10">
+            <div>
+                <h2 class="text-4xl font-black text-gray-900 tracking-tight italic uppercase">Team Manager</h2>
+                <p class="text-gray-500 font-medium italic">Full Administrative Review Portal.</p>
+            </div>
+            <button onclick="loadData()" class="bg-white text-teal-accent border border-teal-accent px-6 py-3 rounded-2xl font-black text-[10px] shadow hover:bg-teal-50 transition uppercase tracking-widest">
+                <i class="fas fa-sync-alt mr-2"></i> Refresh List
+            </button>
+        </header>
+
+        <div class="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden">
+            <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse min-w-[700px]">
+                <thead class="bg-gray-50/50 border-b border-gray-100">
+                    <tr>
+                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">Candidate</th>
+                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest text-center">Country</th>
+                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest text-center">Status</th>
+                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest text-right">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="team-table-body" class="divide-y divide-gray-50 bg-white">
+                    <tr><td colspan="4" class="p-20 text-center italic text-gray-400">Fetching team data...</td></tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+
+        <footer class="py-10 text-center text-gray-600 text-[9px] font-bold uppercase tracking-[0.3em] mt-12 border-t border-gray-200">
+            <div class="text-[7px] uppercase tracking-[0.3em]">Designed by <a href="https://gui-fiedly.vercel.app" target="_blank" rel="noopener noreferrer" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">GF Digital Studio</a> | <a href="mailto:isteah.gffilsaime@gmail.com" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">Gui Fiedly Fils-aime</a></div>
+        </footer>
+    </main>
+
+    <div id="detailsModal" class="hidden fixed inset-0 bg-slate-900/80 backdrop-blur-md z-[100] items-center justify-center p-4">
+        <div class="bg-white w-full max-w-2xl rounded-[3rem] shadow-2xl p-10 relative max-h-[90vh] overflow-y-auto">
+            <div id="modal-content"></div>
+            
+            <div class="mt-10 grid grid-cols-2 gap-4">
+                <div id="modal-delete-btn"></div> 
+                <div id="modal-approve-btn"></div> 
+            </div>
+            
+            <button onclick="closeModal()" class="mt-6 w-full text-center text-gray-400 font-bold text-[10px] uppercase tracking-[0.2em] hover:text-gray-600 transition">
+                Close Dossier
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../database-config.js"></script>
+    <script>
+        let allMembers = [];
+
+        async function checkAdmin() {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (!session) window.location.href = "../login.html";
+            loadData();
+        }
+
+        async function loadData() {
+            const { data, error } = await supabaseClient.from('profiles').select('*').in('role', ['admin', 'staff']).order('is_verified', { ascending: true });
+            if (!error) { allMembers = data; renderTable(); }
+        }
+
+        function renderTable() {
+            const tableBody = document.getElementById('team-table-body');
+            tableBody.innerHTML = allMembers.map(m => `
+                <tr class="hover:bg-gray-50/50 transition">
+                    <td class="p-6">
+                        <div class="font-black text-gray-800">${m.full_name || 'Anonymous'}</div>
+                        <div class="text-[10px] text-gray-400 font-medium">${m.email}</div>
+                    </td>
+                    <td class="p-6 text-center text-[10px] font-black text-teal-accent uppercase">${m.country || 'N/A'}</td>
+                    <td class="p-6 text-center">
+                        <span class="px-3 py-1 rounded-lg text-[9px] font-black uppercase ${m.is_verified ? 'bg-emerald-100 text-emerald-600' : 'bg-amber-100 text-amber-600'}">
+                            ${m.is_verified ? 'Verified' : 'Pending Review'}
+                        </span>
+                    </td>
+                    <td class="p-6 text-right">
+                        <button onclick="openDetails('${m.id}')" class="bg-teal-admin text-white px-6 py-2.5 rounded-xl text-[10px] font-black uppercase hover:bg-teal-accent transition shadow-lg tracking-widest">
+                            View Dossier
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openDetails(id) {
+            const m = allMembers.find(x => x.id === id);
+            const content = document.getElementById('modal-content');
+            const approveBtn = document.getElementById('modal-approve-btn');
+            const deleteBtn = document.getElementById('modal-delete-btn');
+            
+            // Handle both old format (id_file_url, permit_file_url) and new format (file_urls object)
+            // Parse JSON if file_urls is a string
+            let fileUrls = {};
+            if (m.file_urls) {
+                try {
+                    fileUrls = typeof m.file_urls === 'string' ? JSON.parse(m.file_urls) : m.file_urls;
+                } catch (e) {
+                    console.error('Error parsing file_urls:', e);
+                }
+            }
+            const hasOldFormat = m.id_file_url || m.permit_file_url;
+            const hasNewFormat = Object.keys(fileUrls).length > 0;
+            
+            // Debug log
+            console.log('Profile:', m.full_name, 'hasNewFormat:', hasNewFormat, 'hasOldFormat:', hasOldFormat, 'fileUrls:', fileUrls);
+            
+            let fileSectionHtml = "";
+
+            // PRIORITÉ: Nouveau format d'abord, puis ancien format, puis message "no files"
+            if (hasNewFormat && m.country === 'USA') {
+                // USA Documents
+                fileSectionHtml = `
+                    <div class="space-y-4">
+                        ${fileUrls.id_front || fileUrls.id_back ? `
+                            <div class="bg-gray-50 p-3 rounded-xl">
+                                <div class="text-[9px] font-black uppercase text-gray-400 mb-2">ID Document</div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    ${fileUrls.id_front ? `<a href="${fileUrls.id_front}" target="_blank" class="flex items-center justify-center p-2 bg-white rounded-lg border hover:border-teal-accent transition text-[8px] font-bold"><i class="fas fa-image mr-1"></i> Front</a>` : ''}
+                                    ${fileUrls.id_back ? `<a href="${fileUrls.id_back}" target="_blank" class="flex items-center justify-center p-2 bg-white rounded-lg border hover:border-teal-accent transition text-[8px] font-bold"><i class="fas fa-image mr-1"></i> Back</a>` : ''}
+                                </div>
+                            </div>` : ''}
+                        
+                        ${fileUrls.social_front || fileUrls.social_back ? `
+                            <div class="bg-gray-50 p-3 rounded-xl">
+                                <div class="text-[9px] font-black uppercase text-gray-400 mb-2">Social Security</div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    ${fileUrls.social_front ? `<a href="${fileUrls.social_front}" target="_blank" class="flex items-center justify-center p-2 bg-white rounded-lg border hover:border-teal-accent transition text-[8px] font-bold"><i class="fas fa-image mr-1"></i> Front</a>` : ''}
+                                    ${fileUrls.social_back ? `<a href="${fileUrls.social_back}" target="_blank" class="flex items-center justify-center p-2 bg-white rounded-lg border hover:border-teal-accent transition text-[8px] font-bold"><i class="fas fa-image mr-1"></i> Back</a>` : ''}
+                                </div>
+                            </div>` : ''}
+                        
+                        ${fileUrls.address_front || fileUrls.address_back ? `
+                            <div class="bg-gray-50 p-3 rounded-xl">
+                                <div class="text-[9px] font-black uppercase text-gray-400 mb-2">Proof of Address</div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    ${fileUrls.address_front ? `<a href="${fileUrls.address_front}" target="_blank" class="flex items-center justify-center p-2 bg-white rounded-lg border hover:border-teal-accent transition text-[8px] font-bold"><i class="fas fa-file mr-1"></i> Front</a>` : ''}
+                                    ${fileUrls.address_back ? `<a href="${fileUrls.address_back}" target="_blank" class="flex items-center justify-center p-2 bg-white rounded-lg border hover:border-teal-accent transition text-[8px] font-bold"><i class="fas fa-file mr-1"></i> Back</a>` : ''}
+                                </div>
+                            </div>` : ''}
+                        
+                        ${fileUrls.cv ? `
+                            <a href="${fileUrls.cv}" target="_blank" class="flex items-center justify-center p-3 bg-teal-50 rounded-xl border border-teal-100 hover:bg-teal-100 transition">
+                                <i class="fas fa-file-alt text-teal-600 mr-2"></i>
+                                <span class="text-[9px] font-black uppercase text-teal-600">View CV / Resume</span>
+                            </a>` : ''}
+                    </div>`;
+            } else if (hasNewFormat && m.country === 'CL') {
+                // Chile Documents
+                fileSectionHtml = `
+                    <div class="space-y-4">
+                        ${fileUrls.rut_front || fileUrls.rut_back ? `
+                            <div class="bg-gray-50 p-3 rounded-xl">
+                                <div class="text-[9px] font-black uppercase text-gray-400 mb-2">RUT Vigente</div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    ${fileUrls.rut_front ? `<a href="${fileUrls.rut_front}" target="_blank" class="flex items-center justify-center p-2 bg-white rounded-lg border hover:border-teal-accent transition text-[8px] font-bold"><i class="fas fa-image mr-1"></i> Front</a>` : ''}
+                                    ${fileUrls.rut_back ? `<a href="${fileUrls.rut_back}" target="_blank" class="flex items-center justify-center p-2 bg-white rounded-lg border hover:border-teal-accent transition text-[8px] font-bold"><i class="fas fa-image mr-1"></i> Back</a>` : ''}
+                                </div>
+                            </div>` : ''}
+                        
+                        ${fileUrls.antecedentes_front || fileUrls.antecedentes_back ? `
+                            <div class="bg-gray-50 p-3 rounded-xl">
+                                <div class="text-[9px] font-black uppercase text-gray-400 mb-2">Certificado Antecedentes</div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    ${fileUrls.antecedentes_front ? `<a href="${fileUrls.antecedentes_front}" target="_blank" class="flex items-center justify-center p-2 bg-white rounded-lg border hover:border-teal-accent transition text-[8px] font-bold"><i class="fas fa-file mr-1"></i> Front</a>` : ''}
+                                    ${fileUrls.antecedentes_back ? `<a href="${fileUrls.antecedentes_back}" target="_blank" class="flex items-center justify-center p-2 bg-white rounded-lg border hover:border-teal-accent transition text-[8px] font-bold"><i class="fas fa-file mr-1"></i> Back</a>` : ''}
+                                </div>
+                            </div>` : ''}
+                        
+                        ${fileUrls.afp_front || fileUrls.afp_back ? `
+                            <div class="bg-gray-50 p-3 rounded-xl">
+                                <div class="text-[9px] font-black uppercase text-gray-400 mb-2">AFP</div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    ${fileUrls.afp_front ? `<a href="${fileUrls.afp_front}" target="_blank" class="flex items-center justify-center p-2 bg-white rounded-lg border hover:border-teal-accent transition text-[8px] font-bold"><i class="fas fa-file mr-1"></i> Front</a>` : ''}
+                                    ${fileUrls.afp_back ? `<a href="${fileUrls.afp_back}" target="_blank" class="flex items-center justify-center p-2 bg-white rounded-lg border hover:border-teal-accent transition text-[8px] font-bold"><i class="fas fa-file mr-1"></i> Back</a>` : ''}
+                                </div>
+                            </div>` : ''}
+                        
+                        ${fileUrls.fonasa_front || fileUrls.fonasa_back ? `
+                            <div class="bg-gray-50 p-3 rounded-xl">
+                                <div class="text-[9px] font-black uppercase text-gray-400 mb-2">Fonasa</div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    ${fileUrls.fonasa_front ? `<a href="${fileUrls.fonasa_front}" target="_blank" class="flex items-center justify-center p-2 bg-white rounded-lg border hover:border-teal-accent transition text-[8px] font-bold"><i class="fas fa-file mr-1"></i> Front</a>` : ''}
+                                    ${fileUrls.fonasa_back ? `<a href="${fileUrls.fonasa_back}" target="_blank" class="flex items-center justify-center p-2 bg-white rounded-lg border hover:border-teal-accent transition text-[8px] font-bold"><i class="fas fa-file mr-1"></i> Back</a>` : ''}
+                                </div>
+                            </div>` : ''}
+                        
+                        ${fileUrls.cv ? `
+                            <a href="${fileUrls.cv}" target="_blank" class="flex items-center justify-center p-3 bg-teal-50 rounded-xl border border-teal-100 hover:bg-teal-100 transition">
+                                <i class="fas fa-file-alt text-teal-600 mr-2"></i>
+                                <span class="text-[9px] font-black uppercase text-teal-600">Ver CV / Currículum</span>
+                            </a>` : ''}
+                    </div>`;
+            } else if (hasOldFormat) {
+                // Legacy format support (anciens profils créés avant la mise à jour)
+                fileSectionHtml = `
+                    <div class="p-4 bg-blue-50 border border-blue-100 rounded-2xl mb-3">
+                        <p class="text-[8px] font-black uppercase text-blue-600 tracking-tighter mb-1">
+                            <i class="fas fa-info-circle mr-1"></i> Ancien Format Détecté
+                        </p>
+                        <p class="text-[7px] text-blue-500">Ce profil a été créé avant la mise à jour. Seuls 2 documents sont disponibles.</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        ${m.id_file_url ? `<a href="${m.id_file_url}" target="_blank" class="flex flex-col items-center p-3 bg-gray-50 rounded-xl border border-gray-100 hover:bg-teal-50 transition group">
+                            <i class="fas fa-id-badge text-gray-300 group-hover:text-teal-accent mb-1"></i>
+                            <span class="text-[8px] font-black uppercase text-gray-500">View ID</span>
+                        </a>` : ''}
+                        
+                        ${m.permit_file_url ? `<a href="${m.permit_file_url}" target="_blank" class="flex flex-col items-center p-3 bg-gray-50 rounded-xl border border-gray-100 hover:bg-teal-50 transition group">
+                            <i class="fas fa-file-signature text-gray-300 group-hover:text-teal-accent mb-1"></i>
+                            <span class="text-[8px] font-black uppercase text-gray-500">View Permit</span>
+                        </a>` : ''}
+                    </div>`;
+            } else {
+                // Aucun fichier uploadé
+                fileSectionHtml = `
+                    <div class="p-4 bg-amber-50 border border-amber-100 rounded-2xl text-center">
+                        <i class="fas fa-exclamation-triangle text-amber-400 mb-1"></i>
+                        <p class="text-[8px] font-black uppercase text-amber-600 tracking-tighter">No Digital Files Uploaded</p>
+                    </div>`;
+            }
+
+            content.innerHTML = `
+                <div class="flex justify-between items-start border-b pb-6 mb-8">
+                    <div>
+                        <h3 class="text-3xl font-black text-gray-900 italic uppercase tracking-tighter">Staff Dossier</h3>
+                        <p class="text-teal-accent font-bold text-[10px] uppercase tracking-widest">Internal Security Review</p>
+                    </div>
+                    <div class="bg-gray-100 px-4 py-2 rounded-xl text-center">
+                        <div class="info-label">Status</div>
+                        <div class="text-[10px] font-black uppercase ${m.is_verified ? 'text-emerald-500' : 'text-amber-500'}">
+                            ${m.is_verified ? 'Verified' : 'Pending'}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-6">
+                        <section>
+                            <h4 class="text-teal-accent font-black text-[11px] uppercase mb-3 italic tracking-widest">01. Identity & Contact</h4>
+                            <div class="bg-gray-50 p-4 rounded-2xl space-y-3">
+                                <div><div class="info-label">Full Legal Name</div><div class="info-value">${m.full_name || 'N/A'}</div></div>
+                                <div><div class="info-label">Phone</div><div class="info-value">${m.phone || 'N/A'}</div></div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <h4 class="text-teal-accent font-black text-[11px] uppercase mb-3 italic tracking-widest">02. Permanent Address</h4>
+                            <div class="bg-gray-50 p-4 rounded-2xl space-y-3">
+                                <div><div class="info-label">Street</div><div class="info-value">${m.address_street || 'N/A'}</div></div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div><div class="info-label">City</div><div class="info-value">${m.address_city || 'N/A'}</div></div>
+                                    <div><div class="info-label">State/Reg</div><div class="info-value">${m.address_region || 'N/A'}</div></div>
+                                </div>
+                                <div><div class="info-label">ZIP Code</div><div class="info-value">${m.address_zip || 'N/A'}</div></div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="space-y-6">
+                        <section>
+                            <h4 class="text-teal-accent font-black text-[11px] uppercase mb-3 italic tracking-widest">03. Professional Service</h4>
+                            <div class="bg-teal-admin text-white p-4 rounded-2xl">
+                                <div class="info-label text-white/50">Requested Specialization</div>
+                                <div class="text-lg font-black uppercase italic text-gold-accent">
+                                    <i class="fas fa-concierge-bell mr-2"></i> ${m.service_type || 'NOT SPECIFIED'}
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <h4 class="text-gold-accent font-black text-[11px] uppercase mb-3 italic tracking-widest">04. Official Identifiers</h4>
+                            <div class="border border-gold-accent/20 p-4 rounded-2xl space-y-4">
+                                <div>
+                                    <div class="info-label">${m.country === 'USA' ? 'SSN' : 'RUT'}</div>
+                                    <div class="info-value font-mono text-lg text-teal-dark">${m.tax_id || 'NOT PROVIDED'}</div>
+                                </div>
+                                <div><div class="info-label">ID Number</div><div class="info-value">${m.id_number || 'N/A'}</div></div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <h4 class="text-teal-accent font-black text-[11px] uppercase mb-3 italic tracking-widest">05. Digital Verification</h4>
+                            ${fileSectionHtml}
+                        </section>
+                    </div>
+                </div>
+            `;
+
+            deleteBtn.innerHTML = `
+                <button onclick="deleteCandidate('${m.id}')" class="w-full py-4 bg-rose-50 text-rose-500 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-rose-500 hover:text-white transition border border-rose-100">
+                    Reject & Delete
+                </button>
+            `;
+
+            approveBtn.innerHTML = !m.is_verified ? `
+                <button id="approveBtnAction" onclick="approveStaff('${m.id}')" class="w-full py-4 bg-emerald-500 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-xl hover:bg-emerald-600 transition">
+                    Approve Staff Member
+                </button>
+            ` : `<div class="flex items-center justify-center gap-2 text-emerald-500 font-black text-[10px] py-4 uppercase border border-emerald-100 rounded-2xl"><i class="fas fa-check-circle"></i> Profile Verified</div>`;
+
+            document.getElementById('detailsModal').classList.add('modal-active');
+        }
+
+        async function approveStaff(id) {
+            const btn = document.getElementById('approveBtnAction');
+            if(btn) {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> PROCESSING...';
+            }
+
+            const { error } = await supabaseClient.from('profiles').update({ is_verified: true }).eq('id', id);
+            
+            if (!error) {
+                alert("Staff member successfully verified.");
+                closeModal(); 
+                loadData(); 
+            } else {
+                alert("Verification failed: " + error.message);
+                if(btn) {
+                    btn.disabled = false;
+                    btn.innerText = "Approve Staff Member";
+                }
+            }
+        }
+
+        async function deleteCandidate(id) {
+            if (confirm("?? WARNING: This will permanently delete this staff member. Continue?")) {
+                const { error } = await supabaseClient.from('profiles').delete().eq('id', id);
+                if (!error) { closeModal(); loadData(); }
+            }
+        }
+
+        function handleLogout() {
+            supabaseClient.auth.signOut().then(() => { window.location.href = "../login.html"; });
+        }
+
+        function closeModal() { document.getElementById('detailsModal').classList.remove('modal-active'); }
+        
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobile-overlay');
+            sidebar.classList.toggle('mobile-open');
+            overlay.classList.toggle('active');
+        }
+        
+        if(document.getElementById('mobile-menu-btn')) {
+            document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
+        }
+        
+        window.onload = checkAdmin;
+    </script>
+</body>
+</html>

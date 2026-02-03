@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Sparkllex</title>
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    
+    <script src="./translations.js"></script>
+    <script src="./apply-translations.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-primary': '#008080',
+                        'teal-dark': '#006666',
+                        'light-bg': '#F4F9F9',
+                        'gold-accent': '#D4AF37',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .nav-glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        
+        .lang-btn { 
+            font-size: 0.7rem; 
+            font-weight: 800; 
+            padding: 0.4rem 0.8rem; 
+            border-radius: 9999px; 
+            border: 1.5px solid #008080; 
+            cursor: pointer; 
+            transition: 0.3s; 
+        }
+        .lang-active { background-color: #008080 !important; color: white !important; }
+        .lang-inactive { background-color: transparent !important; color: #008080 !important; }
+
+        .pricing-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 2.5rem;
+        }
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .pricing-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 1.5rem;
+                padding: 1.5rem;
+                scrollbar-width: none;
+            }
+            .pricing-card {
+                flex: 0 0 85%;
+                scroll-snap-align: center;
+            }
+            .pricing-grid::-webkit-scrollbar { display: none; }
+        }
+    </style>
+</head>
+
+<body class="bg-light-bg text-gray-800 antialiased font-sans">
+
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-glass border-b border-teal-primary/10">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center h-20">
+            <a href="index.html" class="hover:opacity-80 transition">
+                <img src="./images/logo.png" alt="Sparkllex" class="h-10">
+            </a>
+            
+            <div class="hidden lg:flex space-x-10 font-black text-[10px] uppercase tracking-[0.2em] text-gray-500">
+                <a href="index.html#inicio" class="hover:text-teal-primary transition" data-translate="navHome">Home</a>
+                <a href="index.html#servicios" class="hover:text-teal-primary transition" data-translate="navServices">Services</a>
+                <a href="index.html#planes" class="hover:text-teal-primary transition" data-translate="navPlans">Plans</a>
+                <a href="index.html#contacto" class="hover:text-teal-primary transition" data-translate="navContact">Contact</a>
+            </div>
+
+            <div class="flex items-center space-x-3">
+                <div class="flex bg-gray-100 p-1 rounded-full">
+                    <button onclick="changeLanguage('es')" id="btn-es" class="lang-btn">ES</button>
+                    <button onclick="changeLanguage('en')" id="btn-en" class="lang-btn">EN</button>
+                </div>
+                <a href="/login.html" class="bg-teal-primary text-white px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest transition hover:bg-teal-dark shadow-lg shadow-teal-primary/20" data-translate="btnAccess">Access</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-44 pb-20 bg-white border-b border-gray-50">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <span class="uppercase tracking-[0.4em] text-[10px] font-black text-teal-primary block mb-4" data-translate="pricingSubtitlePre">Excellence in every detail</span>
+            <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tight">
+                <span data-translate="pricingTitle1">Premium</span> 
+                <span class="text-teal-primary italic" data-translate="pricingTitle2">Plans</span>
+            </h1>
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed" data-translate="pricingSubtitle">
+                Choose the level of care your home and lifestyle deserve.
+            </p>
+        </div>
+    </header>
+
+    <section class="py-24 bg-light-bg">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="pricing-grid grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                
+                <div class="pricing-card bg-white border border-teal-primary/10 p-10 flex flex-col shadow-xl shadow-gray-200/50">
+                    <h3 class="text-2xl font-black mb-2 teal-dark" data-translate="planBasicoTitle">Basic</h3>
+                    <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-8" data-translate="planBasicoSubtitle">Essential Needs</p>
+                    <div class="mb-8">
+                        <span class="text-6xl font-black text-teal-primary tracking-tighter">$79</span>
+                        <span class="text-gray-400 font-bold text-sm" data-translate="perMonth">/month</span>
+                    </div>
+                    <ul class="space-y-5 mb-12 flex-grow text-sm font-medium text-gray-600">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-teal-primary mr-3 text-lg"></i> <span data-translate="planBasicoFeature1">1 Monthly visit</span></li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-teal-primary mr-3 text-lg"></i> <span data-translate="planBasicoFeature2">Standard Cleaning</span></li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-teal-primary mr-3 text-lg"></i> <span data-translate="planBasicoFeature3">Chat Support</span></li>
+                        <li class="flex items-center opacity-30 line-through"><i class="fas fa-times-circle mr-3 text-lg"></i> <span data-translate="planBasicoFeature4">Elite Laundry</span></li>
+                    </ul>
+                    <a href="#" data-plan="basic" class="w-full py-5 rounded-2xl border-2 border-teal-primary text-teal-primary font-black text-center hover:bg-teal-primary hover:text-white transition uppercase tracking-[0.2em] text-[10px]" data-translate="viewDetails">View Details</a>
+                </div>
+
+                <div class="pricing-card bg-teal-primary text-white p-12 flex flex-col relative md:scale-110 shadow-2xl shadow-teal-primary/30 z-10">
+                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-gold-accent text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.2em] shadow-lg" data-translate="mostPopular">? Most Popular</div>
+                    <h3 class="text-2xl font-black mb-2" data-translate="planProTitle">Pro</h3>
+                    <p class="text-teal-100 text-xs font-bold uppercase tracking-widest mb-8" data-translate="planProSubtitle">For Professionals</p>
+                    <div class="mb-8">
+                        <span class="text-6xl font-black tracking-tighter">$149</span>
+                        <span class="text-teal-100 font-bold text-sm" data-translate="perMonth">/month</span>
+                    </div>
+                    <ul class="space-y-5 mb-12 flex-grow text-sm font-bold">
+                        <li class="flex items-center"><i class="fas fa-star text-gold-accent mr-3 text-lg"></i> <span data-translate="planProFeature1">3 Monthly visits</span></li>
+                        <li class="flex items-center"><i class="fas fa-star text-gold-accent mr-3 text-lg"></i> <span data-translate="planProFeature2">Pro Laundry Service</span></li>
+                        <li class="flex items-center"><i class="fas fa-star text-gold-accent mr-3 text-lg"></i> <span data-translate="planProFeature3">Priority Support</span></li>
+                        <li class="flex items-center"><i class="fas fa-star text-gold-accent mr-3 text-lg"></i> <span data-translate="planProFeature4">Master Ironing</span></li>
+                    </ul>
+                    <a href="#" data-plan="pro" class="w-full py-5 rounded-2xl bg-white text-teal-primary font-black text-center hover:bg-light-bg transition uppercase tracking-[0.2em] text-[10px] shadow-xl" data-translate="viewDetails">View Details</a>
+                </div>
+
+                <div class="pricing-card bg-white border border-teal-primary/10 p-10 flex flex-col shadow-xl shadow-gray-200/50">
+                    <h3 class="text-2xl font-black mb-2 teal-dark" data-translate="planFamiliarTitle">Family</h3>
+                    <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-8" data-translate="planFamiliarSubtitle">Total Home Care</p>
+                    <div class="mb-8">
+                        <span class="text-6xl font-black text-teal-primary tracking-tighter">$249</span>
+                        <span class="text-gray-400 font-bold text-sm" data-translate="perMonth">/month</span>
+                    </div>
+                    <ul class="space-y-5 mb-12 flex-grow text-sm font-medium text-gray-600">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-teal-primary mr-3 text-lg"></i> <span data-translate="planFamiliarFeature1">Daily Cleaning</span></li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-teal-primary mr-3 text-lg"></i> <span data-translate="planFamiliarFeature2">Unlimited Laundry</span></li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-teal-primary mr-3 text-lg"></i> <span data-translate="planFamiliarFeature3">Full Maintenance</span></li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-teal-primary mr-3 text-lg"></i> <span data-translate="planFamiliarFeature4">24/7 VIP Support</span></li>
+                    </ul>
+                    <a href="#" data-plan="familiar" class="w-full py-5 rounded-2xl border-2 border-teal-primary text-teal-primary font-black text-center hover:bg-teal-primary hover:text-white transition uppercase tracking-[0.2em] text-[10px]" data-translate="viewDetails">View Details</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32 bg-white border-t border-gray-50">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl font-black mb-6 tracking-tight"><span data-translate="securePaymentTitle1">Secure</span> <span class="text-teal-primary" data-translate="securePaymentTitle2">Payments</span></h2>
+                <div class="flex justify-center items-center gap-10 grayscale opacity-30 text-5xl mt-8">
+                    <i class="fab fa-cc-stripe hover:grayscale-0 transition cursor-help"></i>
+                    <i class="fab fa-cc-visa hover:grayscale-0 transition cursor-help"></i>
+                    <i class="fab fa-cc-mastercard hover:grayscale-0 transition cursor-help"></i>
+                    <i class="fab fa-cc-apple-pay hover:grayscale-0 transition cursor-help"></i>
+                </div>
+            </div>
+
+            <div class="space-y-5">
+                <details class="group bg-light-bg rounded-[2rem] p-8 border border-teal-primary/5 cursor-pointer">
+                    <summary class="flex justify-between items-center font-black text-teal-dark list-none uppercase tracking-widest text-xs">
+                        <span data-translate="faq1Question">How does billing work?</span>
+                        <div class="bg-white w-8 h-8 rounded-full flex items-center justify-center shadow-sm">
+                            <i class="fas fa-plus group-open:rotate-45 transition text-[10px]"></i>
+                        </div>
+                    </summary>
+                    <p class="mt-6 text-gray-500 text-sm leading-relaxed font-medium" data-translate="faq1Answer">
+                        Subscriptions renew automatically every 30 days. We process all payments through Stripe with military-grade encryption for your security.
+                    </p>
+                </details>
+
+                <details class="group bg-light-bg rounded-[2rem] p-8 border border-teal-primary/5 cursor-pointer">
+                    <summary class="flex justify-between items-center font-black text-teal-dark list-none uppercase tracking-widest text-xs">
+                        <span data-translate="faq3Question">Can I change my plan?</span>
+                        <div class="bg-white w-8 h-8 rounded-full flex items-center justify-center shadow-sm">
+                            <i class="fas fa-plus group-open:rotate-45 transition text-[10px]"></i>
+                        </div>
+                    </summary>
+                    <p class="mt-6 text-gray-500 text-sm leading-relaxed font-medium" data-translate="faq3Answer">
+                        Yes, you can upgrade or downgrade at any time from your dashboard. Changes are automatically prorated on your next billing cycle.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-teal-dark text-white py-20">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <img src="./images/logo.png" class="h-10 mx-auto mb-10 brightness-0 invert opacity-40">
+            <div class="text-[10px] opacity-30 space-y-3 font-black tracking-[0.3em] uppercase">
+                <p data-translate="footerRights">&copy; 2026 Sparkllex. All rights reserved.</p>
+                <div class="text-[7px] uppercase tracking-[0.3em]">
+                    Designed by <a href="https://gui-fiedly.vercel.app" target="_blank" rel="noopener noreferrer" style="color: #008080;" class="hover:opacity-100 transition cursor-pointer">GF Digital Studio</a> | <a href="mailto:isteah.gffilsaime@gmail.com" style="color: #008080;" class="hover:opacity-100 transition cursor-pointer">Gui Fiedly Fils-aime</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function updateUI(lang) {
+            applyTranslations(lang);
+            document.getElementById('btn-es').className = lang === 'es' ? 'lang-btn lang-active' : 'lang-btn lang-inactive';
+            document.getElementById('btn-en').className = lang === 'en' ? 'lang-btn lang-active' : 'lang-btn lang-inactive';
+        }
+
+        function changeLanguage(lang) {
+            updateUI(lang);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const initial = (typeof getActiveLanguage === 'function') ? getActiveLanguage() : (localStorage.getItem('preferredLang') || 'en');
+            updateUI(initial);
+        });
+
+        async function redirectToStripe(planUrl) {
+            const { data: { user } } = await supabase.auth.getUser();
+
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const finalUrl = `${planUrl}?client_reference_id=${user.id}&prefilled_email=${user.email}`;
+            window.location.href = finalUrl;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('[data-plan="basic"]').addEventListener('click', () => redirectToStripe('https://buy.stripe.com/fZu6oHdNz5dCdRX2Fkb3q06'));
+            document.querySelector('[data-plan="pro"]').addEventListener('click', () => redirectToStripe('https://buy.stripe.com/8x29AT5h30Xm6pveo2b3q07'));
+            document.querySelector('[data-plan="familiar"]').addEventListener('click', () => redirectToStripe('https://buy.stripe.com/cNi14nbFr35u6pv5Rwb3q08'));
+        });
+    </script>
+</body>
+</html>
