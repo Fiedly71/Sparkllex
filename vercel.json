@@ -1,34 +1,9 @@
 {
   "version": 2,
-  "name": "sparkllex",
-  "buildCommand": null,
-  "outputDirectory": null,
   "builds": [
     {
       "src": "api/**/*.js",
       "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/02_MEMBERS_APP/(.*)",
-      "dest": "/02_MEMBERS_APP/$1"
-    },
-    {
-      "src": "/03_OPERATIONS/(.*)",
-      "dest": "/03_OPERATIONS/$1"
-    },
-    {
-      "src": "/04_ADMIN_METRICS/(.*)",
-      "dest": "/04_ADMIN_METRICS/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
     }
   ],
   "headers": [
