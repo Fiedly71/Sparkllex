@@ -1,6 +1,8 @@
 {
   "version": 2,
   "name": "sparkllex",
+  "buildCommand": null,
+  "outputDirectory": null,
   "builds": [
     {
       "src": "api/**/*.js",
