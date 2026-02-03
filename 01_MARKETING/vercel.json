@@ -1,0 +1,100 @@
+{
+  "version": 2,
+  "name": "sparkllex",
+  "builds": [
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/02_MEMBERS_APP/(.*)",
+      "dest": "/02_MEMBERS_APP/$1"
+    },
+    {
+      "src": "/03_OPERATIONS/(.*)",
+      "dest": "/03_OPERATIONS/$1"
+    },
+    {
+      "src": "/04_ADMIN_METRICS/(.*)",
+      "dest": "/04_ADMIN_METRICS/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "/images/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.css",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/index.html",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/02_MEMBERS_APP/membership-status.html",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/dashboard.html",
+      "destination": "/02_MEMBERS_APP/membership-status.html"
+    }
+  ]
+}
