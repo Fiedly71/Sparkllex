@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Staff Signup | Sparkllex</title>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 
+                        'teal-primary': '#008080', 
+                        'teal-dark': '#004D4D', 
+                        'gold-accent': '#D4AF37', 
+                        'light-bg': '#F4F9F9' 
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F4F9F9; }
+        .input-field { width: 100%; padding: 0.8rem 1rem; background: #F8FAFC; border-radius: 0.75rem; border: 2px solid #E2E8F0; outline: none; transition: 0.3s; font-weight: 500; font-size: 14px; }
+        .input-field:focus { border-color: #008080; background: white; box-shadow: 0 0 0 4px rgba(0, 128, 128, 0.05); }
+        label { display: block; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; color: #004D4D; }
+        .hidden-section { display: none; }
+        .step-card { background: white; border-radius: 2.5rem; padding: 2.5rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); border: 1px solid #F1F5F9; }
+    </style>
+</head>
+<body class="min-h-screen pb-20">
+
+    <header class="bg-white border-b border-gray-100 py-12 mb-12 text-center">
+        <div class="max-w-4xl mx-auto px-6">
+            <img src="../images/logo.png" alt="Sparkllex" class="h-12 mx-auto mb-6">
+            <h1 class="text-5xl font-black text-teal-dark tracking-tighter italic uppercase mb-2">Staff Application</h1>
+            <p class="text-gray-400 font-medium italic text-lg uppercase tracking-widest">Precision • Elegance • Trust</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6">
+        <form id="signupForm" class="space-y-8">
+            
+            <div class="step-card bg-teal-dark text-white text-center">
+                <p class="text-[10px] text-gold-accent font-bold uppercase tracking-widest mb-4"><i class="fas fa-exclamation-triangle mr-2"></i> Important: Select your precise operational zone and service specialization</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-white/70 text-left">Operational Zone</label>
+                        <select id="countrySelect" name="country" required class="w-full bg-white/10 border-2 border-white/20 rounded-2xl p-4 text-white outline-none focus:border-white transition">
+                            <option value="" class="text-gray-900">-- Choose Country --</option>
+                            <option value="USA" class="text-gray-900">United States (USA)</option>
+                            <option value="CL" class="text-gray-900">Chile (CL)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-white/70 text-left">Specialization</label>
+                        <select id="service_type" required class="w-full bg-white/10 border-2 border-white/20 rounded-2xl p-4 text-white outline-none focus:border-white transition">
+                            <option value="" class="text-gray-900">-- Choose Service --</option>
+                            <option value="Deep Cleaning" class="text-gray-900">Deep Cleaning</option>
+                            <option value="Elite Laundry" class="text-gray-900">Elite Laundry</option>
+                            <option value="Master Ironing" class="text-gray-900">Master Ironing</option>
+                            <option value="Maintenance" class="text-gray-900">Maintenance</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div id="personalSection" class="step-card hidden-section">
+                <h3 class="text-2xl font-black text-gray-900 mb-8 italic uppercase flex items-center">
+                    <i class="fas fa-user-shield mr-4 text-teal-primary"></i> 01. Profile & Security
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="md:col-span-2"><label>Full Legal Name</label><input type="text" id="full_name" required class="input-field"></div>
+                    <div><label>Email Address</label><input type="email" id="email" required class="input-field"></div>
+                    <div><label>Phone Number</label><input type="tel" id="phone" required class="input-field"></div>
+                    <div><label>Password</label><input type="password" id="password" required class="input-field"></div>
+                    <div><label>Confirm Password</label><input type="password" id="confirm_password" required class="input-field"></div>
+                </div>
+            </div>
+
+            <div id="addressSection" class="step-card hidden-section">
+                <h3 class="text-2xl font-black text-gray-900 mb-8 italic uppercase flex items-center">
+                    <i class="fas fa-map-marker-alt mr-4 text-teal-primary"></i> 02. Residency Details
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="md:col-span-2"><label>Street Address</label><input type="text" id="address_street" required class="input-field"></div>
+                    <div><label>Apartment / Suite</label><input type="text" id="address_apt" class="input-field"></div>
+                    <div><label>City</label><input type="text" id="address_city" required class="input-field"></div>
+                    <div><label id="regionLabel">State / Region</label><input type="text" id="address_region" required class="input-field"></div>
+                    <div><label>ZIP / Postal Code</label><input type="text" id="address_zip" required class="input-field"></div>
+                </div>
+            </div>
+
+            <div id="legalSection" class="step-card hidden-section">
+                <h3 class="text-2xl font-black text-gray-900 mb-8 italic uppercase flex items-center">
+                    <i class="fas fa-file-invoice mr-4 text-gold-accent"></i> 03. Legal Documentation
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div><label id="taxLabel">Tax ID</label><input type="text" id="tax_id" required class="input-field"></div>
+                    <div><label>ID Card Number</label><input type="text" id="id_number" required class="input-field"></div>
+                    <div class="md:col-span-2"><label>Work Authorization Number</label><input type="text" id="work_permit_number" required class="input-field"></div>
+                </div>
+            </div>
+
+            <div id="fileSection" class="step-card hidden-section">
+                <h3 class="text-2xl font-black text-gray-900 mb-8 italic uppercase flex items-center">
+                    <i class="fas fa-cloud-upload-alt mr-4 text-teal-primary"></i> 04. Digital Evidence
+                </h3>
+                
+                <div id="usaDocuments" style="display: none;">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-6 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+                            <label>ID Document (Front)</label>
+                            <input type="file" id="usa_id_front" accept="image/*" class="mt-2 text-xs">
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+                            <label>ID Document (Back)</label>
+                            <input type="file" id="usa_id_back" accept="image/*" class="mt-2 text-xs">
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+                            <label>Social Security Card (Front)</label>
+                            <input type="file" id="usa_social_front" accept="image/*" class="mt-2 text-xs">
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+                            <label>Social Security Card (Back)</label>
+                            <input type="file" id="usa_social_back" accept="image/*" class="mt-2 text-xs">
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+                            <label>Proof of Address (Front)</label>
+                            <input type="file" id="usa_address_front" accept="image/*,.pdf" class="mt-2 text-xs">
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+                            <label>Proof of Address (Back)</label>
+                            <input type="file" id="usa_address_back" accept="image/*,.pdf" class="mt-2 text-xs">
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 md:col-span-2">
+                            <label>CV / Resume</label>
+                            <input type="file" id="usa_cv" accept=".pdf,.doc,.docx" class="mt-2 text-xs">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="chileDocuments" style="display: none;">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-6 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+                            <label>RUT Vigente (Front)</label>
+                            <input type="file" id="cl_rut_front" accept="image/*,.pdf" class="mt-2 text-xs">
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+                            <label>RUT Vigente (Back)</label>
+                            <input type="file" id="cl_rut_back" accept="image/*,.pdf" class="mt-2 text-xs">
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+                            <label>Certificado de Antecedentes (Front)</label>
+                            <input type="file" id="cl_antecedentes_front" accept="image/*,.pdf" class="mt-2 text-xs">
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+                            <label>Certificado de Antecedentes (Back)</label>
+                            <input type="file" id="cl_antecedentes_back" accept="image/*,.pdf" class="mt-2 text-xs">
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+                            <label>AFP (Front)</label>
+                            <input type="file" id="cl_afp_front" accept="image/*,.pdf" class="mt-2 text-xs">
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+                            <label>AFP (Back)</label>
+                            <input type="file" id="cl_afp_back" accept="image/*,.pdf" class="mt-2 text-xs">
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+                            <label>Fonasa (Front)</label>
+                            <input type="file" id="cl_fonasa_front" accept="image/*,.pdf" class="mt-2 text-xs">
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+                            <label>Fonasa (Back)</label>
+                            <input type="file" id="cl_fonasa_back" accept="image/*,.pdf" class="mt-2 text-xs">
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 md:col-span-2">
+                            <label>CV / Curriculum Vitae</label>
+                            <input type="file" id="cl_cv" accept=".pdf,.doc,.docx" class="mt-2 text-xs">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="submitBtnSection" class="hidden-section pb-10">
+                <button type="submit" id="submitBtn" class="w-full py-6 bg-teal-primary text-white rounded-[2rem] font-black uppercase tracking-[0.3em] shadow-2xl hover:bg-teal-dark transition transform hover:scale-[1.01]">
+                    Submit My Application <i class="fas fa-paper-plane ml-3"></i>
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../database-config.js"></script>
+    <script>
+        const form = document.getElementById('signupForm');
+        const countrySelect = document.getElementById('countrySelect');
+        const sections = ['personalSection', 'addressSection', 'legalSection', 'fileSection', 'submitBtnSection'];
+
+        countrySelect.addEventListener('change', function() {
+            const val = this.value;
+            sections.forEach(s => document.getElementById(s).style.display = val ? 'block' : 'none');
+            
+            const usaDocs = document.getElementById('usaDocuments');
+            const chileDocs = document.getElementById('chileDocuments');
+            
+            if(val === 'USA') {
+                document.getElementById('taxLabel').innerText = "Social Security Number (SSN)";
+                document.getElementById('regionLabel').innerText = "State";
+                usaDocs.style.display = 'block';
+                chileDocs.style.display = 'none';
+                
+                document.getElementById('usa_id_front').required = true;
+                document.getElementById('usa_id_back').required = true;
+                document.getElementById('usa_social_front').required = true;
+                document.getElementById('usa_social_back').required = true;
+                document.getElementById('usa_address_front').required = true;
+                document.getElementById('usa_address_back').required = true;
+                document.getElementById('usa_cv').required = true;
+                
+                document.getElementById('cl_rut_front').required = false;
+                document.getElementById('cl_rut_back').required = false;
+                document.getElementById('cl_antecedentes_front').required = false;
+                document.getElementById('cl_antecedentes_back').required = false;
+                document.getElementById('cl_afp_front').required = false;
+                document.getElementById('cl_afp_back').required = false;
+                document.getElementById('cl_fonasa_front').required = false;
+                document.getElementById('cl_fonasa_back').required = false;
+                document.getElementById('cl_cv').required = false;
+                
+            } else if(val === 'CL') {
+                document.getElementById('taxLabel').innerText = "RUT (Rol Único Tributario)";
+                document.getElementById('regionLabel').innerText = "Región";
+                usaDocs.style.display = 'none';
+                chileDocs.style.display = 'block';
+                
+                document.getElementById('cl_rut_front').required = true;
+                document.getElementById('cl_rut_back').required = true;
+                document.getElementById('cl_antecedentes_front').required = true;
+                document.getElementById('cl_antecedentes_back').required = true;
+                document.getElementById('cl_afp_front').required = true;
+                document.getElementById('cl_afp_back').required = true;
+                document.getElementById('cl_fonasa_front').required = true;
+                document.getElementById('cl_fonasa_back').required = true;
+                document.getElementById('cl_cv').required = true;
+                
+                document.getElementById('usa_id_front').required = false;
+                document.getElementById('usa_id_back').required = false;
+                document.getElementById('usa_social_front').required = false;
+                document.getElementById('usa_social_back').required = false;
+                document.getElementById('usa_address_front').required = false;
+                document.getElementById('usa_address_back').required = false;
+                document.getElementById('usa_cv').required = false;
+            }
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submitBtn');
+            const originalBtnText = submitBtn.innerHTML;
+
+            if (document.getElementById('password').value !== document.getElementById('confirm_password').value) {
+                return alert("Passwords do not match!");
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin mr-3"></i> PROCESSING DOSSIER...';
+
+            try {
+                const email = document.getElementById('email').value;
+                const country = countrySelect.value;
+
+                const { data: authData, error: authError } = await supabaseClient.auth.signUp({
+                    email: email,
+                    password: document.getElementById('password').value,
+                });
+                if (authError) throw authError;
+                const userId = authData.user.id;
+
+                const fileUrls = {};
+                
+                if (country === 'USA') {
+                    const usaFiles = {
+                        id_front: document.getElementById('usa_id_front').files[0],
+                        id_back: document.getElementById('usa_id_back').files[0],
+                        social_front: document.getElementById('usa_social_front').files[0],
+                        social_back: document.getElementById('usa_social_back').files[0],
+                        address_front: document.getElementById('usa_address_front').files[0],
+                        address_back: document.getElementById('usa_address_back').files[0],
+                        cv: document.getElementById('usa_cv').files[0]
+                    };
+                    
+                    for (const [key, file] of Object.entries(usaFiles)) {
+                        if (file) {
+                            const path = `${userId}/${key}_${Date.now()}`;
+                            await supabaseClient.storage.from('staff-docs').upload(path, file);
+                            fileUrls[key] = supabaseClient.storage.from('staff-docs').getPublicUrl(path).data.publicUrl;
+                        }
+                    }
+                } else if (country === 'CL') {
+                    const clFiles = {
+                        rut_front: document.getElementById('cl_rut_front').files[0],
+                        rut_back: document.getElementById('cl_rut_back').files[0],
+                        antecedentes_front: document.getElementById('cl_antecedentes_front').files[0],
+                        antecedentes_back: document.getElementById('cl_antecedentes_back').files[0],
+                        afp_front: document.getElementById('cl_afp_front').files[0],
+                        afp_back: document.getElementById('cl_afp_back').files[0],
+                        fonasa_front: document.getElementById('cl_fonasa_front').files[0],
+                        fonasa_back: document.getElementById('cl_fonasa_back').files[0],
+                        cv: document.getElementById('cl_cv').files[0]
+                    };
+                    
+                    for (const [key, file] of Object.entries(clFiles)) {
+                        if (file) {
+                            const path = `${userId}/${key}_${Date.now()}`;
+                            await supabaseClient.storage.from('staff-docs').upload(path, file);
+                            fileUrls[key] = supabaseClient.storage.from('staff-docs').getPublicUrl(path).data.publicUrl;
+                        }
+                    }
+                }
+
+                // --- SAUVEGARDE DE TOUS LES DOCUMENTS UPLOADÉS ---
+                const { error: profileError } = await supabaseClient
+                    .from('profiles')
+                    .upsert([{
+                        id: userId,
+                        full_name: document.getElementById('full_name').value,
+                        email: email,
+                        phone: document.getElementById('phone').value,
+                        country: country,
+                        service_type: document.getElementById('service_type').value,
+                        address_street: document.getElementById('address_street').value,
+                        address_apt: document.getElementById('address_apt').value,
+                        address_city: document.getElementById('address_city').value,
+                        address_region: document.getElementById('address_region').value,
+                        address_zip: document.getElementById('address_zip').value,
+                        tax_id: document.getElementById('tax_id').value,
+                        id_number: document.getElementById('id_number').value,
+                        work_permit_number: document.getElementById('work_permit_number').value,
+                        // Colonnes legacy pour compatibilité
+                        id_file_url: country === 'USA' ? fileUrls.id_front : fileUrls.rut_front,
+                        permit_file_url: country === 'USA' ? fileUrls.social_front : fileUrls.antecedentes_front,
+                        // TOUS LES DOCUMENTS dans un champ JSON
+                        file_urls: fileUrls,
+                        role: 'staff',
+                        is_verified: false
+                    }], { onConflict: 'id' });
+
+                if (profileError) throw profileError;
+
+                window.location.href = "success-staff.html";
+
+            } catch (err) {
+                console.error(err);
+                alert("Error: " + err.message);
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            }
+        });
+    </script>
+
+    <footer class="py-8 text-center text-gray-600 text-[9px] font-bold uppercase tracking-[0.3em] mt-12 border-t border-gray-200">
+        <span>© 2026 Sparkllex. All rights reserved.</span>
+        <div class="mt-3 text-[7px] uppercase tracking-[0.3em]">
+            Designed by <a href="https://gui-fiedly.vercel.app" target="_blank" rel="noopener noreferrer" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">GF Digital Studio</a> | <a href="mailto:isteah.gffilsaime@gmail.com" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">Gui Fiedly Fils-aime</a>
+        </div>
+    </footer>
+
+</body>
+</html>

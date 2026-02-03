@@ -1,0 +1,287 @@
+<!-- 
+    SPARKLLEX BILINGUAL HTML TEMPLATE
+    Use this as a starting point for new pages that need translations
+    
+    What's included:
+    - Proper script loading order (translations.js FIRST, then apply-translations.js)
+    - Language switching links (optional)
+    - Example translatable elements
+    - Proper meta tags
+-->
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Title - Sparkllex</title>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    
+    <!-- ⚠️ IMPORTANT: Load translations BEFORE apply-translations -->
+    <script src="../translations.js"></script>
+    <script src="../apply-translations.js"></script>
+    
+    <!-- Your other scripts and styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Your custom styles here */
+    </style>
+</head>
+<body>
+    <!-- 
+        EXAMPLE: Navigation with Language Links (Optional)
+        You can add language switching buttons if you want.
+        Just call setLanguage('es') or setLanguage('en')
+    -->
+    <nav style="background: #f5f5f5; padding: 10px; text-align: right;">
+        <!-- Optional: Language switcher buttons -->
+        <button onclick="setLanguage('en')" style="padding: 8px 16px; margin: 0 5px; cursor: pointer;">
+            🇬🇧 English
+        </button>
+        <button onclick="setLanguage('es')" style="padding: 8px 16px; margin: 0 5px; cursor: pointer;">
+            🇪🇸 Español
+        </button>
+    </nav>
+
+    <main>
+        <!-- 
+            TRANSLATABLE ELEMENTS
+            
+            Key points:
+            1. Every element that needs translation must have an ID
+            2. The ID must match a key in translations.js
+            3. The system will automatically translate it
+        -->
+
+        <h1 id="pageTitle">My Page Title</h1>
+        <p id="pageDescription">This is a description of my page.</p>
+
+        <!-- Form elements: input placeholders get translated -->
+        <input type="email" id="emailField" placeholder="Email">
+        <input type="text" id="nameField" placeholder="Full Name">
+
+        <!-- Buttons: text content gets translated -->
+        <button id="submitBtn">Submit</button>
+        <button id="cancelBtn">Cancel</button>
+
+        <!-- Regular text in divs/spans -->
+        <div id="welcome">Welcome to our site</div>
+
+        <!-- Select options: labels and text get translated -->
+        <select>
+            <option id="optionSelect">Select an option</option>
+            <option id="optionBasic">Basic Plan</option>
+            <option id="optionPro">Pro Plan</option>
+        </select>
+    </main>
+
+    <footer>
+        <!-- Remove GF Digital Studio attribution footer -->
+    </footer>
+
+    <script>
+        // ========================================
+        // Step 1: Add your new translation keys
+        // ========================================
+        
+        // BEFORE you use this, open translations.js and add keys like:
+        // 
+        // en: {
+        //     pageTitle: "My Page Title",
+        //     pageDescription: "This is a description of my page.",
+        //     emailField: "Email",
+        //     nameField: "Full Name",
+        //     submitBtn: "Submit",
+        //     cancelBtn: "Cancel",
+        //     welcome: "Welcome to our site",
+        //     optionSelect: "Select an option",
+        //     optionBasic: "Basic Plan",
+        //     optionPro: "Pro Plan"
+        // },
+        // es: {
+        //     pageTitle: "Título de Mi Página",
+        //     pageDescription: "Esta es una descripción de mi página.",
+        //     emailField: "Correo Electrónico",
+        //     nameField: "Nombre Completo",
+        //     submitBtn: "Enviar",
+        //     cancelBtn: "Cancelar",
+        //     welcome: "Bienvenido a nuestro sitio",
+        //     optionSelect: "Selecciona una opción",
+        //     optionBasic: "Plan Básico",
+        //     optionPro: "Plan Pro"
+        // }
+
+        // ========================================
+        // Step 2: Add element IDs to your HTML
+        // ========================================
+        
+        // Done! Your HTML above already has all the ID attributes.
+        // The translation engine will automatically:
+        // 1. Find each element with an ID
+        // 2. Look up the translation
+        // 3. Update the element's text
+
+        // ========================================
+        // Step 3 (Optional): Programmatic Control
+        // ========================================
+        
+        // The following functions are already available from translations.js:
+
+        // Get the current language
+        // const lang = getCurrentLang(); // Returns 'en' or 'es'
+
+        // Switch language (saves to localStorage and reloads page)
+        // setLanguage('es');  // Switch to Spanish
+        // setLanguage('en');  // Switch to English
+
+        // Get a translation (if you need it in JavaScript)
+        // const translated = t('pageTitle');  // Returns the translated text
+
+        // ========================================
+        // Example: Manually handle form submission
+        // ========================================
+        
+        // document.getElementById('submitBtn').addEventListener('click', (e) => {
+        //     e.preventDefault();
+        //     const email = document.getElementById('emailField').value;
+        //     const name = document.getElementById('nameField').value;
+        //     
+        //     console.log('Form submitted:', { name, email });
+        //     // Send to your backend
+        // });
+    </script>
+</body>
+</html>
+
+<!-- 
+    =========================================================================
+    QUICK REFERENCE FOR THIS TEMPLATE
+    =========================================================================
+
+    HOW TO USE THIS TEMPLATE:
+    
+    1. Copy this file as a new page (e.g., my-page.html)
+    
+    2. Add your HTML content and give each element an ID:
+       <h1 id="myHeading">My Heading</h1>
+       <button id="myButton">Click Me</button>
+    
+    3. For each element ID, add a translation key to translations.js:
+       en: {
+           myHeading: "My Heading",
+           myButton: "Click Me",
+       },
+       es: {
+           myHeading: "Mi Encabezado",
+           myButton: "Haz clic en mí",
+       }
+    
+    4. Save both files
+    
+    5. Test it:
+       - Open your page normally: page.html (should be in English)
+       - Open with parameter: page.html?lang=es (should be in Spanish)
+       - Navigate away, come back (should stay in Spanish due to localStorage)
+
+    =========================================================================
+    TRANSLATION RULES
+    =========================================================================
+
+    1. ✅ Elements with IDs in translations.js WILL be translated
+       <h1 id="title">Text</h1> where en: { title: "Text" }
+    
+    2. ❌ Elements without IDs will NOT be translated
+       <h1>Text</h1> (no id attribute)
+    
+    3. ❌ Elements with IDs NOT in translations.js will NOT be translated
+       <h1 id="unknown">Text</h1> (no key in translations.js)
+
+    4. The system is smart about element types:
+       - <input> elements: translates the placeholder
+       - <option> elements: translates the label and text
+       - All others: translates the textContent
+
+    =========================================================================
+    ELEMENT TYPES AND EXAMPLES
+    =========================================================================
+
+    Text Elements:
+    <h1 id="heading">My Heading</h1>
+    <p id="description">My Description</p>
+    <button id="button">Click Me</button>
+
+    Input Placeholders:
+    <input id="email" placeholder="Email Address">
+    <textarea id="message" placeholder="Your message..."></textarea>
+
+    Select Options:
+    <select>
+        <option id="option1">Option 1</option>
+        <option id="option2">Option 2</option>
+    </select>
+
+    =========================================================================
+    WORKING EXAMPLE FLOW
+    =========================================================================
+
+    In translations.js:
+    ```
+    en: {
+        pageTitle: "Welcome",
+        submitBtn: "Submit"
+    },
+    es: {
+        pageTitle: "Bienvenido",
+        submitBtn: "Enviar"
+    }
+    ```
+
+    In HTML:
+    ```
+    <h1 id="pageTitle">Welcome</h1>
+    <button id="submitBtn">Submit</button>
+    ```
+
+    When user visits: page.html?lang=es
+    Result:
+    <h1 id="pageTitle">Bienvenido</h1>
+    <button id="submitBtn">Enviar</button>
+
+    =========================================================================
+    COPY THIS FOR QUICK SETUP
+    =========================================================================
+
+    To quickly add translations for this page, copy and paste into 
+    translations.js and replace the values with your own:
+
+    const translations = {
+        en: {
+            pageTitle: "My Page Title",
+            pageDescription: "This is a description of my page.",
+            emailField: "Email",
+            nameField: "Full Name",
+            submitBtn: "Submit",
+            cancelBtn: "Cancel",
+            welcome: "Welcome to our site",
+            optionSelect: "Select an option",
+            optionBasic: "Basic Plan",
+            optionPro: "Pro Plan"
+        },
+        es: {
+            pageTitle: "Título de Mi Página",
+            pageDescription: "Esta es una descripción de mi página.",
+            emailField: "Correo Electrónico",
+            nameField: "Nombre Completo",
+            submitBtn: "Enviar",
+            cancelBtn: "Cancelar",
+            welcome: "Bienvenido a nuestro sitio",
+            optionSelect: "Selecciona una opción",
+            optionBasic: "Plan Básico",
+            optionPro: "Plan Pro"
+        }
+    };
+
+    =========================================================================
+-->

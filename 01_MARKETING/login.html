@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sparkllex</title>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    
+    <script src="../translations.js"></script>
+    <script src="../apply-translations.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-primary': '#008080',
+                        'teal-dark': '#006666',
+                        'light-bg': '#F4F9F9',
+                        'gold-accent': '#D4AF37',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            background: radial-gradient(circle at top right, #fdfdfd, #eef6f6);
+            min-height: 100vh;
+        }
+        .nav-glass { backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.85); }
+        .form-container { 
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 25px 50px -12px rgba(0, 128, 128, 0.1);
+            border-radius: 2.5rem;
+            border: 1px solid rgba(0, 128, 128, 0.05);
+        }
+        .premium-input {
+            width: 100%; padding: 1.2rem; background-color: #fff;
+            border: 1px solid #e5e7eb; border-radius: 16px; outline: none; transition: 0.3s;
+            font-size: 0.95rem;
+        }
+        .premium-input:focus { border-color: #008080; box-shadow: 0 0 0 4px rgba(0, 128, 128, 0.05); }
+        
+        .premium-button {
+            background: linear-gradient(135deg, #008080, #006666);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .premium-button:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0, 128, 128, 0.2); }
+    </style>
+</head>
+<body class="text-gray-800 antialiased flex flex-col">
+
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-glass border-b border-teal-primary/10">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center h-20">
+            <a href="index.html">
+                <img src="../images/logo.png" alt="Sparkllex" class="h-10">
+            </a>
+            <a href="index.html" class="text-teal-primary font-extrabold hover:text-teal-dark transition flex items-center group">
+                <i class="fas fa-arrow-left mr-2 group-hover:-translate-x-1 transition"></i>
+                <span id="navHome">Home</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="h-24"></div>
+
+    <main class="flex-1 flex items-center justify-center px-4 py-12">
+        <div class="w-full max-w-md">
+            <div class="form-container p-10 md:p-14">
+                <div class="text-center mb-12">
+                    <img src="../images/logo.png" class="h-8 mx-auto mb-8 opacity-20 grayscale">
+                    <h1 class="text-3xl font-black teal-dark mb-3 tracking-tight" id="loginTitle">Welcome Back</h1>
+                    <p class="text-gray-400 text-sm font-medium" id="loginSubtitle">Please enter your account details</p>
+                </div>
+
+                <form id="login-form" class="space-y-6">
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 mb-3 ml-1" id="labelEmail">Your Email</label>
+                        <input type="email" id="email" placeholder="hello@example.com" required class="premium-input">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-3 ml-1">
+                            <label class="block text-[10px] font-black uppercase tracking-[0.2em] text-gray-400" id="labelPassword">Password</label>
+                            <a href="#" class="text-[10px] font-bold text-teal-primary hover:text-gold-accent transition" id="forgotPassword">Forgot?</a>
+                        </div>
+                        <input type="password" id="password" placeholder="••••••••" required class="premium-input">
+                    </div>
+
+                    <button type="submit" id="login-button" class="premium-button w-full py-5 text-white font-black rounded-2xl text-xs uppercase tracking-[0.2em] mt-4">
+                        <span id="btnLogin">Sign In</span>
+                    </button>
+
+                    <div id="status-msg" class="hidden text-center text-xs font-bold mt-6 p-4 rounded-2xl border"></div>
+                </form>
+
+                <div class="mt-12 pt-10 border-t border-gray-100 text-center">
+                    <p class="text-sm text-gray-400 font-medium">
+                        <span id="dontHaveAccount">Don't have an account?</span>
+                        <a href="signup.html" class="text-teal-primary font-black hover:text-teal-dark ml-2" id="signUpHere">Register</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-10 text-center text-gray-600 text-[9px] font-bold uppercase tracking-[0.3em]">
+        <span id="footerRights">© 2026 Sparkllex. All rights reserved.</span>
+        <div class="mt-4 text-[7px] uppercase tracking-[0.3em]">Designed by <a href="https://gui-fiedly.vercel.app" target="_blank" rel="noopener noreferrer" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">GF Digital Studio</a> | <a href="mailto:isteah.gffilsaime@gmail.com" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">Gui Fiedly Fils-aime</a></div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../database-config.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const lang = (typeof getActiveLanguage === 'function') ? getActiveLanguage() : (localStorage.getItem('preferredLang') || (window.location.pathname.includes('/es/') ? 'es' : 'en'));
+            applyTranslations(lang);
+
+            const loginForm = document.getElementById('login-form');
+            const loginBtn = document.getElementById('login-button');
+            const statusMsg = document.getElementById('status-msg');
+
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+
+                loginBtn.disabled = true;
+                loginBtn.style.opacity = "0.5";
+                statusMsg.classList.add('hidden');
+
+                try {
+                    const { data, error } = await supabaseClient.auth.signInWithPassword({
+                        email: email,
+                        password: password
+                    });
+
+                    if (error) throw error;
+
+                    const user = data.user;
+
+                    // --- VÉRIFICATION DU PROFIL ET DE L'APPROBATION ---
+                    const { data: profileData, error: profileError } = await supabaseClient
+                        .from('profiles')
+                        .select('role, is_verified')
+                        .eq('id', user.id)
+                        .single();
+
+                    // 1. Si le profil n'existe plus (dossier supprimé dans Team Manager)
+                    if (profileError || !profileData) {
+                        await supabaseClient.auth.signOut();
+                        throw new Error((lang === 'es') ? "Cuenta no encontrada o eliminada." : "Account not found or deleted.");
+                    }
+
+                    // 2. Si c'est un staff et qu'il n'est pas approuvé
+                    if (profileData.role === 'staff' && !profileData.is_verified) {
+                        await supabaseClient.auth.signOut();
+                        throw new Error((lang === 'es') ? "Su solicitud aún está en revisión." : "Your application is still under review.");
+                    }
+
+                    // --- LOGIQUE DE REDIRECTION ---
+                    let userRole = (profileData.role || 'client').toLowerCase();
+                    let destination;
+                    const langParam = '?lang=' + (lang || 'en');
+                    
+                    if (userRole === 'admin') {
+                        destination = "../03_OPERATIONS/agenda.html" + langParam;
+                    } else if (userRole === 'staff') {
+                        destination = "../03_OPERATIONS/staff-dashboard.html" + langParam;
+                    } else {
+                        destination = "../02_MEMBERS_APP/membership-status.html" + langParam;
+                    }
+
+                    statusMsg.className = "text-center text-xs font-bold mt-6 p-4 rounded-2xl bg-teal-50 text-teal-primary border border-teal-100 block";
+                    statusMsg.textContent = (lang === 'es') ? "✓ Acceso concedido. Redirigiendo..." : "✓ Access granted. Redirecting...";
+
+                    setTimeout(() => { window.location.href = destination; }, 800);
+
+                } catch (err) {
+                    statusMsg.className = "text-center text-xs font-bold mt-6 p-4 rounded-2xl bg-red-50 text-red-500 border border-red-100 block";
+                    const msg = (err?.message || '').toLowerCase();
+                    let friendly = (lang === 'es') ? 'Error de inicio de sesión.' : 'Login error.';
+
+                    if (msg.includes('invalid login credentials')) {
+                        friendly = (lang === 'es') ? 'Credenciales inválidas.' : 'Invalid credentials.';
+                    } else if (err.message) {
+                        friendly = err.message; // Affiche le message d'erreur spécifique (Review/Deleted)
+                    }
+
+                    statusMsg.textContent = friendly;
+                    loginBtn.disabled = false;
+                    loginBtn.style.opacity = "1";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

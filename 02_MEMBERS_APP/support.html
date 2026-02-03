@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP Support - Sparkllex Premium</title>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    
+    <script src="../translations.js"></script>
+    <script src="../apply-translations.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-primary': '#008080',
+                        'teal-dark': '#006666',
+                        'gold-accent': '#D4AF37',
+                        'light-bg': '#F8FAFA',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #F8FAFA; font-family: 'Inter', sans-serif; }
+        
+        .glass-header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 128, 128, 0.1);
+        }
+
+        .support-card {
+            background: white;
+            border-radius: 2.5rem;
+            border: 1px solid rgba(0, 128, 128, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 80, 80, 0.02);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .support-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 80, 80, 0.08);
+            border-color: rgba(0, 128, 128, 0.2);
+        }
+
+        .input-premium {
+            width: 100%;
+            padding: 16px 20px;
+            background: #f8fafc;
+            border: 2px solid transparent;
+            border-radius: 18px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .input-premium:focus {
+            border-color: #008080;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(0, 128, 128, 0.05);
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 14px;
+            color: #64748b;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-link.active {
+            background: #008080;
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 128, 128, 0.2);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-header">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <a href="membership-status.html">
+                <img src="../images/logo.png" alt="Logo" class="h-10 w-auto">
+            </a>
+            <div class="flex items-center gap-4">
+                <span class="text-[10px] font-black text-gold-accent bg-gold-accent/10 px-4 py-2 rounded-full tracking-[0.15em] border border-gold-accent/20">SOPORTE PRIORITARIO</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-32 pb-12 max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-10">
+        
+        <aside class="w-full lg:w-64 flex-shrink-0">
+            <div class="bg-white/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-sm border border-white sticky top-32">
+                <nav class="space-y-2">
+                    <a href="membership-status.html" class="sidebar-link hover:bg-teal-50">
+                        <i class="fas fa-th-large text-sm"></i> <span data-translate="membershipStatus">Dashboard</span>
+                    </a>
+                    <a href="appointments.html" class="sidebar-link hover:bg-teal-50">
+                        <i class="fas fa-calendar-plus text-sm"></i> <span data-translate="booking">Book</span>
+                    </a>
+                    <a href="history.html" class="sidebar-link hover:bg-teal-50">
+                        <i class="fas fa-history text-sm"></i> <span data-translate="yourHistory">History</span>
+                    </a>
+                    <a href="support-ia.html" class="sidebar-link hover:bg-teal-50">
+                        <i class="fas fa-robot text-sm"></i> <span data-translate="aISupportLink">AI Support</span>
+                    </a>
+                    <a href="support.html" class="sidebar-link bg-teal-50 text-teal-primary">
+                        <i class="fas fa-headset text-sm"></i> VIP Support
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="flex-1 max-w-3xl">
+            <header class="mb-12 text-center lg:text-left">
+                <h1 class="text-4xl font-black text-gray-900 tracking-tight leading-none">
+                    <span data-translate="exclusiveAttention">Atención</span> <span class="text-teal-primary">Exclusiva</span>
+                </h1>
+                <p class="text-gray-400 font-medium mt-4 text-lg" data-translate="absolutePriority">As a Premium member, you have absolute priority on all your inquiries.</p>
+            </header>
+
+            <div class="space-y-8">
+                <a href="https://wa.me/33600000000" target="_blank" class="support-card p-8 flex items-center gap-6 group border-l-4 border-l-green-500">
+                    <div class="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center text-green-500 text-3xl group-hover:bg-green-500 group-hover:text-white transition-all duration-500">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-black text-gray-800 text-xl" data-translate="whatsappConcierge">WhatsApp Concierge</h3>
+                        <p class="text-sm text-gray-400 font-semibold mt-1" data-translate="immediateResponseChat">Respuesta inmediata por chat para emergencias.</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-300 group-hover:text-teal-primary group-hover:border-teal-primary group-hover:bg-teal-50 transition-all">
+                        <i class="fas fa-chevron-right text-xs"></i>
+                    </div>
+                </a>
+
+                <section class="support-card p-10">
+                    <h2 class="text-xl font-black text-gray-800 mb-8 flex items-center gap-4">
+                        <span class="w-10 h-10 rounded-xl bg-teal-50 text-teal-primary flex items-center justify-center text-sm shadow-sm">
+                            <i class="fas fa-envelope-open-text"></i>
+                        </span>
+                        <span data-translate="sendSupportTicket">Enviar Ticket de Soporte</span>
+                    </h2>
+                    
+                    <form id="support-form" class="space-y-8">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="relative">
+                                <label class="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3" data-translate="inquiryReason">Motivo de consulta</label>
+                                <select id="subject" class="input-premium appearance-none font-bold text-gray-700 cursor-pointer">
+                                    <option value="Facturación" data-translate="billing">💳 Facturación</option>
+                                    <option value="Cita" data-translate="appointmentChange">📅 Cambio de Cita</option>
+                                    <option value="Suscripción" data-translate="planBenefits">💎 Plan y Beneficios</option>
+                                    <option value="Otro" data-translate="otherMatter">💬 Otro Asunto</option>
+                                </select>
+                                <div class="absolute right-5 bottom-4 pointer-events-none text-gray-400">
+                                    <i class="fas fa-chevron-down text-xs"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3" data-translate="priority">Prioridad</label>
+                                <div class="p-4 bg-gold-accent/5 rounded-2xl border border-gold-accent/20 text-gold-accent font-black text-[11px] flex items-center gap-3 uppercase tracking-tighter">
+                                    <i class="fas fa-crown text-sm"></i> <span data-translate="highMemberVip">Alta (Miembro VIP)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3" data-translate="messageDetails">Message Details</label>
+                            <textarea id="message" rows="5" class="input-premium resize-none font-medium" data-translate-placeholder="describeHowWeCanHelp" required placeholder="Write your message here..."></textarea>
+                        </div>
+
+                        <button type="submit" id="submit-btn" class="w-full bg-teal-primary text-white font-black py-5 rounded-2xl hover:bg-teal-dark transition-all shadow-2xl shadow-teal-primary/30 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-3">
+                            <span data-translate="sendPriorityMessage">SEND PRIORITY MESSAGE</span>
+                            <i class="fas fa-paper-plane text-sm"></i>
+                        </button>
+
+                        <div id="response-msg" class="hidden p-5 bg-teal-50 border border-teal-100 rounded-2xl text-teal-primary text-center font-black text-xs uppercase tracking-widest animate-pulse">
+                            ✅ ¡Ticket enviado con éxito! Respuesta en menos de 2 horas.
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../database-config.js"></script>
+
+    <script>
+        const supportForm = document.getElementById('support-form');
+        const responseMsg = document.getElementById('response-msg');
+
+        async function checkAuth() {
+            const { data: { user } } = await supabaseClient.auth.getUser();
+            if (!user) {
+                const lang = (typeof getActiveLanguage === 'function') ? getActiveLanguage() : 'en';
+                window.location.href = "../01_MARKETING/login.html?lang=" + lang;
+                return;
+            }
+
+            // Vérifier le plan de l'utilisateur
+            const { data: profile } = await supabaseClient
+                .from('profiles')
+                .select('plan')
+                .eq('id', user.id)
+                .single();
+
+            const currentPlan = (profile?.plan || 'BASIC').toUpperCase();
+            
+            // Bloquer l'accès si le plan n'est pas FAMILY/FAMILIAR
+            if (currentPlan !== 'FAMILY' && currentPlan !== 'FAMILIAR') {
+                alert('VIP Support is exclusive to Family plan members. Please upgrade your membership to access this feature.');
+                window.location.href = 'membership-status.html';
+            }
+        }
+
+        supportForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-circle-notch animate-spin"></i> ENVIANDO...';
+
+            // Simulación de envío
+            setTimeout(() => {
+                supportForm.reset();
+                responseMsg.classList.remove('hidden');
+                btn.disabled = false;
+                btn.innerHTML = '<span data-translate="sendPriorityMessage">ENVIAR MENSAJE PRIORITARIO</span> <i class="fas fa-paper-plane text-sm"></i>';
+                
+                setTimeout(() => {
+                    responseMsg.classList.add('hidden');
+                }, 6000);
+            }, 1800);
+        });
+
+        checkAuth();
+    </script>
+</body>
+</html>

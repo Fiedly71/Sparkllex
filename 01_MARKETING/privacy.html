@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Sparkllex</title>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    
+    <script src="../translations.js"></script>
+    <script src="../apply-translations.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-primary': '#008080',
+                        'teal-dark': '#006666',
+                        'light-bg': '#F4F9F9',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .nav-glass { backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.85); }
+        .legal-card { background: white; border-radius: 2.5rem; border: 1px solid rgba(0,128,128,0.1); }
+        .lang-btn { 
+            font-size: 0.7rem; 
+            font-weight: 800; 
+            padding: 0.4rem 0.8rem; 
+            border-radius: 9999px; 
+            border: 1.5px solid #008080; 
+            cursor: pointer; 
+            transition: 0.3s; 
+        }
+        .lang-active { background-color: #008080 !important; color: white !important; }
+        .lang-inactive { background-color: transparent !important; color: #008080 !important; }
+    </style>
+</head>
+<body class="bg-light-bg text-gray-800 antialiased font-sans">
+
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-glass border-b border-teal-primary/10">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center h-20">
+            <a href="index.html"><img src="../images/logo.png" alt="Sparkllex Logo" class="h-10"></a>
+            
+            <div class="flex items-center space-x-3">
+                <div class="flex bg-gray-100 p-1 rounded-full">
+                    <button onclick="changeLanguage('es')" id="btn-es" class="lang-btn">ES</button>
+                    <button onclick="changeLanguage('en')" id="btn-en" class="lang-btn">EN</button>
+                </div>
+                <a href="index.html" class="ml-4 text-teal-primary font-black text-[10px] uppercase tracking-widest hover:text-teal-dark transition flex items-center gap-2">
+                    <i class="fas fa-arrow-left"></i> <span data-translate="navHome">Home</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-20">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="legal-card p-8 md:p-16 shadow-xl shadow-teal-900/5">
+                
+                <header class="mb-12 border-b border-gray-100 pb-8">
+                    <h1 class="text-4xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight" data-translate="privacyTitle">Privacy Policy</h1>
+                    <p class="text-teal-primary font-bold flex items-center gap-2 text-sm uppercase tracking-wider">
+                        <i class="far fa-calendar-alt"></i>
+                        <span data-translate="lastUpdated">Last updated: January 21, 2026</span>
+                    </p>
+                </header>
+
+                <div class="space-y-12 text-gray-600 leading-relaxed font-medium">
+                    
+                    <section>
+                        <h2 class="text-sm font-black text-teal-dark uppercase tracking-[0.2em] mb-4 flex items-center gap-3">
+                            <span class="bg-teal-primary text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs">01</span>
+                            <span data-translate="privSec1Title">Introduction</span>
+                        </h2>
+                        <p data-translate="privSec1Content">
+                            At Sparkllex, we deeply value our customers' privacy. This policy describes how we protect your personal information while you enjoy our premium home care and cleaning services.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-sm font-black text-teal-dark uppercase tracking-[0.2em] mb-4 flex items-center gap-3">
+                            <span class="bg-teal-primary text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs">02</span>
+                            <span data-translate="privSec2Title">Information We Collect</span>
+                        </h2>
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <li class="bg-light-bg p-5 rounded-2xl flex items-start gap-4 border border-teal-primary/5">
+                                <i class="fas fa-user text-teal-primary mt-1"></i>
+                                <div>
+                                    <strong class="text-gray-900 block text-sm uppercase tracking-wide" data-translate="privData1Title">Account Data</strong>
+                                    <span class="text-sm opacity-80" data-translate="privData1Desc">Name, email, phone, and service address.</span>
+                                </div>
+                            </li>
+                            <li class="bg-light-bg p-5 rounded-2xl flex items-start gap-4 border border-teal-primary/5">
+                                <i class="fas fa-credit-card text-teal-primary mt-1"></i>
+                                <div>
+                                    <strong class="text-gray-900 block text-sm uppercase tracking-wide" data-translate="privData2Title">Secure Payments</strong>
+                                    <span class="text-sm opacity-80" data-translate="privData2Desc">Processed by Stripe (we do not store card details).</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2 class="text-sm font-black text-teal-dark uppercase tracking-[0.2em] mb-4 flex items-center gap-3">
+                            <span class="bg-teal-primary text-white w-8 h-8 rounded-lg flex items-center justify-center text-xs">03</span>
+                            <span data-translate="privSec3Title">Data Usage</span>
+                        </h2>
+                        <p class="mb-6" data-translate="privSec3Intro">We use your information primarily to:</p>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-gray-50">
+                                <i class="fas fa-check-circle text-teal-primary"></i>
+                                <span class="text-sm" data-translate="privUse1">Manage your appointments and visits.</span>
+                            </div>
+                            <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-gray-50">
+                                <i class="fas fa-check-circle text-teal-primary"></i>
+                                <span class="text-sm" data-translate="privUse2">Ensure the safety and security of your home.</span>
+                            </div>
+                            <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-gray-50">
+                                <i class="fas fa-check-circle text-teal-primary"></i>
+                                <span class="text-sm" data-translate="privUse3">Continuously improve our service quality.</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="bg-teal-dark text-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl shadow-teal-900/20">
+                        <h2 class="text-2xl font-black mb-4 tracking-tight" data-translate="privContactTitle">Have questions?</h2>
+                        <p class="mb-8 opacity-70 font-medium" data-translate="privContactDesc">Our data protection team is ready to assist you with any concerns.</p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="mailto:contact@sparkllex.com" class="bg-white text-teal-dark px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-teal-primary hover:text-white transition">
+                                <i class="fas fa-envelope"></i> contact@sparkllex.com
+                            </a>
+                            <a href="#" class="bg-teal-primary text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-teal-dark border border-white/10 transition">
+                                <i class="fab fa-whatsapp"></i> Support
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-16 bg-white text-center border-t border-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-center space-x-10 mb-8">
+                <a href="terms.html" class="text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-teal-primary transition" data-translate="navTerms">Terms</a>
+                <a href="cookies.html" class="text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-teal-primary transition" data-translate="navCookies">Cookies</a>
+            </div>
+            <p class="text-[10px] text-gray-300 uppercase tracking-[0.3em] font-black">
+                &copy; 2026 Sparkllex. <span data-translate="footerRights">All rights reserved.</span>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function updateUI(lang) {
+            applyTranslations(lang);
+            document.getElementById('btn-es').className = lang === 'es' ? 'lang-btn lang-active' : 'lang-btn lang-inactive';
+            document.getElementById('btn-en').className = lang === 'en' ? 'lang-btn lang-active' : 'lang-btn lang-inactive';
+        }
+
+        function changeLanguage(lang) {
+            updateUI(lang);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const initial = (typeof getActiveLanguage === 'function') ? getActiveLanguage() : (localStorage.getItem('preferredLang') || 'en');
+            updateUI(initial);
+        });
+    </script>
+</body>
+</html>

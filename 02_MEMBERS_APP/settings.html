@@ -1,0 +1,248 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Sparkllex Premium</title>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    
+    <script src="../translations.js"></script>
+    <script src="../apply-translations.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-primary': '#008080',
+                        'teal-dark': '#006666',
+                        'gold-accent': '#D4AF37',
+                        'light-bg': '#F8FAFA',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { 
+            background: radial-gradient(circle at top right, #fdfdfd, #eef6f6);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+        }
+        
+        .glass-header {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0, 128, 128, 0.1);
+        }
+
+        .settings-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 15px 35px rgba(0, 80, 80, 0.03);
+        }
+
+        .input-premium {
+            width: 100%;
+            padding: 16px 20px;
+            background: #f8fafc;
+            border: 2px solid transparent;
+            border-radius: 18px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .input-premium:focus {
+            border-color: #008080;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(0, 128, 128, 0.05);
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 14px;
+            color: #64748b;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-link:hover:not(.active) { background: rgba(0, 128, 128, 0.05); color: #008080; }
+        
+        .sidebar-link.active {
+            background: #008080;
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 128, 128, 0.2);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-header">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <a href="membership-status.html">
+                <img src="../images/logo.png" alt="Logo" class="h-10 w-auto">
+            </a>
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-xl bg-teal-primary text-white flex items-center justify-center shadow-lg shadow-teal-primary/20">
+                    <i class="fas fa-user-cog"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-32 pb-12 max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-10">
+        
+        <aside class="w-full lg:w-64 flex-shrink-0">
+            <div class="bg-white/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-sm border border-white/50 sticky top-32">
+                <nav class="space-y-2">
+                    <a href="membership-status.html" class="sidebar-link">
+                        <i class="fas fa-th-large text-sm"></i> <span data-translate="membershipStatus">Dashboard</span>
+                    </a>
+                    <a href="book-service.html" class="sidebar-link">
+                        <i class="fas fa-calendar-plus text-sm"></i> <span data-translate="booking">Book</span>
+                    </a>
+                    <a href="history.html" class="sidebar-link">
+                        <i class="fas fa-history text-sm"></i> <span data-translate="yourHistory">History</span>
+                    </a>
+                    <a href="settings.html" class="sidebar-link active">
+                        <i class="fas fa-cog text-sm"></i> <span data-translate="settings">Settings</span>
+                    </a>
+                    <div class="pt-6 mt-6 border-t border-gray-100">
+                        <button onclick="handleLogout()" class="sidebar-link text-red-400 w-full hover:bg-red-50">
+                            <i class="fas fa-sign-out-alt text-sm"></i> <span data-translate="logout">Logout</span>
+                        </button>
+                    </div>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="flex-1 max-w-3xl">
+            <header class="mb-10">
+                <h1 class="text-4xl font-black text-gray-900 tracking-tight">
+                    <span data-translate="settings">Your</span> <span class="text-teal-primary">Settings</span>
+                </h1>
+                <p class="text-gray-400 font-medium mt-1">Manage your profile and Sparkllex account security.</p>
+            </header>
+
+            <div class="space-y-8">
+                <section class="settings-card p-10">
+                    <h2 class="text-lg font-black text-gray-800 mb-8 flex items-center gap-3">
+                        <span class="w-9 h-9 rounded-xl bg-teal-50 text-teal-primary flex items-center justify-center text-sm">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        <span data-translate="profileInformation">Profile Information</span>
+                    </h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <label class="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-3" data-translate="fullName">Full Name</label>
+                            <div id="display-name" class="font-bold text-gray-700 p-5 bg-gray-50/50 rounded-2xl border border-gray-100 italic">Loading...</div>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-3" data-translate="accessEmail">Access Email</label>
+                            <div id="display-email" class="font-bold text-gray-700 p-5 bg-gray-50/50 rounded-2xl border border-gray-100">Loading...</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="settings-card p-10">
+                    <h2 class="text-lg font-black text-gray-800 mb-8 flex items-center gap-3">
+                        <span class="w-9 h-9 rounded-xl bg-gold-accent/10 text-gold-accent flex items-center justify-center text-sm">
+                            <i class="fas fa-shield-alt"></i>
+                        </span>
+                        <span data-translate="accountSecurity">Seguridad de la Cuenta</span>
+                    </h2>
+                    <form id="password-form" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-3" data-translate="newPassword">Nueva Contraseña</label>
+                                <input type="password" id="new-password" class="input-premium" placeholder="••••••••" required minlength="8">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-3" data-translate="confirmPasswordField">Confirmar Contraseña</label>
+                                <input type="password" id="confirm-password" class="input-premium" placeholder="••••••••" required minlength="8">
+                            </div>
+                        </div>
+                        <button type="submit" id="update-btn" class="w-full bg-teal-primary text-white font-black py-5 rounded-2xl hover:bg-teal-dark transition-all shadow-xl shadow-teal-primary/20 hover:scale-[1.01] active:scale-95 flex items-center justify-center gap-3">
+                            <span data-translate="updatePassword">ACTUALIZAR CONTRASEÑA</span>
+                            <i class="fas fa-sync-alt text-xs"></i>
+                        </button>
+                        <p id="msg" class="text-center text-xs font-black uppercase tracking-widest hidden p-4 rounded-xl"></p>
+                    </form>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../database-config.js"></script>
+
+    <script>
+        const passwordForm = document.getElementById('password-form');
+        const msg = document.getElementById('msg');
+
+        async function loadProfile() {
+            const { data: { user }, error } = await supabaseClient.auth.getUser();
+            
+            if (error || !user) {
+                const lang = (typeof getActiveLanguage === 'function') ? getActiveLanguage() : 'en';
+                window.location.href = "../01_MARKETING/login.html?lang=" + lang;
+                return;
+            }
+            
+            // On récupère le nom depuis les métadonnées de l'utilisateur
+            document.getElementById('display-name').textContent = user.user_metadata?.full_name || "Miembro Sparkllex";
+            document.getElementById('display-email').textContent = user.email;
+        }
+
+        passwordForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const newPass = document.getElementById('new-password').value;
+            const confirmPass = document.getElementById('confirm-password').value;
+            const btn = document.getElementById('update-btn');
+
+            if (newPass !== confirmPass) {
+                showMsg("Las contraseñas no coinciden", "bg-red-50 text-red-500");
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner animate-spin"></i> PROCESANDO...';
+
+            // Mise à jour réelle sur Supabase
+            const { error } = await supabaseClient.auth.updateUser({ password: newPass });
+
+            if (error) {
+                showMsg("Error: " + error.message, "bg-red-50 text-red-500");
+            } else {
+                showMsg("¡Contraseña actualizada con éxito!", "bg-teal-50 text-teal-primary");
+                passwordForm.reset();
+            }
+            
+            btn.disabled = false;
+            btn.innerHTML = 'ACTUALIZAR CONTRASEÑA <i class="fas fa-sync-alt text-xs"></i>';
+        });
+
+        function showMsg(text, classes) {
+            msg.textContent = text;
+            msg.className = `text-center text-xs font-black uppercase tracking-widest mt-4 p-4 rounded-xl ${classes}`;
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 5000);
+        }
+
+        async function handleLogout() {
+            await supabaseClient.auth.signOut();
+            window.location.href = "../01_MARKETING/index.html";
+        }
+
+        loadProfile();
+    </script>
+</body>
+</html>

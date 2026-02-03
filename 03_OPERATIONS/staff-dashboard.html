@@ -1,0 +1,297 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard - Sparkllex</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../database-config.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        #detailsModal { display: none !important; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
+        #detailsModal.active { display: flex !important; }
+        .status-btn-active { background-color: white !important; color: #0f766e !important; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); transform: scale(1.05); }
+        .status-btn-inactive { background-color: rgba(255, 255, 255, 0.1) !important; color: white !important; border: 1px solid rgba(255, 255, 255, 0.2); }
+        
+        @media (max-width: 768px) {
+            #mainContent { padding: 1rem !important; }
+            .max-w-7xl { padding-left: 1rem; padding-right: 1rem; }
+            table { font-size: 0.875rem; }
+            .bg-white.rounded-\[2\.5rem\] { overflow-x: auto; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen font-sans">
+
+    <div id="detailsModal" class="items-center justify-center p-4">
+        <div class="bg-white rounded-[2.5rem] max-w-lg w-full p-8 shadow-2xl">
+            <h2 class="text-2xl font-black mb-6 text-slate-900 italic">Mission Details</h2>
+            <div id="modalContent" class="space-y-4"></div>
+            <button onclick="closeModal()" class="mt-8 w-full py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-teal-600 transition">Close</button>
+        </div>
+    </div>
+
+    <nav class="bg-white border-b border-slate-200 p-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <img src="../images/logo.png" alt="Logo" class="h-8">
+            <button onclick="handleLogout()" class="px-4 py-2 bg-red-500 text-white rounded-xl font-bold hover:bg-red-600 transition shadow-sm">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </nav>
+
+    <main id="mainContent" class="max-w-7xl mx-auto px-4 py-8">
+        <div class="mb-10 flex justify-between items-end">
+            <div>
+                <h1 class="text-4xl font-black text-slate-900 tracking-tighter italic">Staff Dashboard</h1>
+                <div id="specialtyBadge" class="inline-block px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-[10px] font-black uppercase tracking-widest mt-2">
+                    Fetching specialty...
+                </div>
+            </div>
+            <button onclick="loadData()" class="text-slate-400 hover:text-teal-600 transition"><i class="fas fa-sync-alt text-xl"></i></button>
+        </div>
+
+        <div class="bg-white rounded-[2.5rem] border border-slate-200 shadow-sm overflow-hidden p-8">
+            <div class="overflow-x-auto">
+                <table class="w-full min-w-[700px]">
+                    <thead class="text-left text-[11px] uppercase tracking-widest text-slate-400 font-black">
+                        <tr>
+                            <th class="pb-4 px-4">Client</th>
+                            <th class="pb-4 px-4">Service</th>
+                            <th class="pb-4 px-4">Time</th>
+                            <th class="pb-4 px-4">Address</th>
+                            <th class="pb-4 px-4 text-center">Action</th>
+                            <th class="pb-4 px-4 text-right">Info</th>
+                        </tr>
+                    </thead>
+                    <tbody id="missionsTable" class="text-sm text-slate-700 font-medium">
+                        <tr><td colspan="6" class="p-10 text-center text-slate-400">Loading missions...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+            <div class="bg-slate-900 rounded-[3rem] p-10 text-white shadow-xl">
+                <p class="text-teal-400 text-xs font-black uppercase tracking-widest mb-2 tracking-[2px]">Team Member</p>
+                <p id="staffName" class="text-2xl font-bold italic">---</p>
+                <p id="staffEmail" class="text-slate-400 font-medium mt-1">---</p>
+            </div>
+            
+            <div class="bg-teal-600 rounded-[3rem] p-10 text-white flex flex-col gap-6 shadow-xl">
+                <div>
+                    <p class="text-teal-200 text-xs font-black uppercase tracking-widest mb-2 tracking-[2px]">Availability</p>
+                    <p id="staffStatusLabel" class="text-4xl font-black capitalize italic">---</p>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <button id="btn-active" onclick="updateStaffAvailability('active')" class="px-6 py-3 rounded-2xl text-xs font-black transition-all">Active</button>
+                    <button id="btn-pause" onclick="updateStaffAvailability('pause')" class="px-6 py-3 rounded-2xl text-xs font-black transition-all">Pause</button>
+                    <button id="btn-off" onclick="updateStaffAvailability('off')" class="px-6 py-3 rounded-2xl text-xs font-black transition-all">Off</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let appointmentsData = [];
+
+        async function handleLogout() {
+            await supabaseClient.auth.signOut();
+            window.location.href = "../01_MARKETING/login.html";
+        }
+
+        async function loadData() {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (!session) return window.location.href = "../01_MARKETING/login.html";
+
+            // 1. Get Staff Profile
+            const { data: staffProfile, error: staffError } = await supabaseClient
+                .from('profiles')
+                .select('*')
+                .eq('id', session.user.id)
+                .single();
+
+            // --- BLOC DE SÉCURITÉ ---
+            if (staffProfile.role !== 'staff' || staffProfile.is_verified === false) {
+                document.getElementById('mainContent').innerHTML = `
+                    <div class="flex flex-col items-center justify-center py-20 text-center">
+                        <div class="w-20 h-20 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-3xl mb-6 animate-pulse">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <h1 class="text-3xl font-black text-slate-900 italic tracking-tighter mb-2">Verification Pending</h1>
+                        <p class="text-slate-500 max-w-sm font-medium">Welcome to the team! Your account is currently being reviewed by an administrator. You will gain access to missions once verified.</p>
+                        <button onclick="loadData()" class="mt-8 px-6 py-3 bg-slate-900 text-white rounded-2xl font-bold text-xs uppercase tracking-widest">Check Status</button>
+                    </div>`;
+                return;
+            }
+            // --- FIN DU BLOC DE SÉCURITÉ ---
+
+            if (staffProfile) {
+                document.getElementById('staffName').textContent = staffProfile.full_name || 'Staff Member';
+                document.getElementById('staffEmail').textContent = staffProfile.email;
+                document.getElementById('staffStatusLabel').textContent = staffProfile.status || 'active';
+                document.getElementById('specialtyBadge').textContent = staffProfile.service_type 
+                    ? `Specialty: ${staffProfile.service_type}` 
+                    : 'All Services';
+                updateStatusUI(staffProfile.status || 'active');
+            }
+
+            // 2. Fetch Filtered Appointments
+            let query = supabaseClient.from('appointments').select('*');
+            if (staffProfile && staffProfile.service_type) {
+                query = query.eq('service_type', staffProfile.service_type);
+            }
+            const { data: apps, error: appError } = await query.order('appointment_date', { ascending: true });
+            
+            // 3. Get Client Addresses from Profiles
+            const { data: profiles } = await supabaseClient.from('profiles').select('id, address, city, full_name');
+            const profilesMap = (profiles || []).reduce((acc, p) => { acc[p.id] = p; return acc; }, {});
+
+            // 4. Combine and Render
+            appointmentsData = (apps || []).map(app => {
+                const client = profilesMap[app.client_id];
+                return {
+                    id: app.id,
+                    client: app.client_name || client?.full_name || 'Unknown Client',
+                    service: app.service_type || 'General Cleaning',
+                    time: `${app.appointment_date} @ ${app.appointment_time}`,
+                    address: app.address || (client ? `${client.address}, ${client.city}` : 'No address provided'),
+                    notes: app.notes || 'No special instructions',
+                    status: app.status
+                };
+            });
+            
+            renderMissions();
+        }
+
+        function renderMissions() {
+            const tableBody = document.getElementById('missionsTable');
+            if (appointmentsData.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="6" class="p-10 text-center text-slate-400 italic">No missions found for your specialty.</td></tr>`;
+                return;
+            }
+
+            tableBody.innerHTML = appointmentsData.map(app => {
+                const isDone = app.status === 'completed';
+                return `
+                <tr class="border-b border-slate-50 hover:bg-slate-50 transition-colors">
+                    <td class="p-5 font-bold">${app.client}</td>
+                    <td class="p-5"><span class="bg-teal-50 text-teal-700 px-3 py-1 rounded-lg text-xs font-bold">${app.service}</span></td>
+                    <td class="p-5 text-slate-500">${app.time}</td>
+                    <td class="p-5 text-slate-700 text-xs">${app.address}</td>
+                    <td class="p-5 text-center">
+                        ${isDone 
+                            ? '<span class="text-emerald-600 font-black text-[10px] uppercase bg-emerald-50 px-3 py-2 rounded-xl border border-emerald-200">Completed</span>' 
+                            : `<button onclick="markCompleted('${app.id}')" class="bg-rose-500 text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase shadow-md hover:bg-rose-600 transition">Complete</button>`
+                        }
+                    </td>
+                    <td class="p-5 text-right">
+                        <button onclick="showInfo('${app.id}')" class="text-slate-300 hover:text-slate-900 text-xl transition">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                    </td>
+                </tr>`;
+            }).join('');
+        }
+
+        async function markCompleted(id) {
+            if (!confirm("Are you sure you want to mark this mission as completed?")) return;
+            const { error } = await supabaseClient.from('appointments').update({ status: 'completed' }).eq('id', id);
+            if (!error) loadData();
+        }
+
+        async function updateStaffAvailability(newStatus) {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            await supabaseClient.from('profiles').update({ status: newStatus }).eq('id', session.user.id);
+            loadData();
+        }
+
+        function updateStatusUI(status) {
+            ['active', 'pause', 'off'].forEach(s => {
+                const btn = document.getElementById(`btn-${s}`);
+                if (btn) btn.className = (s === status) ? "px-6 py-3 rounded-2xl text-xs font-black status-btn-active" : "px-6 py-3 rounded-2xl text-xs font-black status-btn-inactive";
+            });
+        }
+
+        function showInfo(id) {
+            const app = appointmentsData.find(a => a.id === id);
+            document.getElementById('modalContent').innerHTML = `
+                <div class="space-y-4">
+                    <div class="bg-slate-50 p-4 rounded-2xl"><p class="text-xs text-slate-400 uppercase font-black mb-1">Client</p><p class="font-bold">${app.client}</p></div>
+                    <div class="bg-slate-50 p-4 rounded-2xl"><p class="text-xs text-slate-400 uppercase font-black mb-1">Service</p><p class="font-bold">${app.service}</p></div>
+                    <div class="bg-teal-50 p-4 rounded-2xl"><p class="text-xs text-teal-600 uppercase font-black mb-1">Address</p><p class="font-bold">${app.address}</p></div>
+                    <div class="bg-amber-50 p-4 rounded-2xl"><p class="text-xs text-amber-600 uppercase font-black mb-1">Special Notes</p><p class="italic">${app.notes}</p></div>
+                </div>`;
+            document.getElementById('detailsModal').classList.add('active');
+        }
+
+        function closeModal() { document.getElementById('detailsModal').classList.remove('active'); }
+        
+        window.onload = loadData;
+    </script>
+
+    <footer class="py-8 text-center text-gray-600 text-[9px] font-bold uppercase tracking-[0.3em] mt-12 border-t border-gray-200">
+        <span>© 2026 Sparkllex. All rights reserved.</span>
+        <div class="mt-3 text-[7px] uppercase tracking-[0.3em]">
+            Designed by <a href="https://gui-fiedly.vercel.app" target="_blank" rel="noopener noreferrer" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">GF Digital Studio</a> | <a href="mailto:isteah.gffilsaime@gmail.com" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">Gui Fiedly Fils-aime</a>
+        </div>
+    </footer>
+
+    <!-- Add data attributes to buttons -->
+    <button data-plan="basic" class="px-4 py-2 bg-teal-500 text-white rounded-xl font-bold hover:bg-teal-600 transition">Basic Plan</button>
+    <button data-plan="pro" class="px-4 py-2 bg-teal-500 text-white rounded-xl font-bold hover:bg-teal-600 transition">Pro Plan</button>
+    <button data-plan="familiar" class="px-4 py-2 bg-teal-500 text-white rounded-xl font-bold hover:bg-teal-600 transition">Familiar Plan</button>
+
+    <!-- VIP Support Link -->
+    <a id="vipSupportLink" href="#" class="text-teal-500 opacity-50 pointer-events-none">VIP Support</a>
+
+    <!-- Client Portal Button -->
+    <button onclick="window.location.href='https://billing.stripe.com/p/login/aFabJ1dNzeOc5lr2Fkb3q00'" class="px-4 py-2 bg-blue-500 text-white rounded-xl font-bold hover:bg-blue-600 transition">Gérer mon abonnement</button>
+
+    <script>
+        async function redirectToStripe(planUrl) {
+            const { data: { user } } = await supabase.auth.getUser();
+
+            if (!user) {
+                window.location.href = '../01_MARKETING/login.html';
+                return;
+            }
+
+            const finalUrl = `${planUrl}?client_reference_id=${user.id}&prefilled_email=${user.email}`;
+            window.location.href = finalUrl;
+        }
+
+        async function updateVIPSupportLink() {
+            const { data: { user } } = await supabase.auth.getUser();
+
+            if (!user) {
+                window.location.href = '../01_MARKETING/login.html';
+                return;
+            }
+
+            const { data: profile } = await supabase
+                .from('profiles')
+                .select('plan')
+                .eq('id', user.id)
+                .single();
+
+            const vipLink = document.getElementById('vipSupportLink');
+            if (profile && profile.plan === 'FAMILIAR') {
+                vipLink.classList.remove('opacity-50', 'pointer-events-none');
+            } else {
+                vipLink.classList.add('opacity-50', 'pointer-events-none');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('[data-plan="basic"]').addEventListener('click', () => redirectToStripe('https://buy.stripe.com/fZu6oHdNz5dCdRX2Fkb3q06'));
+            document.querySelector('[data-plan="pro"]').addEventListener('click', () => redirectToStripe('https://buy.stripe.com/8x29AT5h30Xm6pveo2b3q07'));
+            document.querySelector('[data-plan="familiar"]').addEventListener('click', () => redirectToStripe('https://buy.stripe.com/cNi14nbFr35u6pv5Rwb3q08'));
+
+            updateVIPSupportLink();
+        });
+    </script>
+
+</body>
+</html>

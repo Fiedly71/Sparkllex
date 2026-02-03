@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Sparkllex</title>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    
+    <script src="../translations.js"></script>
+    <script src="../apply-translations.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-primary': '#008080',
+                        'teal-dark': '#006666',
+                        'light-bg': '#F4F9F9',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at top right, #F4F9F9, #E0F2F2); min-height: 100vh; }
+        .glass-card { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); border: 1px solid rgba(0, 128, 128, 0.1); border-radius: 2.5rem; }
+        .premium-input { 
+            width: 100%; padding: 0.85rem 1.25rem; background: #f8fafc; border: 1.5px solid #e2e8f0; 
+            border-radius: 1.25rem; transition: all 0.3s ease; font-size: 0.9rem;
+        }
+        .premium-input:focus { border-color: #008080; background: white; outline: none; box-shadow: 0 0 0 4px rgba(0, 128, 128, 0.1); }
+        .iti { width: 100% !important; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="../index.html"><img src="../images/logo.png" alt="Sparkllex" class="h-10"></a>
+            <a href="login.html" class="text-[10px] font-black uppercase tracking-widest text-teal-dark flex items-center gap-2">
+                <span>Already have an account?</span> 
+                <i class="fas fa-chevron-right text-[8px]"></i>
+            </a>
+        </div>
+    </nav>
+
+    <main class="pt-28 pb-16 px-6 flex items-center justify-center">
+        <div class="glass-card w-full max-w-xl p-8 md:p-12 shadow-2xl">
+            
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-black text-gray-900 mb-2">Create Account</h1>
+                <p class="text-gray-400 font-medium">Please fill in your real service address</p>
+            </div>
+
+            <form id="signup-form" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-teal-dark ml-1">Full Name</label>
+                        <input type="text" id="fullName" class="premium-input" placeholder="John Doe" required>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-teal-dark ml-1">Phone</label>
+                        <input type="tel" id="phone-input" class="premium-input" required>
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-teal-dark ml-1">Email</label>
+                    <input type="email" id="email" class="premium-input" placeholder="hello@example.com" required>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="password" id="password" class="premium-input" placeholder="Password" required minlength="8">
+                    <input type="password" id="confirm_password" class="premium-input" placeholder="Confirm Password" required>
+                </div>
+
+                <div class="pt-4 border-t border-gray-100">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i class="fas fa-map-marked-alt text-teal-primary"></i>
+                        <label class="text-[11px] font-black uppercase tracking-widest text-teal-primary">Service Location</label>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold text-gray-400 ml-1">Country</label>
+                            <select id="country" class="premium-input" required>
+                                <option value="USA">🇺🇸 United States</option>
+                                <option value="Chile">🇨🇱 Chile</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold text-gray-400 ml-1">City</label>
+                            <input type="text" id="city" class="premium-input" placeholder="Miami" required>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold text-gray-400 ml-1">Street Address</label>
+                            <input type="text" id="address1" class="premium-input" placeholder="House number and street" required>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-gray-400 ml-1">Apt / Suite</label>
+                                <input type="text" id="address2" class="premium-input" placeholder="Apt 4B">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-gray-400 ml-1">Zip Code</label>
+                                <input type="text" id="zip" class="premium-input" placeholder="Postal Code" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-1 pt-2">
+                    <label class="text-[10px] font-black uppercase text-teal-dark ml-1">Plan Selected</label>
+                    <select id="plan-select" class="premium-input">
+                        <option value="basico">Basic Plan - $79/mo</option>
+                        <option value="pro" selected>Pro Plan - $149/mo</option>
+                        <option value="familiar">Family / Airbnb Plan - $249/mo</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="submit-btn" class="w-full bg-teal-primary text-white py-4 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-teal-dark transition-all flex items-center justify-center gap-3">
+                    <span>Continue to Secure Payment</span>
+                    <i class="fas fa-lock text-xs"></i>
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="py-10 text-center text-gray-600 text-[9px] font-bold uppercase tracking-[0.3em] mt-12">
+        <div class="text-[7px] uppercase tracking-[0.3em]">Designed by <a href="https://gui-fiedly.vercel.app" target="_blank" rel="noopener noreferrer" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">GF Digital Studio</a> | <a href="mailto:isteah.gffilsaime@gmail.com" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">Gui Fiedly Fils-aime</a></div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Phone Input
+            const phoneInput = document.querySelector("#phone-input");
+            const iti = window.intlTelInput(phoneInput, {
+                utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+                initialCountry: "auto"
+            });
+
+            const signupForm = document.getElementById('signup-form');
+            
+            signupForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Validation password
+                const pass = document.getElementById('password').value;
+                const confirm = document.getElementById('confirm_password').value;
+                if (pass !== confirm) {
+                    alert("Passwords do not match!");
+                    return;
+                }
+
+                const btn = document.getElementById('submit-btn');
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirecting to Stripe...';
+
+                // 1. Capture user data for Success page
+                const userData = {
+                    email: document.getElementById('email').value.trim(),
+                    password: pass,
+                    fullName: document.getElementById('fullName').value,
+                    planId: document.getElementById('plan-select').value,
+                    country: document.getElementById('country').value,
+                    city: document.getElementById('city').value,
+                    address: `${document.getElementById('address1').value}, ${document.getElementById('address2').value || ''}`.trim(),
+                    zip: document.getElementById('zip').value,
+                    phone: iti.getNumber()
+                };
+
+                // 2. Save in Session Storage
+                sessionStorage.setItem('pending_signup', JSON.stringify(userData));
+
+                // 3. Determine Stripe Link
+                let stripeUrl = "";
+                switch (userData.planId) {
+                    case 'basico': stripeUrl = "https://buy.stripe.com/test_aFabJ1dNzeOc5lr2Fkb3q00"; break;
+                    case 'pro': stripeUrl = "https://buy.stripe.com/test_3cI5kD4cZ9tS6pv0xcb3q01"; break;
+                    case 'familiar': stripeUrl = "https://buy.stripe.com/test_9B6cN54cZ7lK9BH3Job3q02"; break;
+                    default: stripeUrl = "https://buy.stripe.com/test_3cI5kD4cZ9tS6pv0xcb3q01";
+                }
+
+                // 4. Redirect with prefilled email
+                window.location.href = `${stripeUrl}?prefilled_email=${encodeURIComponent(userData.email)}`;
+            });
+        });
+    </script>
+</body>
+</html>

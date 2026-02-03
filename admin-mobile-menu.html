@@ -1,0 +1,140 @@
+﻿<!-- 
+    SPARKLLEX ADMIN MOBILE MENU
+    Include this at the top of all admin pages (03_OPERATIONS, 04_ADMIN_METRICS)
+    
+    Usage: Add after <body> tag:
+    <!-- Mobile Admin Menu -->
+    <script src="../admin-mobile-menu.js"></script>
+-->
+
+<style>
+    /* Mobile Admin Menu Styles */
+    #mobile-admin-menu {
+        display: none;
+    }
+    #mobile-admin-menu.active {
+        display: flex;
+    }
+    #mobile-menu-btn {
+        display: none;
+    }
+    @media (max-width: 1023px) {
+        #mobile-menu-btn {
+            display: flex;
+        }
+    }
+    .mobile-menu-overlay {
+        animation: slideIn 0.3s ease-out;
+    }
+    @keyframes slideIn {
+        from {
+            transform: translateX(-100%);
+        }
+        to {
+            transform: translateX(0);
+        }
+    }
+</style>
+
+<!-- Mobile Menu Button -->
+<button id="mobile-menu-btn" class="fixed top-4 left-4 z-50 bg-teal-primary text-white p-3 rounded-lg shadow-lg items-center justify-center">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>
+</button>
+
+<!-- Mobile Admin Menu Overlay -->
+<div id="mobile-admin-menu" class="fixed inset-0 z-40 bg-white flex-col p-6 overflow-y-auto mobile-menu-overlay">
+    <div class="flex justify-between items-center mb-6">
+        <div>
+            <p class="text-sm uppercase tracking-[0.3em] text-gray-600" data-translate="adminPanel">Admin Panel</p>
+            <h1 class="text-2xl font-sans text-teal-primary">Sparkllex</h1>
+        </div>
+        <button id="close-mobile-menu" class="text-gray-600 p-2 hover:bg-gray-100 rounded">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+    </div>
+    
+    <!-- Language Switcher -->
+    <div class="flex items-center justify-center gap-2 text-sm border-b border-teal-primary border-opacity-20 pb-4 mb-4">
+        <button id="lang-es-mobile" onclick="switchLanguage('es')" class="px-4 py-2 rounded bg-teal-primary text-white font-semibold transition">ES</button>
+        <span class="text-gray-600">|</span>
+        <button id="lang-en-mobile" onclick="switchLanguage('en')" class="px-4 py-2 rounded text-gray-600 hover:bg-gray-100 transition">EN</button>
+    </div>
+    
+    <!-- Member Access -->
+    <a href="../01_MARKETING/login.html" class="block w-full bg-teal-primary text-white text-center py-3 px-4 rounded-lg font-semibold mb-6 hover:bg-teal-dark transition">
+        <span data-translate="memberAccess">Acceso Miembro</span>
+    </a>
+    
+    <!-- Navigation Links -->
+    <nav class="flex flex-col gap-2 text-base">
+        <a class="px-4 py-3 rounded-lg hover:bg-gray-100 transition flex items-center gap-3" href="../03_OPERATIONS/agenda.html">
+            <span class="text-2xl">ðŸ“…</span>
+            <span class="font-medium" data-translate="agendaTitle">Agenda</span>
+        </a>
+        <a class="px-4 py-3 rounded-lg hover:bg-gray-100 transition flex items-center gap-3" href="../03_OPERATIONS/team-manager.html">
+            <span class="text-2xl">ðŸ‘¥</span>
+            <span class="font-medium" data-translate="teamManagement">Team Manager</span>
+        </a>
+        <a class="px-4 py-3 rounded-lg hover:bg-gray-100 transition flex items-center gap-3" href="../03_OPERATIONS/crm-clients.html">
+            <span class="text-2xl">ðŸ“Š</span>
+            <span class="font-medium" data-translate="crmTitle">CRM Clients</span>
+        </a>
+        <a class="px-4 py-3 rounded-lg hover:bg-gray-100 transition flex items-center gap-3" href="../04_ADMIN_METRICS/executive-finance.html">
+            <span class="text-2xl">ðŸ’°</span>
+            <span class="font-medium" data-translate="finances">Executive Finance</span>
+        </a>
+        <a class="px-4 py-3 rounded-lg hover:bg-gray-100 transition flex items-center gap-3" href="../04_ADMIN_METRICS/expansion.html">
+            <span class="text-2xl">ðŸŒ</span>
+            <span class="font-medium" data-translate="expansion">Expansion</span>
+        </a>
+    </nav>
+    
+    <div class="mt-auto pt-6 border-t border-gray-200 text-sm text-gray-500">
+        <p data-translate="footerRights">Sparkllex Admin Â© 2026</p>
+    </div>
+</div>
+
+<script>
+    // Mobile Admin Menu Toggle
+    (function() {
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-admin-menu');
+        const closeMenuBtn = document.getElementById('close-mobile-menu');
+        
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+        
+        if (closeMenuBtn) {
+            closeMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        }
+        
+        // Close menu on link click
+        const menuLinks = document.querySelectorAll('#mobile-admin-menu a');
+        menuLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+        
+        // Close on outside click
+        mobileMenu.addEventListener('click', function(e) {
+            if (e.target === mobileMenu) {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    })();
+</script>
+

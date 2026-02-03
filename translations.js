@@ -1,0 +1,981 @@
+// translations.js - Global language catalog for Sparkllex
+// Supports URL parameters (?lang=es or ?lang=en) and localStorage persistence
+
+const translations = {
+    en: {
+        // Navigation & Headers
+        btnAccess: "Log In",
+        indexTitle: "Luxury & Perfection",
+        indexSubtitle: "Premium tailored services for your lifestyle",
+        
+        // Call-to-action buttons
+        getStarted: "Get Started",
+        viewServices: "View Services",
+        
+        // Stats section
+        clients: "Happy Clients",
+        rating: "Rating",
+        support: "Support",
+        guarantee: "Satisfaction",
+        
+        // Services section
+        ourServices: "Our Premium Services",
+        deepCleaning: "Deep Cleaning",
+        eliteLaundry: "Elite Laundry",
+        masterIroning: "Master Ironing",
+        maintenance: "Home Maintenance",
+        
+        // Why Choose Sparkllex
+        whyChooseSparkllex: "Why Choose Sparkllex?",
+        totalTrust: "Total Trust",
+        rigorouslySelected: "Staff rigorously selected and trained to our standards.",
+        premiumQuality: "Premium Quality",
+        highEndProducts: "We use only high-end eco-friendly cleaning products.",
+        flexibility: "Full Flexibility",
+        plansAdapted: "Customized plans that adapt perfectly to your schedule.",
+        
+        // Subscription Plans
+        subscriptionPlans: "Subscription Plans",
+        basicPlan: "Essential",
+        perMonth: "/mo",
+        basicSubtitle: "Perfect for small apartments.",
+        seeMore1: "See More",
+        choosePlan1: "Choose Plan",
+        mostPopular: "Most Popular",
+        proPlan: "Professional",
+        perMonth2: "/mo",
+        proSubtitle: "Ideal for busy professionals.",
+        seeMore2: "See More",
+        choosePlan2: "Choose Plan",
+        familiarPlan: "Family",
+        perMonth3: "/mo",
+        familiarSubtitle: "Complete care for your family home.",
+        seeMore3: "See More",
+        choosePlan3: "Choose Plan",
+        
+        // Contact section
+        contact: "Get in Touch",
+        callUs: "Call Us Now",
+        
+        // Navigation (header & footer)
+        homeNav: "Home",
+        servicesNav: "Services",
+        plansNav: "Plans",
+        howItWorksNav: "How it works",
+        
+        // Mobile Navigation
+        mobileNavHome: "Home",
+        mobileNavServices: "Services",
+        mobileNavPlans: "Plans",
+        mobileHowItWorks: "How it works",
+        
+        // Footer Links
+        footNavHome: "Home",
+        footNavServices: "Services",
+        footNavPlans: "Plans",
+        footHowItWorks: "How it works",
+        footPrivacy: "Privacy Policy",
+        footTerms: "Terms & Conditions",
+        footCookies: "Cookies",
+        footLinksTitle: "Links",
+        footLegalTitle: "Legal",
+        footPaymentsTitle: "Payments",
+        footAbout: "Elevating home care to an art form. Experience the Sparkllex difference.",
+        footerRights: "© 2026 Sparkllex. All rights reserved.",
+        designCredit: "Designed by GF Studio",
+        whatsappLabel: "WhatsApp",
+        
+        // Login page
+        loginTitle: "Welcome Back",
+        loginEmail: "Email",
+        loginPassword: "Password",
+        loginButton: "Sign In",
+        noAccount: "Don't have an account?",
+        signUpLink: "Sign up here",
+        labelEmail: "Your Email",
+        labelPassword: "Password",
+        forgotPassword: "Forgot?",
+        btnLogin: "Sign In",
+        dontHaveAccount: "Don't have an account?",
+        signUpHere: "Register",
+        
+        // Signup page
+        signupTitle: "Create Your Account",
+        signupEmail: "Email",
+        signupPassword: "Password",
+        signupConfirm: "Confirm Password",
+        signupButton: "Sign Up",
+        agreeTerms: "I agree to the Terms & Conditions",
+        haveAccount: "Already have an account?",
+        loginLink: "Log in here",
+
+        // Marketing & Legal pages
+        backHome: "Back",
+        alreadyAccountSignup: "Already have an account?",
+        signupSubtitle: "Register to activate your premium plan",
+        labelName: "Full Name",
+        labelEmailSignup: "Personal Email",
+        labelPasswordSignup: "Password",
+        labelConfirmPassword: "Confirm",
+        labelPhone: "Contact Phone",
+        labelPlan: "Selected Plan",
+        passwordMismatch: "Passwords do not match.",
+        termsText: "By signing up, you agree to our Terms and Privacy Policy.",
+        lastUpdated: "Last updated: January 2026",
+
+        cookieTitle: "Cookie Policy",
+        cookieSec1Title: "What are Cookies?",
+        cookieSec1Text: "Cookies are small text files stored on your device when you visit a website. They help the site remember information about your visit to improve your experience.",
+        cookieSec2Title: "Types of Cookies",
+        cookieBrowserTitle: "Browser Configuration",
+        cookieContactText: "For any questions regarding our policy, please reach out:",
+
+        howItWorksTitle: "Your time is gold",
+        howItWorksSubtitle: "Discover how Sparkllex transforms home management into a seamless luxury experience.",
+        step1Title: "Schedule in seconds",
+        step1Desc: "From our platform or WhatsApp, choose the service you need and schedule the time that suits you best.",
+        step2Title: "White Glove Pickup",
+        step2Desc: "A specialized Sparkllex concierge will visit your home to collect items or begin maintenance tasks with total security.",
+        step3Title: "Premium Care",
+        step3Desc: "We apply the highest quality standards: from eco-friendly laundry to artisan ironing and deep cleaning.",
+        step4Title: "Delivery and Confirmation",
+        step4Desc: "Receive your services on time. We notify you via App and WhatsApp to ensure your complete satisfaction.",
+
+        planBasicoSubtitle: "Essential Needs",
+        planBasicoTitle: "Basic",
+        planBasicoFeature1: "1 Monthly visit",
+        planBasicoFeature2: "Standard Cleaning",
+        planBasicoFeature3: "Chat Support",
+        planBasicoFeature4: "Elite Laundry",
+        planProTitle: "Pro",
+        planProSubtitle: "For Professionals",
+        planProFeature1: "3 Monthly visits",
+        planProFeature2: "Pro Laundry Service",
+        planProFeature3: "Priority Support",
+        planProFeature4: "Master Ironing",
+        planFamiliarTitle: "Family",
+        planFamiliarSubtitle: "Total Home Care",
+        planFamiliarFeature1: "Daily Cleaning",
+        planFamiliarFeature2: "Unlimited Laundry",
+        planFamiliarFeature3: "Full Maintenance",
+        planFamiliarFeature4: "24/7 VIP Support",
+
+        premiumBenefits: "Premium Benefits",
+        proIncl1Title: "2 Standard Cleanings / month",
+        proIncl1Desc: "Up to 2 bed + 1 bath (or 1,500 sq ft).",
+        proIncl2Title: "2 Laundry or Ironing sessions",
+        proIncl2Desc: "Up to 30 lb monthly included.",
+        proIncl3Title: "1 Basic Repair included",
+        proIncl3Desc: "Shoes or home repairs (45 min).",
+        proIncl4Title: "Priority Scheduling",
+        proIncl4Desc: "Preferential access and VIP support.",
+
+        allInclusiveServices: "All-Inclusive Services",
+        famIncl1Title: "4 Standard Cleanings / month",
+        famIncl1Desc: "Up to 3 bed + 2 bath (or 2,000 sq ft).",
+        famIncl2Title: "Recurring Laundry & Ironing",
+        famIncl2Desc: "Up to 60 lb included (fair use).",
+        famIncl3Title: "Basic Maintenance",
+        famIncl3Desc: "2 monthly interventions included.",
+        famIncl4Title: "Maximum Priority",
+        famIncl4Desc: "Guaranteed priority scheduling & support.",
+
+        whatsIncluded: "What's included?",
+        fairUseNote: "Note: Each plan is subject to a fair use policy. Spaces exceeding the mentioned limits may incur additional charges.",
+        choosePlan: "Choose this Plan",
+
+        pricingSubtitlePre: "Excellence in every detail",
+        pricingTitle1: "Premium",
+        pricingTitle2: "Plans",
+        pricingSubtitle: "Choose the level of care your home and lifestyle deserve.",
+        securePaymentTitle1: "Secure",
+        securePaymentTitle2: "Payments",
+        faq1Question: "How does billing work?",
+        faq1Answer: "Subscriptions renew automatically every 30 days. We process all payments through Stripe with military-grade encryption for your security.",
+        faq3Question: "Can I change my plan?",
+        faq3Answer: "Yes, you can upgrade or downgrade at any time from your dashboard. Changes are automatically prorated on your next billing cycle.",
+
+        navContact: "Contact",
+        navCookies: "Cookies",
+        navTerms: "Terms",
+
+        privacyTitle: "Privacy Policy",
+        privacyIntro: "Your privacy is important to us. This policy explains how we collect, use, and protect your information.",
+        privSec1Title: "Introduction",
+        privSec1Content: "At Sparkllex, we deeply value our customers' privacy. This policy describes how we protect your personal information while you enjoy our premium home care and cleaning services.",
+        privSec2Title: "Information We Collect",
+        privSec2Content: "We collect personal information such as your name, email address, and phone number when you sign up for our services.",
+        privData1Title: "Account Data",
+        privData1Desc: "Name, email, phone, and service address.",
+        privData2Title: "Secure Payments",
+        privData2Desc: "Processed by Stripe (we do not store card details).",
+        privSec3Title: "Data Usage",
+        privSec3Intro: "We use your information primarily to:",
+        privSec3Content: "We do not share your personal information with third parties except as required by law or to provide our services.",
+        privUse1: "Manage your appointments and visits.",
+        privUse2: "Ensure the safety and security of your home.",
+        privUse3: "Continuously improve our service quality.",
+        privSec4Title: "Your Rights",
+        privSec4Content: "You have the right to access, update, or delete your personal information. Contact us to exercise these rights.",
+        contactUsTitle: "Contact Us",
+        privContactTitle: "Have questions?",
+        privContactDesc: "Our data protection team is ready to assist you with any concerns.",
+
+        paymentSuccess: "Payment Successful!",
+        successTitle: "Welcome to Sparkllex!",
+        successMessage: "Your subscription at Sparkllex has been activated. Welcome to premium home care excellence.",
+        nextSteps: "Next Steps",
+        step1: "Access your dashboard",
+        step2: "Schedule your first cleaning",
+        btnGoAccount: "Go to my account",
+        needHelp: "Need assistance?",
+        viewDetails: "View Details",
+
+        // Members App - shared navigation
+        logout: "Log Out",
+        booking: "Book",
+        membershipStatus: "Dashboard",
+        myAppointmentsLink: "My Appointments",
+        myAppointments: "My Appointments",
+        appointments2: "Citas",
+        aISupportLink: "AI Support",
+        yourHistory: "History",
+
+        // Members App - appointments
+        upcomingServices: "Upcoming Services",
+        manageReservations: "Manage your Sparkllex bookings.",
+        manageServiceReservations: "Manage your service reservations.",
+        newAppointment: "New Appointment",
+        newBooking: "New Booking",
+        scheduleAppointment: "Schedule Appointment",
+        serviceAtHome: "At-home Service",
+        serviceType: "Service Type",
+        selectDate: "Date",
+        selectTime: "Time",
+        notesOrInstructions: "Notes or Instructions",
+        confirmReservation: "Confirm Reservation",
+        loadingAppointments: "Loading appointments...",
+        noScheduledAppointments: "No scheduled appointments",
+        bookFirstService: "Book your first Sparkllex service now.",
+        bookNow: "Book Now",
+        inactivePlan: "Inactive Plan",
+        cannotMakeNewReservations: "Your plan is inactive. You cannot make new reservations.",
+        yourBookings: "Manage your service reservations.",
+
+        // Members App - booking flow
+        mainMenu: "Main Menu",
+        selectService: "Select your",
+        bookService: "Service",
+        personalizeExperience: "Personalize your Sparkllex experience today.",
+        premiumLaundry: "Premium Laundry",
+        highQualityTreatment: "High-quality care for your garments.",
+        masterIroningLink: "Master Ironing",
+        impeccableFinish: "Impeccable finish and professional steaming.",
+        deepCleaningDesc: "Professional deep cleaning for your home.",
+        maintenanceDesc: "Home repairs and maintenance services.",
+        schedulePickup: "Schedule Pickup",
+        dateAndTime: "Date & Time",
+        photoDamage: "Damage Photo (Optional)",
+        specialInstructions: "Special Instructions",
+        notesPlaceholder: "E.g.: Call before arriving or handle silk carefully...",
+        pickupTimeNote: "Our agents pick up your items within 30 min of the selected time.",
+        confirmBooking: "Confirm Booking",
+        allSet: "All set!",
+        supportReceived: "We've received your request. A driver will contact you soon.",
+        understood: "Understood",
+        bookingSuccess: "Booking Successful!",
+        bookingSuccessMessage: "Your pickup has been scheduled. You can view the details in your appointments history.",
+        viewMyAppointments: "View My Appointments",
+
+        // Members App - membership status
+        yourAccountBenefits: "Manage your subscription and exclusive perks.",
+        planStatus: "Plan Status",
+        memberId: "Member ID",
+        activeUserPlan: "Active Plan",
+        managePlan: "Manage Billing",
+        nextCharge: "Next Charge",
+        autoRenewal: "Auto-Renewal",
+        paymentMethod: "Payment Method",
+        paymentCard: "Saved Card",
+        quickAccess: "Quick Access",
+        cancelSubscription: "Cancel Subscription",
+        basicMember: "Basic Member",
+        proMember: "Pro Member",
+        familyMember: "Family Member",
+        premiumMember: "Premium Member",
+
+        // Members App - history
+        downloadInvoices: "Manage your services and download invoices.",
+        csvExport: "CSV",
+        pdfInvoice: "PDF Invoice",
+        completedService: "Premium Wash Plus",
+        completed: "Completed",
+        loadingHistory: "Loading history...",
+
+        // Members App - settings
+        settings: "Settings",
+        yourConfiguration: "Your Configuration",
+        profileInformation: "Profile Information",
+        fullName: "Full Name",
+        accessEmail: "Access Email",
+        accountSecurity: "Account Security",
+        newPassword: "New Password",
+        confirmPasswordField: "Confirm Password",
+        updatePassword: "Update Password",
+
+        // Members App - support & AI
+        aISupport: "AI Support",
+        aIAssistant: "Sparkllex Virtual Assistant",
+        activeVipSupport: "VIP Support Active",
+        onlineAI: "Online • Artificial Intelligence",
+        whatPlans: "What plans are available?",
+        howToBook: "How to book?",
+        schedules: "Schedules",
+        typeQuestion: "Type your question",
+
+        // Members App - VIP support ticket
+        exclusiveAttention: "Exclusive Attention",
+        absolutePriority: "As a Premium member, you have absolute priority on all requests.",
+        whatsappConcierge: "WhatsApp Concierge",
+        immediateResponseChat: "Immediate response via chat for emergencies.",
+        sendSupportTicket: "Send Support Ticket",
+        inquiryReason: "Inquiry reason",
+        billing: "Billing",
+        appointmentChange: "Appointment Change",
+        planBenefits: "Plan & Benefits",
+        otherMatter: "Other Matter",
+        priority: "Priority",
+        highMemberVip: "High (VIP Member)",
+        messageDetails: "Message details",
+        sendPriorityMessage: "Send Priority Message",
+        describeHowWeCanHelp: "Describe how we can help you",
+
+        // Operations & Admin - shared
+        adminPanel: "Admin Panel",
+        memberAccess: "Member Access",
+        agendaTitle: "Global Agenda",
+        teamManagement: "Team Manager",
+        crmTitle: "CRM Clients",
+        operationalControl: "Operational Control",
+        globalStrategy: "Global Strategy",
+        finances: "Executive Finance",
+        expansion: "Expansion",
+        actions: "Actions",
+        logout: "Log Out",
+
+        // Operations - agenda
+        todayAgenda: "Central control of missions and services.",
+        pending: "Pending",
+        confirmed: "Confirmed",
+        todayCount: "Today",
+        timeSlot: "Schedule",
+        serviceName: "Service / Client",
+        status: "Status",
+        addManual: "Dispatch Mission",
+        createService: "Create Service",
+        selectStaff: "Select Staff (Optional)",
+        cancel: "Cancel",
+        clientName: "Client Name",
+
+        // Operations - CRM
+        clientDatabase: "Manage and view active members.",
+        name: "Full Name",
+        email: "Email",
+        memberPlan: "Current Plan",
+        phone: "Phone",
+        syncedSupabase: "Synced with Supabase",
+
+        // Operations - team manager
+        teamManager: "Team Manager",
+        staffManagement: "Staff management",
+        staffName: "Staff Name",
+        role: "Role",
+        contact: "Contact",
+        addStaff: "Add Staff Member",
+        
+        // Staff Dashboard
+        staffDashboard: "Staff Dashboard",
+        assignedJobs: "Assigned Missions",
+        clientLabel: "Client",
+        serviceLabel: "Service",
+        timeLabel: "Time",
+        statusLabel: "Status",
+        viewDetails: "View Details",
+        pending: "Pending",
+        collaborator: "Collaborator",
+        statusActive: "Active",
+        statusOff: "Off",
+        statusLunch: "Lunch",
+
+        // Staff dashboard
+        staffDashboard: "Staff Dashboard",
+        assignedJobs: "Assigned Missions",
+        clientLabel: "Client",
+        serviceLabel: "Service",
+        timeLabel: "Time",
+        statusLabel: "Status",
+        viewDetailsHeader: "View Details",
+
+        // Admin metrics - executive finance
+        financialAnalysis: "Financial Analysis",
+        start: "Start",
+        end: "End",
+        exportReport: "Export PDF Report",
+        syncStatus: "System Status",
+        liveData: "LIVE DATA",
+        mrr: "MRR (Period)",
+        newClients: "New Clients",
+        arpu: "ARPU (Period)",
+        averageRevenue: "Average revenue",
+        annualProjection: "Annual Projection",
+        basedOnSelection: "Based on selection",
+        revenue: "Recurring Revenue",
+        revenueChart: "Revenue Performance",
+        subscriptionMix: "Subscription Mix",
+        calculation: "Calculating...",
+
+        // Admin metrics - expansion
+        expansionTitle: "Expansion",
+        strategicRoadmap: "Strategic roadmap for American market growth.",
+        targetClients: "Goal: 500 Clients",
+        networkPreparation: "Network Preparation",
+        operationalCapacity: "Operational capacity before international deployment.",
+        targetAmount: "Goal: $250k ARR",
+        expansionFunds: "Expansion Funds",
+        capitalRequired: "Capital required for USA/Chile logistics and licenses.",
+        strategicDestinations: "Next Strategic Destinations",
+        miamiHq: "Miami / Florida HQ",
+        marketResearch: "Market research completed",
+        trademarkFiling: "Trademark filing",
+        inProgress: "In progress",
+        localStaffRecruitment: "Local staff recruitment",
+        logisticAlliances: "Logistic alliances identified",
+        priceAdaptation: "Pricing adaptation (CLP)",
+        officeOpening: "Office opening",
+        santiagoHub: "Santiago / Latam Hub",
+        temporalStatus: "Temporal Status",
+        projectedQ3: "Planned for Q3 2026",
+        projectedFor2027: "Projected for 2027",
+        usaExpansion: "USA Expansion",
+        chileExpansion: "Chile Expansion",
+        quit: "Log Out",
+
+        // Placeholders
+        exampleInstructions: "Add any preferences or notes",
+        exampleNotes: "Add details for your appointment",
+        typeQuestion: "Type your question",
+        clientName: "Client Name",
+        serviceName: "Service Name",
+        describeHowWeCanHelp: "Describe how we can help you"
+    },
+    
+    es: {
+        // Navigation & Headers
+        btnAccess: "Iniciar Sesión",
+        indexTitle: "Lujo y Perfección",
+        indexSubtitle: "Servicios premium personalizados para tu estilo de vida",
+        
+        // Call-to-action buttons
+        getStarted: "Comenzar",
+        viewServices: "Ver Servicios",
+        
+        // Stats section
+        clients: "Clientes Satisfechos",
+        rating: "Calificación",
+        support: "Soporte",
+        guarantee: "Garantía",
+        
+        // Services section
+        ourServices: "Nuestros Servicios Premium",
+        deepCleaning: "Limpieza Profunda",
+        eliteLaundry: "Lavandería de Élite",
+        masterIroning: "Planchado Maestro",
+        maintenance: "Mantenimiento del Hogar",
+        
+        // Why Choose Sparkllex
+        whyChooseSparkllex: "¿Por qué elegir Sparkllex?",
+        totalTrust: "Confianza Total",
+        rigorouslySelected: "Personal cuidadosamente seleccionado y capacitado según nuestros estándares.",
+        premiumQuality: "Calidad Premium",
+        highEndProducts: "Utilizamos solo productos de limpieza de alta gama y ecológicos.",
+        flexibility: "Flexibilidad Total",
+        plansAdapted: "Planes personalizados que se adaptan perfectamente a tu horario.",
+        
+        // Subscription Plans
+        subscriptionPlans: "Planes de Suscripción",
+        basicPlan: "Esencial",
+        perMonth: "/mes",
+        basicSubtitle: "Perfecto para apartamentos pequeños.",
+        seeMore1: "Ver Más",
+        choosePlan1: "Elegir Plan",
+        mostPopular: "Más Popular",
+        proPlan: "Profesional",
+        perMonth2: "/mes",
+        proSubtitle: "Ideal para profesionales ocupados.",
+        seeMore2: "Ver Más",
+        choosePlan2: "Elegir Plan",
+        familiarPlan: "Familia",
+        perMonth3: "/mes",
+        familiarSubtitle: "Cuidado completo para el hogar de tu familia.",
+        seeMore3: "Ver Más",
+        choosePlan3: "Elegir Plan",
+        
+        // Contact section
+        contact: "Ponte en Contacto",
+        callUs: "Llámanos Ahora",
+        
+        // Navigation (header & footer)
+        homeNav: "Inicio",
+        servicesNav: "Servicios",
+        plansNav: "Planes",
+        howItWorksNav: "Cómo Funciona",
+        
+        // Mobile Navigation
+        mobileNavHome: "Inicio",
+        mobileNavServices: "Servicios",
+        mobileNavPlans: "Planes",
+        mobileHowItWorks: "Cómo Funciona",
+        
+        // Footer Links
+        footNavHome: "Inicio",
+        footNavServices: "Servicios",
+        footNavPlans: "Planes",
+        footHowItWorks: "Cómo Funciona",
+        footPrivacy: "Política de Privacidad",
+        footTerms: "Términos y Condiciones",
+        footCookies: "Cookies",
+        footLinksTitle: "Enlaces",
+        footLegalTitle: "Legal",
+        footPaymentsTitle: "Pagos",
+        footAbout: "Llevamos el cuidado del hogar a una forma de arte. Vive la experiencia Sparkllex.",
+        footerRights: "© 2026 Sparkllex. Todos los derechos reservados.",
+        designCredit: "Diseñado por GF Studio",
+        whatsappLabel: "WhatsApp",
+        
+        // Login page
+        loginTitle: "Bienvenido de Vuelta",
+        loginEmail: "Correo Electrónico",
+        loginPassword: "Contraseña",
+        loginButton: "Iniciar Sesión",
+        noAccount: "¿No tienes cuenta?",
+        signUpLink: "Regístrate aquí",
+        labelEmail: "Tu correo",
+        labelPassword: "Contraseña",
+        forgotPassword: "¿Olvidaste?",
+        btnLogin: "Iniciar sesión",
+        dontHaveAccount: "¿No tienes una cuenta?",
+        signUpHere: "Regístrate",
+        
+        // Signup page
+        signupTitle: "Crea tu Cuenta",
+        signupEmail: "Correo Electrónico",
+        signupPassword: "Contraseña",
+        signupConfirm: "Confirmar Contraseña",
+        signupButton: "Registrarse",
+        agreeTerms: "Acepto los Términos y Condiciones",
+        haveAccount: "¿Ya tienes cuenta?",
+        loginLink: "Inicia sesión aquí",
+
+        // Marketing & Legal pages
+        backHome: "Volver",
+        alreadyAccountSignup: "¿Ya tienes una cuenta?",
+        signupSubtitle: "Regístrate para activar tu plan premium",
+        labelName: "Nombre completo",
+        labelEmailSignup: "Correo personal",
+        labelPasswordSignup: "Contraseña",
+        labelConfirmPassword: "Confirmar",
+        labelPhone: "Teléfono de contacto",
+        labelPlan: "Plan seleccionado",
+        passwordMismatch: "Las contraseñas no coinciden.",
+        termsText: "Al registrarte, aceptas nuestros Términos y la Política de Privacidad.",
+        lastUpdated: "Última actualización: enero 2026",
+
+        cookieTitle: "Política de Cookies",
+        cookieSec1Title: "¿Qué son las cookies?",
+        cookieSec1Text: "Las cookies son archivos de texto pequeños que se almacenan en tu dispositivo al visitar un sitio web. Ayudan al sitio a recordar información de tu visita para mejorar tu experiencia.",
+        cookieSec2Title: "Tipos de cookies",
+        cookieBrowserTitle: "Configuración del navegador",
+        cookieContactText: "Para cualquier consulta sobre nuestra política, contáctanos:",
+
+        howItWorksTitle: "Tu tiempo es oro",
+        howItWorksSubtitle: "Descubre cómo Sparkllex convierte la gestión del hogar en una experiencia de lujo sin fricciones.",
+        step1Title: "Programa en segundos",
+        step1Desc: "Desde nuestra plataforma o WhatsApp, elige el servicio que necesitas y agenda el horario que prefieras.",
+        step2Title: "Retiro White Glove",
+        step2Desc: "Un concierge especializado de Sparkllex visitará tu hogar para recoger artículos o iniciar tareas con total seguridad.",
+        step3Title: "Cuidado Premium",
+        step3Desc: "Aplicamos los estándares más altos: lavandería eco, planchado artesanal y limpieza profunda.",
+        step4Title: "Entrega y Confirmación",
+        step4Desc: "Recibe tus servicios puntualmente. Te avisamos por App y WhatsApp para asegurar tu satisfacción total.",
+
+        planBasicoSubtitle: "Necesidades esenciales",
+        planBasicoTitle: "Básico",
+        planBasicoFeature1: "1 visita mensual",
+        planBasicoFeature2: "Limpieza estándar",
+        planBasicoFeature3: "Soporte por chat",
+        planBasicoFeature4: "Lavandería élite",
+        planProTitle: "Pro",
+        planProSubtitle: "Para profesionales",
+        planProFeature1: "3 visitas mensuales",
+        planProFeature2: "Lavandería Pro",
+        planProFeature3: "Soporte prioritario",
+        planProFeature4: "Planchado maestro",
+        planFamiliarTitle: "Familiar",
+        planFamiliarSubtitle: "Cuidado total del hogar",
+        planFamiliarFeature1: "Limpieza diaria",
+        planFamiliarFeature2: "Lavandería ilimitada",
+        planFamiliarFeature3: "Mantenimiento completo",
+        planFamiliarFeature4: "Soporte VIP 24/7",
+
+        premiumBenefits: "Beneficios premium",
+        proIncl1Title: "2 limpiezas estándar / mes",
+        proIncl1Desc: "Hasta 2 recámaras + 1 baño (o 140 m²).",
+        proIncl2Title: "2 sesiones de lavandería o planchado",
+        proIncl2Desc: "Hasta 13.6 kg mensuales incluidos.",
+        proIncl3Title: "1 reparación básica incluida",
+        proIncl3Desc: "Zapatos o arreglos del hogar (45 min).",
+        proIncl4Title: "Agendamiento prioritario",
+        proIncl4Desc: "Acceso preferente y soporte VIP.",
+
+        allInclusiveServices: "Servicios todo incluido",
+        famIncl1Title: "4 limpiezas estándar / mes",
+        famIncl1Desc: "Hasta 3 recámaras + 2 baños (o 185 m²).",
+        famIncl2Title: "Lavandería y planchado recurrente",
+        famIncl2Desc: "Hasta 27 kg incluidos (uso justo).",
+        famIncl3Title: "Mantenimiento básico",
+        famIncl3Desc: "2 intervenciones mensuales incluidas.",
+        famIncl4Title: "Prioridad máxima",
+        famIncl4Desc: "Agendamiento y soporte garantizados con prioridad.",
+
+        whatsIncluded: "¿Qué incluye?",
+        fairUseNote: "Nota: Cada plan está sujeto a una política de uso justo. Los espacios que excedan los límites mencionados pueden tener cargos adicionales.",
+        choosePlan: "Elegir este plan",
+
+        pricingSubtitlePre: "Excelencia en cada detalle",
+        pricingTitle1: "Planes",
+        pricingTitle2: "Premium",
+        pricingSubtitle: "Elige el nivel de cuidado que tu hogar y estilo de vida merecen.",
+        securePaymentTitle1: "Pagos",
+        securePaymentTitle2: "Seguros",
+        faq1Question: "¿Cómo funciona la facturación?",
+        faq1Answer: "Las suscripciones se renuevan automáticamente cada 30 días. Procesamos todos los pagos con Stripe con cifrado de nivel militar para tu seguridad.",
+        faq3Question: "¿Puedo cambiar mi plan?",
+        faq3Answer: "Sí, puedes mejorar o bajar de plan en cualquier momento desde tu panel. Los cambios se prorratean automáticamente en tu siguiente ciclo de facturación.",
+
+        navContact: "Contacto",
+        navCookies: "Cookies",
+        navTerms: "Términos",
+
+        privacyTitle: "Política de Privacidad",
+        privacyIntro: "Tu privacidad es importante para nosotros. Esta política explica cómo recopilamos, usamos y protegemos tu información.",
+        privSec1Title: "Introducción",
+        privSec1Content: "En Sparkllex valoramos profundamente la privacidad de nuestros clientes. Esta política describe cómo protegemos tu información personal mientras disfrutas de nuestros servicios premium.",
+        privSec2Title: "Información que recopilamos",
+        privSec2Content: "Recopilamos datos personales como nombre, correo y teléfono cuando te registras en nuestros servicios.",
+        privData1Title: "Datos de cuenta",
+        privData1Desc: "Nombre, correo, teléfono y dirección de servicio.",
+        privData2Title: "Pagos seguros",
+        privData2Desc: "Procesados por Stripe (no guardamos datos de tarjeta).",
+        privSec3Title: "Uso de datos",
+        privSec3Intro: "Usamos tu información principalmente para:",
+        privSec3Content: "No compartimos tu información personal con terceros salvo por obligación legal o para prestar nuestros servicios.",
+        privUse1: "Gestionar tus citas y visitas.",
+        privUse2: "Garantizar la seguridad de tu hogar.",
+        privUse3: "Mejorar continuamente la calidad del servicio.",
+        privSec4Title: "Tus derechos",
+        privSec4Content: "Puedes acceder, actualizar o eliminar tus datos personales en cualquier momento. Contáctanos para ejercer estos derechos.",
+        contactUsTitle: "Contáctanos",
+        privContactTitle: "¿Tienes preguntas?",
+        privContactDesc: "Nuestro equipo de protección de datos está listo para ayudarte con cualquier duda.",
+
+        paymentSuccess: "¡Pago exitoso!",
+        successTitle: "Bienvenido a Sparkllex",
+        successMessage: "Tu suscripción en Sparkllex ha sido activada. Bienvenido a la excelencia en cuidado del hogar.",
+        nextSteps: "Siguientes pasos",
+        step1: "Accede a tu panel",
+        step2: "Programa tu primera limpieza",
+        btnGoAccount: "Ir a mi cuenta",
+        needHelp: "¿Necesitas ayuda?",
+        viewDetails: "Ver detalles",
+
+        // Members App - shared navigation
+        logout: "Cerrar Sesión",
+        booking: "Reservar",
+        membershipStatus: "Dashboard",
+        myAppointmentsLink: "Mis Citas",
+        myAppointments: "Mis Citas",
+        appointments2: "Citas",
+        aISupportLink: "Soporte IA",
+        yourHistory: "Historial",
+
+        // Members App - appointments
+        upcomingServices: "Próximos Servicios",
+        manageReservations: "Gestiona tus reservas premium de Sparkllex.",
+        manageServiceReservations: "Gestiona tus reservas de servicio.",
+        newAppointment: "Nueva Cita",
+        newBooking: "Nueva Reserva",
+        scheduleAppointment: "Agendar Cita",
+        serviceAtHome: "Servicio a Domicilio",
+        serviceType: "Tipo de Servicio",
+        selectDate: "Fecha",
+        selectTime: "Hora",
+        notesOrInstructions: "Notas o Instrucciones",
+        confirmReservation: "Confirmar Reserva",
+        loadingAppointments: "Cargando citas...",
+        noScheduledAppointments: "No tienes citas programadas",
+        bookFirstService: "Reserva tu primer servicio Sparkllex ahora.",
+        bookNow: "Reservar Ahora",
+        inactivePlan: "Plan Inactivo",
+        cannotMakeNewReservations: "Tu plan está inactivo. No puedes realizar nuevas reservas.",
+        yourBookings: "Gestiona tus reservas de servicio.",
+
+        // Members App - booking flow
+        mainMenu: "Menú Principal",
+        selectService: "Selecciona tu",
+        bookService: "Servicio",
+        personalizeExperience: "Personaliza tu experiencia Sparkllex hoy mismo.",
+        premiumLaundry: "Lavado Premium",
+        highQualityTreatment: "Tratamiento de alta gama para tus prendas delicadas.",
+        masterIroningLink: "Planchado Maestro",
+        impeccableFinish: "Acabado impecable y vaporizado profesional.",
+        deepCleaningDesc: "Limpieza profunda profesional para tu hogar.",
+        maintenanceDesc: "Servicios de reparación y mantenimiento del hogar.",
+        schedulePickup: "Programar Recogida",
+        dateAndTime: "Fecha y Hora",
+        photoDamage: "Foto del Daño (Opcional)",
+        specialInstructions: "Instrucciones Especiales",
+        notesPlaceholder: "Ej: Llamar antes de llegar o cuidado con la seda...",
+        pickupTimeNote: "Nuestros agentes recogen su ropa en un margen de 30 min respecto a la hora seleccionada.",
+        confirmBooking: "Confirmar Reserva",
+        allSet: "¡Todo listo!",
+        supportReceived: "Hemos recibido tu solicitud. Un conductor se pondrá en contacto pronto.",
+        understood: "Entendido",
+        bookingSuccess: "¡Reserva Exitosa!",
+        bookingSuccessMessage: "Tu recogida ha sido programada. Puedes ver los detalles en tu historial de citas.",
+        viewMyAppointments: "Ver mis citas",
+
+        // Members App - membership status
+        yourAccountBenefits: "Gestiona tu suscripción y beneficios exclusivos.",
+        planStatus: "Estado de tu Plan",
+        memberId: "ID Miembro",
+        activeUserPlan: "Plan Activo",
+        managePlan: "Gestionar Pago",
+        nextCharge: "Próximo Cobro",
+        autoRenewal: "Renovación Automática",
+        paymentMethod: "Método de Pago",
+        paymentCard: "Tarjeta Guardada",
+        quickAccess: "Accesos Rápidos",
+        cancelSubscription: "Cancelar Suscripción",
+        basicMember: "Miembro Básico",
+        proMember: "Miembro Pro",
+        familyMember: "Miembro Familiar",
+        premiumMember: "Miembro Premium",
+
+        // Members App - history
+        downloadInvoices: "Gestiona tus servicios y descarga tus facturas.",
+        csvExport: "CSV",
+        pdfInvoice: "Factura PDF",
+        completedService: "Lavado Premium Plus",
+        completed: "Completado",
+        loadingHistory: "Cargando historial...",
+
+        // Members App - settings
+        settings: "Ajustes",
+        yourConfiguration: "Tu Configuración",
+        profileInformation: "Información del Perfil",
+        fullName: "Nombre Completo",
+        accessEmail: "Email de acceso",
+        accountSecurity: "Seguridad de la Cuenta",
+        newPassword: "Nueva Contraseña",
+        confirmPasswordField: "Confirmar Contraseña",
+        updatePassword: "Actualizar Contraseña",
+
+        // Members App - support & AI
+        aISupport: "Soporte IA",
+        aIAssistant: "Asistente Virtual Sparkllex",
+        activeVipSupport: "SOPORTE VIP ACTIVO",
+        onlineAI: "En línea • Inteligencia Artificial",
+        whatPlans: "¿Qué planes hay?",
+        howToBook: "¿Cómo reservo?",
+        schedules: "Horarios",
+        typeQuestion: "Escribe tu pregunta",
+
+        // Members App - VIP support ticket
+        exclusiveAttention: "Atención Exclusiva",
+        absolutePriority: "Como miembro Premium, tienes prioridad absoluta en todas tus consultas.",
+        whatsappConcierge: "WhatsApp Concierge",
+        immediateResponseChat: "Respuesta inmediata por chat para emergencias.",
+        sendSupportTicket: "Enviar Ticket de Soporte",
+        inquiryReason: "Motivo de consulta",
+        billing: "Facturación",
+        appointmentChange: "Cambio de Cita",
+        planBenefits: "Plan y Beneficios",
+        otherMatter: "Otro Asunto",
+        priority: "Prioridad",
+        highMemberVip: "Alta (Miembro VIP)",
+        messageDetails: "Detalles del mensaje",
+        sendPriorityMessage: "Enviar Mensaje Prioritario",
+        describeHowWeCanHelp: "Describe cómo podemos ayudarte",
+
+        // Operations & Admin - shared
+        adminPanel: "Panel Admin",
+        memberAccess: "Acceso Miembro",
+        agendaTitle: "Agenda Global",
+        teamManagement: "Team Manager",
+        crmTitle: "CRM Clientes",
+        operationalControl: "Control Operativo",
+        globalStrategy: "Estrategia Global",
+        finances: "Finanzas Ejecutivas",
+        expansion: "Expansión",
+        actions: "Acciones",
+        logout: "Salir",
+
+        // Operations - agenda
+        todayAgenda: "Control central de misiones y servicios.",
+        pending: "Pendientes",
+        confirmed: "Confirmadas",
+        todayCount: "Hoy",
+        timeSlot: "Programación",
+        serviceName: "Servicio / Cliente",
+        status: "Estado",
+        addManual: "Despachar Misión",
+        createService: "Crear Servicio",
+        selectStaff: "Seleccionar Staff (Opcional)",
+        cancel: "Cancelar",
+        clientName: "Nombre del Cliente",
+
+        // Operations - CRM
+        clientDatabase: "Gestión y visualización de miembros activos.",
+        name: "Nombre Completo",
+        email: "Email",
+        memberPlan: "Plan Actual",
+        phone: "Teléfono",
+        syncedSupabase: "SINCRONIZADO CON SUPABASE",
+
+        // Operations - team manager
+        teamManager: "Team Manager",
+        staffManagement: "Gestión del personal",
+        staffName: "Colaborador",
+        role: "Rol",
+        contact: "Contacto",
+        addStaff: "Inscribir un miembro",
+
+        // Staff dashboard
+        staffDashboard: "Panel de Personal",
+        assignedJobs: "Misiones Asignadas",
+        clientLabel: "Cliente",
+        serviceLabel: "Servicio",
+        timeLabel: "Hora",
+        statusLabel: "Estado",
+        viewDetailsHeader: "Ver Detalles",
+        pending: "Pendiente",
+        collaborator: "Colaborador",
+        statusActive: "Activo",
+        statusOff: "Fuera de servicio",
+        statusLunch: "En descanso",
+
+        // Admin metrics - executive finance
+        financialAnalysis: "Análisis Financiero",
+        start: "Inicio",
+        end: "Fin",
+        exportReport: "Reporte PDF",
+        syncStatus: "Estado del Sistema",
+        liveData: "LIVE DATA",
+        mrr: "MRR (Período)",
+        newClients: "Nuevos Clientes",
+        arpu: "ARPU (Período)",
+        averageRevenue: "Ingreso promedio",
+        annualProjection: "Proyección Anual",
+        basedOnSelection: "Basado en la selección",
+        revenue: "Ingreso recurrente",
+        revenueChart: "Performance de Ingresos",
+        subscriptionMix: "Mix de Suscripciones",
+        calculation: "Calculando...",
+
+        // Admin metrics - expansion
+        expansionTitle: "Expansión",
+        strategicRoadmap: "Hoja de ruta estratégica para el mercado americano.",
+        targetClients: "Objetivo: 500 Clientes",
+        networkPreparation: "Preparación de Red",
+        operationalCapacity: "Capacidad operativa previa al despliegue internacional.",
+        targetAmount: "Objetivo: 250k $ ARR",
+        expansionFunds: "Fondos de Expansión",
+        capitalRequired: "Capital requerido para licencias y logística USA/Chile.",
+        strategicDestinations: "Próximos Destinos Estratégicos",
+        miamiHq: "Miami / Florida HQ",
+        marketResearch: "Estudio de mercado completado",
+        trademarkFiling: "Registro de marca",
+        inProgress: "En curso",
+        localStaffRecruitment: "Reclutamiento staff local",
+        logisticAlliances: "Alianzas logísticas identificadas",
+        priceAdaptation: "Adaptación de precios (CLP)",
+        officeOpening: "Apertura de oficinas",
+        santiagoHub: "Santiago / Latam Hub",
+        temporalStatus: "Estatus Temporal",
+        projectedQ3: "Proyectado para Q3 2026",
+        projectedFor2027: "Proyectado para 2027",
+        usaExpansion: "Expansión USA",
+        chileExpansion: "Expansión Chile",
+        quit: "Salir",
+
+        // Placeholders
+        exampleInstructions: "Agrega preferencias o indicaciones",
+        exampleNotes: "Agrega detalles para tu cita",
+        typeQuestion: "Escribe tu pregunta",
+        clientName: "Nombre del Cliente",
+        serviceName: "Nombre del servicio",
+        describeHowWeCanHelp: "Describe cómo podemos ayudarte"
+    }
+};
+
+/**
+ * Get language from URL parameter (?lang=es or ?lang=en)
+ * Falls back to localStorage, then defaults to 'en'
+ */
+function getCurrentLang() {
+    // 1. Check URL parameter (?lang=)
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    
+    if (langParam === 'es' || langParam === 'en') {
+        // Save to localStorage for persistence
+        localStorage.setItem('sparkllex_lang', langParam);
+        return langParam;
+    }
+    
+    // 2. Check localStorage
+    const savedLang = localStorage.getItem('sparkllex_lang');
+    if (savedLang === 'es' || savedLang === 'en') {
+        return savedLang;
+    }
+    
+    // 3. Default to English
+    localStorage.setItem('sparkllex_lang', 'en');
+    return 'en';
+}
+
+/**
+ * Set language and save to localStorage
+ * You can call this to programmatically change language
+ */
+function setLanguage(lang) {
+    if (lang === 'es' || lang === 'en') {
+        localStorage.setItem('sparkllex_lang', lang);
+        // Optionally redirect to add language to URL
+        const url = new URL(window.location);
+        url.searchParams.set('lang', lang);
+        window.location.href = url.toString();
+    }
+}
+
+/**
+ * Translate text for a given key
+ * Returns the translated text or the key itself if not found
+ */
+function t(key) {
+    const lang = getCurrentLang();
+    return (translations[lang] && translations[lang][key]) || key;
+}
+
+// Store current language globally
+const currentLang = getCurrentLang();
