@@ -50,11 +50,9 @@ temp/
 *SECRET*
 sk_test_*
 sk_live_*
-# Images volumineuses (>10MB) - à compresser
+# Images volumineuses (>10MB) - a compresser ou supprimer
 images/high-angle-man-stretching-home.jpg
 images/high-angle-hands-holding-smartphone.jpg
-images/positive-female-housekeeper.jpg
 images/high-angle-view-cleaning-products-green-backdrop.jpg
 images/chambermaid-preparing-hotel-room.jpg
-images/young-african-american-man-doing-laundry.jpg
 images/still-life-say-no-fast-fashion.jpg
