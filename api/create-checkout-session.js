@@ -83,7 +83,7 @@ module.exports = async (req, res) => {
         });
         
         // Get the domain from the request
-        const domain = req.headers.origin || 'http://localhost:3000';
+        const domain = 'https://sparkllex.com';
         
         // Create Stripe Checkout Session
         const session = await stripe.checkout.sessions.create({
@@ -97,8 +97,8 @@ module.exports = async (req, res) => {
                     quantity: 1,
                 }
             ],
-            success_url: `${domain}/02_MEMBERS_APP/membership-status.html?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${domain}/01_MARKETING/signup.html?canceled=true`,
+            success_url: `${domain}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${domain}/signup.html?canceled=true`,
             metadata: {
                 userId: userId,
                 customerName: customerName,
