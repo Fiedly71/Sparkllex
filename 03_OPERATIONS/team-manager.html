@@ -49,7 +49,7 @@
 </head>
 <body class="lg:flex min-h-screen">
 
-    <button id="mobile-menu-btn" class="lg:hidden fixed top-4 left-4 z-[101] w-12 h-12 bg-teal-accent text-white rounded-xl shadow-lg flex items-center justify-center">
+    <button id="mobile-menu-btn" class="lg:hidden fixed top-20 left-4 z-[101] w-12 h-12 bg-teal-accent text-white rounded-xl shadow-lg flex items-center justify-center">
         <i class="fas fa-bars"></i>
     </button>
     
@@ -194,7 +194,7 @@
             
             let fileSectionHtml = "";
 
-            // PRIORITÉ: Nouveau format d'abord, puis ancien format, puis message "no files"
+            // PRIORITï¿½: Nouveau format d'abord, puis ancien format, puis message "no files"
             if (hasNewFormat && m.country === 'USA') {
                 // USA Documents
                 fileSectionHtml = `
@@ -275,17 +275,17 @@
                         ${fileUrls.cv ? `
                             <a href="${fileUrls.cv}" target="_blank" class="flex items-center justify-center p-3 bg-teal-50 rounded-xl border border-teal-100 hover:bg-teal-100 transition">
                                 <i class="fas fa-file-alt text-teal-600 mr-2"></i>
-                                <span class="text-[9px] font-black uppercase text-teal-600">Ver CV / Currículum</span>
+                                <span class="text-[9px] font-black uppercase text-teal-600">Ver CV / Currï¿½culum</span>
                             </a>` : ''}
                     </div>`;
             } else if (hasOldFormat) {
-                // Legacy format support (anciens profils créés avant la mise à jour)
+                // Legacy format support (anciens profils crï¿½ï¿½s avant la mise ï¿½ jour)
                 fileSectionHtml = `
                     <div class="p-4 bg-blue-50 border border-blue-100 rounded-2xl mb-3">
                         <p class="text-[8px] font-black uppercase text-blue-600 tracking-tighter mb-1">
-                            <i class="fas fa-info-circle mr-1"></i> Ancien Format Détecté
+                            <i class="fas fa-info-circle mr-1"></i> Ancien Format Dï¿½tectï¿½
                         </p>
-                        <p class="text-[7px] text-blue-500">Ce profil a été créé avant la mise à jour. Seuls 2 documents sont disponibles.</p>
+                        <p class="text-[7px] text-blue-500">Ce profil a ï¿½tï¿½ crï¿½ï¿½ avant la mise ï¿½ jour. Seuls 2 documents sont disponibles.</p>
                     </div>
                     <div class="grid grid-cols-2 gap-2">
                         ${m.id_file_url ? `<a href="${m.id_file_url}" target="_blank" class="flex flex-col items-center p-3 bg-gray-50 rounded-xl border border-gray-100 hover:bg-teal-50 transition group">
@@ -299,7 +299,7 @@
                         </a>` : ''}
                     </div>`;
             } else {
-                // Aucun fichier uploadé
+                // Aucun fichier uploadï¿½
                 fileSectionHtml = `
                     <div class="p-4 bg-amber-50 border border-amber-100 rounded-2xl text-center">
                         <i class="fas fa-exclamation-triangle text-amber-400 mb-1"></i>

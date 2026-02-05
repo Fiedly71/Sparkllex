@@ -50,7 +50,7 @@
 </head>
 <body class="lg:flex min-h-screen">
 
-    <button id="mobile-menu-btn" class="lg:hidden fixed top-4 left-4 z-[101] w-12 h-12 bg-teal-accent text-white rounded-xl shadow-lg flex items-center justify-center">
+    <button id="mobile-menu-btn" class="lg:hidden fixed top-20 left-4 z-[101] w-12 h-12 bg-teal-accent text-white rounded-xl shadow-lg flex items-center justify-center">
         <i class="fas fa-bars"></i>
     </button>
     
@@ -167,7 +167,7 @@
         }
 
         async function loadData() {
-            // Récupération avec jointure Profiles pour le Nom et l'Adresse
+            // Rï¿½cupï¿½ration avec jointure Profiles pour le Nom et l'Adresse
             const { data, error } = await supabaseClient
                 .from('appointments')
                 .select(`
