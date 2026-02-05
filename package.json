@@ -1,0 +1,17 @@
+{
+  "name": "sparkllex-official",
+  "version": "1.0.0",
+  "description": "Sparkllex Elite - Premium Cleaning Services Platform",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "stripe": "^14.10.0",
+    "@supabase/supabase-js": "^2.39.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
