@@ -1,19 +1,19 @@
 const STRIPE_CONFIG = {
-    publishableKey: 'pk_test_51SZlQ1IccQ4MNulwcJxTi0dO18r1sGlWGc7y7Z8RZRXfCUU58PD7NXL0pYJJM8XuMb2GmNUNPy3fQf2xtaNnOzGb00u76i0tWP'
+    publishableKey: 'pk_live_51QgKzRIccQ4MNulwUzGnD30ZWfxOkumnWgfe4wOXkZ5nbYtXbAO9SiO9QD99RymodhycNHUd5c7G70RdLA5e54Fz00xqGNTJt4'
 };
 
 const STRIPE_PRICING_PLANS = {
     basico: { 
         priceId: 'price_1Ss6yTIccQ4MNulwrZnZFdTx', 
-        url: 'https://buy.stripe.com/test_aFabJ1dNzeOc5lr2Fkb3q00' 
+        url: 'https://buy.stripe.com/fZu6oHdNz5dCdRX2Fkb3q06' 
     },
     pro: { 
         priceId: 'price_1Ss6zEIccQ4MNulwvkTloCjn', 
-        url: 'https://buy.stripe.com/test_3cI5kD4cZ9tS6pv0xcb3q01' 
+        url: 'https://buy.stripe.com/8x29AT5h30Xm6pveo2b3q07' 
     },
     familiar: { 
         priceId: 'price_1Ss703IccQ4MNulwaKlBAh5R', 
-        url: 'https://buy.stripe.com/test_9B6cN54cZ7lK9BH3Job3q02' 
+        url: 'https://buy.stripe.com/cNi14nbFr35u6pv5Rwb3q08' 
     }
 };
 
