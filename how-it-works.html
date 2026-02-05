@@ -54,7 +54,7 @@
     <nav class="fixed top-0 left-0 right-0 z-50 nav-glass border-b border-teal-primary/10">
         <div class="max-w-7xl mx-auto px-6 flex justify-between items-center h-20">
             <a href="index.html" class="transition hover:opacity-80">
-                <img src="./images/logo.png" alt="Sparkllex" class="h-10">
+                <img src="./images/logo.png" alt="Sparkllex" class="h-14 md:h-16">
             </a>
             
             <a href="index.html" class="text-teal-primary font-bold hover:text-teal-dark transition flex items-center group" data-translate="navHome">
@@ -139,14 +139,35 @@
             
             <div class="inline-block px-6 py-3 border border-white/5 rounded-full">
                 <p class="text-[7px] uppercase tracking-[0.3em]">
-                    Designed by <a href="https://gui-fiedly.vercel.app" target="_blank" rel="noopener noreferrer" style="color: #008080;" class="hover:opacity-80 transition cursor-pointer">GF Digital Studio</a> | <a href="mailto:isteah.gffilsaime@gmail.com" style="color: #008080;" class="hover:opacity-80 transition cursor-pointer">Gui Fiedly Fils-aime</a>
+                    Designed by <a href="https://gui-fiedly.vercel.app" target="_blank" rel="noopener noreferrer" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">GF Digital Studio</a> | <a href="mailto:isteah.gffilsaime@gmail.com" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">Gui Fiedly Fils-aime</a>
                 </p>
             </div>
         </div>
     </footer>
 
+    <!-- Back to Top Button - Fixed -->
+    <a href="#" id="backToTop" class="fixed bottom-6 right-6 bg-gold-accent w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 hover:shadow-gold-accent/50 transition-all duration-300 z-[100] opacity-0 pointer-events-none">
+        <i class="fas fa-arrow-up text-teal-dark text-xl md:text-2xl"></i>
+    </a>
+
     <script src="./translations.js"></script>
     <script>
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                backToTop.classList.remove('opacity-0', 'pointer-events-none');
+                backToTop.classList.add('opacity-100');
+            } else {
+                backToTop.classList.add('opacity-0', 'pointer-events-none');
+                backToTop.classList.remove('opacity-100');
+            }
+        });
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
             applyTranslations();
         });

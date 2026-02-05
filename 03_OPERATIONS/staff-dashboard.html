@@ -34,7 +34,7 @@
 
     <nav class="bg-white border-b border-slate-200 p-4 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <img src="/images/logo.png" alt="Logo" class="h-8">
+            <img src="/images/logo.png" alt="Logo" class="h-14 md:h-16">
             <button onclick="handleLogout()" class="px-4 py-2 bg-red-500 text-white rounded-xl font-bold hover:bg-red-600 transition shadow-sm">
                 <i class="fas fa-sign-out-alt"></i> Logout
             </button>
@@ -112,7 +112,7 @@
                 .eq('id', session.user.id)
                 .single();
 
-            // --- BLOC DE SÉCURITÉ ---
+            // --- BLOC DE Sï¿½CURITï¿½ ---
             if (staffProfile.role !== 'staff' || staffProfile.is_verified === false) {
                 document.getElementById('mainContent').innerHTML = `
                     <div class="flex flex-col items-center justify-center py-20 text-center">
@@ -125,7 +125,7 @@
                     </div>`;
                 return;
             }
-            // --- FIN DU BLOC DE SÉCURITÉ ---
+            // --- FIN DU BLOC DE Sï¿½CURITï¿½ ---
 
             if (staffProfile) {
                 document.getElementById('staffName').textContent = staffProfile.full_name || 'Staff Member';
@@ -232,7 +232,7 @@
     </script>
 
     <footer class="py-8 text-center text-gray-600 text-[9px] font-bold uppercase tracking-[0.3em] mt-12 border-t border-gray-200">
-        <span>© 2026 Sparkllex. All rights reserved.</span>
+        <span>ï¿½ 2026 Sparkllex. All rights reserved.</span>
         <div class="mt-3 text-[7px] uppercase tracking-[0.3em]">
             Designed by <a href="https://gui-fiedly.vercel.app" target="_blank" rel="noopener noreferrer" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">GF Digital Studio</a> | <a href="mailto:isteah.gffilsaime@gmail.com" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">Gui Fiedly Fils-aime</a>
         </div>
@@ -247,7 +247,7 @@
     <a id="vipSupportLink" href="#" class="text-teal-500 opacity-50 pointer-events-none">VIP Support</a>
 
     <!-- Client Portal Button -->
-    <button onclick="window.location.href='https://billing.stripe.com/p/login/aFabJ1dNzeOc5lr2Fkb3q00'" class="px-4 py-2 bg-blue-500 text-white rounded-xl font-bold hover:bg-blue-600 transition">Gérer mon abonnement</button>
+    <button onclick="window.location.href='https://billing.stripe.com/p/login/aFabJ1dNzeOc5lr2Fkb3q00'" class="px-4 py-2 bg-blue-500 text-white rounded-xl font-bold hover:bg-blue-600 transition">Gï¿½rer mon abonnement</button>
 
     <script>
         async function redirectToStripe(planUrl) {

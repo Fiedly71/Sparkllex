@@ -88,7 +88,7 @@
     <nav class="fixed top-0 left-0 right-0 z-50 glass-header">
         <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
             <a href="membership-status.html">
-                <img src="../images/logo.png" alt="Logo" class="h-10 w-auto">
+                <img src="../images/logo.png" alt="Logo" class="h-14 md:h-16 w-auto">
             </a>
             <div class="flex items-center gap-4">
                 <div class="w-10 h-10 rounded-xl bg-teal-primary text-white flex items-center justify-center shadow-lg shadow-teal-primary/20">
@@ -162,16 +162,16 @@
                     <form id="password-form" class="space-y-6">
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-3" data-translate="newPassword">Nueva Contraseña</label>
-                                <input type="password" id="new-password" class="input-premium" placeholder="••••••••" required minlength="8">
+                                <label class="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-3" data-translate="newPassword">Nueva Contraseï¿½a</label>
+                                <input type="password" id="new-password" class="input-premium" placeholder="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" required minlength="8">
                             </div>
                             <div>
-                                <label class="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-3" data-translate="confirmPasswordField">Confirmar Contraseña</label>
-                                <input type="password" id="confirm-password" class="input-premium" placeholder="••••••••" required minlength="8">
+                                <label class="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-3" data-translate="confirmPasswordField">Confirmar Contraseï¿½a</label>
+                                <input type="password" id="confirm-password" class="input-premium" placeholder="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" required minlength="8">
                             </div>
                         </div>
                         <button type="submit" id="update-btn" class="w-full bg-teal-primary text-white font-black py-5 rounded-2xl hover:bg-teal-dark transition-all shadow-xl shadow-teal-primary/20 hover:scale-[1.01] active:scale-95 flex items-center justify-center gap-3">
-                            <span data-translate="updatePassword">ACTUALIZAR CONTRASEÑA</span>
+                            <span data-translate="updatePassword">ACTUALIZAR CONTRASEï¿½A</span>
                             <i class="fas fa-sync-alt text-xs"></i>
                         </button>
                         <p id="msg" class="text-center text-xs font-black uppercase tracking-widest hidden p-4 rounded-xl"></p>
@@ -197,7 +197,7 @@
                 return;
             }
             
-            // On récupère le nom depuis les métadonnées de l'utilisateur
+            // On rï¿½cupï¿½re le nom depuis les mï¿½tadonnï¿½es de l'utilisateur
             document.getElementById('display-name').textContent = user.user_metadata?.full_name || "Miembro Sparkllex";
             document.getElementById('display-email').textContent = user.email;
         }
@@ -209,25 +209,25 @@
             const btn = document.getElementById('update-btn');
 
             if (newPass !== confirmPass) {
-                showMsg("Las contraseñas no coinciden", "bg-red-50 text-red-500");
+                showMsg("Las contraseï¿½as no coinciden", "bg-red-50 text-red-500");
                 return;
             }
 
             btn.disabled = true;
             btn.innerHTML = '<i class="fas fa-spinner animate-spin"></i> PROCESANDO...';
 
-            // Mise à jour réelle sur Supabase
+            // Mise ï¿½ jour rï¿½elle sur Supabase
             const { error } = await supabaseClient.auth.updateUser({ password: newPass });
 
             if (error) {
                 showMsg("Error: " + error.message, "bg-red-50 text-red-500");
             } else {
-                showMsg("¡Contraseña actualizada con éxito!", "bg-teal-50 text-teal-primary");
+                showMsg("ï¿½Contraseï¿½a actualizada con ï¿½xito!", "bg-teal-50 text-teal-primary");
                 passwordForm.reset();
             }
             
             btn.disabled = false;
-            btn.innerHTML = 'ACTUALIZAR CONTRASEÑA <i class="fas fa-sync-alt text-xs"></i>';
+            btn.innerHTML = 'ACTUALIZAR CONTRASEï¿½A <i class="fas fa-sync-alt text-xs"></i>';
         });
 
         function showMsg(text, classes) {

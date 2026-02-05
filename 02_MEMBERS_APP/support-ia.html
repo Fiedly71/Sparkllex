@@ -119,7 +119,7 @@
     <nav class="fixed top-0 left-0 right-0 z-50 glass-header">
         <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
             <a href="membership-status.html">
-                <img src="../images/logo.png" alt="Logo" class="h-10 w-auto">
+                <img src="../images/logo.png" alt="Logo" class="h-14 md:h-16 w-auto">
             </a>
             <div class="flex items-center gap-4">
                 <span class="text-[10px] font-black text-teal-primary px-4 py-2 bg-teal-50 rounded-full tracking-widest" data-translate="activeVipSupport">VIP SUPPORT ACTIVE</span>
@@ -162,7 +162,7 @@
                     </div>
                     <div>
                         <h2 class="font-black text-gray-900 tracking-tight" data-translate="aIAssistant">Sparkllex Bot</h2>
-                        <p class="text-[10px] font-bold text-teal-primary uppercase tracking-widest" data-translate="onlineAI">Online • 24/7 Support</p>
+                        <p class="text-[10px] font-bold text-teal-primary uppercase tracking-widest" data-translate="onlineAI">Online ï¿½ 24/7 Support</p>
                     </div>
                 </div>
             </div>
@@ -211,7 +211,7 @@
         function setGreeting() {
             const lang = (typeof getActiveLanguage === 'function') ? getActiveLanguage() : 'en';
             const greeting = lang === 'es'
-                ? '¡Hola! Soy tu asistente de <b>Sparkllex</b>. Estoy aquí para ayudarte con tus dudas sobre limpieza, planes y reservas. ¿En qué puedo servirte hoy? ?'
+                ? 'ï¿½Hola! Soy tu asistente de <b>Sparkllex</b>. Estoy aquï¿½ para ayudarte con tus dudas sobre limpieza, planes y reservas. ï¿½En quï¿½ puedo servirte hoy? ?'
                 : 'Hello! I\'m your <b>Sparkllex</b> assistant. I\'m here to help you with questions about cleaning, plans and bookings. How can I help you today? ?';
             document.getElementById('ai-greeting').innerHTML = greeting;
         }
@@ -226,12 +226,12 @@
         };
 
         const responsesEs = {
-            'planes': 'Ofrecemos 3 niveles de lujo:\n\n1. **Basic**: Limpieza esencial.\n2. **Pro**: Lavado y planchado incluido.\n3. **Family**: Todo lo anterior más reparaciones de sastrería.\n\n¿Te gustaría ver los precios?',
-            'reservar': 'Es muy sencillo. Solo ve a la sección de **"Reservar"** en tu panel lateral, elige el servicio y la hora. ¡Nosotros nos encargamos del resto!',
-            'horario': 'Nuestro equipo trabaja de **Lunes a Sábado, de 8:00 AM a 8:00 PM**. La app está disponible 24/7 para programar servicios.',
-            'precio': 'Los planes comienzan desde precios muy competitivos. ¿Quieres que te envíe el catálogo PDF a tu correo?',
-            'hola': '¡Hola de nuevo! Es un placer saludarte. ¿Cómo puedo hacer tu vida más fácil hoy?',
-            'default': 'Esa es una excelente pregunta. Permíteme conectarte con un agente humano si necesitas detalles muy específicos, o intenta preguntarme sobre "planes", "reservas" o "horarios".'
+            'planes': 'Ofrecemos 3 niveles de lujo:\n\n1. **Basic**: Limpieza esencial.\n2. **Pro**: Lavado y planchado incluido.\n3. **Family**: Todo lo anterior mï¿½s reparaciones de sastrerï¿½a.\n\nï¿½Te gustarï¿½a ver los precios?',
+            'reservar': 'Es muy sencillo. Solo ve a la secciï¿½n de **"Reservar"** en tu panel lateral, elige el servicio y la hora. ï¿½Nosotros nos encargamos del resto!',
+            'horario': 'Nuestro equipo trabaja de **Lunes a Sï¿½bado, de 8:00 AM a 8:00 PM**. La app estï¿½ disponible 24/7 para programar servicios.',
+            'precio': 'Los planes comienzan desde precios muy competitivos. ï¿½Quieres que te envï¿½e el catï¿½logo PDF a tu correo?',
+            'hola': 'ï¿½Hola de nuevo! Es un placer saludarte. ï¿½Cï¿½mo puedo hacer tu vida mï¿½s fï¿½cil hoy?',
+            'default': 'Esa es una excelente pregunta. Permï¿½teme conectarte con un agente humano si necesitas detalles muy especï¿½ficos, o intenta preguntarme sobre "planes", "reservas" o "horarios".'
         };
 
         function addMessage(text, type = 'ai') {

@@ -40,7 +40,7 @@
     <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-b border-gray-100 px-6 py-4">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <a href="#inicio" class="hover:opacity-80 transition">
-                <img src="./images/logo.png" alt="Sparkllex" class="h-10 md:h-12">
+                <img src="./images/logo.png" alt="Sparkllex" class="h-14 md:h-16">
             </a>
 
             <div class="hidden lg:flex items-center space-x-8 font-bold text-sm uppercase tracking-widest">
@@ -176,7 +176,7 @@
             </div>
             <h2 class="text-4xl font-black mb-8" id="contact"></h2>
             <div class="bg-light-bg p-12 rounded-[3rem] border border-teal-primary/10 reveal">
-                <p class="text-4xl md:text-6xl font-black gold-text mb-12">+1 (555) 123-4567</p>
+                <p class="text-2xl md:text-6xl font-black gold-text mb-12 whitespace-nowrap">+1 (555) 123-4567</p>
                 <div class="flex flex-col md:flex-row justify-center gap-6">
                     <a href="tel:+15551234567" class="btn-teal px-12 py-5 rounded-full font-black text-sm uppercase tracking-widest"><i class="fas fa-phone mr-3"></i><span id="callUs"></span></a>
                     <a href="https://wa.me/15551234567" class="bg-white border-2 px-12 py-5 rounded-full font-black text-sm uppercase tracking-widest hover:bg-gray-50 transition"><i class="fab fa-whatsapp mr-3 text-green-500"></i> <span id="whatsappLabel"></span></a>
@@ -203,13 +203,12 @@
         </div>
     </section>
 
-    <footer class="bg-teal-dark text-white pt-24 pb-12 relative overflow-hidden">
-        <div class="absolute -top-10 left-1/2 -translate-x-1/2">
-            <a href="#inicio" class="bg-gold-accent w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition">
-                <i class="fas fa-arrow-up text-teal-dark text-2xl"></i>
-            </a>
-        </div>
-        
+    <!-- Back to Top Button - Fixed -->
+    <a href="#inicio" id="backToTop" class="fixed bottom-6 right-6 bg-gold-accent w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 hover:shadow-gold-accent/50 transition-all duration-300 z-[100] opacity-0 pointer-events-none">
+        <i class="fas fa-arrow-up text-teal-dark text-xl md:text-2xl"></i>
+    </a>
+
+    <footer class="bg-teal-dark text-white pt-24 pb-12 relative overflow-hidden">        
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 pb-16 border-b border-white/10 text-center md:text-left">
                 <div class="col-span-1 md:col-span-1 flex flex-col items-center md:items-start">
@@ -235,8 +234,11 @@
                 </div>
                 <div>
                     <h4 class="font-black uppercase tracking-widest mb-6 text-gold-accent" id="footPaymentsTitle"></h4>
-                    <div class="flex justify-center md:justify-start gap-4 text-3xl opacity-40">
-                        <i class="fab fa-cc-visa"></i><i class="fab fa-cc-mastercard"></i><i class="fab fa-cc-apple-pay"></i><i class="fab fa-cc-paypal"></i>
+                    <div class="flex justify-center md:justify-start gap-4 text-3xl">
+                        <i class="fab fa-cc-visa text-[#1A1F71]"></i>
+                        <i class="fab fa-cc-mastercard text-[#EB001B]"></i>
+                        <i class="fab fa-cc-apple-pay text-white"></i>
+                        <i class="fab fa-cc-paypal text-[#00457C]"></i>
                     </div>
                 </div>
             </div>
@@ -258,6 +260,18 @@
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                backToTop.classList.remove('opacity-0', 'pointer-events-none');
+                backToTop.classList.add('opacity-100');
+            } else {
+                backToTop.classList.add('opacity-0', 'pointer-events-none');
+                backToTop.classList.remove('opacity-100');
+            }
+        });
     </script>
 </body>
 </html>

@@ -44,7 +44,7 @@
 
     <nav class="fixed top-0 left-0 right-0 z-50 nav-glass border-b border-teal-primary/10">
         <div class="max-w-7xl mx-auto px-6 flex justify-between items-center h-20">
-            <a href="index.html"><img src="./images/logo.png" alt="Sparkllex Logo" class="h-10"></a>
+            <a href="index.html"><img src="./images/logo.png" alt="Sparkllex Logo" class="h-14 md:h-16"></a>
             
             <div class="flex items-center space-x-3">
                 <div class="flex bg-gray-100 p-1 rounded-full">
@@ -156,6 +156,11 @@
         </div>
     </footer>
 
+    <!-- Back to Top Button - Fixed -->
+    <a href="#" id="backToTop" class="fixed bottom-6 right-6 bg-gold-accent w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 hover:shadow-gold-accent/50 transition-all duration-300 z-[100] opacity-0 pointer-events-none">
+        <i class="fas fa-arrow-up text-teal-dark text-xl md:text-2xl"></i>
+    </a>
+
     <script>
         function updateUI(lang) {
             applyTranslations(lang);
@@ -166,6 +171,22 @@
         function changeLanguage(lang) {
             updateUI(lang);
         }
+
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                backToTop.classList.remove('opacity-0', 'pointer-events-none');
+                backToTop.classList.add('opacity-100');
+            } else {
+                backToTop.classList.add('opacity-0', 'pointer-events-none');
+                backToTop.classList.remove('opacity-100');
+            }
+        });
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
             const initial = (typeof getActiveLanguage === 'function') ? getActiveLanguage() : (localStorage.getItem('preferredLang') || 'en');
