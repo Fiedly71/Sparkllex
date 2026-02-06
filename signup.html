@@ -144,9 +144,9 @@
                 <div class="space-y-1 pt-2">
                     <label class="text-[10px] font-black uppercase text-teal-dark ml-1">Plan Selected</label>
                     <select id="plan-select" class="premium-input">
-                        <option value="basico">Basic Plan - $79/mo</option>
-                        <option value="pro" selected>Pro Plan - $149/mo</option>
-                        <option value="familiar">Family / Airbnb Plan - $249/mo</option>
+                        <option value="basico" data-plan-label="Basic Plan" data-price-usd="79">Basic Plan - $79/mo</option>
+                        <option value="pro" data-plan-label="Pro Plan" data-price-usd="149" selected>Pro Plan - $149/mo</option>
+                        <option value="familiar" data-plan-label="Family / Airbnb Plan" data-price-usd="249">Family / Airbnb Plan - $249/mo</option>
                     </select>
                 </div>
 
@@ -163,6 +163,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+    <script src="price-localizer.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Initialize Phone Input

@@ -11,6 +11,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <script src="price-localizer.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -80,7 +81,7 @@
                 <span class="uppercase tracking-[0.3em] text-xs font-black text-gray-400 block mb-4" data-translate="planProSubtitle">Premium Balance</span>
                 <h1 class="text-4xl md:text-6xl font-black teal-dark mb-6 italic tracking-tight" data-translate="proPlan">Pro Plan</h1>
                 <div class="text-6xl font-black text-teal-primary">
-                    $149<span class="text-xl text-gray-400 font-medium ml-2" data-translate="perMonth">/month</span>
+                    <span class="price-amount" data-price-usd="149">$149</span><span class="text-xl text-gray-400 font-medium ml-2" data-translate="perMonth">/month</span>
                 </div>
             </div>
 

@@ -11,6 +11,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <script src="price-localizer.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -118,7 +119,7 @@
                     <h3 class="text-2xl font-black mb-2 teal-dark" data-translate="planBasicoTitle">Basic</h3>
                     <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-8" data-translate="planBasicoSubtitle">Essential Needs</p>
                     <div class="mb-8">
-                        <span class="text-6xl font-black text-teal-primary tracking-tighter">$79</span>
+                        <span class="text-6xl font-black text-teal-primary tracking-tighter price-amount" data-price-usd="79">$79</span>
                         <span class="text-gray-400 font-bold text-sm" data-translate="perMonth">/month</span>
                     </div>
                     <ul class="space-y-5 mb-12 flex-grow text-sm font-medium text-gray-600">
@@ -135,7 +136,7 @@
                     <h3 class="text-2xl font-black mb-2" data-translate="planProTitle">Pro</h3>
                     <p class="text-teal-100 text-xs font-bold uppercase tracking-widest mb-8" data-translate="planProSubtitle">For Professionals</p>
                     <div class="mb-8">
-                        <span class="text-6xl font-black tracking-tighter">$149</span>
+                        <span class="text-6xl font-black tracking-tighter price-amount" data-price-usd="149">$149</span>
                         <span class="text-teal-100 font-bold text-sm" data-translate="perMonth">/month</span>
                     </div>
                     <ul class="space-y-5 mb-12 flex-grow text-sm font-bold">
@@ -151,7 +152,7 @@
                     <h3 class="text-2xl font-black mb-2 teal-dark" data-translate="planFamiliarTitle">Family</h3>
                     <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-8" data-translate="planFamiliarSubtitle">Total Home Care</p>
                     <div class="mb-8">
-                        <span class="text-6xl font-black text-teal-primary tracking-tighter">$249</span>
+                        <span class="text-6xl font-black text-teal-primary tracking-tighter price-amount" data-price-usd="249">$249</span>
                         <span class="text-gray-400 font-bold text-sm" data-translate="perMonth">/month</span>
                     </div>
                     <ul class="space-y-5 mb-12 flex-grow text-sm font-medium text-gray-600">
