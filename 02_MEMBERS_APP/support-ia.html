@@ -203,36 +203,33 @@
     <script src="../database-config.js"></script>
 
     <script>
+        const GEMINI_API_KEY = 'AIzaSyBHUFojm7Hz7os9bjtIZgL1v0j-22kvP-8';
         const chatMessages = document.getElementById('chat-messages');
         const chatInput = document.getElementById('chat-input');
         const sendBtn = document.getElementById('send-btn');
+        let conversationHistory = [];
 
         // Set initial AI greeting based on language
         function setGreeting() {
             const lang = (typeof getActiveLanguage === 'function') ? getActiveLanguage() : 'en';
             const greeting = lang === 'es'
-                ? '�Hola! Soy tu asistente de <b>Sparkllex</b>. Estoy aqu� para ayudarte con tus dudas sobre limpieza, planes y reservas. �En qu� puedo servirte hoy? ?'
-                : 'Hello! I\'m your <b>Sparkllex</b> assistant. I\'m here to help you with questions about cleaning, plans and bookings. How can I help you today? ?';
+                ? '¡Hola! Soy tu asistente de <b>Sparkllex</b>. Estoy aquí para ayudarte con tus dudas sobre limpieza, planes y reservas. ¿En qué puedo servirte hoy?'
+                : 'Hello! I\'m your <b>Sparkllex</b> assistant. I\'m here to help you with questions about cleaning, plans and bookings. How can I help you today?';
             document.getElementById('ai-greeting').innerHTML = greeting;
         }
 
-        const responsesEn = {
-            'plan': 'We offer 3 luxury levels:\n\n1. **Basic**: Essential cleaning.\n2. **Pro**: Laundry and ironing included.\n3. **Family**: Everything above plus home repairs.\n\nWould you like to see the prices?',
-            'book': 'It\'s very simple. Just go to the **"Book"** section in your sidebar, choose the service and time. We take care of the rest!',
-            'schedule': 'Our team works **Monday to Saturday, from 8:00 AM to 8:00 PM**. The app is available 24/7 to schedule services.',
-            'price': 'Plans start from very competitive prices. Would you like me to send you the PDF catalog to your email?',
-            'hello': 'Hello again! It\'s a pleasure to greet you. How can I make your life easier today?',
-            'default': 'That\'s an excellent question. Let me connect you with a human agent if you need very specific details, or try asking me about "plans", "booking" or "schedules".'
-        };
+        const systemPrompt = `You are the AI support assistant for Sparkllex, a premium home cleaning and maintenance service in Chile. 
+Your name is Sparkllex Bot. Be helpful, friendly, and professional.
 
-        const responsesEs = {
-            'planes': 'Ofrecemos 3 niveles de lujo:\n\n1. **Basic**: Limpieza esencial.\n2. **Pro**: Lavado y planchado incluido.\n3. **Family**: Todo lo anterior m�s reparaciones de sastrer�a.\n\n�Te gustar�a ver los precios?',
-            'reservar': 'Es muy sencillo. Solo ve a la secci�n de **"Reservar"** en tu panel lateral, elige el servicio y la hora. �Nosotros nos encargamos del resto!',
-            'horario': 'Nuestro equipo trabaja de **Lunes a S�bado, de 8:00 AM a 8:00 PM**. La app est� disponible 24/7 para programar servicios.',
-            'precio': 'Los planes comienzan desde precios muy competitivos. �Quieres que te env�e el cat�logo PDF a tu correo?',
-            'hola': '�Hola de nuevo! Es un placer saludarte. �C�mo puedo hacer tu vida m�s f�cil hoy?',
-            'default': 'Esa es una excelente pregunta. Perm�teme conectarte con un agente humano si necesitas detalles muy espec�ficos, o intenta preguntarme sobre "planes", "reservas" o "horarios".'
-        };
+Key information about Sparkllex:
+- Services: Deep Cleaning, Elite Laundry, Master Ironing, Home Maintenance
+- Plans: Basic ($79/month - 1 visit), Pro ($149/month - 3 visits + laundry), Family ($249/month - daily cleaning + all services)
+- Hours: Monday to Saturday, 8:00 AM to 8:00 PM
+- Location: Chile (prices also shown in CLP for Chilean users)
+- Booking: Users can book through the "Book" section in their dashboard
+
+Always respond in the same language the user writes to you (Spanish or English).
+Keep responses concise and helpful. If asked about something outside Sparkllex services, politely redirect to relevant topics.`;
 
         function addMessage(text, type = 'ai') {
             const div = document.createElement('div');
@@ -272,32 +269,60 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-        function handleSend() {
+        async function callGeminiAPI(userMessage) {
+            conversationHistory.push({ role: 'user', parts: [{ text: userMessage }] });
+
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    system_instruction: { parts: [{ text: systemPrompt }] },
+                    contents: conversationHistory,
+                    generationConfig: {
+                        temperature: 0.7,
+                        maxOutputTokens: 500
+                    }
+                })
+            });
+
+            const data = await response.json();
+            
+            if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+                const aiResponse = data.candidates[0].content.parts[0].text;
+                conversationHistory.push({ role: 'model', parts: [{ text: aiResponse }] });
+                return aiResponse;
+            } else {
+                throw new Error('No response from Gemini');
+            }
+        }
+
+        async function handleSend() {
             const text = chatInput.value.trim();
             if (!text) return;
 
-            const msg = text.toLowerCase();
             addMessage(text, 'user');
             chatInput.value = '';
+            sendBtn.disabled = true;
 
             showTypingIndicator();
 
-            setTimeout(() => {
+            try {
+                const aiResponse = await callGeminiAPI(text);
                 const indicator = document.getElementById('typing-indicator');
                 if (indicator) indicator.remove();
-
+                addMessage(aiResponse, 'ai');
+            } catch (error) {
+                console.error('Gemini API error:', error);
+                const indicator = document.getElementById('typing-indicator');
+                if (indicator) indicator.remove();
                 const lang = (typeof getActiveLanguage === 'function') ? getActiveLanguage() : 'en';
-                const responses = lang === 'es' ? responsesEs : responsesEn;
+                const errorMsg = lang === 'es' 
+                    ? 'Lo siento, hubo un error. Por favor intenta de nuevo.'
+                    : 'Sorry, there was an error. Please try again.';
+                addMessage(errorMsg, 'ai');
+            }
 
-                let response = responses.default;
-                for (let key in responses) {
-                    if (msg.includes(key)) {
-                        response = responses[key];
-                        break;
-                    }
-                }
-                addMessage(response, 'ai');
-            }, 1500);
+            sendBtn.disabled = false;
         }
 
         function quickQuery(topic) {
