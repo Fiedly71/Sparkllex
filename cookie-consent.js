@@ -1,10 +1,33 @@
 /**
- * Sparkllex - Système de Consentement des Cookies
- * Mémorise le choix de l'utilisateur de manière permanente
+ * Sparkllex - Cookie Consent System (Bilingual EN/ES)
+ * Remembers the user's choice permanently
  */
 
+const cookieTexts = {
+    en: {
+        title: '🍪 Cookies & Privacy',
+        message: 'To enhance your premium experience, we use cookies. By continuing, you accept our privacy policy.',
+        accept: 'Accept',
+        decline: 'Decline'
+    },
+    es: {
+        title: '🍪 Cookies y Privacidad',
+        message: 'Para mejorar tu experiencia premium, usamos cookies. Al continuar, aceptas nuestra política de privacidad.',
+        accept: 'Aceptar',
+        decline: 'Rechazar'
+    }
+};
+
+function getCookieLang() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlLang = urlParams.get('lang');
+    if (urlLang === 'es' || urlLang === 'en') return urlLang;
+    const stored = localStorage.getItem('preferredLang');
+    if (stored === 'es' || stored === 'en') return stored;
+    return 'en';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Vérifier si l'utilisateur a déjà fait un choix
     const cookieConsent = localStorage.getItem('sparkllex_cookies');
 
     if (!cookieConsent) {
@@ -13,11 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function createCookieBanner() {
-    // Création du conteneur principal
+    const lang = getCookieLang();
+    const t = cookieTexts[lang];
+
     const banner = document.createElement('div');
     banner.id = 'cookie-banner';
     
-    // Style du bandeau (Glassmorphism élégant)
     banner.style.cssText = `
         position: fixed;
         bottom: 20px;
@@ -39,12 +63,11 @@ function createCookieBanner() {
         animation: slideUp 0.5s ease-out;
     `;
 
-    // Contenu textuel
     banner.innerHTML = `
         <div style="text-align: center;">
-            <h4 style="color: #008080; font-weight: bold; margin-bottom: 8px; font-family: sans-serif;">🍪 Cookies & Confidentialité</h4>
+            <h4 style="color: #008080; font-weight: bold; margin-bottom: 8px; font-family: sans-serif;">${t.title}</h4>
             <p style="color: #666; font-size: 14px; line-height: 1.4; font-family: sans-serif; margin: 0;">
-                Pour améliorer votre expérience de luxe, nous utilisons des cookies. En continuant, vous acceptez notre politique de confidentialité.
+                ${t.message}
             </p>
         </div>
         <div style="display: flex; gap: 10px; width: 100%;">
@@ -58,7 +81,7 @@ function createCookieBanner() {
                 font-weight: bold;
                 cursor: pointer;
                 transition: 0.3s;
-            ">Accepter</button>
+            ">${t.accept}</button>
             <button id="decline-cookies" style="
                 flex: 1;
                 background: transparent;
@@ -69,7 +92,7 @@ function createCookieBanner() {
                 font-weight: bold;
                 cursor: pointer;
                 transition: 0.3s;
-            ">Refuser</button>
+            ">${t.decline}</button>
         </div>
     `;
 
