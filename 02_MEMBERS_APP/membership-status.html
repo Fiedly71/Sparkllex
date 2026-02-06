@@ -271,13 +271,12 @@
 
         const selectPlan = (plan) => {
             selectedPlan = plan;
-            // Afficher la vraie date de renouvellement depuis Stripe
-            if (profile?.subscription_current_period_end) {
-                const renewalDate = new Date(profile.subscription_current_period_end);
-                document.getElementById('next-renewal').textContent = renewalDate.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
-            } else {
-                document.getElementById('next-renewal').textContent = 'Pending...';
-            }
+            const btn = document.getElementById('update-plan-btn');
+            
+            document.querySelectorAll('.plan-option').forEach(el => el.classList.remove('selected'));
+            const selectedEl = document.getElementById('plan-' + plan);
+            if (selectedEl) selectedEl.classList.add('selected');
+
             if (plan === currentPlanFromDB) {
                 btn.disabled = true;
                 btn.textContent = "Your Current Plan";
@@ -292,13 +291,13 @@
         const redirectToStripe = () => {
             const link = STRIPE_LINKS[selectedPlan];
             if (link) {
-                // Pass email to Stripe Checkout for a better user experience
                 const finalUrl = `${link}?prefilled_email=${encodeURIComponent(currentUser.email)}`;
-                alert(`Redirecting to Stripe to confirm your ${selectedPlan} membership...`);
                 window.location.href = finalUrl;
-            }manageBilling = async () => {
+            }
+        };
+
+        const manageBilling = async () => {
             try {
-                // Récupérer le customer_id depuis le profil
                 const { data: profile } = await supabaseClient
                     .from('profiles')
                     .select('stripe_customer_id')
@@ -310,8 +309,7 @@
                     return;
                 }
 
-                // Appeler l'API pour créer une session du billing portal
-                const response = await fetch('https://sparkllex.com/api/create-billing-portal', {
+                const response = await fetch('/api/create-billing-portal', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -330,10 +328,7 @@
                 console.error('Billing portal error:', error);
                 alert('Error opening billing portal. Please contact support.');
             }
-        }
         };
-
-        const manageBilling = () => alert('Opening Secure Stripe Billing Portal...');
 
         async function handleLogout() {
             await supabaseClient.auth.signOut();
