@@ -41,18 +41,19 @@ Key information about Sparkllex:
 Always respond in the same language the user writes to you (Spanish or English).
 Keep responses concise and helpful. If asked about something outside Sparkllex services, politely redirect to relevant topics.`;
 
-    // Build conversation with system instruction
+    // Build conversation
     const contents = [
-      { role: 'user', parts: [{ text: systemPrompt }] },
-      { role: 'model', parts: [{ text: 'Understood. I am Sparkllex Bot, ready to help with Sparkllex services.' }] },
       ...(conversationHistory || []),
       { role: 'user', parts: [{ text: message }] }
     ];
 
-    // Utilisation de gemini-pro (modèle stable et compatible)
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
+    // Utilisation de gemini-1.5-flash (modèle stable et compatible)
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
     const { data } = await axios.post(url, {
+      system_instruction: {
+        parts: [{ text: systemPrompt }]
+      },
       contents: contents,
       generationConfig: {
         temperature: 0.7,
