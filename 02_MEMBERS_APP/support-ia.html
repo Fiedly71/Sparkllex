@@ -40,7 +40,6 @@
             border-bottom: 1px solid rgba(0, 128, 128, 0.1);
         }
 
-        /* Chat Styles */
         #chat-messages::-webkit-scrollbar { width: 5px; }
         #chat-messages::-webkit-scrollbar-thumb { background: #00808022; border-radius: 10px; }
 
@@ -91,20 +90,13 @@
         
         @media (max-width: 1023px) {
             aside { 
-                position: fixed !important; 
-                left: 0; 
-                top: 0; 
-                transform: translateX(-100%); 
-                transition: transform 0.3s ease;
-                z-index: 100 !important;
-                height: 100vh;
-                width: 280px;
-                padding-top: 80px;
+                position: fixed !important; left: 0; top: 0; 
+                transform: translateX(-100%); transition: transform 0.3s ease;
+                z-index: 100 !important; height: 100vh; width: 280px; padding-top: 80px;
             }
             aside.mobile-open { transform: translateX(0); }
             .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 99; }
             .mobile-overlay.active { display: block; }
-            main { max-width: 100%; }
         }
     </style>
 </head>
@@ -128,7 +120,6 @@
     </nav>
 
     <div class="pt-28 pb-6 max-w-7xl mx-auto px-4 md:px-6 flex flex-col lg:flex-row gap-10 h-full">
-        
         <aside id="sidebar" class="w-full lg:w-64 flex-shrink-0 lg:block">
             <div class="bg-white/50 backdrop-blur-md p-6 rounded-[2.5rem] shadow-sm border border-white/50">
                 <nav class="space-y-2">
@@ -161,7 +152,7 @@
                         <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-4 border-white rounded-full"></div>
                     </div>
                     <div>
-                        <h2 class="font-black text-gray-900 tracking-tight" data-translate="aIAssistant">Sparkllex Bot</h2>
+                        <h2 class="font-black text-gray-900 tracking-tight">Sparkllex Bot</h2>
                         <p class="text-[10px] font-bold text-teal-primary uppercase tracking-widest" data-translate="onlineAI">Online • 24/7 Support</p>
                     </div>
                 </div>
@@ -195,10 +186,6 @@
         </main>
     </div>
 
-    <footer class="py-10 text-center text-gray-600 text-[9px] font-bold uppercase tracking-[0.3em] mt-12 border-t border-gray-200">
-        <div class="text-[7px] uppercase tracking-[0.3em]">Designed by <a href="https://gui-fiedly.vercel.app" target="_blank" rel="noopener noreferrer" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">GF Digital Studio</a> | <a href="mailto:isteah.gffilsaime@gmail.com" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">Gui Fiedly Fils-aime</a></div>
-    </footer>
-
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../database-config.js"></script>
 
@@ -211,26 +198,25 @@
         function setGreeting() {
             const lang = (typeof getActiveLanguage === 'function') ? getActiveLanguage() : 'en';
             const greeting = lang === 'es'
-                ? '¡Hola! Soy tu asistente de <b>Sparkllex</b>. Estoy aquí para ayudarte con tus dudas sobre limpieza, planes et reservas. ¿En qué puedo servirte hoy?'
-                : 'Hello! I\'m your <b>Sparkllex</b> assistant. I\'m here to help you with questions about cleaning, plans and bookings. How can I help you today?';
+                ? '¡Hola! Soy tu asistente de <b>Sparkllex</b>. Estoy aquí para ayudarte con tus dudas. ¿En qué puedo servirte hoy?'
+                : 'Hello! I\'m your <b>Sparkllex</b> assistant. I\'m here to help you with your questions. How can I help you today?';
             document.getElementById('ai-greeting').innerHTML = greeting;
         }
 
         function addMessage(text, type = 'ai') {
             const div = document.createElement('div');
             div.className = `flex gap-4 message-anim ${type === 'user' ? 'flex-row-reverse' : ''}`;
-            const icon = type === 'ai' ? '<i class="fas fa-robot text-xs"></i>' : '<i class="fas fa-user text-xs"></i>';
+            const icon = type === 'ai' ? 'fa-robot' : 'fa-user';
             const iconBg = type === 'ai' ? 'bg-teal-50 text-teal-primary' : 'bg-gold-accent text-white';
             const bubbleClass = type === 'ai' ? 'ai-bubble' : 'user-bubble';
             
             div.innerHTML = `
                 <div class="w-9 h-9 rounded-xl ${iconBg} flex items-center justify-center flex-shrink-0 shadow-sm">
-                    ${icon}
+                    <i class="fas ${icon} text-xs"></i>
                 </div>
                 <div class="${bubbleClass} p-5 max-w-[85%]">
                     <p class="text-sm font-medium leading-relaxed">${text.replace(/\n/g, '<br>')}</p>
-                </div>
-            `;
+                </div>`;
             chatMessages.appendChild(div);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
@@ -245,38 +231,30 @@
                 </div>
                 <div class="ai-bubble p-5 flex gap-1 items-center">
                     <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
-                </div>
-            `;
+                </div>`;
             chatMessages.appendChild(div);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
         async function callGeminiAPI(userMessage) {
-            // On prépare l'historique sans le message actuel (le backend le gère)
-            const cleanHistory = conversationHistory.map(item => ({
-                role: item.role,
-                parts: item.parts
-            }));
-
             try {
-                // Utilisation du chemin absolu /api/
+                // On envoie l'historique actuel AU SERVEUR (api/gemini-chat.js)
                 const response = await fetch('/api/gemini-chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         message: userMessage,
-                        conversationHistory: cleanHistory
+                        conversationHistory: conversationHistory
                     })
                 });
 
                 const data = await response.json();
                 
                 if (response.ok && data.response) {
-                    const aiResponse = data.response;
-                    // Mise à jour locale de l'historique
+                    // Si succès, on met à jour l'historique local pour la suite
                     conversationHistory.push({ role: 'user', parts: [{ text: userMessage }] });
-                    conversationHistory.push({ role: 'model', parts: [{ text: aiResponse }] });
-                    return aiResponse;
+                    conversationHistory.push({ role: 'model', parts: [{ text: data.response }] });
+                    return data.response;
                 } else {
                     throw new Error(data.error || 'API Error');
                 }
@@ -288,7 +266,7 @@
 
         async function handleSend() {
             const text = chatInput.value.trim();
-            if (!text) return;
+            if (!text || sendBtn.disabled) return;
 
             addMessage(text, 'user');
             chatInput.value = '';
@@ -297,16 +275,15 @@
 
             try {
                 const aiResponse = await callGeminiAPI(text);
-                const indicator = document.getElementById('typing-indicator');
-                if (indicator) indicator.remove();
+                document.getElementById('typing-indicator')?.remove();
                 addMessage(aiResponse, 'ai');
             } catch (error) {
-                const indicator = document.getElementById('typing-indicator');
-                if (indicator) indicator.remove();
+                document.getElementById('typing-indicator')?.remove();
                 const lang = (typeof getActiveLanguage === 'function') ? getActiveLanguage() : 'en';
-                addMessage(lang === 'es' ? 'Error de conexión.' : 'Connection error.', 'ai');
+                addMessage(lang === 'es' ? 'Lo siento, hay un problema de conexión.' : 'Sorry, there is a connection issue.', 'ai');
+            } finally {
+                sendBtn.disabled = false;
             }
-            sendBtn.disabled = false;
         }
 
         function quickQuery(topic) {
@@ -316,23 +293,23 @@
 
         sendBtn.addEventListener('click', handleSend);
         chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSend(); });
-        
+
         async function checkVIPAccess() {
-            const { data: { user } } = await supabaseClient.auth.getUser();
-            if (!user) return;
-            const { data: profile } = await supabaseClient.from('profiles').select('plan').eq('id', user.id).single();
-            const currentPlan = (profile?.plan || 'BASIC').toUpperCase();
-            const vipLink = document.getElementById('vip-support-link');
-            if (currentPlan !== 'FAMILY' && currentPlan !== 'FAMILIAR') {
-                if(vipLink) {
-                    vipLink.style.opacity = '0.5';
-                    vipLink.style.cursor = 'not-allowed';
-                    vipLink.style.pointerEvents = 'none';
+            try {
+                const { data: { user } } = await supabaseClient.auth.getUser();
+                if (!user) return;
+                const { data: profile } = await supabaseClient.from('profiles').select('plan').eq('id', user.id).single();
+                const currentPlan = (profile?.plan || 'BASIC').toUpperCase();
+                const vipLink = document.getElementById('vip-support-link');
+                if (!['FAMILY', 'FAMILIAR'].includes(currentPlan)) {
+                    if(vipLink) {
+                        vipLink.style.opacity = '0.5';
+                        vipLink.style.pointerEvents = 'none';
+                    }
+                } else {
+                    vipLink?.querySelector('.fa-lock')?.remove();
                 }
-            } else {
-                const lockIcon = vipLink?.querySelector('.fa-lock');
-                if(lockIcon) lockIcon.remove();
-            }
+            } catch(e) {}
         }
         
         function toggleMobileMenu() {
