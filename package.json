@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.95.0",
-    "stripe": "^14.25.0"
+    "stripe": "^14.25.0",
+    "axios": "^1.6.0"
   },
   "engines": {
     "node": ">=18.0.0"

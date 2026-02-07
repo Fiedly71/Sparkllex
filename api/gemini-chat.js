@@ -1,4 +1,5 @@
 // Gemini AI Chat Proxy - Sécurise la clé API côté serveur
+const axios = require('axios');
 
 module.exports = async (req, res) => {
     // CORS Headers
@@ -45,20 +46,20 @@ Keep responses concise and helpful. If asked about something outside Sparkllex s
         const history = conversationHistory || [];
         history.push({ role: 'user', parts: [{ text: message }] });
 
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
+        const { data } = await axios.post(
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+            {
                 system_instruction: { parts: [{ text: systemPrompt }] },
                 contents: history,
                 generationConfig: {
                     temperature: 0.7,
                     maxOutputTokens: 500
                 }
-            })
-        });
-
-        const data = await response.json();
+            },
+            {
+                headers: { 'Content-Type': 'application/json' }
+            }
+        );
 
         if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
             const aiResponse = data.candidates[0].content.parts[0].text;
@@ -76,7 +77,9 @@ Keep responses concise and helpful. If asked about something outside Sparkllex s
         }
 
     } catch (error) {
-        console.error('Gemini Chat Error:', error);
-        return res.status(500).json({ error: error.message });
+        console.error('Gemini Chat Error:', error.response?.data || error.message);
+        return res.status(500).json({ 
+            error: error.response?.data?.error?.message || error.message || 'API Error'
+        });
     }
 };
