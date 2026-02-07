@@ -267,6 +267,8 @@
 
             const data = await response.json();
             
+            console.log('API Response:', data); // Debug log
+            
             if (data.response) {
                 conversationHistory = data.conversationHistory;
                 return data.response;
