@@ -208,11 +208,10 @@
         const sendBtn = document.getElementById('send-btn');
         let conversationHistory = [];
 
-        // Set initial AI greeting based on language
         function setGreeting() {
             const lang = (typeof getActiveLanguage === 'function') ? getActiveLanguage() : 'en';
             const greeting = lang === 'es'
-                ? '¡Hola! Soy tu asistente de <b>Sparkllex</b>. Estoy aquí para ayudarte con tus dudas sobre limpieza, planes y reservas. ¿En qué puedo servirte hoy?'
+                ? '¡Hola! Soy tu asistente de <b>Sparkllex</b>. Estoy aquí para ayudarte con tus dudas sobre limpieza, planes et reservas. ¿En qué puedo servirte hoy?'
                 : 'Hello! I\'m your <b>Sparkllex</b> assistant. I\'m here to help you with questions about cleaning, plans and bookings. How can I help you today?';
             document.getElementById('ai-greeting').innerHTML = greeting;
         }
@@ -220,7 +219,6 @@
         function addMessage(text, type = 'ai') {
             const div = document.createElement('div');
             div.className = `flex gap-4 message-anim ${type === 'user' ? 'flex-row-reverse' : ''}`;
-            
             const icon = type === 'ai' ? '<i class="fas fa-robot text-xs"></i>' : '<i class="fas fa-user text-xs"></i>';
             const iconBg = type === 'ai' ? 'bg-teal-50 text-teal-primary' : 'bg-gold-accent text-white';
             const bubbleClass = type === 'ai' ? 'ai-bubble' : 'user-bubble';
@@ -246,9 +244,7 @@
                     <i class="fas fa-robot text-xs"></i>
                 </div>
                 <div class="ai-bubble p-5 flex gap-1 items-center">
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
                 </div>
             `;
             chatMessages.appendChild(div);
@@ -256,26 +252,37 @@
         }
 
         async function callGeminiAPI(userMessage) {
-            conversationHistory.push({ role: 'user', parts: [{ text: userMessage }] });
+            // On prépare l'historique sans le message actuel (le backend le gère)
+            const cleanHistory = conversationHistory.map(item => ({
+                role: item.role,
+                parts: item.parts
+            }));
 
-            // On appelle le backend Vercel pour plus de sécurité
-            const response = await fetch('/api/gemini-chat', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    message: userMessage,
-                    conversationHistory: conversationHistory.slice(0, -1)
-                })
-            });
+            try {
+                // Utilisation du chemin absolu /api/
+                const response = await fetch('/api/gemini-chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: userMessage,
+                        conversationHistory: cleanHistory
+                    })
+                });
 
-            const data = await response.json();
-            
-            if (response.ok && data.response) {
-                const aiResponse = data.response;
-                conversationHistory.push({ role: 'model', parts: [{ text: aiResponse }] });
-                return aiResponse;
-            } else {
-                throw new Error(data.error || 'API Error');
+                const data = await response.json();
+                
+                if (response.ok && data.response) {
+                    const aiResponse = data.response;
+                    // Mise à jour locale de l'historique
+                    conversationHistory.push({ role: 'user', parts: [{ text: userMessage }] });
+                    conversationHistory.push({ role: 'model', parts: [{ text: aiResponse }] });
+                    return aiResponse;
+                } else {
+                    throw new Error(data.error || 'API Error');
+                }
+            } catch (err) {
+                console.error("Fetch error:", err);
+                throw err;
             }
         }
 
@@ -286,7 +293,6 @@
             addMessage(text, 'user');
             chatInput.value = '';
             sendBtn.disabled = true;
-
             showTypingIndicator();
 
             try {
@@ -295,16 +301,11 @@
                 if (indicator) indicator.remove();
                 addMessage(aiResponse, 'ai');
             } catch (error) {
-                console.error('Gemini API error:', error);
                 const indicator = document.getElementById('typing-indicator');
                 if (indicator) indicator.remove();
                 const lang = (typeof getActiveLanguage === 'function') ? getActiveLanguage() : 'en';
-                const errorMsg = lang === 'es' 
-                    ? 'Lo siento, hubo un error. Por favor intenta de nuevo.'
-                    : 'Sorry, there was an error. Please try again.';
-                addMessage(errorMsg, 'ai');
+                addMessage(lang === 'es' ? 'Error de conexión.' : 'Connection error.', 'ai');
             }
-
             sendBtn.disabled = false;
         }
 
@@ -316,20 +317,12 @@
         sendBtn.addEventListener('click', handleSend);
         chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSend(); });
         
-        // VIP Access Check
         async function checkVIPAccess() {
             const { data: { user } } = await supabaseClient.auth.getUser();
             if (!user) return;
-
-            const { data: profile } = await supabaseClient
-                .from('profiles')
-                .select('plan')
-                .eq('id', user.id)
-                .single();
-
+            const { data: profile } = await supabaseClient.from('profiles').select('plan').eq('id', user.id).single();
             const currentPlan = (profile?.plan || 'BASIC').toUpperCase();
             const vipLink = document.getElementById('vip-support-link');
-            
             if (currentPlan !== 'FAMILY' && currentPlan !== 'FAMILIAR') {
                 if(vipLink) {
                     vipLink.style.opacity = '0.5';
@@ -343,17 +336,12 @@
         }
         
         function toggleMobileMenu() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('mobile-overlay');
-            sidebar.classList.toggle('mobile-open');
-            overlay.classList.toggle('active');
+            document.getElementById('sidebar').classList.toggle('mobile-open');
+            document.getElementById('mobile-overlay').classList.toggle('active');
         }
         
-        // Set greeting on page load
         setGreeting();
         checkVIPAccess();
-        
-        // Mobile menu event listener
         document.getElementById('mobile-menu-btn')?.addEventListener('click', toggleMobileMenu);
     </script>
 </body>
