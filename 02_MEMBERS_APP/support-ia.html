@@ -162,7 +162,7 @@
                     </div>
                     <div>
                         <h2 class="font-black text-gray-900 tracking-tight" data-translate="aIAssistant">Sparkllex Bot</h2>
-                        <p class="text-[10px] font-bold text-teal-primary uppercase tracking-widest" data-translate="onlineAI">Online � 24/7 Support</p>
+                        <p class="text-[10px] font-bold text-teal-primary uppercase tracking-widest" data-translate="onlineAI">Online • 24/7 Support</p>
                     </div>
                 </div>
             </div>
@@ -256,47 +256,26 @@
         }
 
         async function callGeminiAPI(userMessage) {
-            // TEMPORARY: Direct call to test if API key works
-            const GEMINI_API_KEY = 'AIzaSyAmcaAcoRqstLDI6LZlTPokMhiaGbjAnQ';
-            
             conversationHistory.push({ role: 'user', parts: [{ text: userMessage }] });
 
-            const systemPrompt = `You are the AI support assistant for Sparkllex, a premium home cleaning and maintenance service in Chile. 
-Your name is Sparkllex Bot. Be helpful, friendly, and professional.
-
-Key information about Sparkllex:
-- Services: Deep Cleaning, Elite Laundry, Master Ironing, Home Maintenance
-- Plans: Basic ($79/month - 1 visit), Pro ($149/month - 3 visits + laundry), Family ($249/month - daily cleaning + all services)
-- Hours: Monday to Saturday, 8:00 AM to 8:00 PM
-- Location: Chile (prices also shown in CLP for Chilean users)
-- Booking: Users can book through the "Book" section in their dashboard
-
-Always respond in the same language the user writes to you (Spanish or English).
-Keep responses concise and helpful. If asked about something outside Sparkllex services, politely redirect to relevant topics.`;
-
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+            // On appelle le backend Vercel pour plus de sécurité
+            const response = await fetch('/api/gemini-chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    system_instruction: { parts: [{ text: systemPrompt }] },
-                    contents: conversationHistory,
-                    generationConfig: {
-                        temperature: 0.7,
-                        maxOutputTokens: 500
-                    }
+                    message: userMessage,
+                    conversationHistory: conversationHistory.slice(0, -1)
                 })
             });
 
             const data = await response.json();
             
-            console.log('API Response:', data);
-            
-            if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
-                const aiResponse = data.candidates[0].content.parts[0].text;
+            if (response.ok && data.response) {
+                const aiResponse = data.response;
                 conversationHistory.push({ role: 'model', parts: [{ text: aiResponse }] });
                 return aiResponse;
             } else {
-                throw new Error(data.error?.message || 'No response from AI');
+                throw new Error(data.error || 'API Error');
             }
         }
 
@@ -352,11 +331,14 @@ Keep responses concise and helpful. If asked about something outside Sparkllex s
             const vipLink = document.getElementById('vip-support-link');
             
             if (currentPlan !== 'FAMILY' && currentPlan !== 'FAMILIAR') {
-                vipLink.style.opacity = '0.5';
-                vipLink.style.cursor = 'not-allowed';
-                vipLink.style.pointerEvents = 'none';
+                if(vipLink) {
+                    vipLink.style.opacity = '0.5';
+                    vipLink.style.cursor = 'not-allowed';
+                    vipLink.style.pointerEvents = 'none';
+                }
             } else {
-                vipLink.querySelector('.fa-lock').remove();
+                const lockIcon = vipLink?.querySelector('.fa-lock');
+                if(lockIcon) lockIcon.remove();
             }
         }
         
