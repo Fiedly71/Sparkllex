@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+    const GEMINI_API_KEY = process.env.GEMINI_API_KEY || 'AIzaSyBHUFojm7Hz7os9bjtIZgL1v0j-22kvP-8';
     
     if (!GEMINI_API_KEY) {
         console.error('GEMINI_API_KEY not configured');
