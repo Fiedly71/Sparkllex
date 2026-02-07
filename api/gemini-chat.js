@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
   }
 
   const { message, conversationHistory } = req.body;
-  const API_KEY = process.env.GEMINI_API_KEY || 'AIzaSyAmcaAcoRqstLDI6LZlTPokMhiaGbjAnQ';
+  const API_KEY = process.env.GEMINI_API_KEY || 'AIzaSyCz1oqdPayE-5JrtNG_Rr1UfWDfavptp4I';
 
   if (!API_KEY) {
     return res.status(500).json({ error: 'Clé API manquante' });
