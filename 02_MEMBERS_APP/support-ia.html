@@ -251,9 +251,14 @@
                 const data = await response.json();
                 
                 if (response.ok && data.response) {
-                    // Si succès, on met à jour l'historique local pour la suite
-                    conversationHistory.push({ role: 'user', parts: [{ text: userMessage }] });
-                    conversationHistory.push({ role: 'model', parts: [{ text: data.response }] });
+                    // Le serveur renvoie l'historique complet, on l'utilise
+                    if (data.conversationHistory) {
+                        conversationHistory = data.conversationHistory;
+                    } else {
+                        // Fallback si le serveur ne renvoie pas l'historique
+                        conversationHistory.push({ role: 'user', parts: [{ text: userMessage }] });
+                        conversationHistory.push({ role: 'model', parts: [{ text: data.response }] });
+                    }
                     return data.response;
                 } else {
                     throw new Error(data.error || 'API Error');
@@ -294,10 +299,26 @@
         sendBtn.addEventListener('click', handleSend);
         chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSend(); });
 
+        // Auth Guard - Redirect to login if not authenticated
+        async function checkAuth() {
+            try {
+                const { data: { user }, error } = await supabaseClient.auth.getUser();
+                if (!user || error) {
+                    window.location.href = "../login.html";
+                    return false;
+                }
+                return user;
+            } catch(e) {
+                window.location.href = "../login.html";
+                return false;
+            }
+        }
+
         async function checkVIPAccess() {
             try {
-                const { data: { user } } = await supabaseClient.auth.getUser();
+                const user = await checkAuth();
                 if (!user) return;
+                
                 const { data: profile } = await supabaseClient.from('profiles').select('plan').eq('id', user.id).single();
                 const currentPlan = (profile?.plan || 'BASIC').toUpperCase();
                 const vipLink = document.getElementById('vip-support-link');
@@ -309,7 +330,9 @@
                 } else {
                     vipLink?.querySelector('.fa-lock')?.remove();
                 }
-            } catch(e) {}
+            } catch(e) {
+                console.error('Error checking VIP access:', e);
+            }
         }
         
         function toggleMobileMenu() {
