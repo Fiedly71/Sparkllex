@@ -5,7 +5,7 @@ const STRIPE_CONFIG = {
 const STRIPE_PRICING_PLANS = {
     basico: { 
         priceId: 'price_1Ss6yTIccQ4MNulwrZnZFdTx', 
-        url: 'https://buy.stripe.com/8x2cN5cJv6hG4hnfs6b3q09' 
+        url: 'https://buy.stripe.com/fZu6oHdNz5dCdRX2Fkb3q06' 
     },
     pro: { 
         priceId: 'price_1Ss6zEIccQ4MNulwvkTloCjn', 

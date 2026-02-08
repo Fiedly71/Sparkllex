@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let stripeUrl = "";
             switch (userData.planId) {
                 case 'basico': 
-                    stripeUrl = "https://buy.stripe.com/8x2cN5cJv6hG4hnfs6b3q09"; 
+                    stripeUrl = "https://buy.stripe.com/fZu6oHdNz5dCdRX2Fkb3q06"; 
                     break;
                 case 'pro': 
                     stripeUrl = "https://buy.stripe.com/8x29AT5h30Xm6pveo2b3q07"; 
