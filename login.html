@@ -145,23 +145,23 @@
 
                     const user = data.user;
 
-                    // --- V�RIFICATION DU PROFIL ET DE L'APPROBATION ---
+                    // --- VÉRIFICATION DU PROFIL ET DE L'APPROBATION ---
                     const { data: profileData, error: profileError } = await supabaseClient
                         .from('profiles')
                         .select('role, is_verified')
                         .eq('id', user.id)
                         .single();
 
-                    // 1. Si le profil n'existe plus (dossier supprim� dans Team Manager)
+                    // 1. Si le profil n'existe plus (dossier supprimé dans Team Manager)
                     if (profileError || !profileData) {
                         await supabaseClient.auth.signOut();
                         throw new Error((lang === 'es') ? "Cuenta no encontrada o eliminada." : "Account not found or deleted.");
                     }
 
-                    // 2. Si c'est un staff et qu'il n'est pas approuv�
+                    // 2. Si c'est un staff et qu'il n'est pas approuvé
                     if (profileData.role === 'staff' && !profileData.is_verified) {
                         await supabaseClient.auth.signOut();
-                        throw new Error((lang === 'es') ? "Su solicitud a�n est� en revisi�n." : "Your application is still under review.");
+                        throw new Error((lang === 'es') ? "Su solicitud aún está en revisión." : "Your application is still under review.");
                     }
 
                     // --- LOGIQUE DE REDIRECTION ---
