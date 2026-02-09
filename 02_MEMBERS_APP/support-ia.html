@@ -243,35 +243,34 @@
         }
 
         async function callGeminiAPI(userMessage) {
-            try {
-                // On envoie l'historique actuel AU SERVEUR (api/gemini-chat.js)
-                const response = await fetch('/api/gemini-chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        message: userMessage,
-                        conversationHistory: conversationHistory
-                    })
-                });
+            // On envoie l'historique actuel AU SERVEUR (api/gemini-chat.js)
+            const response = await fetch('/api/gemini-chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    message: userMessage,
+                    conversationHistory: conversationHistory
+                })
+            });
 
-                const data = await response.json();
-                
-                if (response.ok && data.response) {
-                    // Le serveur renvoie l'historique complet, on l'utilise
-                    if (data.conversationHistory) {
-                        conversationHistory = data.conversationHistory;
-                    } else {
-                        // Fallback si le serveur ne renvoie pas l'historique
-                        conversationHistory.push({ role: 'user', parts: [{ text: userMessage }] });
-                        conversationHistory.push({ role: 'model', parts: [{ text: data.response }] });
-                    }
-                    return data.response;
+            const data = await response.json();
+            
+            if (response.ok && data.response) {
+                // Le serveur renvoie l'historique complet, on l'utilise
+                if (data.conversationHistory) {
+                    conversationHistory = data.conversationHistory;
                 } else {
-                    throw new Error(data.error || 'API Error');
+                    // Fallback si le serveur ne renvoie pas l'historique
+                    conversationHistory.push({ role: 'user', parts: [{ text: userMessage }] });
+                    conversationHistory.push({ role: 'model', parts: [{ text: data.response }] });
                 }
-            } catch (err) {
-                console.error("Fetch error:", err);
-                throw err;
+                return { success: true, response: data.response };
+            } else if (data.error && data.error.includes('quota')) {
+                return { success: false, errorType: 'quota' };
+            } else if (data.error) {
+                return { success: false, errorType: 'api', error: data.error };
+            } else {
+                return { success: false, errorType: 'empty' };
             }
         }
 
@@ -285,13 +284,37 @@
             showTypingIndicator();
 
             try {
-                const aiResponse = await callGeminiAPI(text);
+                const result = await callGeminiAPI(text);
                 document.getElementById('typing-indicator')?.remove();
-                addMessage(aiResponse, 'ai');
+                
+                const lang = (typeof getActiveLanguage === 'function') ? getActiveLanguage() : 'en';
+                
+                if (result.success) {
+                    addMessage(result.response, 'ai');
+                } else if (result.errorType === 'quota') {
+                    // Rate limit hit
+                    const msg = lang === 'es' 
+                        ? "¡Ups! Estoy un poco ocupado ahora. 😅 Por favor, espera unos segundos y vuelve a intentarlo."
+                        : "Oops! I'm a bit busy right now. 😅 Please wait a few seconds and try again.";
+                    addMessage(msg, 'ai');
+                } else if (result.errorType === 'api') {
+                    const msg = lang === 'es'
+                        ? "Tengo un pequeño problema técnico. ¡Inténtalo de nuevo en un momento! 🔧"
+                        : "I'm having a small technical issue. Please try again in a moment! 🔧";
+                    addMessage(msg, 'ai');
+                } else {
+                    const msg = lang === 'es'
+                        ? "No entendí bien. ¿Podrías intentar preguntar de nuevo? 😊"
+                        : "I didn't quite catch that. Could you try asking again? 😊";
+                    addMessage(msg, 'ai');
+                }
             } catch (error) {
                 document.getElementById('typing-indicator')?.remove();
                 const lang = (typeof getActiveLanguage === 'function') ? getActiveLanguage() : 'en';
-                addMessage(lang === 'es' ? 'Lo siento, hay un problema de conexión.' : 'Sorry, there is a connection issue.', 'ai');
+                const msg = lang === 'es' 
+                    ? 'Problema de conexión. Por favor, intenta de nuevo.'
+                    : 'Connection issue. Please try again.';
+                addMessage(msg, 'ai');
             } finally {
                 sendBtn.disabled = false;
             }
