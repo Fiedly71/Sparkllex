@@ -115,6 +115,11 @@
                     <a href="support.html" class="sidebar-link bg-teal-50 text-teal-primary">
                         <i class="fas fa-headset text-sm"></i> VIP Support
                     </a>
+                    <div class="pt-6 mt-6 border-t border-gray-100">
+                        <button onclick="handleLogout()" class="sidebar-link text-red-400 w-full hover:bg-red-50">
+                            <i class="fas fa-sign-out-alt text-sm"></i> <span>Logout</span>
+                        </button>
+                    </div>
                 </nav>
             </div>
         </aside>
@@ -240,6 +245,11 @@
                 }, 6000);
             }, 1800);
         });
+
+        async function handleLogout() {
+            await supabaseClient.auth.signOut();
+            window.location.href = "../login.html";
+        }
 
         checkAuth();
     </script>

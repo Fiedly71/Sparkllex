@@ -112,6 +112,12 @@
                     <a href="history.html" class="sidebar-link">
                         <i class="fas fa-history text-sm"></i> <span data-translate="yourHistory">History</span>
                     </a>
+                    <a href="support-ia.html" class="sidebar-link">
+                        <i class="fas fa-robot text-sm"></i> <span>AI Concierge</span>
+                    </a>
+                    <a href="support.html" id="vip-support-link" class="sidebar-link">
+                        <i class="fas fa-headset text-sm"></i> <span>VIP Support</span> <i class="fas fa-lock ml-auto text-[10px] opacity-50"></i>
+                    </a>
                     <a href="settings.html" class="sidebar-link active">
                         <i class="fas fa-cog text-sm"></i> <span data-translate="settings">Settings</span>
                     </a>
@@ -239,10 +245,27 @@
 
         async function handleLogout() {
             await supabaseClient.auth.signOut();
-            window.location.href = "../index.html";
+            window.location.href = "../login.html";
+        }
+
+        async function checkVIPAccess() {
+            const { data: { user } } = await supabaseClient.auth.getUser();
+            if (!user) return;
+            const { data: profile } = await supabaseClient.from('profiles').select('plan').eq('id', user.id).single();
+            const currentPlan = (profile?.plan || 'BASIC').toUpperCase();
+            const vipLink = document.getElementById('vip-support-link');
+            if (vipLink && currentPlan !== 'FAMILY' && currentPlan !== 'FAMILIAR') {
+                vipLink.style.opacity = '0.5';
+                vipLink.style.cursor = 'not-allowed';
+                vipLink.style.pointerEvents = 'none';
+            } else if (vipLink) {
+                const lock = vipLink.querySelector('.fa-lock');
+                if (lock) lock.remove();
+            }
         }
 
         loadProfile();
+        checkVIPAccess();
     </script>
 </body>
 </html>

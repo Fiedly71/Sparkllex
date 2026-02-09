@@ -138,6 +138,11 @@
                     <a href="support.html" id="vip-support-link" class="sidebar-link hover:bg-teal-50">
                         <i class="fas fa-headset text-sm"></i> <span>Soporte VIP</span> <i class="fas fa-lock ml-auto text-[10px] opacity-50"></i>
                     </a>
+                    <div class="pt-6 mt-6 border-t border-gray-100">
+                        <button onclick="handleLogout()" class="sidebar-link text-red-400 w-full hover:bg-red-50">
+                            <i class="fas fa-sign-out-alt text-sm"></i> <span>Logout</span>
+                        </button>
+                    </div>
                 </nav>
             </div>
         </aside>
@@ -338,6 +343,11 @@
         function toggleMobileMenu() {
             document.getElementById('sidebar').classList.toggle('mobile-open');
             document.getElementById('mobile-overlay').classList.toggle('active');
+        }
+        
+        async function handleLogout() {
+            await supabaseClient.auth.signOut();
+            window.location.href = "../login.html";
         }
         
         setGreeting();
