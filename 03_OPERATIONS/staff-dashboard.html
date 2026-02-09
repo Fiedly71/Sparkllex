@@ -61,6 +61,7 @@
                             <th class="pb-4 px-4">Service</th>
                             <th class="pb-4 px-4">Time</th>
                             <th class="pb-4 px-4">Address</th>
+                            <th class="pb-4 px-4">Numéro</th>
                             <th class="pb-4 px-4 text-center">Action</th>
                             <th class="pb-4 px-4 text-right">Info</th>
                         </tr>
@@ -157,6 +158,7 @@
                     service: app.service_type || 'General Cleaning',
                     time: `${app.appointment_date} @ ${app.appointment_time}`,
                     address: app.address || (client ? `${client.address}, ${client.city}` : 'No address provided'),
+                    numero: client?.phone || app.client_phone || 'Non renseigné',
                     notes: app.notes || 'No special instructions',
                     status: app.status
                 };
@@ -180,6 +182,7 @@
                     <td class="p-5"><span class="bg-teal-50 text-teal-700 px-3 py-1 rounded-lg text-xs font-bold">${app.service}</span></td>
                     <td class="p-5 text-slate-500">${app.time}</td>
                     <td class="p-5 text-slate-700 text-xs">${app.address}</td>
+                    <td class="p-5 text-slate-700 text-xs">${app.numero}</td>
                     <td class="p-5 text-center">
                         ${isDone 
                             ? '<span class="text-emerald-600 font-black text-[10px] uppercase bg-emerald-50 px-3 py-2 rounded-xl border border-emerald-200">Completed</span>' 
