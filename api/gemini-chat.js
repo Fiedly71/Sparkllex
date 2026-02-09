@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
 
   const { message, conversationHistory } = req.body;
   
-  // Get API key from environment variable
+  // Get API key ONLY from environment variable - never hardcode!
   const API_KEY = process.env.GEMINI_API_KEY;
 
   if (!API_KEY) {
@@ -48,8 +48,8 @@ Keep responses concise and helpful. If asked about something outside Sparkllex s
       { role: 'user', parts: [{ text: message }] }
     ];
 
-    // Use gemini-1.5-flash
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+    // Use gemini-2.0-flash (current stable model)
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
     const response = await fetch(url, {
       method: 'POST',
