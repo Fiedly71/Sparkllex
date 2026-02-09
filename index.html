@@ -274,6 +274,161 @@
             }
         });
     </script>
+
+    <!-- Floating AI Chat Button & Modal -->
+    <div id="ai-chat-btn" onclick="toggleAIChat()" class="fixed bottom-6 right-6 w-16 h-16 bg-gradient-to-br from-teal-primary to-teal-dark rounded-full shadow-2xl cursor-pointer z-[1000] flex items-center justify-center hover:scale-110 transition-all duration-300 group">
+        <i class="fas fa-robot text-white text-2xl group-hover:animate-pulse"></i>
+        <div class="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse"></div>
+    </div>
+
+    <div id="ai-chat-modal" class="fixed bottom-24 right-6 w-[380px] max-w-[calc(100vw-48px)] h-[500px] max-h-[70vh] bg-white rounded-3xl shadow-2xl z-[1001] flex-col overflow-hidden border border-gray-100 hidden">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-teal-primary to-teal-dark p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                    <i class="fas fa-robot text-white text-lg"></i>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold text-sm">Sparkllex Assistant</h3>
+                    <p class="text-white/70 text-[10px] font-medium">Online • 24/7</p>
+                </div>
+            </div>
+            <button onclick="toggleAIChat()" class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center text-white hover:bg-white/30 transition">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Messages -->
+        <div id="ai-messages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50" style="height: calc(100% - 140px);">
+            <div class="flex gap-3">
+                <div class="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-robot text-teal-primary text-xs"></i>
+                </div>
+                <div class="bg-white p-3 rounded-2xl rounded-tl-sm shadow-sm max-w-[85%]">
+                    <p class="text-sm text-gray-700" id="ai-welcome">Hi! I'm the Sparkllex assistant. Ask me anything about our services, plans, or how to get started!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input -->
+        <div class="p-4 bg-white border-t border-gray-100">
+            <div class="flex gap-2">
+                <input type="text" id="ai-input" placeholder="Type your question..." 
+                    class="flex-1 px-4 py-3 bg-gray-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-teal-primary/20 transition"
+                    onkeypress="if(event.key==='Enter') sendAIMessage()">
+                <button onclick="sendAIMessage()" class="w-12 h-12 bg-teal-primary text-white rounded-xl flex items-center justify-center hover:bg-teal-dark transition shadow-lg">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        #ai-chat-modal { display: none; }
+        #ai-chat-modal.open { display: flex; animation: slideUp 0.3s ease-out; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        #ai-messages::-webkit-scrollbar { width: 4px; }
+        #ai-messages::-webkit-scrollbar-thumb { background: #00808033; border-radius: 10px; }
+        .ai-typing { display: flex; gap: 4px; padding: 12px; }
+        .ai-typing span { width: 6px; height: 6px; background: #008080; border-radius: 50%; animation: bounce 1.4s infinite; }
+        .ai-typing span:nth-child(2) { animation-delay: 0.2s; }
+        .ai-typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes bounce { 0%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-6px); } }
+    </style>
+
+    <script>
+        let publicConversationHistory = [];
+
+        function toggleAIChat() {
+            const modal = document.getElementById('ai-chat-modal');
+            modal.classList.toggle('open');
+            if (modal.classList.contains('open')) {
+                document.getElementById('ai-input').focus();
+            }
+        }
+
+        function addAIBubble(text, isUser = false) {
+            const container = document.getElementById('ai-messages');
+            const div = document.createElement('div');
+            div.className = `flex gap-3 ${isUser ? 'flex-row-reverse' : ''}`;
+            
+            const iconBg = isUser ? 'bg-gold-accent' : 'bg-teal-100';
+            const iconColor = isUser ? 'text-white' : 'text-teal-primary';
+            const bubbleBg = isUser ? 'bg-teal-primary text-white' : 'bg-white';
+            const bubbleRadius = isUser ? 'rounded-2xl rounded-tr-sm' : 'rounded-2xl rounded-tl-sm';
+            const icon = isUser ? 'fa-user' : 'fa-robot';
+
+            div.innerHTML = `
+                <div class="w-8 h-8 ${iconBg} rounded-lg flex items-center justify-center flex-shrink-0">
+                    <i class="fas ${icon} ${iconColor} text-xs"></i>
+                </div>
+                <div class="${bubbleBg} p-3 ${bubbleRadius} shadow-sm max-w-[85%]">
+                    <p class="text-sm">${text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>')}</p>
+                </div>
+            `;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function showTyping() {
+            const container = document.getElementById('ai-messages');
+            const div = document.createElement('div');
+            div.id = 'typing';
+            div.className = 'flex gap-3';
+            div.innerHTML = `
+                <div class="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-robot text-teal-primary text-xs"></i>
+                </div>
+                <div class="bg-white p-3 rounded-2xl rounded-tl-sm shadow-sm ai-typing">
+                    <span></span><span></span><span></span>
+                </div>
+            `;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        async function sendAIMessage() {
+            const input = document.getElementById('ai-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            addAIBubble(text, true);
+            input.value = '';
+            showTyping();
+
+            try {
+                const response = await fetch('/api/public-chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: text,
+                        conversationHistory: publicConversationHistory
+                    })
+                });
+
+                const data = await response.json();
+                document.getElementById('typing')?.remove();
+
+                if (data.response) {
+                    addAIBubble(data.response);
+                    if (data.conversationHistory) {
+                        publicConversationHistory = data.conversationHistory;
+                    }
+                } else {
+                    addAIBubble("Sorry, I couldn't process that. Please try again!");
+                }
+            } catch (err) {
+                document.getElementById('typing')?.remove();
+                addAIBubble("Connection issue. Please try again.");
+            }
+        }
+
+        // Set welcome message based on language
+        const lang = localStorage.getItem('preferredLang') || 'en';
+        if (lang === 'es') {
+            document.getElementById('ai-welcome').textContent = '¡Hola! Soy el asistente de Sparkllex. ¡Pregúntame sobre nuestros servicios, planes o cómo empezar!';
+        }
+    </script>
     <script src="cookie-consent.js"></script>
 </body>
 </html>
