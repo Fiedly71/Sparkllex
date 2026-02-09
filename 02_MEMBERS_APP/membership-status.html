@@ -146,23 +146,29 @@
                     </div>
 
                     <div class="border-t border-gray-50 pt-8" id="modify-membership-section">
-                        <h4 class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-6">Modify Membership</h4>
-                        <div class="grid grid-cols-3 gap-4">
-                            <div onclick="selectPlan('BASIC')" id="plan-BASIC" class="plan-option p-4 rounded-2xl flex flex-col items-center">
+                        <h4 class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-4">Modify Membership</h4>
+                        <div class="bg-blue-50 border border-blue-100 rounded-2xl p-4 mb-6">
+                            <p class="text-xs text-blue-700 font-semibold flex items-center gap-2">
+                                <i class="fas fa-info-circle"></i>
+                                To upgrade or downgrade your plan, click "Manage Billing" above. Stripe will automatically calculate the prorated amount based on your remaining subscription time.
+                            </p>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 opacity-60">
+                            <div id="plan-BASIC" class="plan-option p-4 rounded-2xl flex flex-col items-center pointer-events-none">
                                 <span class="text-[9px] font-black text-gray-400 uppercase mb-2">Basic</span>
                                 <span class="text-xl font-black text-slate-elite">$79</span>
                             </div>
-                            <div onclick="selectPlan('PRO')" id="plan-PRO" class="plan-option p-4 rounded-2xl flex flex-col items-center">
+                            <div id="plan-PRO" class="plan-option p-4 rounded-2xl flex flex-col items-center pointer-events-none">
                                 <span class="text-[9px] font-black text-gray-400 uppercase mb-2">Pro</span>
                                 <span class="text-xl font-black text-slate-elite">$149</span>
                             </div>
-                            <div onclick="selectPlan('FAMILY')" id="plan-FAMILY" class="plan-option p-4 rounded-2xl flex flex-col items-center">
+                            <div id="plan-FAMILY" class="plan-option p-4 rounded-2xl flex flex-col items-center pointer-events-none">
                                 <span class="text-[9px] font-black text-teal-primary uppercase mb-1 italic text-center">Familiar</span>
                                 <span class="text-xl font-black text-slate-elite">$249</span>
                             </div>
                         </div>
-                        <button id="update-plan-btn" onclick="redirectToStripe()" disabled class="w-full mt-6 py-4 bg-gray-100 text-gray-400 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all">
-                            Select a Plan
+                        <button onclick="manageBilling()" class="w-full mt-6 py-4 bg-teal-primary text-white rounded-xl font-black text-[10px] uppercase tracking-widest transition-all hover:bg-teal-dark">
+                            <i class="fas fa-exchange-alt mr-2"></i> Change Plan via Stripe Portal
                         </button>
                     </div>
 
@@ -268,11 +274,11 @@
             nextRenewal.setDate(nextRenewal.getDate() + 30);
             document.getElementById('next-renewal').textContent = nextRenewal.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
 
-            // Zéro Doublon : masquer le bouton Stripe Checkout si déjà client
+            // Afficher "Modify Membership" uniquement pour les clients existants avec abonnement
             if (profile?.stripe_customer_id) {
-                document.getElementById('modify-membership-section').style.display = 'none';
-            } else {
                 document.getElementById('modify-membership-section').style.display = '';
+            } else {
+                document.getElementById('modify-membership-section').style.display = 'none';
             }
         };
 
