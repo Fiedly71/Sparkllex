@@ -1,6 +1,4 @@
-// Gemini AI Chat API - Utilise gemini-pro (modèle stable)
-const axios = require('axios');
-
+// Gemini AI Chat API - Uses native fetch (no axios needed)
 module.exports = async (req, res) => {
   // CORS Headers
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -16,18 +14,21 @@ module.exports = async (req, res) => {
   }
 
   const { message, conversationHistory } = req.body;
-  const API_KEY = process.env.GEMINI_API_KEY || 'AIzaSyCz1oqdPayE-5JrtNG_Rr1UfWDfavptp4I';
+  
+  // Get API key from environment variable
+  const API_KEY = process.env.GEMINI_API_KEY;
 
   if (!API_KEY) {
-    return res.status(500).json({ error: 'Clé API manquante' });
+    console.error('GEMINI_API_KEY environment variable not set');
+    return res.status(500).json({ error: 'API key not configured. Please set GEMINI_API_KEY in Vercel.' });
   }
 
   if (!message) {
-    return res.status(400).json({ error: 'Message requis' });
+    return res.status(400).json({ error: 'Message required' });
   }
 
   try {
-    // System prompt pour Sparkllex
+    // System prompt for Sparkllex
     const systemPrompt = `You are the AI support assistant for Sparkllex, a premium home cleaning and maintenance service in Chile. 
 Your name is Sparkllex Bot. Be helpful, friendly, and professional.
 
@@ -47,28 +48,34 @@ Keep responses concise and helpful. If asked about something outside Sparkllex s
       { role: 'user', parts: [{ text: message }] }
     ];
 
-    // Utilisation de gemini-1.5-flash (modèle stable et compatible)
+    // Use gemini-1.5-flash
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
-    const { data } = await axios.post(url, {
-      system_instruction: {
-        parts: [{ text: systemPrompt }]
-      },
-      contents: contents,
-      generationConfig: {
-        temperature: 0.7,
-        maxOutputTokens: 500,
-        topP: 0.8,
-        topK: 40
-      }
-    }, {
+    const response = await fetch(url, {
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      timeout: 30000
+      body: JSON.stringify({
+        system_instruction: {
+          parts: [{ text: systemPrompt }]
+        },
+        contents: contents,
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 500,
+          topP: 0.8,
+          topK: 40
+        }
+      })
     });
 
-    if (data.error) {
-      console.error('Google API Error:', data.error);
-      return res.status(500).json({ error: data.error.message || 'Erreur API Gemini' });
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error('Google API Error:', data);
+      return res.status(500).json({ 
+        error: data.error?.message || 'Gemini API error',
+        details: data.error?.status || response.status
+      });
     }
 
     if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
@@ -81,14 +88,19 @@ Keep responses concise and helpful. If asked about something outside Sparkllex s
           { role: 'model', parts: [{ text: aiResponse }] }
         ]
       });
+    } else if (data.candidates && data.candidates[0]?.finishReason === 'SAFETY') {
+      return res.status(200).json({ 
+        response: "I'm sorry, I can't respond to that. Please ask me about Sparkllex services!",
+        conversationHistory: conversationHistory || []
+      });
     } else {
-      console.error('Structure de réponse inattendue:', data);
-      return res.status(500).json({ error: 'Format de réponse invalide' });
+      console.error('Unexpected response structure:', JSON.stringify(data));
+      return res.status(500).json({ error: 'Invalid response format from AI' });
     }
   } catch (error) {
-    console.error('Erreur Serveur:', error.response?.data || error.message);
+    console.error('Server Error:', error);
     return res.status(500).json({ 
-      error: error.response?.data?.error?.message || error.message || 'Erreur interne de connexion' 
+      error: error.message || 'Internal connection error'
     });
   }
 };
