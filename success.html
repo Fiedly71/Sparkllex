@@ -52,7 +52,9 @@
             const data = JSON.parse(sessionStorage.getItem('pending_signup'));
 
             if (!data) {
-                statusBox.innerHTML = "No pending registration found.";
+                statusBox.innerHTML = "✓ Your payment was received!";
+                statusBox.classList.replace('text-teal-700', 'text-green-600');
+                loginBtn.classList.remove('hidden');
                 return;
             }
 
