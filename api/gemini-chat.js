@@ -48,8 +48,8 @@ Keep responses concise and helpful. If asked about something outside Sparkllex s
       { role: 'user', parts: [{ text: message }] }
     ];
 
-    // Use gemini-2.0-flash (current stable model)
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+    // Use gemini-2.5-flash (latest model)
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
     const response = await fetch(url, {
       method: 'POST',
