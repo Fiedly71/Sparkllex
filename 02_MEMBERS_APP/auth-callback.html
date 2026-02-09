@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authenticating...</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../database-config.js"></script>
+    <style>
+        body { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #F4F9F9; }
+        .card { background: white; border-radius: 2rem; box-shadow: 0 8px 32px rgba(0,0,0,0.08); padding: 2.5rem 2rem; text-align: center; }
+        .loader { margin-bottom: 1.5rem; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="loader">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="20" r="18" stroke="#008080" stroke-width="4" stroke-linecap="round" stroke-dasharray="90 60"/>
+            </svg>
+        </div>
+        <div id="status">Checking your account...</div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const { data: { user }, error } = await supabaseClient.auth.getUser();
+            if (!user || error) {
+                document.getElementById('status').textContent = 'Authentication failed. Please try again.';
+                setTimeout(() => window.location.href = '../login.html', 2000);
+                return;
+            }
+            // Vérifier si le profil a déjà un plan
+            const { data: profile } = await supabaseClient
+                .from('profiles')
+                .select('plan')
+                .eq('id', user.id)
+                .single();
+            if (profile && profile.plan) {
+                window.location.href = 'membership-status.html';
+            } else {
+                window.location.href = '../signup.html?from=google';
+            }
+        });
+    </script>
+</body>
+</html>

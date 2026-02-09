@@ -145,7 +145,7 @@
                         </button>
                     </div>
 
-                    <div class="border-t border-gray-50 pt-8">
+                    <div class="border-t border-gray-50 pt-8" id="modify-membership-section">
                         <h4 class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-6">Modify Membership</h4>
                         <div class="grid grid-cols-3 gap-4">
                             <div onclick="selectPlan('BASIC')" id="plan-BASIC" class="plan-option p-4 rounded-2xl flex flex-col items-center">
@@ -267,6 +267,13 @@
             const nextRenewal = new Date(createdDate);
             nextRenewal.setDate(nextRenewal.getDate() + 30);
             document.getElementById('next-renewal').textContent = nextRenewal.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
+
+            // Zéro Doublon : masquer le bouton Stripe Checkout si déjà client
+            if (profile?.stripe_customer_id) {
+                document.getElementById('modify-membership-section').style.display = 'none';
+            } else {
+                document.getElementById('modify-membership-section').style.display = '';
+            }
         };
 
         const selectPlan = (plan) => {
@@ -288,11 +295,23 @@
             }
         };
 
-        const redirectToStripe = () => {
-            const link = STRIPE_LINKS[selectedPlan];
-            if (link) {
-                const finalUrl = `${link}?prefilled_email=${encodeURIComponent(currentUser.email)}`;
-                window.location.href = finalUrl;
+        const redirectToStripe = async () => {
+            // On vérifie si l'utilisateur a déjà un stripe_customer_id
+            const { data: profile } = await supabaseClient
+                .from('profiles')
+                .select('stripe_customer_id')
+                .eq('id', currentUser.id)
+                .single();
+            if (profile?.stripe_customer_id) {
+                // Redirige vers le Customer Portal (manageBilling)
+                await manageBilling();
+            } else {
+                // Redirige vers Stripe Checkout
+                const link = STRIPE_LINKS[selectedPlan];
+                if (link) {
+                    const finalUrl = `${link}?prefilled_email=${encodeURIComponent(currentUser.email)}`;
+                    window.location.href = finalUrl;
+                }
             }
         };
 

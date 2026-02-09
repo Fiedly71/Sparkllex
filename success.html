@@ -18,7 +18,7 @@
 </head>
 <body class="min-h-screen flex items-center justify-center p-6">
 
-    <div class="success-card max-w-md w-full p-10 text-center shadow-2xl">
+    <div class="success-card max-w-md w-full p-10 text-center shadow-2xl" style="margin-bottom: 80px;">
         <div class="w-20 h-20 bg-teal-600 text-white rounded-full flex items-center justify-center text-4xl mx-auto mb-6 pulse">
             <i class="fas fa-check"></i>
         </div>
@@ -33,10 +33,19 @@
         <a href="login.html" id="login-btn" class="hidden w-full py-4 bg-teal-600 text-white font-black rounded-xl uppercase tracking-widest hover:bg-teal-700 transition-all">
             Go to my account
         </a>
+
+        <div class="mt-8 flex flex-col items-center gap-3">
+            <span class="text-xs font-bold text-gray-400 mb-2">Next steps</span>
+            <div class="flex flex-wrap justify-center gap-2">
+                <a href="membership-status.html" class="px-4 py-2 bg-white text-teal-600 border border-teal-500 rounded-xl font-bold hover:bg-teal-50 transition text-xs shadow">Membership Dashboard</a>
+                <a href="appointments.html" class="px-4 py-2 bg-white text-teal-600 border border-teal-500 rounded-xl font-bold hover:bg-teal-50 transition text-xs shadow">Book Service</a>
+                <a href="support.html" class="px-4 py-2 bg-white text-teal-600 border border-teal-500 rounded-xl font-bold hover:bg-teal-50 transition text-xs shadow">VIP Support</a>
+            </div>
+        </div>
     </div>
 
-    <footer class="py-10 text-center text-gray-600 text-[9px] font-bold uppercase tracking-[0.3em] mt-12">
-        <div class="text-[7px] uppercase tracking-[0.3em]">Designed by <a href="https://gui-fiedly.vercel.app" target="_blank" rel="noopener noreferrer" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">GF Digital Studio</a> | <a href="mailto:isteah.gffilsaime@gmail.com" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">Gui Fiedly Fils-aime</a></div>
+    <footer class="py-10 w-full flex flex-col items-center justify-center text-gray-600 text-[9px] font-bold uppercase tracking-[0.3em]" style="position:fixed; left:0; bottom:0; background:transparent;">
+        <div class="text-[7px] uppercase tracking-[0.3em] text-center">Designed by <a href="https://gui-fiedly.vercel.app" target="_blank" rel="noopener noreferrer" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">GF Digital Studio</a> | <a href="mailto:isteah.gffilsaime@gmail.com" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">Gui Fiedly Fils-aime</a></div>
     </footer>
 
     <script>
@@ -44,7 +53,7 @@
             const statusBox = document.getElementById('status-box');
             const loginBtn = document.getElementById('login-btn');
             
-            // 1. On r�cup�re les infos du sac � dos
+            // 1. On rcupre les infos du sac dos
             const data = JSON.parse(sessionStorage.getItem('pending_signup'));
 
             if (!data) {
@@ -53,7 +62,7 @@
             }
 
             try {
-                // 2. Cr�ation Auth dans Supabase
+                // 2. Cration Auth dans Supabase
                 const { data: authData, error: authError } = await supabaseClient.auth.signUp({
                     email: data.email,
                     password: data.password,

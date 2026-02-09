@@ -198,6 +198,25 @@
                     loginBtn.style.opacity = "1";
                 }
             });
+
+            // Système sécurisé de reset mot de passe
+            const forgotPasswordLink = document.getElementById('forgotPassword');
+            if (forgotPasswordLink) {
+                forgotPasswordLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const email = prompt('Please enter your email to reset your password:');
+                    if (!email) return;
+                    supabaseClient.auth.resetPasswordForEmail(email, {
+                        redirectTo: window.location.origin + '/02_MEMBERS_APP/update-password.html'
+                    }).then(({ error }) => {
+                        if (error) {
+                            alert(error.message);
+                        } else {
+                            alert('If an account exists for this email, a reset link has been sent. Please check your inbox.');
+                        }
+                    });
+                });
+            }
         });
     </script>
 </body>
