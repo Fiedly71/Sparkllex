@@ -146,7 +146,7 @@
             const { data: apps, error: appError } = await query.order('appointment_date', { ascending: true });
             
             // 3. Get Client Addresses from Profiles
-            const { data: profiles } = await supabaseClient.from('profiles').select('id, address, city, full_name');
+            const { data: profiles } = await supabaseClient.from('profiles').select('id, address, city, full_name, phone');
             const profilesMap = (profiles || []).reduce((acc, p) => { acc[p.id] = p; return acc; }, {});
 
             // 4. Combine and Render
