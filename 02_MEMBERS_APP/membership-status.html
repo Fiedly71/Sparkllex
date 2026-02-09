@@ -222,6 +222,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../database-config.js"></script>
+    <script src="../auth-guard.js"></script>
 
     <script>
         let currentUser = null;
@@ -359,8 +360,7 @@
         };
 
         async function handleLogout() {
-            await supabaseClient.auth.signOut();
-            window.location.href = "../login.html";
+            secureLogout();
         }
 
         function toggleMobileMenu() {

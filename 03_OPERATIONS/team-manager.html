@@ -136,6 +136,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../database-config.js"></script>
+    <script src="../auth-guard.js"></script>
     <script>
         let allMembers = [];
 
@@ -422,7 +423,7 @@
         }
 
         function handleLogout() {
-            supabaseClient.auth.signOut().then(() => { window.location.href = "../login.html"; });
+            secureLogout();
         }
 
         function closeModal() { document.getElementById('detailsModal').classList.remove('modal-active'); }

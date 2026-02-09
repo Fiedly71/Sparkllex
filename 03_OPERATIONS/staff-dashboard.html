@@ -9,6 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="/database-config.js"></script>
+    <script src="/auth-guard.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         #detailsModal { display: none !important; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
@@ -100,8 +101,7 @@
         let appointmentsData = [];
 
         async function handleLogout() {
-            await supabaseClient.auth.signOut();
-            window.location.href = "../login.html";
+            secureLogout();
         }
 
         async function loadData() {
