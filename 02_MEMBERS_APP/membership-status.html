@@ -274,12 +274,7 @@
             nextRenewal.setDate(nextRenewal.getDate() + 30);
             document.getElementById('next-renewal').textContent = nextRenewal.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
 
-            // Afficher "Modify Membership" uniquement pour les clients existants avec abonnement
-            if (profile?.stripe_customer_id) {
-                document.getElementById('modify-membership-section').style.display = '';
-            } else {
-                document.getElementById('modify-membership-section').style.display = 'none';
-            }
+            // La section Modify Membership est toujours visible - le bouton redirige vers Stripe Portal
         };
 
         const selectPlan = (plan) => {
