@@ -215,5 +215,111 @@
     window.addEventListener('load', () => {
         runTranslations();
         addLangParamToLinks();
+        showLanguageSuggestion();
     });
+
+    /**
+     * Detect browser language and show suggestion banner if different from current
+     */
+    function showLanguageSuggestion() {
+        // Don't show on admin/staff pages
+        const path = window.location.pathname;
+        if (path.includes('03_OPERATIONS') || path.includes('04_ADMIN_METRICS')) return;
+        
+        // Check if user already dismissed
+        const dismissed = sessionStorage.getItem('lang_suggestion_dismissed');
+        if (dismissed) return;
+
+        // Get browser language
+        const browserLang = navigator.language || navigator.userLanguage;
+        const browserLangCode = browserLang.split('-')[0].toLowerCase();
+        
+        // Map browser language to our supported languages
+        let suggestedLang = null;
+        if (browserLangCode === 'es' && activeLang === 'en') {
+            suggestedLang = 'es';
+        } else if (browserLangCode === 'en' && activeLang === 'es') {
+            suggestedLang = 'en';
+        }
+        
+        // If no suggestion needed, exit
+        if (!suggestedLang) return;
+
+        // Create banner
+        const banner = document.createElement('div');
+        banner.id = 'lang-suggestion-banner';
+        banner.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #008080, #004d4d);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-family: 'Inter', sans-serif;
+            max-width: 90%;
+            animation: slideUp 0.4s ease-out;
+        `;
+        
+        // Add animation keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideUp {
+                from { transform: translateX(-50%) translateY(100px); opacity: 0; }
+                to { transform: translateX(-50%) translateY(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        const flagEmoji = suggestedLang === 'es' ? '🇪🇸' : '🇺🇸';
+        const message = suggestedLang === 'es' 
+            ? '¿Prefieres ver esta página en Español?' 
+            : 'Would you prefer to view this page in English?';
+        const btnText = suggestedLang === 'es' ? 'Sí, traducir' : 'Yes, translate';
+
+        banner.innerHTML = `
+            <span style="font-size: 24px;">${flagEmoji}</span>
+            <span style="font-size: 13px; font-weight: 600;">${message}</span>
+            <button id="accept-lang-btn" style="
+                background: white;
+                color: #008080;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 10px;
+                font-weight: 800;
+                font-size: 11px;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                cursor: pointer;
+                transition: transform 0.2s;
+            ">${btnText}</button>
+            <button id="dismiss-lang-btn" style="
+                background: transparent;
+                border: none;
+                color: white;
+                font-size: 18px;
+                cursor: pointer;
+                opacity: 0.7;
+                padding: 4px;
+            ">✕</button>
+        `;
+
+        document.body.appendChild(banner);
+
+        // Event handlers
+        document.getElementById('accept-lang-btn').addEventListener('click', () => {
+            setLanguage(suggestedLang);
+        });
+
+        document.getElementById('dismiss-lang-btn').addEventListener('click', () => {
+            sessionStorage.setItem('lang_suggestion_dismissed', 'true');
+            banner.remove();
+        });
+    }
 })();
