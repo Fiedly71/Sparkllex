@@ -89,7 +89,7 @@ After logging in, members have access to:
 === CONTACT & SUPPORT ===
 - AI Support: Available 24/7 (this chat)
 - VIP Support (Family plan): WhatsApp or email with priority response
-- Email: support@sparkllex.com
+- Email: contactsparkless@sparkllex.com
 - Website: sparkllex.com
 
 === COMMON QUESTIONS ===

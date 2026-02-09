@@ -120,7 +120,7 @@ A: Absolutely! We use Stripe, a PCI-compliant payment processor.
 
 === CONTACT ===
 - Website: sparkllex.com
-- Email: support@sparkllex.com
+- Email: contactsparkless@sparkllex.com
 - AI Chat: Available 24/7 on our website
 
 === RESPONSE RULES ===
