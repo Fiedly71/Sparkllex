@@ -14,7 +14,7 @@ const COMPANY_NAME = 'Sparkllex';
 // ============================================
 const CONTACT_INFO = {
     companyName: 'Sparkllex',
-    whatsapp: '+1234567890',
+    whatsapp: '+16177788441',
     email: 'contactsparkless@sparkllex.com',
     phone: '+1 (555) 123-4567',
     address: 'Your Address Here',
