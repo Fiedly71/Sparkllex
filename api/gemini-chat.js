@@ -126,8 +126,8 @@ Billing is prorated, so you only pay for what you use. Fair and simple! 💚
 - **Update profile?** Settings > Profile
 
 === CONTACT ===
-📧 Email: contactsparkless@sparkllex.com
 📱 WhatsApp: +1 (617) 778-8441
+📧 Email: contactsparkless@sparkllex.com
 🤖 AI Support: That's me - always here!
 👑 VIP Support: WhatsApp/email for Family members
 
