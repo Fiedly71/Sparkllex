@@ -49,8 +49,12 @@ const PRICE_IDS = {
 // FOR VERCEL/NETLIFY SERVERLESS FUNCTIONS
 // ==========================================
 module.exports = async (req, res) => {
-    // Enable CORS
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    // Enable CORS - Restricted to authorized domains
+    const allowedOrigins = ['https://sparkllex.com', 'https://www.sparkllex.com', 'https://sparkllex.vercel.app'];
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+    }
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     

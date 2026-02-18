@@ -23,7 +23,7 @@ const SUPABASE_CONFIG = {
     // Supabase Project URL
     url: 'https://xpdmvmxdqfnvrzetoxlz.supabase.co',
     
-    // Supabase Anon/Public Key
+    // Supabase Anon/Public Key (safe to expose - protected by Row Level Security)
     anonKey: 'sb_publishable_vp3nKradP4s8lK6BHB0Tng_1MYvPvW5'
 };
 

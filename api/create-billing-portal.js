@@ -2,8 +2,12 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 module.exports = async (req, res) => {
-    // CORS Headers
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    // CORS Headers - Restricted to authorized domains
+    const allowedOrigins = ['https://sparkllex.com', 'https://www.sparkllex.com', 'https://sparkllex.vercel.app'];
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     
@@ -25,7 +29,7 @@ module.exports = async (req, res) => {
         // Créer une session du Stripe Customer Portal
         const session = await stripe.billingPortal.sessions.create({
             customer: customerId,
-            return_url: returnUrl || 'https://votre-site.com/02_MEMBERS_APP/membership-status.html',
+            return_url: returnUrl || 'https://sparkllex.com/02_MEMBERS_APP/membership-status.html',
         });
 
         res.status(200).json({ url: session.url });

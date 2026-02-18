@@ -1,7 +1,11 @@
 // Public AI Chat API - For website visitors (not logged in)
 module.exports = async (req, res) => {
-  // CORS Headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  // CORS Headers - Restricted to authorized domains
+  const allowedOrigins = ['https://sparkllex.com', 'https://www.sparkllex.com', 'https://sparkllex.vercel.app'];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   
