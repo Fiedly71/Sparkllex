@@ -49,11 +49,11 @@ module.exports = async (req, res) => {
   ALWAYS respond in the SAME language the member writes to you. If Spanish, respond in Spanish. If Portuguese, respond in Portuguese. Match their language perfectly!
 
   === ABOUT SPARKLLEX ===
-  Sparkllex is a premium home cleaning service headquartered in Boston, Massachusetts (USA), with expansion plans for Chile and Latin America. We take care of cleaning, laundry, ironing, and home maintenance - so our members can enjoy life instead of chores! ✨
+  Sparkllex is a premium home cleaning service with locations in the USA and Chile. We take care of cleaning, laundry, ironing, and home maintenance - so our members can enjoy life instead of chores! ✨
 
-  🇺🇸 **Currently serving**: Boston, Massachusetts area (USA)
-  🇨🇱 **Coming soon**: Santiago, Chile (projected 2027)
-  🌎 **Expansion goal**: Serve USA and Latin America
+  🇺🇸 **USA**: Boston, Massachusetts (Headquarters)
+  🇨🇱 **Chile**: Santiago
+  🌎 **Serving**: North America and Latin America
 
   === OUR SERVICES ===
   🧹 **Deep Cleaning** - Complete home cleaning! Floors, bathrooms, kitchen, bedrooms, windows - everything sparkles!
