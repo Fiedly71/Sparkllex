@@ -267,6 +267,31 @@
 
     <script>
         let selectedServiceName = "";
+        let userPlan = "BASIC";
+        let currentUserId = null;
+        let serviceQuotas = {};
+
+        // Service quotas per plan (by service type)
+        const PLAN_QUOTAS = {
+            'BASIC': {
+                'Deep Cleaning': 1,
+                'Elite Laundry': 1,
+                'Master Ironing': 1, // Shares with laundry (1 total for laundry OR ironing)
+                'Maintenance': 0
+            },
+            'PRO': {
+                'Deep Cleaning': 2,
+                'Elite Laundry': 2,
+                'Master Ironing': 2, // Shares with laundry (2 total)
+                'Maintenance': 1
+            },
+            'FAMILY': {
+                'Deep Cleaning': 4,
+                'Elite Laundry': 99, // Fair use
+                'Master Ironing': 99, // Fair use
+                'Maintenance': 2
+            }
+        };
 
         async function checkUser() {
             const { data: { user } } = await supabaseClient.auth.getUser();
@@ -274,10 +299,11 @@
                 window.location.href = "../login.html";
                 return;
             }
+            currentUserId = user.id;
 
             const { data: profile } = await supabaseClient
                 .from('profiles')
-                .select('plan_status, full_name')
+                .select('plan_status, full_name, plan')
                 .eq('id', user.id)
                 .single();
 
@@ -287,9 +313,177 @@
                 return;
             }
 
+            userPlan = (profile?.plan || 'BASIC').toUpperCase();
+
+            // Count services used this month by type
+            const now = new Date();
+            const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0];
+            const lastDayOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).toISOString().split('T')[0];
+
+            const { data: appointments } = await supabaseClient
+                .from('appointments')
+                .select('service_type')
+                .eq('client_id', user.id)
+                .gte('appointment_date', firstDayOfMonth)
+                .lte('appointment_date', lastDayOfMonth);
+
+            // Count by service type
+            serviceQuotas = {
+                'Deep Cleaning': 0,
+                'Elite Laundry': 0,
+                'Master Ironing': 0,
+                'Maintenance': 0
+            };
+            
+            (appointments || []).forEach(apt => {
+                if (serviceQuotas.hasOwnProperty(apt.service_type)) {
+                    serviceQuotas[apt.service_type]++;
+                }
+            });
+
+            // For Basic plan: Laundry and Ironing share 1 quota
+            if (userPlan === 'BASIC') {
+                const laundryIroningUsed = serviceQuotas['Elite Laundry'] + serviceQuotas['Master Ironing'];
+                serviceQuotas['laundryIroningCombined'] = laundryIroningUsed;
+            }
+            // For Pro plan: Laundry and Ironing share 2 quota
+            if (userPlan === 'PRO') {
+                const laundryIroningUsed = serviceQuotas['Elite Laundry'] + serviceQuotas['Master Ironing'];
+                serviceQuotas['laundryIroningCombined'] = laundryIroningUsed;
+            }
+
+            // Display quota info
+            displayQuotaInfo();
+
             document.getElementById('userEmailNav').textContent = user.email;
             document.getElementById('userBadge').classList.remove('hidden');
         }
+
+        function getServiceLimit(serviceType) {
+            const planLimits = PLAN_QUOTAS[userPlan] || PLAN_QUOTAS['BASIC'];
+            return planLimits[serviceType] || 0;
+        }
+
+        function isServiceAvailable(serviceType) {
+            const limit = getServiceLimit(serviceType);
+            if (limit >= 99) return true; // Fair use / unlimited
+            
+            // For Basic/Pro: Laundry and Ironing share quota
+            if ((serviceType === 'Elite Laundry' || serviceType === 'Master Ironing') && (userPlan === 'BASIC' || userPlan === 'PRO')) {
+                const combinedLimit = userPlan === 'BASIC' ? 1 : 2;
+                return serviceQuotas['laundryIroningCombined'] < combinedLimit;
+            }
+            
+            return serviceQuotas[serviceType] < limit;
+        }
+
+        function displayQuotaInfo() {
+            const planLimits = PLAN_QUOTAS[userPlan] || PLAN_QUOTAS['BASIC'];
+            const isFamily = userPlan === 'FAMILY';
+
+            let quotaHtml = `
+                <div class="glass-card p-6 rounded-2xl mb-8 border-l-4 border-teal-primary">
+                    <p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-4">Monthly Service Quota - ${userPlan} Plan</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            `;
+
+            // Cleaning
+            const cleaningUsed = serviceQuotas['Deep Cleaning'];
+            const cleaningLimit = planLimits['Deep Cleaning'];
+            const cleaningExhausted = cleaningUsed >= cleaningLimit;
+            quotaHtml += `
+                <div class="p-3 rounded-xl ${cleaningExhausted ? 'bg-red-50' : 'bg-teal-50'}">
+                    <p class="text-[9px] font-bold text-gray-400 uppercase">Cleaning</p>
+                    <p class="text-xl font-black ${cleaningExhausted ? 'text-red-500' : 'text-teal-primary'}">${cleaningUsed}/${cleaningLimit}</p>
+                </div>
+            `;
+
+            // Laundry/Ironing (combined for Basic/Pro)
+            if (userPlan === 'BASIC' || userPlan === 'PRO') {
+                const liUsed = serviceQuotas['laundryIroningCombined'];
+                const liLimit = userPlan === 'BASIC' ? 1 : 2;
+                const liExhausted = liUsed >= liLimit;
+                quotaHtml += `
+                    <div class="p-3 rounded-xl ${liExhausted ? 'bg-red-50' : 'bg-teal-50'}">
+                        <p class="text-[9px] font-bold text-gray-400 uppercase">Laundry/Ironing</p>
+                        <p class="text-xl font-black ${liExhausted ? 'text-red-500' : 'text-teal-primary'}">${liUsed}/${liLimit}</p>
+                    </div>
+                `;
+            } else {
+                // Family plan - fair use
+                quotaHtml += `
+                    <div class="p-3 rounded-xl bg-teal-50">
+                        <p class="text-[9px] font-bold text-gray-400 uppercase">Laundry/Ironing</p>
+                        <p class="text-xl font-black text-teal-primary">Fair Use</p>
+                    </div>
+                `;
+            }
+
+            // Maintenance
+            const maintUsed = serviceQuotas['Maintenance'];
+            const maintLimit = planLimits['Maintenance'];
+            const maintExhausted = maintUsed >= maintLimit;
+            const maintAvailable = maintLimit > 0;
+            quotaHtml += `
+                <div class="p-3 rounded-xl ${!maintAvailable ? 'bg-gray-100' : maintExhausted ? 'bg-red-50' : 'bg-teal-50'}">
+                    <p class="text-[9px] font-bold text-gray-400 uppercase">Repairs</p>
+                    <p class="text-xl font-black ${!maintAvailable ? 'text-gray-400' : maintExhausted ? 'text-red-500' : 'text-teal-primary'}">
+                        ${maintAvailable ? `${maintUsed}/${maintLimit}` : 'N/A'}
+                    </p>
+                </div>
+            `;
+
+            quotaHtml += `
+                    </div>
+                    <p class="text-xs text-gray-500 mt-4">⚠️ Fair use policy applies. Resets on the 1st of each month.</p>
+                </div>
+            `;
+
+            // Insert after header
+            const header = document.querySelector('main header');
+            const existingQuota = document.getElementById('quota-info');
+            if (existingQuota) existingQuota.remove();
+            
+            const quotaDiv = document.createElement('div');
+            quotaDiv.id = 'quota-info';
+            quotaDiv.innerHTML = quotaHtml;
+            header.after(quotaDiv);
+
+            // Update service cards based on availability
+            updateServiceCardsAvailability();
+        }
+
+        function updateServiceCardsAvailability() {
+            const serviceCards = document.querySelectorAll('.service-card');
+            serviceCards.forEach(card => {
+                const onclick = card.getAttribute('onclick');
+                if (!onclick) return;
+                
+                const match = onclick.match(/selectService\('([^']+)'/);
+                if (!match) return;
+                
+                const serviceName = match[1];
+                const available = isServiceAvailable(serviceName);
+                
+                if (!available) {
+                    card.classList.add('opacity-50');
+                    card.style.cursor = 'not-allowed';
+                    card.onclick = (e) => {
+                        e.preventDefault();
+                        alert(`You have used all your ${serviceName} services for this month. Upgrade your plan for more!`);
+                    };
+                    // Add "Exhausted" badge
+                    if (!card.querySelector('.exhausted-badge')) {
+                        const badge = document.createElement('div');
+                        badge.className = 'exhausted-badge absolute top-4 right-4 bg-red-500 text-white text-[9px] font-black px-3 py-1 rounded-full uppercase';
+                        badge.textContent = 'Quota Used';
+                        card.style.position = 'relative';
+                        card.appendChild(badge);
+                    }
+                }
+            });
+        }
+
         checkUser();
 
         function selectService(serviceName, element) {
@@ -313,8 +507,16 @@
         document.getElementById('booking-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
+            
+            // Double-check quota before submitting
+            if (!isServiceAvailable(selectedServiceName)) {
+                alert(`You have used all your ${selectedServiceName} services for this month. Please upgrade your plan for more services.`);
+                window.location.href = "membership-status.html";
+                return;
+            }
+
             btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner animate-spin"></i> PROCESANDO...';
+            btn.innerHTML = '<i class="fas fa-spinner animate-spin"></i> PROCESSING...';
 
             const { data: { user } } = await supabaseClient.auth.getUser();
             const pickupDate = document.getElementById('datetime').value;

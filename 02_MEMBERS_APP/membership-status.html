@@ -229,6 +229,28 @@
         let selectedPlan = null;
         let currentPlanFromDB = "";
 
+        // Service quotas per plan (by service type)
+        const PLAN_QUOTAS = {
+            'BASIC': {
+                'Deep Cleaning': 1,
+                'Laundry/Ironing': 1, // Combined
+                'Maintenance': 0,
+                'description': '1 cleaning + 1 laundry/ironing'
+            },
+            'PRO': {
+                'Deep Cleaning': 2,
+                'Laundry/Ironing': 2, // Combined
+                'Maintenance': 1,
+                'description': '2 cleanings + 2 laundry/ironing + 1 repair'
+            },
+            'FAMILY': {
+                'Deep Cleaning': 4,
+                'Laundry/Ironing': 99, // Fair use
+                'Maintenance': 2,
+                'description': '4 cleanings + fair use laundry + 2 repairs'
+            }
+        };
+
         const STRIPE_LINKS = {
             BASIC: "https://buy.stripe.com/fZu6oHdNz5dCdRX2Fkb3q06",
             PRO: "https://buy.stripe.com/8x29AT5h30Xm6pveo2b3q07",
@@ -284,6 +306,75 @@
                 currentPlanEl.style.border = '2px solid #008080';
                 currentPlanEl.innerHTML += '<span class="text-[8px] text-teal-primary font-black mt-1">CURRENT</span>';
             }
+
+            // Display service quota
+            await displayServiceQuota(user.id, currentPlanFromDB);
+        };
+
+        const displayServiceQuota = async (userId, plan) => {
+            const planLimits = PLAN_QUOTAS[plan] || PLAN_QUOTAS['BASIC'];
+            const isFamily = plan === 'FAMILY';
+
+            // Count services used this month by type
+            const now = new Date();
+            const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0];
+            const lastDayOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).toISOString().split('T')[0];
+
+            const { data: appointments } = await supabaseClient
+                .from('appointments')
+                .select('service_type')
+                .eq('client_id', userId)
+                .gte('appointment_date', firstDayOfMonth)
+                .lte('appointment_date', lastDayOfMonth);
+
+            // Count by service type
+            const serviceUsage = {
+                'Deep Cleaning': 0,
+                'Elite Laundry': 0,
+                'Master Ironing': 0,
+                'Maintenance': 0
+            };
+            
+            (appointments || []).forEach(apt => {
+                if (serviceUsage.hasOwnProperty(apt.service_type)) {
+                    serviceUsage[apt.service_type]++;
+                }
+            });
+
+            const laundryIroningUsed = serviceUsage['Elite Laundry'] + serviceUsage['Master Ironing'];
+            const cleaningUsed = serviceUsage['Deep Cleaning'];
+            const repairsUsed = serviceUsage['Maintenance'];
+
+            // Insert quota card after the plan card section
+            const planCardSection = document.querySelector('.plan-card-gradient').parentElement;
+            
+            const quotaCard = document.createElement('div');
+            quotaCard.className = 'mt-8 p-6 rounded-2xl border bg-gradient-to-r from-teal-50 to-white border-teal-100';
+            quotaCard.innerHTML = `
+                <p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-4">Monthly Services Used - ${plan} Plan</p>
+                <div class="grid grid-cols-3 gap-4 mb-4">
+                    <div class="text-center p-4 bg-white rounded-xl shadow-sm">
+                        <p class="text-[9px] font-bold text-gray-400 uppercase mb-1">Cleaning</p>
+                        <p class="text-2xl font-black ${cleaningUsed >= planLimits['Deep Cleaning'] ? 'text-red-500' : 'text-teal-primary'}">${cleaningUsed}/${planLimits['Deep Cleaning']}</p>
+                    </div>
+                    <div class="text-center p-4 bg-white rounded-xl shadow-sm">
+                        <p class="text-[9px] font-bold text-gray-400 uppercase mb-1">Laundry/Ironing</p>
+                        <p class="text-2xl font-black ${planLimits['Laundry/Ironing'] >= 99 ? 'text-teal-primary' : laundryIroningUsed >= planLimits['Laundry/Ironing'] ? 'text-red-500' : 'text-teal-primary'}">
+                            ${planLimits['Laundry/Ironing'] >= 99 ? laundryIroningUsed + '/∞' : laundryIroningUsed + '/' + planLimits['Laundry/Ironing']}
+                        </p>
+                    </div>
+                    <div class="text-center p-4 bg-white rounded-xl shadow-sm">
+                        <p class="text-[9px] font-bold text-gray-400 uppercase mb-1">Repairs</p>
+                        <p class="text-2xl font-black ${planLimits['Maintenance'] === 0 ? 'text-gray-300' : repairsUsed >= planLimits['Maintenance'] ? 'text-red-500' : 'text-teal-primary'}">
+                            ${planLimits['Maintenance'] === 0 ? 'N/A' : repairsUsed + '/' + planLimits['Maintenance']}
+                        </p>
+                    </div>
+                </div>
+                <p class="text-xs text-gray-500">⚠️ Fair use policy applies. Quotas reset on the 1st of each month.</p>
+                ${planLimits['Maintenance'] === 0 ? '<p class="text-xs text-teal-600 mt-2">💡 Upgrade to Pro for repair services!</p>' : ''}
+            `;
+            
+            planCardSection.querySelector('.plan-card-gradient').after(quotaCard);
         };
 
         const selectPlan = (plan) => {

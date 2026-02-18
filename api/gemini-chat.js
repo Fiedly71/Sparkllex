@@ -67,20 +67,37 @@ module.exports = async (req, res) => {
   === MEMBERSHIP PLANS ===
 
   **Basic - $79/month** 💫
-  - 1 deep cleaning per month
+  Entry-level plan!
+  - 1 standard cleaning per month (up to 1 bedroom + 1 bath or 1,200 sq ft)
+  - 1 laundry OR ironing service (up to 15 lb or 1 standard bag)
+  - Preferential pricing on all additional services
   - Standard scheduling
-  - Perfect for apartments or minimal needs!
 
-  **Pro - $149/month** ⭐ (Our most popular!)
-  - 3 cleanings per month
-  - Laundry included!
-  - Priority scheduling - pick the best times
+  **Pro - $149/month** ⭐ (MOST POPULAR!)
+  Best value for busy people!
+  - 2 standard cleanings per month (up to 2 bedrooms + 1 bath or 1,500 sq ft)
+  - 2 laundry or ironing services (up to 15 lb each, 30 lb/month total)
+  - 1 basic repair included (shoes or home, up to 45 min)
+  - Priority scheduling
+  - Preferential support
 
-  **Family - $249/month** 👑 (The VIP treatment!)
-  - Daily cleaning
-  - ALL services included
+  **Family / Airbnb - $249/month** 👑
+  Maximum value for families or property managers!
+  - Up to 4 standard cleanings per month (up to 2-3 bedrooms + 2 baths or 2,000 sq ft)
+  - Recurring laundry + ironing (up to 60 lb/month included, excess charged per lb)
+  - Basic repairs included (up to 2 per month, 45 min each)
+  - Maximum priority scheduling
   - VIP human support
-  - 24/7 priority booking
+
+  === SERVICE QUOTAS ===
+  Each plan has monthly limits:
+  - Basic: 1 cleaning + 1 laundry/ironing
+  - Pro: 2 cleanings + 2 laundry/ironing + 1 repair
+  - Family: 4 cleanings + unlimited laundry (fair use) + 2 repairs
+  
+  ⚠️ **Fair Use Policy**: Services have clear limits based on size, weight, or time. Additional services may require extra fees or plan upgrade.
+  
+  Quotas reset on the 1st of each month. If someone runs out, they can upgrade their plan for more services.
 
   === YOUR DASHBOARD - WHERE EVERYTHING IS ===
   Let me show you around! 🏠

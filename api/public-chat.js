@@ -62,23 +62,31 @@ Sparkllex is a premium home cleaning service with locations in the USA and Chile
 === OUR PLANS ===
 
 **Basic - $79/month** 💫
-Perfect for small spaces or if you just need a monthly refresh!
-- 1 deep cleaning per month
+Perfect entry-level plan!
+- 1 standard cleaning per month (up to 1 bedroom + 1 bath or 1,200 sq ft)
+- 1 laundry OR ironing service (up to 15 lb or 1 standard bag)
+- Preferential pricing on all additional services
 - Standard scheduling
-- Great for apartments or minimal needs
 
-**Pro - $149/month** ⭐
-Our most popular! Great for busy people.
-- 3 cleanings per month
-- Laundry service included
-- Priority scheduling (you choose the best times!)
+**Pro - $149/month** ⭐ (MOST POPULAR!)
+Our best value for busy people!
+- 2 standard cleanings per month (up to 2 bedrooms + 1 bath or 1,500 sq ft)
+- 2 laundry or ironing services (up to 15 lb each, 30 lb/month total)
+- 1 basic repair included (shoes or home, up to 45 min)
+- Priority scheduling
+- Preferential support
 
-**Family - $249/month** 👑
-The VIP experience! For families or anyone who wants the best.
-- Daily cleaning service
-- ALL services included (laundry, ironing, maintenance)
-- VIP human support - real people ready to help
-- 24/7 priority booking
+**Family / Airbnb - $249/month** 👑
+Maximum value for families or property managers!
+- Up to 4 standard cleanings per month (up to 2-3 bedrooms + 2 baths or 2,000 sq ft)
+- Recurring laundry + ironing (up to 60 lb/month included, excess charged per lb)
+- Basic repairs included (up to 2 per month, 45 min each)
+- Maximum priority scheduling
+- VIP human support
+
+⚠️ **Fair Use Policy**: Each plan has clear limits based on size, weight, or time. Additional services may require extra fees or plan upgrade.
+
+Service quotas reset on the 1st of each month. Upgrade anytime for more services!
 
 === HOW TO SIGN UP AS A CLIENT ===
 Super easy! Here's how:
