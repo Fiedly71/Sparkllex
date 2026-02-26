@@ -69,5 +69,7 @@
       "source": "/api/public-chat",
       "destination": "/api/public-chat.js"
     }
-  ]
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
 }

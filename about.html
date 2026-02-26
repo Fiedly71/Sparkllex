@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Sparkllex - Premium Cleaning Services</title>
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Learn about Sparkllex - a premium cleaning service company committed to luxury and perfection. Meet our team and discover our mission.">
+    <meta name="keywords" content="about sparkllex, cleaning company, professional cleaners, our story, cleaning team">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="About Sparkllex - Our Story">
+    <meta property="og:description" content="Discover the story behind Sparkllex and our commitment to premium cleaning services.">
+    <meta property="og:image" content="https://www.sparkllex.com/images/logo.png">
+    <meta property="og:url" content="https://www.sparkllex.com/about.html">
+    <meta property="og:type" content="website">
+    
+    <script src="./translations.js"></script>
+    <script src="./apply-translations.js"></script>
+    <script src="./language-selector.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-primary': '#008080',
+                        'teal-dark': '#006666',
+                        'gold-accent': '#D4AF37',
+                        'light-bg': '#F4F9F9',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gold-text { color: #D4AF37; }
+        .btn-teal { background: #008080; color: white; transition: 0.3s; }
+        .btn-teal:hover { background: #006666; transform: translateY(-2px); }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-b border-gray-100 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="./index.html" class="flex items-center gap-2">
+                <img src="./images/logo.png" alt="Sparkllex" class="h-10 w-10">
+                <span class="text-2xl font-bold text-teal-primary">Sparkllex</span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <a href="./index.html" class="text-gray-700 hover:text-teal-primary transition" data-i18n="nav_home">Home</a>
+                <a href="./pricing.html" class="text-gray-700 hover:text-teal-primary transition" data-i18n="nav_pricing">Pricing</a>
+                <a href="./how-it-works.html" class="text-gray-700 hover:text-teal-primary transition" data-i18n="nav_how_it_works">How It Works</a>
+                <a href="./reviews.html" class="text-gray-700 hover:text-teal-primary transition" data-i18n="nav_reviews">Reviews</a>
+                <div id="nav-lang-container"></div>
+                <a href="./login.html" class="btn-teal px-6 py-2 rounded-full font-semibold" data-i18n="nav_login">Login</a>
+            </div>
+            
+            <button id="menu-toggle" class="md:hidden text-2xl text-teal-primary">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-y-0 right-0 w-72 bg-white shadow-2xl z-50 p-8 flex flex-col gap-6">
+        <button id="menu-close" class="self-end text-2xl text-gray-500"><i class="fas fa-times"></i></button>
+        <a href="./index.html" class="text-lg font-medium text-gray-700" data-i18n="nav_home">Home</a>
+        <a href="./pricing.html" class="text-lg font-medium text-gray-700" data-i18n="nav_pricing">Pricing</a>
+        <a href="./how-it-works.html" class="text-lg font-medium text-gray-700" data-i18n="nav_how_it_works">How It Works</a>
+        <a href="./reviews.html" class="text-lg font-medium text-gray-700" data-i18n="nav_reviews">Reviews</a>
+        <div id="mobile-lang-container" class="border-t pt-4"></div>
+        <a href="./login.html" class="btn-teal text-center py-3 rounded-full font-semibold" data-i18n="nav_login">Login</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="pt-28 pb-16 bg-gradient-to-br from-teal-50 to-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6" data-i18n="about_hero_title">
+                        Our Story of <span class="text-teal-primary">Excellence</span>
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8" data-i18n="about_hero_subtitle">
+                        From a small team with big dreams to a leading premium cleaning service across the Americas.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="./pricing.html" class="btn-teal px-8 py-3 rounded-full font-semibold" data-i18n="get_started">Get Started</a>
+                        <a href="./contact.html" class="border-2 border-teal-primary text-teal-primary px-8 py-3 rounded-full font-semibold hover:bg-teal-primary hover:text-white transition" data-i18n="contact_us">Contact Us</a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="./images/positive-female-housekeeper.jpg" alt="Sparkllex Team" class="rounded-2xl shadow-2xl w-full">
+                    <div class="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-lg p-4">
+                        <div class="text-3xl font-bold text-teal-primary">5+</div>
+                        <div class="text-gray-600" data-i18n="about_years_experience">Years of Excellence</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="bg-light-bg rounded-2xl p-8">
+                    <div class="w-16 h-16 bg-teal-primary rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-bullseye text-2xl text-white"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-4" data-i18n="about_mission_title">Our Mission</h2>
+                    <p class="text-gray-600 leading-relaxed" data-i18n="about_mission_text">
+                        To deliver premium cleaning services that transform spaces and exceed expectations. We believe everyone deserves to come home to a perfectly clean environment, and we're dedicated to making that a reality through attention to detail, eco-friendly practices, and exceptional customer service.
+                    </p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-teal-primary to-teal-dark rounded-2xl p-8 text-white">
+                    <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-eye text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-4" data-i18n="about_vision_title">Our Vision</h2>
+                    <p class="opacity-90 leading-relaxed" data-i18n="about_vision_text">
+                        To become the most trusted name in premium cleaning services across the Americas, setting new standards for quality, reliability, and customer satisfaction. We envision a world where every space sparkles with perfection.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="py-20 bg-light-bg px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4" data-i18n="about_values_title">Our Core Values</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto" data-i18n="about_values_subtitle">The principles that guide everything we do</p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition">
+                    <div class="w-16 h-16 bg-teal-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-gem text-2xl text-teal-primary"></i>
+                    </div>
+                    <h3 class="font-bold mb-2" data-i18n="value_quality">Quality</h3>
+                    <p class="text-gray-600 text-sm" data-i18n="value_quality_text">Excellence in every detail, every time.</p>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition">
+                    <div class="w-16 h-16 bg-teal-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-handshake text-2xl text-teal-primary"></i>
+                    </div>
+                    <h3 class="font-bold mb-2" data-i18n="value_trust">Trust</h3>
+                    <p class="text-gray-600 text-sm" data-i18n="value_trust_text">Building lasting relationships through honesty.</p>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition">
+                    <div class="w-16 h-16 bg-teal-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-leaf text-2xl text-teal-primary"></i>
+                    </div>
+                    <h3 class="font-bold mb-2" data-i18n="value_eco">Eco-Friendly</h3>
+                    <p class="text-gray-600 text-sm" data-i18n="value_eco_text">Sustainable practices for a better planet.</p>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition">
+                    <div class="w-16 h-16 bg-teal-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-heart text-2xl text-teal-primary"></i>
+                    </div>
+                    <h3 class="font-bold mb-2" data-i18n="value_care">Care</h3>
+                    <p class="text-gray-600 text-sm" data-i18n="value_care_text">Treating every home like our own.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-5xl font-bold text-teal-primary mb-2">10K+</div>
+                    <p class="text-gray-600" data-i18n="stat_clients">Happy Clients</p>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold text-teal-primary mb-2">50K+</div>
+                    <p class="text-gray-600" data-i18n="stat_cleanings">Cleanings Completed</p>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold text-teal-primary mb-2">200+</div>
+                    <p class="text-gray-600" data-i18n="stat_professionals">Professional Cleaners</p>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold text-teal-primary mb-2">4.9</div>
+                    <p class="text-gray-600" data-i18n="stat_rating">Average Rating</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-20 bg-gradient-to-br from-teal-primary to-teal-dark text-white px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4" data-i18n="about_why_title">Why Choose Sparkllex?</h2>
+                <p class="opacity-90 max-w-2xl mx-auto" data-i18n="about_why_subtitle">What sets us apart from the competition</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white/10 backdrop-blur rounded-xl p-6">
+                    <i class="fas fa-user-check text-3xl text-gold-accent mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2" data-i18n="why_vetted">Vetted Professionals</h3>
+                    <p class="opacity-90" data-i18n="why_vetted_text">Background-checked, trained, and insured cleaning experts.</p>
+                </div>
+                
+                <div class="bg-white/10 backdrop-blur rounded-xl p-6">
+                    <i class="fas fa-calendar-check text-3xl text-gold-accent mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2" data-i18n="why_flexible">Flexible Scheduling</h3>
+                    <p class="opacity-90" data-i18n="why_flexible_text">Book online 24/7, reschedule anytime with no hassle.</p>
+                </div>
+                
+                <div class="bg-white/10 backdrop-blur rounded-xl p-6">
+                    <i class="fas fa-shield-alt text-3xl text-gold-accent mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2" data-i18n="why_guarantee">Satisfaction Guarantee</h3>
+                    <p class="opacity-90" data-i18n="why_guarantee_text">Not happy? We'll re-clean for free within 24 hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6" data-i18n="about_cta_title">Ready to Experience the Sparkllex Difference?</h2>
+            <p class="text-xl text-gray-600 mb-8" data-i18n="about_cta_text">Join thousands of satisfied customers and discover what premium cleaning truly means.</p>
+            <a href="./signup.html" class="inline-flex items-center gap-2 btn-teal px-10 py-4 rounded-full font-semibold text-lg">
+                <span data-i18n="cta_start_today">Start Today</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <img src="./images/logo.png" alt="Sparkllex" class="h-8 w-8">
+                    <span class="text-xl font-bold">Sparkllex</span>
+                </div>
+                <p class="text-gray-400" data-i18n="footer_tagline">Luxury & Perfection in every clean.</p>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4" data-i18n="footer_services">Services</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="./pricing.html" class="hover:text-white transition" data-i18n="nav_pricing">Pricing</a></li>
+                    <li><a href="./how-it-works.html" class="hover:text-white transition" data-i18n="nav_how_it_works">How It Works</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4" data-i18n="footer_company">Company</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="./about.html" class="hover:text-white transition" data-i18n="nav_about">About Us</a></li>
+                    <li><a href="./contact.html" class="hover:text-white transition" data-i18n="nav_contact">Contact</a></li>
+                    <li><a href="./faq.html" class="hover:text-white transition" data-i18n="nav_faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4" data-i18n="footer_legal">Legal</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="./privacy.html" class="hover:text-white transition" data-i18n="nav_privacy">Privacy Policy</a></li>
+                    <li><a href="./terms.html" class="hover:text-white transition" data-i18n="nav_terms">Terms of Service</a></li>
+                    <li><a href="./cookies.html" class="hover:text-white transition" data-i18n="nav_cookies">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+            <p>&copy; 2026 Sparkllex LLC. <span data-i18n="footer_rights">All rights reserved.</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuToggle?.addEventListener('click', () => mobileMenu.classList.add('open'));
+        menuClose?.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    </script>
+</body>
+</html>

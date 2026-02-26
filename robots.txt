@@ -1,0 +1,29 @@
+# robots.txt for Sparkllex
+# https://www.sparkllex.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.sparkllex.com/sitemap.xml
+
+# Disallow admin and internal pages
+Disallow: /02_MEMBERS_APP/
+Disallow: /03_OPERATIONS/
+Disallow: /04_ADMIN_METRICS/
+Disallow: /api/
+Disallow: /.env
+Disallow: /.git/
+Disallow: /node_modules/
+
+# Allow public pages
+Allow: /index.html
+Allow: /pricing.html
+Allow: /how-it-works.html
+Allow: /reviews.html
+Allow: /contact.html
+Allow: /about.html
+Allow: /faq.html
+Allow: /privacy.html
+Allow: /terms.html
+Allow: /cookies.html

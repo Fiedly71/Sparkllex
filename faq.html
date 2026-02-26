@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | Sparkllex - Frequently Asked Questions</title>
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Find answers to frequently asked questions about Sparkllex cleaning services. Learn about pricing, scheduling, cancellations, and more.">
+    <meta name="keywords" content="sparkllex faq, cleaning service questions, how to book cleaning, cleaning prices, cancellation policy">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="FAQ - Sparkllex Cleaning Services">
+    <meta property="og:description" content="Get answers to common questions about our premium cleaning services.">
+    <meta property="og:image" content="https://www.sparkllex.com/images/logo.png">
+    <meta property="og:url" content="https://www.sparkllex.com/faq.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Schema.org FAQ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How do I book a cleaning service?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "You can book a cleaning service by signing up on our website, selecting your preferred plan, and choosing a time slot that works for you. The entire process takes less than 5 minutes."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is included in a standard cleaning?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Our standard cleaning includes dusting, vacuuming, mopping, bathroom cleaning, kitchen cleaning, and general tidying of all rooms."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I cancel or reschedule my booking?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, you can cancel or reschedule your booking up to 24 hours before the scheduled time at no extra charge through your member dashboard."
+                }
+            }
+        ]
+    }
+    </script>
+    
+    <script src="./translations.js"></script>
+    <script src="./apply-translations.js"></script>
+    <script src="./language-selector.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-primary': '#008080',
+                        'teal-dark': '#006666',
+                        'gold-accent': '#D4AF37',
+                        'light-bg': '#F4F9F9',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gold-text { color: #D4AF37; }
+        .btn-teal { background: #008080; color: white; transition: 0.3s; }
+        .btn-teal:hover { background: #006666; transform: translateY(-2px); }
+        .faq-item.active .faq-answer { max-height: 500px; padding-top: 1rem; }
+        .faq-item.active .faq-icon { transform: rotate(180deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-b border-gray-100 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="./index.html" class="flex items-center gap-2">
+                <img src="./images/logo.png" alt="Sparkllex" class="h-10 w-10">
+                <span class="text-2xl font-bold text-teal-primary">Sparkllex</span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <a href="./index.html" class="text-gray-700 hover:text-teal-primary transition" data-i18n="nav_home">Home</a>
+                <a href="./pricing.html" class="text-gray-700 hover:text-teal-primary transition" data-i18n="nav_pricing">Pricing</a>
+                <a href="./how-it-works.html" class="text-gray-700 hover:text-teal-primary transition" data-i18n="nav_how_it_works">How It Works</a>
+                <a href="./reviews.html" class="text-gray-700 hover:text-teal-primary transition" data-i18n="nav_reviews">Reviews</a>
+                <div id="nav-lang-container"></div>
+                <a href="./login.html" class="btn-teal px-6 py-2 rounded-full font-semibold" data-i18n="nav_login">Login</a>
+            </div>
+            
+            <button id="menu-toggle" class="md:hidden text-2xl text-teal-primary">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-y-0 right-0 w-72 bg-white shadow-2xl z-50 p-8 flex flex-col gap-6">
+        <button id="menu-close" class="self-end text-2xl text-gray-500"><i class="fas fa-times"></i></button>
+        <a href="./index.html" class="text-lg font-medium text-gray-700" data-i18n="nav_home">Home</a>
+        <a href="./pricing.html" class="text-lg font-medium text-gray-700" data-i18n="nav_pricing">Pricing</a>
+        <a href="./how-it-works.html" class="text-lg font-medium text-gray-700" data-i18n="nav_how_it_works">How It Works</a>
+        <a href="./reviews.html" class="text-lg font-medium text-gray-700" data-i18n="nav_reviews">Reviews</a>
+        <div id="mobile-lang-container" class="border-t pt-4"></div>
+        <a href="./login.html" class="btn-teal text-center py-3 rounded-full font-semibold" data-i18n="nav_login">Login</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="pt-28 pb-16 bg-gradient-to-br from-teal-50 to-white">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6" data-i18n="faq_hero_title">
+                Frequently Asked <span class="text-teal-primary">Questions</span>
+            </h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto" data-i18n="faq_hero_subtitle">
+                Find quick answers to common questions about our services, booking process, and policies.
+            </p>
+            
+            <!-- Search -->
+            <div class="max-w-xl mx-auto mt-8">
+                <div class="relative">
+                    <input type="text" id="faq-search" placeholder="Search questions..." 
+                        class="w-full px-6 py-4 pl-12 border border-gray-200 rounded-full focus:ring-2 focus:ring-teal-primary focus:border-transparent outline-none shadow-lg">
+                    <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Categories -->
+    <section class="py-16 px-6">
+        <div class="max-w-4xl mx-auto">
+            
+            <!-- Category: Getting Started -->
+            <div class="mb-12">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                    <i class="fas fa-rocket text-teal-primary"></i>
+                    <span data-i18n="faq_cat_getting_started">Getting Started</span>
+                </h2>
+                
+                <div class="space-y-4">
+                    <div class="faq-item bg-light-bg rounded-xl overflow-hidden">
+                        <button class="faq-question w-full flex justify-between items-center p-6 text-left font-semibold">
+                            <span data-i18n="faq_q1">How do I book a cleaning service?</span>
+                            <i class="fas fa-chevron-down faq-icon transition-transform text-teal-primary"></i>
+                        </button>
+                        <div class="faq-answer px-6 text-gray-600">
+                            <p data-i18n="faq_a1">You can book a cleaning service by signing up on our website, selecting your preferred plan, and choosing a time slot that works for you. The entire process takes less than 5 minutes. Simply create an account, add your address, choose your cleaning frequency, and we'll match you with our best available cleaner.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-light-bg rounded-xl overflow-hidden">
+                        <button class="faq-question w-full flex justify-between items-center p-6 text-left font-semibold">
+                            <span data-i18n="faq_q2">What areas do you serve?</span>
+                            <i class="fas fa-chevron-down faq-icon transition-transform text-teal-primary"></i>
+                        </button>
+                        <div class="faq-answer px-6 text-gray-600">
+                            <p data-i18n="faq_a2">We currently serve major metropolitan areas in the United States and Chile. In the US, we cover major cities including New York, Los Angeles, Chicago, Houston, and Miami. In Chile, we serve Santiago and surrounding regions. We're constantly expanding, so check our website for the latest coverage areas.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-light-bg rounded-xl overflow-hidden">
+                        <button class="faq-question w-full flex justify-between items-center p-6 text-left font-semibold">
+                            <span data-i18n="faq_q3">Do I need to be home during the cleaning?</span>
+                            <i class="fas fa-chevron-down faq-icon transition-transform text-teal-primary"></i>
+                        </button>
+                        <div class="faq-answer px-6 text-gray-600">
+                            <p data-i18n="faq_a3">No, you don't need to be home. Many clients provide access instructions (door code, lockbox, etc.) so our cleaners can enter when you're away. You can add these details in your account settings. All our cleaners are background-checked and insured for your peace of mind.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Category: Services & Pricing -->
+            <div class="mb-12">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                    <i class="fas fa-tag text-teal-primary"></i>
+                    <span data-i18n="faq_cat_pricing">Services & Pricing</span>
+                </h2>
+                
+                <div class="space-y-4">
+                    <div class="faq-item bg-light-bg rounded-xl overflow-hidden">
+                        <button class="faq-question w-full flex justify-between items-center p-6 text-left font-semibold">
+                            <span data-i18n="faq_q4">What is included in a standard cleaning?</span>
+                            <i class="fas fa-chevron-down faq-icon transition-transform text-teal-primary"></i>
+                        </button>
+                        <div class="faq-answer px-6 text-gray-600">
+                            <p data-i18n="faq_a4">Our standard cleaning includes: dusting all surfaces, vacuuming carpets and rugs, mopping hard floors, cleaning and sanitizing bathrooms, cleaning kitchen surfaces and appliances, making beds, emptying trash, and general tidying. For deep cleaning services, we also include inside appliances, windows, baseboards, and more.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-light-bg rounded-xl overflow-hidden">
+                        <button class="faq-question w-full flex justify-between items-center p-6 text-left font-semibold">
+                            <span data-i18n="faq_q5">How is pricing determined?</span>
+                            <i class="fas fa-chevron-down faq-icon transition-transform text-teal-primary"></i>
+                        </button>
+                        <div class="faq-answer px-6 text-gray-600">
+                            <p data-i18n="faq_a5">Our pricing is based on your chosen plan (Basic, Family, or Pro) and cleaning frequency. Plans are billed monthly with no hidden fees. The more frequently you book, the better your rate. You can see exact pricing on our Pricing page, and prices are localized based on your country.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-light-bg rounded-xl overflow-hidden">
+                        <button class="faq-question w-full flex justify-between items-center p-6 text-left font-semibold">
+                            <span data-i18n="faq_q6">Do you provide cleaning supplies?</span>
+                            <i class="fas fa-chevron-down faq-icon transition-transform text-teal-primary"></i>
+                        </button>
+                        <div class="faq-answer px-6 text-gray-600">
+                            <p data-i18n="faq_a6">Yes! Our cleaners bring all necessary eco-friendly cleaning supplies and equipment. If you prefer specific products due to allergies or preferences, just let us know in your booking notes and we'll accommodate your requests whenever possible.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Category: Booking & Scheduling -->
+            <div class="mb-12">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                    <i class="fas fa-calendar-alt text-teal-primary"></i>
+                    <span data-i18n="faq_cat_booking">Booking & Scheduling</span>
+                </h2>
+                
+                <div class="space-y-4">
+                    <div class="faq-item bg-light-bg rounded-xl overflow-hidden">
+                        <button class="faq-question w-full flex justify-between items-center p-6 text-left font-semibold">
+                            <span data-i18n="faq_q7">Can I cancel or reschedule my booking?</span>
+                            <i class="fas fa-chevron-down faq-icon transition-transform text-teal-primary"></i>
+                        </button>
+                        <div class="faq-answer px-6 text-gray-600">
+                            <p data-i18n="faq_a7">Yes, you can cancel or reschedule up to 24 hours before your scheduled cleaning at no charge. Changes made less than 24 hours in advance may incur a fee. You can manage all bookings through your member dashboard.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-light-bg rounded-xl overflow-hidden">
+                        <button class="faq-question w-full flex justify-between items-center p-6 text-left font-semibold">
+                            <span data-i18n="faq_q8">How far in advance should I book?</span>
+                            <i class="fas fa-chevron-down faq-icon transition-transform text-teal-primary"></i>
+                        </button>
+                        <div class="faq-answer px-6 text-gray-600">
+                            <p data-i18n="faq_a8">We recommend booking at least 48 hours in advance for the best availability. However, we often have same-day or next-day slots available. Once you sign up for a recurring plan, your appointments are automatically scheduled based on your preferences.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-light-bg rounded-xl overflow-hidden">
+                        <button class="faq-question w-full flex justify-between items-center p-6 text-left font-semibold">
+                            <span data-i18n="faq_q9">Can I request the same cleaner each time?</span>
+                            <i class="fas fa-chevron-down faq-icon transition-transform text-teal-primary"></i>
+                        </button>
+                        <div class="faq-answer px-6 text-gray-600">
+                            <p data-i18n="faq_a9">Absolutely! We encourage building a relationship with your cleaner. After your first cleaning, you can request the same professional for future visits through your dashboard. We do our best to maintain consistency, though occasionally schedule conflicts may require a backup cleaner.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Category: Trust & Safety -->
+            <div class="mb-12">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                    <i class="fas fa-shield-alt text-teal-primary"></i>
+                    <span data-i18n="faq_cat_safety">Trust & Safety</span>
+                </h2>
+                
+                <div class="space-y-4">
+                    <div class="faq-item bg-light-bg rounded-xl overflow-hidden">
+                        <button class="faq-question w-full flex justify-between items-center p-6 text-left font-semibold">
+                            <span data-i18n="faq_q10">Are your cleaners background-checked?</span>
+                            <i class="fas fa-chevron-down faq-icon transition-transform text-teal-primary"></i>
+                        </button>
+                        <div class="faq-answer px-6 text-gray-600">
+                            <p data-i18n="faq_a10">Yes, every Sparkllex cleaner goes through a rigorous vetting process including criminal background checks, reference verification, and in-person interviews. They are also fully insured and bonded, giving you complete peace of mind.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-light-bg rounded-xl overflow-hidden">
+                        <button class="faq-question w-full flex justify-between items-center p-6 text-left font-semibold">
+                            <span data-i18n="faq_q11">What if something is damaged during cleaning?</span>
+                            <i class="fas fa-chevron-down faq-icon transition-transform text-teal-primary"></i>
+                        </button>
+                        <div class="faq-answer px-6 text-gray-600">
+                            <p data-i18n="faq_a11">While damage is rare, we're fully insured. If anything is accidentally damaged, report it within 24 hours through your dashboard or contact support. We'll review the claim and work with you to make it right, whether through repair or replacement.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-light-bg rounded-xl overflow-hidden">
+                        <button class="faq-question w-full flex justify-between items-center p-6 text-left font-semibold">
+                            <span data-i18n="faq_q12">What's your satisfaction guarantee?</span>
+                            <i class="fas fa-chevron-down faq-icon transition-transform text-teal-primary"></i>
+                        </button>
+                        <div class="faq-answer px-6 text-gray-600">
+                            <p data-i18n="faq_a12">We stand behind our work 100%. If you're not completely satisfied with any aspect of your cleaning, let us know within 24 hours and we'll send someone back to re-clean the areas of concern at no additional charge.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Still Have Questions CTA -->
+    <section class="py-16 bg-gradient-to-br from-teal-primary to-teal-dark text-white px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-4" data-i18n="faq_cta_title">Still Have Questions?</h2>
+            <p class="text-xl opacity-90 mb-8" data-i18n="faq_cta_text">Our team is here to help. Reach out and we'll get back to you within 24 hours.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="./contact.html" class="inline-flex items-center justify-center gap-2 bg-white text-teal-primary px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition">
+                    <i class="fas fa-envelope"></i>
+                    <span data-i18n="contact_us">Contact Us</span>
+                </a>
+                <a href="tel:+15551234567" class="inline-flex items-center justify-center gap-2 border-2 border-white px-8 py-3 rounded-full font-semibold hover:bg-white/10 transition">
+                    <i class="fas fa-phone"></i>
+                    <span>+1 (555) 123-4567</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <img src="./images/logo.png" alt="Sparkllex" class="h-8 w-8">
+                    <span class="text-xl font-bold">Sparkllex</span>
+                </div>
+                <p class="text-gray-400" data-i18n="footer_tagline">Luxury & Perfection in every clean.</p>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4" data-i18n="footer_services">Services</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="./pricing.html" class="hover:text-white transition" data-i18n="nav_pricing">Pricing</a></li>
+                    <li><a href="./how-it-works.html" class="hover:text-white transition" data-i18n="nav_how_it_works">How It Works</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4" data-i18n="footer_company">Company</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="./about.html" class="hover:text-white transition" data-i18n="nav_about">About Us</a></li>
+                    <li><a href="./contact.html" class="hover:text-white transition" data-i18n="nav_contact">Contact</a></li>
+                    <li><a href="./faq.html" class="hover:text-white transition" data-i18n="nav_faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4" data-i18n="footer_legal">Legal</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="./privacy.html" class="hover:text-white transition" data-i18n="nav_privacy">Privacy Policy</a></li>
+                    <li><a href="./terms.html" class="hover:text-white transition" data-i18n="nav_terms">Terms of Service</a></li>
+                    <li><a href="./cookies.html" class="hover:text-white transition" data-i18n="nav_cookies">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+            <p>&copy; 2026 Sparkllex LLC. <span data-i18n="footer_rights">All rights reserved.</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuToggle?.addEventListener('click', () => mobileMenu.classList.add('open'));
+        menuClose?.addEventListener('click', () => mobileMenu.classList.remove('open'));
+        
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.faq-item');
+                const wasActive = item.classList.contains('active');
+                
+                // Close all
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                
+                // Toggle current
+                if (!wasActive) item.classList.add('active');
+            });
+        });
+        
+        // FAQ search
+        const searchInput = document.getElementById('faq-search');
+        searchInput?.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            
+            document.querySelectorAll('.faq-item').forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>

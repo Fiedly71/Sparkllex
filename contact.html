@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Sparkllex - Premium Cleaning Services</title>
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Contact Sparkllex for premium cleaning services. Get in touch via phone, email, or our contact form. Available in USA and Chile.">
+    <meta name="keywords" content="contact sparkllex, cleaning service contact, house cleaning inquiry, commercial cleaning quote">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Contact Sparkllex - Premium Cleaning Services">
+    <meta property="og:description" content="Get in touch with our team for premium cleaning services. We're here to help!">
+    <meta property="og:image" content="https://www.sparkllex.com/images/logo.png">
+    <meta property="og:url" content="https://www.sparkllex.com/contact.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contact Sparkllex">
+    <meta name="twitter:description" content="Get in touch with our premium cleaning team.">
+    
+    <script src="./translations.js"></script>
+    <script src="./apply-translations.js"></script>
+    <script src="./language-selector.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-primary': '#008080',
+                        'teal-dark': '#006666',
+                        'gold-accent': '#D4AF37',
+                        'light-bg': '#F4F9F9',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gold-text { color: #D4AF37; }
+        .btn-teal { background: #008080; color: white; transition: 0.3s; }
+        .btn-teal:hover { background: #006666; transform: translateY(-2px); }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-b border-gray-100 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="./index.html" class="flex items-center gap-2">
+                <img src="./images/logo.png" alt="Sparkllex" class="h-10 w-10">
+                <span class="text-2xl font-bold text-teal-primary">Sparkllex</span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <a href="./index.html" class="text-gray-700 hover:text-teal-primary transition" data-i18n="nav_home">Home</a>
+                <a href="./pricing.html" class="text-gray-700 hover:text-teal-primary transition" data-i18n="nav_pricing">Pricing</a>
+                <a href="./how-it-works.html" class="text-gray-700 hover:text-teal-primary transition" data-i18n="nav_how_it_works">How It Works</a>
+                <a href="./reviews.html" class="text-gray-700 hover:text-teal-primary transition" data-i18n="nav_reviews">Reviews</a>
+                <div id="nav-lang-container"></div>
+                <a href="./login.html" class="btn-teal px-6 py-2 rounded-full font-semibold" data-i18n="nav_login">Login</a>
+            </div>
+            
+            <button id="menu-toggle" class="md:hidden text-2xl text-teal-primary">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-y-0 right-0 w-72 bg-white shadow-2xl z-50 p-8 flex flex-col gap-6">
+        <button id="menu-close" class="self-end text-2xl text-gray-500"><i class="fas fa-times"></i></button>
+        <a href="./index.html" class="text-lg font-medium text-gray-700" data-i18n="nav_home">Home</a>
+        <a href="./pricing.html" class="text-lg font-medium text-gray-700" data-i18n="nav_pricing">Pricing</a>
+        <a href="./how-it-works.html" class="text-lg font-medium text-gray-700" data-i18n="nav_how_it_works">How It Works</a>
+        <a href="./reviews.html" class="text-lg font-medium text-gray-700" data-i18n="nav_reviews">Reviews</a>
+        <div id="mobile-lang-container" class="border-t pt-4"></div>
+        <a href="./login.html" class="btn-teal text-center py-3 rounded-full font-semibold" data-i18n="nav_login">Login</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="pt-28 pb-16 bg-gradient-to-br from-teal-50 to-white">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6" data-i18n="contact_hero_title">
+                Get In <span class="text-teal-primary">Touch</span>
+            </h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto" data-i18n="contact_hero_subtitle">
+                Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="py-16 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
+            
+            <!-- Contact Form -->
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+                <h2 class="text-2xl font-bold mb-6" data-i18n="contact_form_title">Send us a Message</h2>
+                
+                <form id="contact-form" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form_name">Name</label>
+                            <input type="text" name="name" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-primary focus:border-transparent outline-none transition"
+                                placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form_email">Email</label>
+                            <input type="email" name="email" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-primary focus:border-transparent outline-none transition"
+                                placeholder="john@example.com">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form_phone">Phone (Optional)</label>
+                        <input type="tel" name="phone"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-primary focus:border-transparent outline-none transition"
+                            placeholder="+1 (555) 123-4567">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form_subject">Subject</label>
+                        <select name="subject" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-primary focus:border-transparent outline-none transition">
+                            <option value="" data-i18n="form_select_subject">Select a subject</option>
+                            <option value="quote" data-i18n="form_subject_quote">Request a Quote</option>
+                            <option value="support" data-i18n="form_subject_support">Customer Support</option>
+                            <option value="partnership" data-i18n="form_subject_partnership">Partnership Inquiry</option>
+                            <option value="careers" data-i18n="form_subject_careers">Careers</option>
+                            <option value="other" data-i18n="form_subject_other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form_message">Message</label>
+                        <textarea name="message" rows="5" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-primary focus:border-transparent outline-none transition resize-none"
+                            placeholder="Tell us how we can help..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full btn-teal py-4 rounded-full font-semibold text-lg flex items-center justify-center gap-2">
+                        <i class="fas fa-paper-plane"></i>
+                        <span data-i18n="form_send">Send Message</span>
+                    </button>
+                </form>
+                
+                <!-- Success Message -->
+                <div id="form-success" class="hidden mt-6 p-4 bg-green-50 border border-green-200 rounded-lg text-center">
+                    <i class="fas fa-check-circle text-green-500 text-3xl mb-2"></i>
+                    <p class="text-green-700 font-medium" data-i18n="form_success_message">Thank you! We'll get back to you within 24 hours.</p>
+                </div>
+            </div>
+            
+            <!-- Contact Info -->
+            <div class="space-y-8">
+                <!-- Info Cards -->
+                <div class="bg-light-bg rounded-2xl p-8">
+                    <h3 class="text-xl font-bold mb-6" data-i18n="contact_info_title">Contact Information</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-teal-primary rounded-full flex items-center justify-center text-white">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold" data-i18n="contact_email">Email</h4>
+                                <a href="mailto:hello@sparkllex.com" class="text-teal-primary hover:underline">hello@sparkllex.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-teal-primary rounded-full flex items-center justify-center text-white">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold" data-i18n="contact_phone">Phone</h4>
+                                <p class="text-gray-600">USA: +1 (555) 123-4567</p>
+                                <p class="text-gray-600">Chile: +56 2 2345 6789</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-teal-primary rounded-full flex items-center justify-center text-white">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold" data-i18n="contact_hours">Business Hours</h4>
+                                <p class="text-gray-600" data-i18n="contact_hours_weekday">Mon - Fri: 8:00 AM - 6:00 PM</p>
+                                <p class="text-gray-600" data-i18n="contact_hours_weekend">Sat: 9:00 AM - 2:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Social Links -->
+                <div class="bg-light-bg rounded-2xl p-8">
+                    <h3 class="text-xl font-bold mb-6" data-i18n="contact_social">Follow Us</h3>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-12 h-12 bg-teal-primary hover:bg-teal-dark rounded-full flex items-center justify-center text-white transition">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-teal-primary hover:bg-teal-dark rounded-full flex items-center justify-center text-white transition">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-teal-primary hover:bg-teal-dark rounded-full flex items-center justify-center text-white transition">
+                            <i class="fab fa-linkedin-in text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-teal-primary hover:bg-teal-dark rounded-full flex items-center justify-center text-white transition">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Response -->
+                <div class="bg-gradient-to-br from-teal-primary to-teal-dark rounded-2xl p-8 text-white">
+                    <div class="flex items-center gap-4 mb-4">
+                        <i class="fas fa-bolt text-3xl text-gold-accent"></i>
+                        <h3 class="text-xl font-bold" data-i18n="contact_quick_response">Quick Response</h3>
+                    </div>
+                    <p class="opacity-90" data-i18n="contact_quick_response_text">
+                        We typically respond within 2-4 hours during business hours. For urgent matters, please call us directly.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ CTA -->
+    <section class="py-16 bg-light-bg">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-4" data-i18n="contact_faq_cta_title">Have a Quick Question?</h2>
+            <p class="text-gray-600 mb-8" data-i18n="contact_faq_cta_text">Check out our FAQ page for instant answers to common questions.</p>
+            <a href="./faq.html" class="inline-flex items-center gap-2 btn-teal px-8 py-3 rounded-full font-semibold">
+                <i class="fas fa-question-circle"></i>
+                <span data-i18n="view_faq">View FAQ</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <img src="./images/logo.png" alt="Sparkllex" class="h-8 w-8">
+                    <span class="text-xl font-bold">Sparkllex</span>
+                </div>
+                <p class="text-gray-400" data-i18n="footer_tagline">Luxury & Perfection in every clean.</p>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4" data-i18n="footer_services">Services</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="./pricing.html" class="hover:text-white transition" data-i18n="nav_pricing">Pricing</a></li>
+                    <li><a href="./how-it-works.html" class="hover:text-white transition" data-i18n="nav_how_it_works">How It Works</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4" data-i18n="footer_company">Company</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="./about.html" class="hover:text-white transition" data-i18n="nav_about">About Us</a></li>
+                    <li><a href="./contact.html" class="hover:text-white transition" data-i18n="nav_contact">Contact</a></li>
+                    <li><a href="./faq.html" class="hover:text-white transition" data-i18n="nav_faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4" data-i18n="footer_legal">Legal</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="./privacy.html" class="hover:text-white transition" data-i18n="nav_privacy">Privacy Policy</a></li>
+                    <li><a href="./terms.html" class="hover:text-white transition" data-i18n="nav_terms">Terms of Service</a></li>
+                    <li><a href="./cookies.html" class="hover:text-white transition" data-i18n="nav_cookies">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+            <p>&copy; 2026 Sparkllex LLC. <span data-i18n="footer_rights">All rights reserved.</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuToggle?.addEventListener('click', () => mobileMenu.classList.add('open'));
+        menuClose?.addEventListener('click', () => mobileMenu.classList.remove('open'));
+        
+        // Contact form
+        const form = document.getElementById('contact-form');
+        const successMsg = document.getElementById('form-success');
+        
+        form?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Simulate form submission
+            const formData = new FormData(form);
+            console.log('Form submitted:', Object.fromEntries(formData));
+            
+            // Show success message
+            form.style.display = 'none';
+            successMsg.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
