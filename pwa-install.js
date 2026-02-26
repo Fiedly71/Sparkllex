@@ -73,7 +73,8 @@
         visitCount++;
         localStorage.setItem(VISIT_COUNT_KEY, visitCount.toString());
 
-        // Show every 5 visits
+        // Show on first visit, then every 5 visits
+        if (visitCount === 1) return true;
         return visitCount % PROMPT_INTERVAL === 0;
     }
 
