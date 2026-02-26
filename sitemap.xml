@@ -48,6 +48,14 @@
         <priority>0.7</priority>
     </url>
     
+    <!-- Blog -->
+    <url>
+        <loc>https://sparkllex.com/blog.html</loc>
+        <lastmod>2026-02-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
     <!-- FAQ -->
     <url>
         <loc>https://sparkllex.com/faq.html</loc>

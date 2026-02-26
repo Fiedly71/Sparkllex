@@ -1,10 +1,25 @@
-// Sparkllex Service Worker
-const CACHE_NAME = 'sparkllex-v1';
+// Sparkllex Service Worker v2
+const CACHE_NAME = 'sparkllex-v2';
 const urlsToCache = [
   '/',
   '/index.html',
+  '/pricing.html',
+  '/how-it-works.html',
+  '/contact.html',
+  '/about.html',
+  '/faq.html',
+  '/404.html',
+  '/login.html',
+  '/signup.html',
   '/images/logo.png',
-  '/styles.css'
+  '/images/logo.jpg',
+  '/images/elite.jpg',
+  '/styles.css',
+  '/translations.js',
+  '/language-selector.js',
+  '/cookie-consent.js',
+  'https://cdn.tailwindcss.com',
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
 ];
 
 // Install event

@@ -1,5 +1,5 @@
 /**
- * Sparkllex - Cookie Consent System (Bilingual EN/ES)
+ * Sparkllex - Cookie Consent System (Multi-language: EN/ES/FR/PT/DE/IT)
  * Remembers the user's choice permanently
  */
 
@@ -15,15 +15,40 @@ const cookieTexts = {
         message: 'Para mejorar tu experiencia premium, usamos cookies. Al continuar, aceptas nuestra política de privacidad.',
         accept: 'Aceptar',
         decline: 'Rechazar'
+    },
+    fr: {
+        title: '🍪 Cookies et Confidentialité',
+        message: 'Pour améliorer votre expérience premium, nous utilisons des cookies. En continuant, vous acceptez notre politique de confidentialité.',
+        accept: 'Accepter',
+        decline: 'Refuser'
+    },
+    pt: {
+        title: '🍪 Cookies e Privacidade',
+        message: 'Para melhorar sua experiência premium, usamos cookies. Ao continuar, você aceita nossa política de privacidade.',
+        accept: 'Aceitar',
+        decline: 'Recusar'
+    },
+    de: {
+        title: '🍪 Cookies & Datenschutz',
+        message: 'Um Ihr Premium-Erlebnis zu verbessern, verwenden wir Cookies. Durch Fortfahren akzeptieren Sie unsere Datenschutzrichtlinie.',
+        accept: 'Akzeptieren',
+        decline: 'Ablehnen'
+    },
+    it: {
+        title: '🍪 Cookie e Privacy',
+        message: 'Per migliorare la tua esperienza premium, utilizziamo i cookie. Continuando, accetti la nostra politica sulla privacy.',
+        accept: 'Accetta',
+        decline: 'Rifiuta'
     }
 };
 
 function getCookieLang() {
     const urlParams = new URLSearchParams(window.location.search);
     const urlLang = urlParams.get('lang');
-    if (urlLang === 'es' || urlLang === 'en') return urlLang;
+    const supportedLangs = ['en', 'es', 'fr', 'pt', 'de', 'it'];
+    if (supportedLangs.includes(urlLang)) return urlLang;
     const stored = localStorage.getItem('preferredLang');
-    if (stored === 'es' || stored === 'en') return stored;
+    if (supportedLangs.includes(stored)) return stored;
     return 'en';
 }
 

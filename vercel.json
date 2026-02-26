@@ -72,6 +72,10 @@
     {
       "source": "/api/contact-form",
       "destination": "/api/contact-form.js"
+    },
+    {
+      "source": "/api/newsletter",
+      "destination": "/api/newsletter.js"
     }
   ],
   "cleanUrls": true,

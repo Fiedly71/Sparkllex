@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Sparkllex Cleaning Tips & Home Care</title>
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Expert cleaning tips, home care advice, and lifestyle guides from Sparkllex. Learn professional cleaning techniques and home maintenance best practices.">
+    <meta name="keywords" content="cleaning tips, home care, house cleaning guide, professional cleaning advice, home maintenance">
+    <link rel="canonical" href="https://sparkllex.com/blog.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Blog - Sparkllex Cleaning Tips">
+    <meta property="og:description" content="Expert cleaning tips and home care advice from the professionals at Sparkllex.">
+    <meta property="og:image" content="https://sparkllex.com/images/logo.png">
+    <meta property="og:url" content="https://sparkllex.com/blog.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9TYQY947Y5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-9TYQY947Y5');
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="./translations.js"></script>
+    <script src="./language-selector.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-primary': '#008080',
+                        'teal-dark': '#006666',
+                        'light-bg': '#F4F9F9',
+                        'gold-accent': '#D4AF37',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .nav-glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); }
+        .blog-card { transition: all 0.3s ease; }
+        .blog-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .mobile-menu { transform: translateX(-100%); transition: transform 0.3s ease; }
+        .mobile-menu.open { transform: translateX(0); }
+    </style>
+</head>
+
+<body class="bg-light-bg text-gray-800 antialiased font-sans">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-glass border-b border-teal-primary/10">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center h-20">
+            <a href="index.html" class="hover:opacity-80 transition">
+                <img src="./images/logo.png" alt="Sparkllex" class="h-12 md:h-14">
+            </a>
+            
+            <div class="hidden lg:flex space-x-8 font-bold text-sm text-gray-600">
+                <a href="index.html" class="hover:text-teal-primary transition" data-i18n="nav_home">Home</a>
+                <a href="pricing.html" class="hover:text-teal-primary transition" data-i18n="nav_pricing">Pricing</a>
+                <a href="about.html" class="hover:text-teal-primary transition" data-i18n="nav_about">About</a>
+                <a href="blog.html" class="text-teal-primary" data-i18n="nav_blog">Blog</a>
+                <a href="contact.html" class="hover:text-teal-primary transition" data-i18n="nav_contact">Contact</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div id="language-selector-container"></div>
+                <a href="login.html" class="hidden md:inline-flex bg-teal-primary text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-teal-dark transition" data-i18n="nav_login">Login</a>
+                <button id="menu-toggle" class="lg:hidden text-2xl text-gray-600">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-0 bg-white z-50 lg:hidden">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <img src="./images/logo.png" alt="Sparkllex" class="h-10">
+                <button id="menu-close" class="text-2xl"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="flex flex-col space-y-6 text-lg font-medium">
+                <a href="index.html" data-i18n="nav_home">Home</a>
+                <a href="pricing.html" data-i18n="nav_pricing">Pricing</a>
+                <a href="about.html" data-i18n="nav_about">About</a>
+                <a href="blog.html" class="text-teal-primary" data-i18n="nav_blog">Blog</a>
+                <a href="contact.html" data-i18n="nav_contact">Contact</a>
+                <a href="login.html" class="btn-teal text-center py-3 rounded-full" data-i18n="nav_login">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-16 px-6 bg-gradient-to-br from-teal-primary/5 to-white">
+        <div class="max-w-7xl mx-auto text-center">
+            <span class="text-teal-primary font-bold text-sm uppercase tracking-wider" data-i18n="blog_subtitle">Tips & Guides</span>
+            <h1 class="text-4xl md:text-6xl font-black mt-4 mb-6">
+                <span data-i18n="blog_title_1">Sparkllex</span> <span class="text-teal-primary" data-i18n="blog_title_2">Blog</span>
+            </h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto" data-i18n="blog_hero_desc">
+                Expert cleaning tips, home care advice, and lifestyle guides to help you maintain a pristine home.
+            </p>
+        </div>
+    </section>
+
+    <!-- Blog Grid -->
+    <section class="py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            
+            <!-- Featured Post -->
+            <div class="mb-16">
+                <h2 class="text-2xl font-black mb-8 flex items-center gap-3">
+                    <i class="fas fa-star text-gold-accent"></i>
+                    <span data-i18n="blog_featured">Featured Article</span>
+                </h2>
+                <div class="blog-card bg-white rounded-3xl overflow-hidden shadow-xl grid md:grid-cols-2">
+                    <div class="h-64 md:h-auto bg-gradient-to-br from-teal-primary to-teal-dark flex items-center justify-center">
+                        <i class="fas fa-broom text-white/20 text-9xl"></i>
+                    </div>
+                    <div class="p-8 md:p-12 flex flex-col justify-center">
+                        <span class="text-teal-primary font-bold text-sm uppercase tracking-wider" data-i18n="blog_category_tips">Cleaning Tips</span>
+                        <h3 class="text-2xl md:text-3xl font-black mt-2 mb-4" data-i18n="blog_featured_title">10 Professional Cleaning Secrets for a Spotless Home</h3>
+                        <p class="text-gray-600 mb-6" data-i18n="blog_featured_desc">Learn the techniques that professional cleaners use to achieve that perfect clean every time. From kitchen to bathroom, discover insider tips.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-400"><i class="fas fa-calendar-alt mr-2"></i>February 2026</span>
+                            <a href="#" class="text-teal-primary font-bold hover:text-teal-dark transition flex items-center gap-2">
+                                <span data-i18n="blog_read_more">Read More</span> <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Posts Grid -->
+            <h2 class="text-2xl font-black mb-8" data-i18n="blog_latest">Latest Articles</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Article 1 -->
+                <article class="blog-card bg-white rounded-2xl overflow-hidden shadow-lg">
+                    <div class="h-48 bg-gradient-to-br from-green-400 to-teal-primary flex items-center justify-center">
+                        <i class="fas fa-leaf text-white/30 text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-green-600 font-bold text-xs uppercase tracking-wider" data-i18n="blog_category_eco">Eco-Friendly</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3" data-i18n="blog_post1_title">Natural Cleaning Products You Can Make at Home</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2" data-i18n="blog_post1_desc">Discover how to create effective, eco-friendly cleaning solutions using ingredients from your kitchen.</p>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-400"><i class="fas fa-clock mr-1"></i>5 min read</span>
+                            <a href="#" class="text-teal-primary font-bold hover:text-teal-dark" data-i18n="blog_read_more">Read More</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="blog-card bg-white rounded-2xl overflow-hidden shadow-lg">
+                    <div class="h-48 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                        <i class="fas fa-tshirt text-white/30 text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-blue-600 font-bold text-xs uppercase tracking-wider" data-i18n="blog_category_laundry">Laundry</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3" data-i18n="blog_post2_title">The Ultimate Guide to Stain Removal</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2" data-i18n="blog_post2_desc">From wine to grass stains, learn how to tackle any stain with our comprehensive removal guide.</p>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-400"><i class="fas fa-clock mr-1"></i>7 min read</span>
+                            <a href="#" class="text-teal-primary font-bold hover:text-teal-dark" data-i18n="blog_read_more">Read More</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="blog-card bg-white rounded-2xl overflow-hidden shadow-lg">
+                    <div class="h-48 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-calendar-check text-white/30 text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-purple-600 font-bold text-xs uppercase tracking-wider" data-i18n="blog_category_organization">Organization</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3" data-i18n="blog_post3_title">Weekly Cleaning Schedule That Works</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2" data-i18n="blog_post3_desc">Create a sustainable cleaning routine that keeps your home tidy without overwhelming your schedule.</p>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-400"><i class="fas fa-clock mr-1"></i>4 min read</span>
+                            <a href="#" class="text-teal-primary font-bold hover:text-teal-dark" data-i18n="blog_read_more">Read More</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 4 -->
+                <article class="blog-card bg-white rounded-2xl overflow-hidden shadow-lg">
+                    <div class="h-48 bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center">
+                        <i class="fas fa-fire-alt text-white/30 text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-orange-600 font-bold text-xs uppercase tracking-wider" data-i18n="blog_category_kitchen">Kitchen</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3" data-i18n="blog_post4_title">Deep Clean Your Kitchen in 30 Minutes</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2" data-i18n="blog_post4_desc">Quick and efficient techniques to get your kitchen sparkling clean even when you're short on time.</p>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-400"><i class="fas fa-clock mr-1"></i>6 min read</span>
+                            <a href="#" class="text-teal-primary font-bold hover:text-teal-dark" data-i18n="blog_read_more">Read More</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 5 -->
+                <article class="blog-card bg-white rounded-2xl overflow-hidden shadow-lg">
+                    <div class="h-48 bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center">
+                        <i class="fas fa-spa text-white/30 text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-pink-600 font-bold text-xs uppercase tracking-wider" data-i18n="blog_category_bathroom">Bathroom</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3" data-i18n="blog_post5_title">Secrets to a Hotel-Quality Bathroom</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2" data-i18n="blog_post5_desc">Transform your bathroom into a spa-like retreat with these professional cleaning and organizing tips.</p>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-400"><i class="fas fa-clock mr-1"></i>5 min read</span>
+                            <a href="#" class="text-teal-primary font-bold hover:text-teal-dark" data-i18n="blog_read_more">Read More</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 6 -->
+                <article class="blog-card bg-white rounded-2xl overflow-hidden shadow-lg">
+                    <div class="h-48 bg-gradient-to-br from-yellow-400 to-amber-500 flex items-center justify-center">
+                        <i class="fas fa-tools text-white/30 text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-amber-600 font-bold text-xs uppercase tracking-wider" data-i18n="blog_category_maintenance">Maintenance</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3" data-i18n="blog_post6_title">Home Maintenance Tasks You Shouldn't Skip</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2" data-i18n="blog_post6_desc">Essential maintenance tasks that save money and prevent bigger problems down the road.</p>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-400"><i class="fas fa-clock mr-1"></i>8 min read</span>
+                            <a href="#" class="text-teal-primary font-bold hover:text-teal-dark" data-i18n="blog_read_more">Read More</a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Newsletter CTA -->
+            <div class="mt-16 bg-gradient-to-r from-teal-primary to-teal-dark rounded-3xl p-8 md:p-12 text-white text-center">
+                <i class="fas fa-envelope text-4xl mb-4 opacity-50"></i>
+                <h3 class="text-2xl md:text-3xl font-black mb-4" data-i18n="blog_newsletter_title">Get Cleaning Tips in Your Inbox</h3>
+                <p class="text-teal-100 mb-6 max-w-xl mx-auto" data-i18n="blog_newsletter_desc">Subscribe to our newsletter for weekly cleaning tips, special offers, and home care advice.</p>
+                <form id="newsletter-form" class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                    <input type="email" placeholder="Enter your email" required
+                        class="flex-1 px-6 py-4 rounded-full text-gray-800 outline-none focus:ring-4 focus:ring-white/30">
+                    <button type="submit" class="bg-white text-teal-primary px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition flex items-center justify-center gap-2">
+                        <i class="fas fa-paper-plane"></i>
+                        <span data-i18n="blog_subscribe">Subscribe</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <img src="./images/logo.png" alt="Sparkllex" class="h-8 w-8">
+                    <span class="text-xl font-bold">Sparkllex</span>
+                </div>
+                <p class="text-gray-400" data-i18n="footer_tagline">Luxury & Perfection in every clean.</p>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4" data-i18n="footer_services">Services</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="./pricing.html" class="hover:text-white transition" data-i18n="nav_pricing">Pricing</a></li>
+                    <li><a href="./how-it-works.html" class="hover:text-white transition" data-i18n="nav_how_it_works">How It Works</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4" data-i18n="footer_company">Company</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="./about.html" class="hover:text-white transition" data-i18n="nav_about">About Us</a></li>
+                    <li><a href="./blog.html" class="hover:text-white transition" data-i18n="nav_blog">Blog</a></li>
+                    <li><a href="./contact.html" class="hover:text-white transition" data-i18n="nav_contact">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4" data-i18n="footer_legal">Legal</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="./privacy.html" class="hover:text-white transition" data-i18n="nav_privacy">Privacy Policy</a></li>
+                    <li><a href="./terms.html" class="hover:text-white transition" data-i18n="nav_terms">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+            <p>&copy; 2026 Sparkllex LLC. <span data-i18n="footer_rights">All rights reserved.</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuToggle?.addEventListener('click', () => mobileMenu.classList.add('open'));
+        menuClose?.addEventListener('click', () => mobileMenu.classList.remove('open'));
+        
+        // Newsletter form
+        document.getElementById('newsletter-form')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const emailInput = form.querySelector('input[type="email"]');
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const email = emailInput.value;
+            
+            // Disable button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            
+            try {
+                const response = await fetch('/api/newsletter', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, source: 'blog' })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Show success
+                    form.innerHTML = '<p class="text-white text-lg"><i class="fas fa-check-circle mr-2"></i>' + (result.message || 'Thank you for subscribing! 🎉') + '</p>';
+                } else {
+                    throw new Error(result.error);
+                }
+            } catch (error) {
+                alert('Sorry, there was an error. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> <span data-i18n="blog_subscribe">Subscribe</span>';
+            }
+        });
+    </script>
+    <script src="cookie-consent.js"></script>
+    <script src="chat-widget.js"></script>
+</body>
+</html>
