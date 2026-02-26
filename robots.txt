@@ -1,11 +1,11 @@
 # robots.txt for Sparkllex
-# https://www.sparkllex.com
+# https://sparkllex.com
 
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://www.sparkllex.com/sitemap.xml
+Sitemap: https://sparkllex.com/sitemap.xml
 
 # Disallow admin and internal pages
 Disallow: /02_MEMBERS_APP/
