@@ -1,20 +1,22 @@
 /**
- * apply-translations.js - Bilingual Translation Engine for Sparkllex
+ * apply-translations.js - Multi-language Translation Engine for Sparkllex
  *
+ * Supports: EN, ES, FR, PT, DE, IT with fallback to English
  * Addresses requirements:
- * 1) URL param > localStorage > default to 'en'
- * 2) Prevent English flash: blank text for any element whose id exists in translations
+ * 1) URL param > localStorage > auto-detect > default to 'en'
+ * 2) Prevent flash: blank text for any element whose id exists in translations
  * 3) Robust timing: run on DOM ready, window load, and observe dynamic nodes
  * 4) Keep <html lang> in sync with the active language
  */
 
 (function () {
-    const STORAGE_KEY = 'preferredLang';
+    const STORAGE_KEY = 'sparkllex_language';
+    const SUPPORTED_LANGS = ['en', 'es', 'fr', 'pt', 'de', 'it'];
 
     function normalizeLang(lang) {
         if (!lang) return null;
-        const lower = String(lang).toLowerCase();
-        return lower === 'es' ? 'es' : lower === 'en' ? 'en' : null;
+        const lower = String(lang).toLowerCase().split('-')[0];
+        return SUPPORTED_LANGS.includes(lower) ? lower : null;
     }
 
     function getLangFromUrl() {
@@ -26,7 +28,7 @@
         return (
             normalizeLang(localStorage.getItem(STORAGE_KEY)) ||
             // Legacy key support
-            normalizeLang(localStorage.getItem('sparkllex_lang'))
+            normalizeLang(localStorage.getItem('preferredLang'))
         );
     }
 
@@ -45,16 +47,17 @@
     }
 
     /**
-     * Blank any element that has a translation key to avoid English flash.
+     * Blank any element that has a translation key to avoid flash.
      */
     function blankTranslatable(root = document) {
-        const langPack = translations && translations[activeLang];
+        // Use current language or fallback to English for key checking
+        const langPack = (translations && translations[activeLang]) || (translations && translations.en);
         if (!langPack) return;
 
         const elements = root.querySelectorAll('[id], [data-translate]');
         elements.forEach(el => {
             const key = getKey(el);
-            if (!key || !Object.prototype.hasOwnProperty.call(langPack, key)) return;
+            if (!key || !getTranslation(key)) return;
 
             if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
                 el.placeholder = '';
@@ -69,23 +72,41 @@
         // Blank placeholders that use a dedicated key
         root.querySelectorAll('[data-translate-placeholder]').forEach(el => {
             const key = getPlaceholderKey(el);
-            if (key && Object.prototype.hasOwnProperty.call(langPack, key)) {
+            if (key && getTranslation(key)) {
                 el.placeholder = '';
             }
         });
     }
 
     /**
+     * Get translation with fallback to English
+     */
+    function getTranslation(key) {
+        if (!translations) return null;
+        
+        // Try current language first
+        if (translations[activeLang] && translations[activeLang][key]) {
+            return translations[activeLang][key];
+        }
+        
+        // Fallback to English
+        if (translations.en && translations.en[key]) {
+            return translations.en[key];
+        }
+        
+        return null;
+    }
+
+    /**
      * Apply translations to a single element if a matching key exists.
      */
     function translateElement(el) {
-        const langPack = translations && translations[activeLang];
-        if (!langPack) return;
-
         const key = getKey(el);
-        if (!key || !Object.prototype.hasOwnProperty.call(langPack, key)) return;
+        if (!key) return;
+        
+        const value = getTranslation(key);
+        if (!value) return;
 
-        const value = langPack[key];
         if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
             el.placeholder = value;
         } else if (el.tagName === 'OPTGROUP' || el.tagName === 'OPTION') {
@@ -100,12 +121,11 @@
      * Apply placeholder translations to inputs/textareas/selects that declare data-translate-placeholder.
      */
     function translatePlaceholder(el) {
-        const langPack = translations && translations[activeLang];
-        if (!langPack) return;
-
         const key = getPlaceholderKey(el);
-        if (!key || !Object.prototype.hasOwnProperty.call(langPack, key)) return;
-        el.placeholder = langPack[key];
+        if (!key) return;
+        
+        const value = getTranslation(key);
+        if (value) el.placeholder = value;
     }
 
     /**

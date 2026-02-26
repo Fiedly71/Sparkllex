@@ -959,57 +959,232 @@ const translations = {
         clientName: "Nombre del Cliente",
         serviceName: "Nombre del servicio",
         describeHowWeCanHelp: "Describe cómo podemos ayudarte"
+    },
+
+    // French - Core translations (others fallback to English)
+    fr: {
+        btnAccess: "Connexion",
+        indexTitle: "Luxe et Perfection",
+        indexSubtitle: "Services premium sur mesure pour votre style de vie",
+        getStarted: "Commencer",
+        viewServices: "Voir les Services",
+        clients: "Clients Satisfaits",
+        rating: "Évaluation",
+        support: "Support",
+        guarantee: "Satisfaction",
+        ourServices: "Nos Services Premium",
+        deepCleaning: "Nettoyage en Profondeur",
+        eliteLaundry: "Blanchisserie Élite",
+        masterIroning: "Repassage Expert",
+        maintenance: "Entretien Maison",
+        whyChooseSparkllex: "Pourquoi Choisir Sparkllex?",
+        totalTrust: "Confiance Totale",
+        premiumQuality: "Qualité Premium",
+        flexibility: "Flexibilité Totale",
+        subscriptionPlans: "Plans d'Abonnement",
+        basicPlan: "Essentiel",
+        proPlan: "Professionnel",
+        familiarPlan: "Famille",
+        perMonth: "/mois",
+        mostPopular: "Plus Populaire",
+        contact: "Contactez-Nous",
+        callUs: "Appelez-Nous",
+        homeNav: "Accueil",
+        servicesNav: "Services",
+        plansNav: "Plans",
+        howItWorksNav: "Comment ça marche",
+        logout: "Déconnexion",
+        settings: "Paramètres",
+        loginTitle: "Bienvenue",
+        loginButton: "Se Connecter",
+        signupTitle: "Créer un Compte",
+        reviewsTitle: "Avis Clients",
+        leaveReview: "Laisser un Avis",
+        footerRights: "© 2026 Sparkllex. Tous droits réservés."
+    },
+
+    // Portuguese - Core translations (others fallback to English)
+    pt: {
+        btnAccess: "Entrar",
+        indexTitle: "Luxo e Perfeição",
+        indexSubtitle: "Serviços premium personalizados para seu estilo de vida",
+        getStarted: "Começar",
+        viewServices: "Ver Serviços",
+        clients: "Clientes Satisfeitos",
+        rating: "Avaliação",
+        support: "Suporte",
+        guarantee: "Satisfação",
+        ourServices: "Nossos Serviços Premium",
+        deepCleaning: "Limpeza Profunda",
+        eliteLaundry: "Lavanderia Elite",
+        masterIroning: "Passadoria Mestre",
+        maintenance: "Manutenção Residencial",
+        whyChooseSparkllex: "Por que Escolher Sparkllex?",
+        totalTrust: "Confiança Total",
+        premiumQuality: "Qualidade Premium",
+        flexibility: "Flexibilidade Total",
+        subscriptionPlans: "Planos de Assinatura",
+        basicPlan: "Essencial",
+        proPlan: "Profissional",
+        familiarPlan: "Família",
+        perMonth: "/mês",
+        mostPopular: "Mais Popular",
+        contact: "Entre em Contato",
+        callUs: "Ligue Agora",
+        homeNav: "Início",
+        servicesNav: "Serviços",
+        plansNav: "Planos",
+        howItWorksNav: "Como Funciona",
+        logout: "Sair",
+        settings: "Configurações",
+        loginTitle: "Bem-vindo",
+        loginButton: "Entrar",
+        signupTitle: "Criar Conta",
+        reviewsTitle: "Avaliações",
+        leaveReview: "Deixar Avaliação",
+        footerRights: "© 2026 Sparkllex. Todos os direitos reservados."
+    },
+
+    // German - Core translations (others fallback to English)
+    de: {
+        btnAccess: "Anmelden",
+        indexTitle: "Luxus und Perfektion",
+        indexSubtitle: "Premium-Services maßgeschneidert für Ihren Lebensstil",
+        getStarted: "Loslegen",
+        viewServices: "Services Ansehen",
+        clients: "Zufriedene Kunden",
+        rating: "Bewertung",
+        support: "Support",
+        guarantee: "Zufriedenheit",
+        ourServices: "Unsere Premium-Services",
+        deepCleaning: "Tiefenreinigung",
+        eliteLaundry: "Elite-Wäscherei",
+        masterIroning: "Meister-Bügeln",
+        maintenance: "Hauswartung",
+        whyChooseSparkllex: "Warum Sparkllex Wählen?",
+        totalTrust: "Volles Vertrauen",
+        premiumQuality: "Premium-Qualität",
+        flexibility: "Volle Flexibilität",
+        subscriptionPlans: "Abonnement-Pläne",
+        basicPlan: "Basis",
+        proPlan: "Professionell",
+        familiarPlan: "Familie",
+        perMonth: "/Monat",
+        mostPopular: "Beliebteste",
+        contact: "Kontakt",
+        callUs: "Jetzt Anrufen",
+        homeNav: "Startseite",
+        servicesNav: "Services",
+        plansNav: "Pläne",
+        howItWorksNav: "So funktioniert's",
+        logout: "Abmelden",
+        settings: "Einstellungen",
+        loginTitle: "Willkommen",
+        loginButton: "Anmelden",
+        signupTitle: "Konto Erstellen",
+        reviewsTitle: "Kundenbewertungen",
+        leaveReview: "Bewertung Schreiben",
+        footerRights: "© 2026 Sparkllex. Alle Rechte vorbehalten."
+    },
+
+    // Italian - Core translations (others fallback to English)
+    it: {
+        btnAccess: "Accedi",
+        indexTitle: "Lusso e Perfezione",
+        indexSubtitle: "Servizi premium su misura per il tuo stile di vita",
+        getStarted: "Inizia",
+        viewServices: "Vedi Servizi",
+        clients: "Clienti Soddisfatti",
+        rating: "Valutazione",
+        support: "Supporto",
+        guarantee: "Soddisfazione",
+        ourServices: "I Nostri Servizi Premium",
+        deepCleaning: "Pulizia Profonda",
+        eliteLaundry: "Lavanderia Elite",
+        masterIroning: "Stiratura Professionale",
+        maintenance: "Manutenzione Casa",
+        whyChooseSparkllex: "Perché Scegliere Sparkllex?",
+        totalTrust: "Fiducia Totale",
+        premiumQuality: "Qualità Premium",
+        flexibility: "Flessibilità Totale",
+        subscriptionPlans: "Piani di Abbonamento",
+        basicPlan: "Essenziale",
+        proPlan: "Professionale",
+        familiarPlan: "Famiglia",
+        perMonth: "/mese",
+        mostPopular: "Più Popolare",
+        contact: "Contattaci",
+        callUs: "Chiamaci Ora",
+        homeNav: "Home",
+        servicesNav: "Servizi",
+        plansNav: "Piani",
+        howItWorksNav: "Come Funziona",
+        logout: "Esci",
+        settings: "Impostazioni",
+        loginTitle: "Benvenuto",
+        loginButton: "Accedi",
+        signupTitle: "Crea Account",
+        reviewsTitle: "Recensioni Clienti",
+        leaveReview: "Lascia Recensione",
+        footerRights: "© 2026 Sparkllex. Tutti i diritti riservati."
     }
 };
 
 /**
- * Get language from URL parameter (?lang=es or ?lang=en)
- * Falls back to localStorage, then defaults to 'en'
+ * Get language from URL parameter, localStorage, or default to 'en'
+ * Supports: en, es, fr, pt, de, it
  */
 function getCurrentLang() {
+    const SUPPORTED = ['en', 'es', 'fr', 'pt', 'de', 'it'];
+    
     // 1. Check URL parameter (?lang=)
     const urlParams = new URLSearchParams(window.location.search);
     const langParam = urlParams.get('lang');
     
-    if (langParam === 'es' || langParam === 'en') {
-        // Save to localStorage for persistence
-        localStorage.setItem('sparkllex_lang', langParam);
+    if (langParam && SUPPORTED.includes(langParam)) {
+        localStorage.setItem('sparkllex_language', langParam);
         return langParam;
     }
     
     // 2. Check localStorage
-    const savedLang = localStorage.getItem('sparkllex_lang');
-    if (savedLang === 'es' || savedLang === 'en') {
-        return savedLang;
+    const storedLang = localStorage.getItem('sparkllex_language') || localStorage.getItem('preferredLang');
+    if (storedLang && SUPPORTED.includes(storedLang)) {
+        return storedLang;
     }
     
     // 3. Default to English
-    localStorage.setItem('sparkllex_lang', 'en');
     return 'en';
 }
 
 /**
  * Set language and save to localStorage
- * You can call this to programmatically change language
  */
 function setLanguage(lang) {
-    if (lang === 'es' || lang === 'en') {
-        localStorage.setItem('sparkllex_lang', lang);
-        // Optionally redirect to add language to URL
-        const url = new URL(window.location);
-        url.searchParams.set('lang', lang);
-        window.location.href = url.toString();
+    const SUPPORTED = ['en', 'es', 'fr', 'pt', 'de', 'it'];
+    if (SUPPORTED.includes(lang)) {
+        localStorage.setItem('sparkllex_language', lang);
+        // Dispatch event for language selector to update
+        window.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));
     }
 }
 
 /**
- * Translate text for a given key
- * Returns the translated text or the key itself if not found
+ * Translate text for a given key with fallback to English
  */
 function t(key) {
     const lang = getCurrentLang();
-    return (translations[lang] && translations[lang][key]) || key;
+    // Try current language first, then fallback to English
+    return (translations[lang] && translations[lang][key]) || 
+           (translations.en && translations.en[key]) || 
+           key;
 }
 
-// Store current language globally
-const currentLang = getCurrentLang();
+// Export for global use
+window.getActiveLanguage = getCurrentLang;
+window.applyTranslations = function(lang) {
+    // This function is now handled by apply-translations.js
+    // This is just a fallback for pages that don't load it
+    if (typeof runTranslations === 'function') {
+        runTranslations();
+    }
+};
