@@ -432,6 +432,20 @@
     </div>
 
     <style>
+        #ai-chat-btn { bottom: 5rem; }
+        #backToTop { bottom: 9.5rem; }
+        #ai-chat-modal { bottom: 10rem; }
+
+        @media (max-width: 768px) {
+            #ai-chat-btn { bottom: 7.5rem; right: 0.9rem; }
+            #backToTop { bottom: 11.75rem; right: 0.9rem; }
+            #ai-chat-modal {
+                right: 0.75rem;
+                bottom: 12rem;
+                max-width: calc(100vw - 24px);
+            }
+        }
+
         #ai-chat-modal { display: none; }
         #ai-chat-modal.open { display: flex; animation: slideUp 0.3s ease-out; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
