@@ -24,6 +24,7 @@ Allow: /reviews.html
 Allow: /contact.html
 Allow: /about.html
 Allow: /faq.html
+Allow: /blog.html
 Allow: /privacy.html
 Allow: /terms.html
 Allow: /cookies.html
