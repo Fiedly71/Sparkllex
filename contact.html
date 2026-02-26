@@ -303,20 +303,57 @@
         menuToggle?.addEventListener('click', () => mobileMenu.classList.add('open'));
         menuClose?.addEventListener('click', () => mobileMenu.classList.remove('open'));
         
-        // Contact form
+        // Contact form submission
         const form = document.getElementById('contact-form');
         const successMsg = document.getElementById('form-success');
+        const submitBtn = form?.querySelector('button[type="submit"]');
         
         form?.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // Simulate form submission
-            const formData = new FormData(form);
-            console.log('Form submitted:', Object.fromEntries(formData));
+            // Disable button and show loading state
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Sending...</span>';
+            }
             
-            // Show success message
-            form.style.display = 'none';
-            successMsg.classList.remove('hidden');
+            try {
+                const formData = new FormData(form);
+                const data = {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone') || '',
+                    subject: formData.get('subject'),
+                    message: formData.get('message')
+                };
+                
+                const response = await fetch('/api/contact-form', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Show success message
+                    form.style.display = 'none';
+                    successMsg.classList.remove('hidden');
+                } else {
+                    throw new Error(result.error || 'Failed to send message');
+                }
+            } catch (error) {
+                console.error('Contact form error:', error);
+                alert('Sorry, there was an error sending your message. Please try again or email us directly at contact@sparkllex.com');
+                
+                // Reset button
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> <span data-i18n="form_send">Send Message</span>';
+                }
+            }
         });
     </script>
 </body>

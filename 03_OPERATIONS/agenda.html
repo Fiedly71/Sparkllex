@@ -51,7 +51,7 @@
 </head>
 <body class="lg:flex min-h-screen">
 
-    <button id="mobile-menu-btn" class="lg:hidden fixed top-20 left-4 z-[101] w-12 h-12 bg-teal-accent text-white rounded-xl shadow-lg flex items-center justify-center">
+    <button id="mobile-menu-btn" class="lg:hidden fixed top-4 left-4 z-[101] w-12 h-12 bg-teal-accent text-white rounded-xl shadow-lg flex items-center justify-center">
         <i class="fas fa-bars"></i>
     </button>
     
@@ -137,9 +137,9 @@
                 <div class="space-y-4">
                     <input type="text" id="task-service" placeholder="Service Type" class="w-full p-4 bg-gray-50 rounded-2xl outline-none">
                     <input type="text" id="task-client-manual" placeholder="Client Name" class="w-full p-4 bg-gray-50 rounded-2xl outline-none">
-                    <div class="flex gap-4">
-                        <input type="date" id="task-date" class="w-1/2 p-4 bg-gray-50 rounded-2xl outline-none">
-                        <input type="time" id="task-time" class="w-1/2 p-4 bg-gray-50 rounded-2xl outline-none">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <input type="date" id="task-date" class="w-full sm:w-1/2 p-4 bg-gray-50 rounded-2xl outline-none">
+                        <input type="time" id="task-time" class="w-full sm:w-1/2 p-4 bg-gray-50 rounded-2xl outline-none">
                     </div>
                     <button onclick="saveTask()" class="w-full bg-teal-admin text-white py-4 rounded-2xl font-black hover:bg-teal-accent transition">CREATE SERVICE</button>
                     <button onclick="closeModal()" class="w-full text-gray-400 text-[10px] font-black uppercase tracking-widest">Cancel</button>

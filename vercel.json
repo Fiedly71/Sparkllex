@@ -68,6 +68,10 @@
     {
       "source": "/api/public-chat",
       "destination": "/api/public-chat.js"
+    },
+    {
+      "source": "/api/contact-form",
+      "destination": "/api/contact-form.js"
     }
   ],
   "cleanUrls": true,
