@@ -98,7 +98,7 @@
 
         <div class="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden">
             <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse min-w-[700px]">
+            <table class="w-full text-left border-collapse">
                 <thead class="bg-gray-50/50 border-b border-gray-100">
                     <tr>
                         <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">Candidate</th>
@@ -140,6 +140,14 @@
     <script>
         let allMembers = [];
 
+        // XSS Protection
+        function escapeHtml(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
         async function checkAdmin() {
             const { data: { session } } = await supabaseClient.auth.getSession();
             if (!session) window.location.href = "../login.html";
@@ -156,10 +164,10 @@
             tableBody.innerHTML = allMembers.map(m => `
                 <tr class="hover:bg-gray-50/50 transition">
                     <td class="p-6">
-                        <div class="font-black text-gray-800">${m.full_name || 'Anonymous'}</div>
-                        <div class="text-[10px] text-gray-400 font-medium">${m.email}</div>
+                        <div class="font-black text-gray-800">${escapeHtml(m.full_name) || 'Anonymous'}</div>
+                        <div class="text-[10px] text-gray-400 font-medium">${escapeHtml(m.email)}</div>
                     </td>
-                    <td class="p-6 text-center text-[10px] font-black text-teal-accent uppercase">${m.country || 'N/A'}</td>
+                    <td class="p-6 text-center text-[10px] font-black text-teal-accent uppercase">${escapeHtml(m.country) || 'N/A'}</td>
                     <td class="p-6 text-center">
                         <span class="px-3 py-1 rounded-lg text-[9px] font-black uppercase ${m.is_verified ? 'bg-emerald-100 text-emerald-600' : 'bg-amber-100 text-amber-600'}">
                             ${m.is_verified ? 'Verified' : 'Pending Review'}

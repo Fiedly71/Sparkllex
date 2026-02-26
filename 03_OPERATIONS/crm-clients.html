@@ -105,7 +105,7 @@
 
         <div class="table-container shadow-xl">
             <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse min-w-[800px]">
+            <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="bg-gray-50/50 border-b border-gray-100">
                         <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest" data-translate="name">Nom Complet</th>
@@ -133,6 +133,14 @@
     <script>
         let allClients = [];
         let currentFilter = 'all';
+
+        // XSS Protection
+        function escapeHtml(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
 
         function filterClients(filter) {
             currentFilter = filter;
@@ -172,10 +180,10 @@
             tableBody.innerHTML = filtered.map(member => `
                 <tr class="hover:bg-teal-50/20 transition group">
                     <td class="p-6">
-                        <div class="font-black text-gray-800">${member.full_name || 'Sans Nom'}</div>
+                        <div class="font-black text-gray-800">${escapeHtml(member.full_name) || 'Sans Nom'}</div>
                         <div class="text-[9px] text-gray-400 font-mono tracking-tighter uppercase">ID: ${member.id.substring(0,8)}</div>
                     </td>
-                    <td class="p-6 text-gray-500 text-sm font-medium italic">${member.email}</td>
+                    <td class="p-6 text-gray-500 text-sm font-medium italic">${escapeHtml(member.email)}</td>
                     <td class="p-6">
                         <span class="px-3 py-1 rounded-lg text-[9px] font-black border ${getPlanStyle(member.plan)} uppercase tracking-widest">
                             ${member.plan || 'BASIC'}

@@ -94,7 +94,7 @@
 
             } catch (err) {
                 console.error(err);
-                statusBox.innerHTML = "Error: " + err.message;
+                statusBox.textContent = "Error: " + err.message;
                 statusBox.classList.replace('text-teal-700', 'text-red-500');
             }
         });

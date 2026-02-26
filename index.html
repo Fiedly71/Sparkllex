@@ -57,6 +57,12 @@
                 <a href="#servicios" class="hover:text-teal-primary transition" id="servicesNav"></a>
                 <a href="#planes" class="hover:text-teal-primary transition" id="plansNav"></a>
                 <a href="how-it-works.html" class="hover:text-teal-primary transition" id="howItWorksNav"></a>
+                <!-- Language Switcher -->
+                <div class="flex items-center gap-1 ml-4">
+                    <button onclick="changeLanguage('en')" id="lang-en" class="px-2 py-1 rounded text-xs font-black uppercase transition hover:bg-teal-50">EN</button>
+                    <span class="text-gray-300">|</span>
+                    <button onclick="changeLanguage('es')" id="lang-es" class="px-2 py-1 rounded text-xs font-black uppercase transition hover:bg-teal-50">ES</button>
+                </div>
             </div>
 
             <div class="flex items-center space-x-4">
@@ -72,6 +78,11 @@
         <a href="#servicios" onclick="toggleMenu()" id="mobileNavServices">Services</a>
         <a href="#planes" onclick="toggleMenu()" id="mobileNavPlans">Plans</a>
         <a href="how-it-works.html" onclick="toggleMenu()" id="mobileHowItWorks">How it works</a>
+        <!-- Mobile Language Switcher -->
+        <div class="flex items-center gap-2 pt-4 border-t border-gray-100">
+            <button onclick="changeLanguage('en'); toggleMenu()" id="mobile-lang-en" class="flex-1 py-2 rounded-lg text-sm font-black uppercase transition bg-gray-100">EN</button>
+            <button onclick="changeLanguage('es'); toggleMenu()" id="mobile-lang-es" class="flex-1 py-2 rounded-lg text-sm font-black uppercase transition bg-gray-100">ES</button>
+        </div>
     </div>
 
     <section id="inicio" class="pt-32 pb-20 bg-gradient-to-br from-teal-primary to-teal-dark text-white text-center">
@@ -286,6 +297,31 @@
         document.getElementById('menu-toggle').addEventListener('click', toggleMenu);
         document.getElementById('menu-close').addEventListener('click', toggleMenu);
 
+        // Language Switcher
+        function changeLanguage(lang) {
+            localStorage.setItem('preferredLang', lang);
+            if (typeof applyTranslations === 'function') applyTranslations(lang);
+            updateLangButtons(lang);
+        }
+
+        function updateLangButtons(lang) {
+            const enBtn = document.getElementById('lang-en');
+            const esBtn = document.getElementById('lang-es');
+            const mobileEnBtn = document.getElementById('mobile-lang-en');
+            const mobileEsBtn = document.getElementById('mobile-lang-es');
+            
+            if (enBtn) enBtn.className = `px-2 py-1 rounded text-xs font-black uppercase transition ${lang === 'en' ? 'bg-teal-primary text-white' : 'hover:bg-teal-50'}`;
+            if (esBtn) esBtn.className = `px-2 py-1 rounded text-xs font-black uppercase transition ${lang === 'es' ? 'bg-teal-primary text-white' : 'hover:bg-teal-50'}`;
+            if (mobileEnBtn) mobileEnBtn.className = `flex-1 py-2 rounded-lg text-sm font-black uppercase transition ${lang === 'en' ? 'bg-teal-primary text-white' : 'bg-gray-100'}`;
+            if (mobileEsBtn) mobileEsBtn.className = `flex-1 py-2 rounded-lg text-sm font-black uppercase transition ${lang === 'es' ? 'bg-teal-primary text-white' : 'bg-gray-100'}`;
+        }
+
+        // Initialize language on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLang') || 'en';
+            updateLangButtons(savedLang);
+        });
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
@@ -472,6 +508,14 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="./database-config.js"></script>
     <script>
+        // XSS Protection
+        function escapeHtml(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
         // Load reviews for homepage
         const MIN_REVIEWS_TO_SHOW = 3;
 
@@ -501,23 +545,23 @@
             container.innerHTML = reviews.map(review => {
                 const stars = generateStars(review.rating);
                 const photos = review.photos ? JSON.parse(review.photos) : [];
-                const firstPhoto = photos.length > 0 ? `<img src="${photos[0]}" alt="Review photo" class="w-full h-32 object-cover rounded-xl mt-4">` : '';
+                const firstPhoto = photos.length > 0 ? `<img src="${escapeHtml(photos[0])}" alt="Review photo" class="w-full h-32 object-cover rounded-xl mt-4">` : '';
 
                 return `
                     <div class="bg-white p-6 rounded-3xl shadow-lg border border-gray-50 reveal">
                         <div class="flex items-start justify-between mb-4">
                             <div class="flex items-center gap-3">
                                 <div class="w-12 h-12 rounded-full bg-teal-primary/10 flex items-center justify-center">
-                                    <span class="text-teal-primary font-black text-lg">${review.client_name ? review.client_name.charAt(0).toUpperCase() : 'A'}</span>
+                                    <span class="text-teal-primary font-black text-lg">${review.client_name ? escapeHtml(review.client_name).charAt(0).toUpperCase() : 'A'}</span>
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-gray-900">${review.client_name || 'Anonymous'}</h4>
-                                    ${review.service_type ? `<span class="text-[10px] font-bold text-teal-primary uppercase">${review.service_type}</span>` : ''}
+                                    <h4 class="font-bold text-gray-900">${escapeHtml(review.client_name) || 'Anonymous'}</h4>
+                                    ${review.service_type ? `<span class="text-[10px] font-bold text-teal-primary uppercase">${escapeHtml(review.service_type)}</span>` : ''}
                                 </div>
                             </div>
                         </div>
                         <div class="flex gap-0.5 mb-3">${stars}</div>
-                        <p class="text-gray-600 text-sm leading-relaxed line-clamp-3">${review.comment || ''}</p>
+                        <p class="text-gray-600 text-sm leading-relaxed line-clamp-3">${escapeHtml(review.comment) || ''}</p>
                         ${firstPhoto}
                     </div>
                 `;
