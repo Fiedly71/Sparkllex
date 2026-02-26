@@ -215,8 +215,83 @@
             </div>
         </div>
 
+        <!-- Leave a Review Section -->
+        <div class="mt-8 premium-card p-8 rounded-3xl">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h3 class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Share Your Experience</h3>
+                    <p class="text-lg font-bold text-slate-elite">Leave a Review</p>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-gold-accent/10 flex items-center justify-center">
+                    <i class="fas fa-star text-gold-accent"></i>
+                </div>
+            </div>
+
+            <form id="review-form" class="space-y-6">
+                <!-- Star Rating -->
+                <div>
+                    <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 block">Your Rating</label>
+                    <div id="star-rating" class="flex gap-2">
+                        <button type="button" onclick="setRating(1)" class="star-btn text-3xl text-gray-200 hover:text-gold-accent transition"><i class="fas fa-star"></i></button>
+                        <button type="button" onclick="setRating(2)" class="star-btn text-3xl text-gray-200 hover:text-gold-accent transition"><i class="fas fa-star"></i></button>
+                        <button type="button" onclick="setRating(3)" class="star-btn text-3xl text-gray-200 hover:text-gold-accent transition"><i class="fas fa-star"></i></button>
+                        <button type="button" onclick="setRating(4)" class="star-btn text-3xl text-gray-200 hover:text-gold-accent transition"><i class="fas fa-star"></i></button>
+                        <button type="button" onclick="setRating(5)" class="star-btn text-3xl text-gray-200 hover:text-gold-accent transition"><i class="fas fa-star"></i></button>
+                    </div>
+                    <input type="hidden" id="rating-value" value="0">
+                </div>
+
+                <!-- Service Type -->
+                <div>
+                    <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 block">Service Type</label>
+                    <select id="service-type" class="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 font-medium text-sm focus:outline-none focus:border-teal-primary transition">
+                        <option value="">Select a service...</option>
+                        <option value="Home Cleaning">Home Cleaning</option>
+                        <option value="Laundry & Ironing">Laundry & Ironing</option>
+                        <option value="Shoe Repair">Shoe Repair</option>
+                        <option value="Home Repairs">Home Repairs</option>
+                        <option value="Multiple Services">Multiple Services</option>
+                    </select>
+                </div>
+
+                <!-- Comment -->
+                <div>
+                    <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 block">Your Comment</label>
+                    <textarea id="review-comment" rows="4" placeholder="Tell us about your experience..." class="w-full p-4 rounded-xl border border-gray-100 bg-gray-50 font-medium text-sm focus:outline-none focus:border-teal-primary transition resize-none"></textarea>
+                </div>
+
+                <!-- Photo Upload -->
+                <div>
+                    <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 block">Add Photos (Optional)</label>
+                    <div class="relative">
+                        <input type="file" id="review-photos" multiple accept="image/*" class="hidden" onchange="handlePhotoSelect(event)">
+                        <button type="button" onclick="document.getElementById('review-photos').click()" class="w-full p-4 rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 hover:border-teal-primary hover:bg-teal-50 transition flex items-center justify-center gap-3">
+                            <i class="fas fa-camera text-gray-400"></i>
+                            <span class="text-sm font-medium text-gray-500">Click to upload photos</span>
+                        </button>
+                    </div>
+                    <div id="photo-preview" class="flex flex-wrap gap-2 mt-3"></div>
+                    <p class="text-[10px] text-gray-400 mt-2">Max 4 photos, 5MB each</p>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="submit-review-btn" class="w-full py-4 bg-teal-primary text-white rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-teal-dark transition-all flex items-center justify-center gap-2">
+                    <i class="fas fa-paper-plane"></i> Submit Review
+                </button>
+            </form>
+
+            <!-- Success Message -->
+            <div id="review-success" class="hidden text-center py-8">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-check text-green-500 text-2xl"></i>
+                </div>
+                <h4 class="text-lg font-bold text-gray-900 mb-2">Thank You!</h4>
+                <p class="text-gray-500 text-sm">Your review has been submitted and is pending approval.</p>
+            </div>
+        </div>
+
         <footer class="py-10 text-center text-gray-600 text-[9px] font-bold uppercase tracking-[0.3em] mt-12 border-t border-gray-200">
-            <div class="text-[7px] uppercase tracking-[0.3em]">Designed by <a href="https://gui-fiedly.vercel.app" target="_blank" rel="noopener noreferrer" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">GF Digital Studio</a> | <a href="mailto:isteah.gffilsaime@gmail.com" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">Gui Fiedly Fils-aime</a></div>
+            <div class="text-[7px] uppercase tracking-[0.3em]"><a href="../privacy.html" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">SPARKLLEX LLC</a> | Designed by <a href="https://gui-fiedly.vercel.app" target="_blank" rel="noopener noreferrer" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">GF Digital Studio</a> | <a href="mailto:isteah.gffilsaime@gmail.com" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">Gui Fiedly Fils-aime</a></div>
         </footer>
     </main>
 
@@ -463,6 +538,160 @@
         
         document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
         document.addEventListener('DOMContentLoaded', checkSession);
+
+        // ========== REVIEW SYSTEM ==========
+        let selectedRating = 0;
+        let selectedPhotos = [];
+        const MAX_PHOTOS = 4;
+        const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+
+        function setRating(rating) {
+            selectedRating = rating;
+            document.getElementById('rating-value').value = rating;
+            
+            const stars = document.querySelectorAll('.star-btn');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.remove('text-gray-200');
+                    star.classList.add('text-gold-accent');
+                } else {
+                    star.classList.add('text-gray-200');
+                    star.classList.remove('text-gold-accent');
+                }
+            });
+        }
+
+        function handlePhotoSelect(event) {
+            const files = Array.from(event.target.files);
+            const preview = document.getElementById('photo-preview');
+            
+            files.forEach(file => {
+                if (selectedPhotos.length >= MAX_PHOTOS) {
+                    alert(`Maximum ${MAX_PHOTOS} photos allowed`);
+                    return;
+                }
+                
+                if (file.size > MAX_FILE_SIZE) {
+                    alert(`File ${file.name} is too large. Max 5MB per photo.`);
+                    return;
+                }
+                
+                if (!file.type.startsWith('image/')) {
+                    alert(`File ${file.name} is not an image.`);
+                    return;
+                }
+                
+                selectedPhotos.push(file);
+                
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const div = document.createElement('div');
+                    div.className = 'relative';
+                    div.innerHTML = `
+                        <img src="${e.target.result}" class="w-20 h-20 object-cover rounded-lg">
+                        <button type="button" onclick="removePhoto(${selectedPhotos.length - 1}, this)" class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full text-xs hover:bg-red-600">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                    preview.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            });
+            
+            event.target.value = '';
+        }
+
+        function removePhoto(index, btn) {
+            selectedPhotos.splice(index, 1);
+            btn.parentElement.remove();
+            
+            // Re-index remaining photos
+            const preview = document.getElementById('photo-preview');
+            const buttons = preview.querySelectorAll('button[onclick^="removePhoto"]');
+            buttons.forEach((button, i) => {
+                button.setAttribute('onclick', `removePhoto(${i}, this)`);
+            });
+        }
+
+        async function uploadPhotos() {
+            const uploadedUrls = [];
+            
+            for (const file of selectedPhotos) {
+                const fileName = `review_${currentUser.id}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}.${file.name.split('.').pop()}`;
+                
+                const { data, error } = await supabaseClient.storage
+                    .from('review-photos')
+                    .upload(fileName, file);
+                
+                if (error) {
+                    console.error('Upload error:', error);
+                    continue;
+                }
+                
+                const { data: urlData } = supabaseClient.storage
+                    .from('review-photos')
+                    .getPublicUrl(fileName);
+                
+                if (urlData?.publicUrl) {
+                    uploadedUrls.push(urlData.publicUrl);
+                }
+            }
+            
+            return uploadedUrls;
+        }
+
+        document.getElementById('review-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (selectedRating === 0) {
+                alert('Please select a rating');
+                return;
+            }
+            
+            const comment = document.getElementById('review-comment').value.trim();
+            const serviceType = document.getElementById('service-type').value;
+            
+            const submitBtn = document.getElementById('submit-review-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Submitting...';
+            
+            try {
+                let photoUrls = [];
+                if (selectedPhotos.length > 0) {
+                    photoUrls = await uploadPhotos();
+                }
+                
+                const { data: profile } = await supabaseClient
+                    .from('profiles')
+                    .select('full_name')
+                    .eq('id', currentUser.id)
+                    .single();
+                
+                const { error } = await supabaseClient
+                    .from('reviews')
+                    .insert({
+                        client_id: currentUser.id,
+                        client_name: profile?.full_name || 'Anonymous',
+                        client_email: currentUser.email,
+                        rating: selectedRating,
+                        service_type: serviceType || null,
+                        comment: comment || null,
+                        photos: photoUrls.length > 0 ? JSON.stringify(photoUrls) : null,
+                        approved: false
+                    });
+                
+                if (error) throw error;
+                
+                document.getElementById('review-form').classList.add('hidden');
+                document.getElementById('review-success').classList.remove('hidden');
+                
+            } catch (error) {
+                console.error('Error submitting review:', error);
+                alert('Error submitting review. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Review';
+            }
+        });
     </script>
 </body>
 </html>

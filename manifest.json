@@ -1,0 +1,27 @@
+{
+  "name": "Sparkllex - Premium Home Services",
+  "short_name": "Sparkllex",
+  "description": "Premium home cleaning, laundry, and maintenance services. Experience the Sparkllex difference.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#F4F9F9",
+  "theme_color": "#008080",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "utilities"],
+  "lang": "en",
+  "dir": "ltr"
+}

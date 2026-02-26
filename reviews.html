@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Reviews - Sparkllex</title>
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    
+    <script src="./translations.js"></script>
+    <script src="./apply-translations.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-primary': '#008080',
+                        'teal-dark': '#006666',
+                        'light-bg': '#F4F9F9',
+                        'gold-accent': '#D4AF37',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .nav-glass { backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.85); }
+        .review-card { background: white; border-radius: 1.5rem; border: 1px solid rgba(0,128,128,0.08); transition: all 0.3s; }
+        .review-card:hover { box-shadow: 0 20px 40px -15px rgba(0,128,128,0.15); transform: translateY(-2px); }
+        .star-filled { color: #D4AF37; }
+        .star-empty { color: #e5e7eb; }
+        .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 0.5rem; }
+        .review-photo { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 0.75rem; cursor: pointer; transition: transform 0.2s; }
+        .review-photo:hover { transform: scale(1.05); }
+        .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; align-items: center; justify-content: center; }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-width: 90%; max-height: 90%; border-radius: 1rem; }
+        .lang-btn { font-size: 0.7rem; font-weight: 800; padding: 0.4rem 0.8rem; border-radius: 9999px; border: 1.5px solid #008080; cursor: pointer; transition: 0.3s; }
+        .lang-active { background-color: #008080 !important; color: white !important; }
+        .lang-inactive { background-color: transparent !important; color: #008080 !important; }
+    </style>
+</head>
+<body class="bg-light-bg text-gray-800 antialiased font-sans">
+
+    <!-- Lightbox for photos -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Review photo">
+        <button class="absolute top-6 right-6 text-white text-3xl hover:opacity-70" onclick="closeLightbox()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-glass border-b border-teal-primary/10">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center h-20">
+            <a href="index.html"><img src="./images/logo.png" alt="Sparkllex Logo" class="h-14 md:h-16"></a>
+            
+            <div class="flex items-center space-x-3">
+                <div class="flex bg-gray-100 p-1 rounded-full">
+                    <button onclick="changeLanguage('es')" id="btn-es" class="lang-btn">ES</button>
+                    <button onclick="changeLanguage('en')" id="btn-en" class="lang-btn">EN</button>
+                </div>
+                <a href="index.html" class="ml-4 text-teal-primary font-black text-[10px] uppercase tracking-widest hover:text-teal-dark transition flex items-center gap-2">
+                    <i class="fas fa-arrow-left"></i> <span data-translate="navHome">Home</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-20">
+        <div class="max-w-6xl mx-auto px-6">
+            
+            <!-- Header -->
+            <header class="text-center mb-16">
+                <span class="text-teal-primary font-black text-xs uppercase tracking-[0.3em] mb-4 block">Testimonials</span>
+                <h1 class="text-4xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight" data-translate="reviewsPageTitle">What Our Clients Say</h1>
+                <p class="text-gray-500 max-w-2xl mx-auto" data-translate="reviewsPageSubtitle">Real experiences from our valued members who trust Sparkllex for their home care needs.</p>
+                
+                <!-- Stats -->
+                <div class="flex justify-center gap-8 mt-10">
+                    <div class="text-center">
+                        <p id="total-reviews" class="text-4xl font-black text-teal-primary">0</p>
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Reviews</p>
+                    </div>
+                    <div class="text-center">
+                        <p id="average-rating" class="text-4xl font-black text-gold-accent">0.0</p>
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Average</p>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Filter buttons -->
+            <div class="flex justify-center gap-2 mb-10 flex-wrap">
+                <button onclick="filterReviews('all')" class="filter-btn active px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-teal-primary text-white" data-filter="all">All</button>
+                <button onclick="filterReviews(5)" class="filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-gray-100 text-gray-600 hover:bg-teal-primary hover:text-white transition" data-filter="5">5 Stars</button>
+                <button onclick="filterReviews(4)" class="filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-gray-100 text-gray-600 hover:bg-teal-primary hover:text-white transition" data-filter="4">4 Stars</button>
+                <button onclick="filterReviews(3)" class="filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-gray-100 text-gray-600 hover:bg-teal-primary hover:text-white transition" data-filter="3">3 Stars</button>
+            </div>
+
+            <!-- Reviews Grid -->
+            <div id="reviews-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Reviews will be loaded here dynamically -->
+                <div class="col-span-full text-center py-20">
+                    <i class="fas fa-spinner fa-spin text-4xl text-teal-primary mb-4"></i>
+                    <p class="text-gray-400 font-medium">Loading reviews...</p>
+                </div>
+            </div>
+
+            <!-- Empty state -->
+            <div id="empty-state" class="hidden text-center py-20">
+                <i class="fas fa-star text-6xl text-gray-200 mb-6"></i>
+                <h3 class="text-xl font-bold text-gray-400 mb-2">No reviews yet</h3>
+                <p class="text-gray-400">Be the first to share your experience!</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="py-16 bg-white text-center border-t border-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-center space-x-10 mb-8">
+                <a href="terms.html" class="text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-teal-primary transition">Terms</a>
+                <a href="privacy.html" class="text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-teal-primary transition">Privacy</a>
+                <a href="cookies.html" class="text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-teal-primary transition">Cookies</a>
+            </div>
+            <p class="text-[10px] text-gray-300 uppercase tracking-[0.3em] font-black">
+                &copy; 2026 Sparkllex. All rights reserved.
+            </p>
+            <div class="text-[7px] uppercase tracking-[0.3em] mt-4">
+                <a href="privacy.html" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">SPARKLLEX LLC</a> | 
+                Designed by <a href="https://gui-fiedly.vercel.app" target="_blank" rel="noopener noreferrer" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">GF Digital Studio</a> | 
+                <a href="mailto:isteah.gffilsaime@gmail.com" style="color: #008080; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">Gui Fiedly Fils-aime</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./database-config.js"></script>
+
+    <script>
+        let allReviews = [];
+        let currentFilter = 'all';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            initializeSupabase();
+            await loadReviews();
+            
+            const initial = (typeof getActiveLanguage === 'function') ? getActiveLanguage() : (localStorage.getItem('preferredLang') || 'en');
+            updateUI(initial);
+        });
+
+        function updateUI(lang) {
+            if (typeof applyTranslations === 'function') applyTranslations(lang);
+            document.getElementById('btn-es').className = lang === 'es' ? 'lang-btn lang-active' : 'lang-btn lang-inactive';
+            document.getElementById('btn-en').className = lang === 'en' ? 'lang-btn lang-active' : 'lang-btn lang-inactive';
+        }
+
+        function changeLanguage(lang) {
+            localStorage.setItem('preferredLang', lang);
+            updateUI(lang);
+        }
+
+        async function loadReviews() {
+            try {
+                if (!supabaseClient) {
+                    document.getElementById('reviews-container').innerHTML = `
+                        <div class="col-span-full text-center py-20">
+                            <i class="fas fa-star text-6xl text-gray-200 mb-6"></i>
+                            <h3 class="text-xl font-bold text-gray-400 mb-2">Reviews Coming Soon</h3>
+                            <p class="text-gray-400">Check back later for customer testimonials!</p>
+                        </div>
+                    `;
+                    return;
+                }
+                const { data, error } = await supabaseClient
+                    .from('reviews')
+                    .select('*')
+                    .eq('approved', true)
+                    .order('created_at', { ascending: false });
+
+                if (error) throw error;
+
+                allReviews = data || [];
+                updateStats();
+                renderReviews(allReviews);
+
+            } catch (err) {
+                console.error('Error loading reviews:', err);
+                document.getElementById('reviews-container').innerHTML = `
+                    <div class="col-span-full text-center py-20">
+                        <i class="fas fa-exclamation-circle text-4xl text-red-400 mb-4"></i>
+                        <p class="text-gray-400 font-medium">Error loading reviews. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('total-reviews').textContent = allReviews.length;
+            
+            if (allReviews.length > 0) {
+                const avg = allReviews.reduce((sum, r) => sum + r.rating, 0) / allReviews.length;
+                document.getElementById('average-rating').textContent = avg.toFixed(1);
+            }
+        }
+
+        function renderReviews(reviews) {
+            const container = document.getElementById('reviews-container');
+            const emptyState = document.getElementById('empty-state');
+
+            if (reviews.length === 0) {
+                container.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            container.innerHTML = reviews.map(review => createReviewCard(review)).join('');
+        }
+
+        function createReviewCard(review) {
+            const stars = generateStars(review.rating);
+            const photos = review.photos ? JSON.parse(review.photos) : [];
+            const photosHtml = photos.length > 0 ? `
+                <div class="photo-grid mt-4">
+                    ${photos.map(url => `<img src="${url}" alt="Review photo" class="review-photo" onclick="openLightbox('${url}', event)">`).join('')}
+                </div>
+            ` : '';
+
+            const date = new Date(review.created_at).toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            });
+
+            return `
+                <div class="review-card p-6" data-rating="${review.rating}">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full bg-teal-primary/10 flex items-center justify-center">
+                                <span class="text-teal-primary font-black text-lg">${review.client_name ? review.client_name.charAt(0).toUpperCase() : 'A'}</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">${review.client_name || 'Anonymous'}</h4>
+                                <p class="text-xs text-gray-400">${date}</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-0.5">
+                            ${stars}
+                        </div>
+                    </div>
+                    
+                    ${review.service_type ? `<span class="inline-block px-3 py-1 bg-teal-50 text-teal-700 text-[10px] font-bold uppercase tracking-wider rounded-full mb-3">${review.service_type}</span>` : ''}
+                    
+                    <p class="text-gray-600 leading-relaxed">${review.comment || ''}</p>
+                    
+                    ${photosHtml}
+                </div>
+            `;
+        }
+
+        function generateStars(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                stars += `<i class="fas fa-star ${i <= rating ? 'star-filled' : 'star-empty'}"></i>`;
+            }
+            return stars;
+        }
+
+        function filterReviews(filter) {
+            currentFilter = filter;
+            
+            // Update button states
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                const btnFilter = btn.dataset.filter;
+                if (btnFilter === String(filter)) {
+                    btn.classList.add('bg-teal-primary', 'text-white');
+                    btn.classList.remove('bg-gray-100', 'text-gray-600');
+                } else {
+                    btn.classList.remove('bg-teal-primary', 'text-white');
+                    btn.classList.add('bg-gray-100', 'text-gray-600');
+                }
+            });
+
+            // Filter reviews
+            const filtered = filter === 'all' 
+                ? allReviews 
+                : allReviews.filter(r => r.rating === filter);
+            
+            renderReviews(filtered);
+        }
+
+        function openLightbox(url, event) {
+            event.stopPropagation();
+            document.getElementById('lightbox-img').src = url;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close lightbox on escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+    <script src="cookie-consent.js"></script>
+</body>
+</html>

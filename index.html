@@ -6,6 +6,14 @@
     <title>Sparkllex - Luxury & Perfection</title>
     <link rel="icon" type="image/png" href="./images/logo.png">
     
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#008080">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Sparkllex">
+    <link rel="apple-touch-icon" href="./images/logo.png">
+    
     <script src="./translations.js"></script>
     <script src="./apply-translations.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -185,6 +193,28 @@
         </div>
     </section>
 
+    <!-- Customer Reviews Section -->
+    <section id="reviews-section" class="py-24 bg-light-bg hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="text-teal-primary font-black text-xs uppercase tracking-[0.3em] mb-4 block" data-translate="reviewsLabel">What Our Clients Say</span>
+                <h2 class="text-4xl md:text-5xl font-black mb-6" data-translate="reviewsTitle">Customer Reviews</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto" data-translate="reviewsSubtitle">Real experiences from our valued members who trust Sparkllex for their home care needs.</p>
+            </div>
+
+            <div id="home-reviews-container" class="grid md:grid-cols-3 gap-6 mb-12">
+                <!-- Reviews will be dynamically loaded here -->
+            </div>
+
+            <div class="text-center reveal">
+                <a href="reviews.html" class="btn-teal px-10 py-5 rounded-full font-black text-sm uppercase tracking-widest inline-flex items-center gap-3">
+                    <span data-translate="viewAllReviews">View All Reviews</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <section class="py-24 bg-white overflow-hidden">
         <div class="max-w-7xl mx-auto px-6">
             <div class="relative bg-teal-dark rounded-[3rem] overflow-hidden shadow-2xl flex flex-col md:flex-row items-center reveal">
@@ -245,7 +275,7 @@
             
             <div class="text-center">
                 <p class="opacity-40 text-[10px] uppercase font-bold tracking-[0.3em]" id="footerRights">&copy; 2026 Sparkllex. All rights reserved.</p>
-                <div class="text-[7px] uppercase tracking-[0.3em] mt-4">Designed by <a href="https://gui-fiedly.vercel.app" target="_blank" rel="noopener noreferrer" style="color: white; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">GF Digital Studio</a> | <a href="mailto:isteah.gffilsaime@gmail.com" style="color: white; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">Gui Fiedly Fils-aime</a></div>
+                <div class="text-[7px] uppercase tracking-[0.3em] mt-4"><a href="privacy.html" style="color: white; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">SPARKLLEX LLC</a> | Designed by <a href="https://gui-fiedly.vercel.app" target="_blank" rel="noopener noreferrer" style="color: white; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">GF Digital Studio</a> | <a href="mailto:isteah.gffilsaime@gmail.com" style="color: white; text-decoration: underline;" class="hover:opacity-80 transition cursor-pointer">Gui Fiedly Fils-aime</a></div>
             </div>
         </div>
     </footer>
@@ -437,6 +467,81 @@
             document.getElementById('ai-welcome').textContent = '¡Hola! Soy el asistente de Sparkllex. ¡Pregúntame sobre nuestros servicios, planes o cómo empezar!';
         }
     </script>
+
+    <!-- Supabase for Reviews -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./database-config.js"></script>
+    <script>
+        // Load reviews for homepage
+        const MIN_REVIEWS_TO_SHOW = 3;
+
+        async function loadHomeReviews() {
+            try {
+                if (!supabaseClient) return;
+                const { data: reviews, error } = await supabaseClient
+                    .from('reviews')
+                    .select('*')
+                    .eq('approved', true)
+                    .order('created_at', { ascending: false })
+                    .limit(6);
+
+                if (error) throw error;
+
+                if (reviews && reviews.length >= MIN_REVIEWS_TO_SHOW) {
+                    document.getElementById('reviews-section').classList.remove('hidden');
+                    renderHomeReviews(reviews.slice(0, 3));
+                }
+            } catch (err) {
+                console.error('Error loading reviews:', err);
+            }
+        }
+
+        function renderHomeReviews(reviews) {
+            const container = document.getElementById('home-reviews-container');
+            container.innerHTML = reviews.map(review => {
+                const stars = generateStars(review.rating);
+                const photos = review.photos ? JSON.parse(review.photos) : [];
+                const firstPhoto = photos.length > 0 ? `<img src="${photos[0]}" alt="Review photo" class="w-full h-32 object-cover rounded-xl mt-4">` : '';
+
+                return `
+                    <div class="bg-white p-6 rounded-3xl shadow-lg border border-gray-50 reveal">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-full bg-teal-primary/10 flex items-center justify-center">
+                                    <span class="text-teal-primary font-black text-lg">${review.client_name ? review.client_name.charAt(0).toUpperCase() : 'A'}</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900">${review.client_name || 'Anonymous'}</h4>
+                                    ${review.service_type ? `<span class="text-[10px] font-bold text-teal-primary uppercase">${review.service_type}</span>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-0.5 mb-3">${stars}</div>
+                        <p class="text-gray-600 text-sm leading-relaxed line-clamp-3">${review.comment || ''}</p>
+                        ${firstPhoto}
+                    </div>
+                `;
+            }).join('');
+
+            // Re-observe new elements for reveal animation
+            document.querySelectorAll('#home-reviews-container .reveal').forEach(el => observer.observe(el));
+        }
+
+        function generateStars(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                stars += `<i class="fas fa-star ${i <= rating ? 'text-gold-accent' : 'text-gray-200'}"></i>`;
+            }
+            return stars;
+        }
+
+        // Load reviews when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeSupabase();
+            loadHomeReviews();
+        });
+    </script>
     <script src="cookie-consent.js"></script>
+    <script src="pwa-install.js"></script>
 </body>
 </html>

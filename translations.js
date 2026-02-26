@@ -85,6 +85,23 @@ const translations = {
         designCredit: "Designed by GF Studio",
         whatsappLabel: "WhatsApp",
         
+        // Reviews section
+        reviewsLabel: "What Our Clients Say",
+        reviewsTitle: "Customer Reviews",
+        reviewsSubtitle: "Real experiences from our valued members who trust Sparkllex for their home care needs.",
+        viewAllReviews: "View All Reviews",
+        reviewsPageTitle: "What Our Clients Say",
+        reviewsPageSubtitle: "Real experiences from our valued members who trust Sparkllex for their home care needs.",
+        leaveReview: "Leave a Review",
+        shareExperience: "Share Your Experience",
+        yourRating: "Your Rating",
+        serviceType: "Service Type",
+        yourComment: "Your Comment",
+        addPhotos: "Add Photos (Optional)",
+        submitReview: "Submit Review",
+        reviewSuccess: "Thank You!",
+        reviewPending: "Your review has been submitted and is pending approval.",
+        
         // Login page
         loginTitle: "Welcome Back",
         loginEmail: "Email",
@@ -551,6 +568,23 @@ const translations = {
         footerRights: "© 2026 Sparkllex. Todos los derechos reservados.",
         designCredit: "Diseñado por GF Studio",
         whatsappLabel: "WhatsApp",
+        
+        // Reviews section
+        reviewsLabel: "Lo Que Dicen Nuestros Clientes",
+        reviewsTitle: "Reseñas de Clientes",
+        reviewsSubtitle: "Experiencias reales de nuestros valiosos miembros que confían en Sparkllex para el cuidado de su hogar.",
+        viewAllReviews: "Ver Todas las Reseñas",
+        reviewsPageTitle: "Lo Que Dicen Nuestros Clientes",
+        reviewsPageSubtitle: "Experiencias reales de nuestros valiosos miembros que confían en Sparkllex para el cuidado de su hogar.",
+        leaveReview: "Dejar una Reseña",
+        shareExperience: "Comparte Tu Experiencia",
+        yourRating: "Tu Calificación",
+        serviceType: "Tipo de Servicio",
+        yourComment: "Tu Comentario",
+        addPhotos: "Añadir Fotos (Opcional)",
+        submitReview: "Enviar Reseña",
+        reviewSuccess: "¡Gracias!",
+        reviewPending: "Tu reseña ha sido enviada y está pendiente de aprobación.",
         
         // Login page
         loginTitle: "Bienvenido de Vuelta",
