@@ -238,6 +238,14 @@
         showLanguageSuggestion();
     });
 
+    // Listen for language changes from language-selector.js
+    window.addEventListener('languageChanged', (e) => {
+        const lang = e.detail && e.detail.lang;
+        if (lang) {
+            setLanguage(lang);
+        }
+    });
+
     /**
      * Detect browser language and show suggestion banner if different from current
      */
