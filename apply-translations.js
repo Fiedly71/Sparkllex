@@ -157,6 +157,8 @@
         activeLang = normalized;
         localStorage.setItem(STORAGE_KEY, activeLang);
         runTranslations();
+        // Update all links with the new language parameter
+        addLangParamToLinks();
     }
 
     /**
@@ -210,11 +212,16 @@
     function addLangParamToLinks() {
         const links = document.querySelectorAll('a[href]:not([href^="http"]):not([href^="/"]):not([href^="mailto"]):not([href^="tel"]):not([href^="#"])');
         links.forEach(link => {
-            const href = link.getAttribute('href');
-            if (!href.includes('?lang=') && !href.includes('&lang=')) {
-                const separator = href.includes('?') ? '&' : '?';
-                link.setAttribute('href', href + separator + 'lang=' + activeLang);
-            }
+            let href = link.getAttribute('href');
+            
+            // Remove existing lang parameter if present
+            href = href.replace(/[?&]lang=[a-z]{2}/gi, '');
+            // Clean up double ? or & after removal
+            href = href.replace(/\?&/, '?').replace(/&&/, '&').replace(/\?$/, '').replace(/&$/, '');
+            
+            // Add current language parameter
+            const separator = href.includes('?') ? '&' : '?';
+            link.setAttribute('href', href + separator + 'lang=' + activeLang);
         });
     }
 
