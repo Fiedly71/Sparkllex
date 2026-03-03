@@ -1,40 +1,88 @@
 /**
  * SPARKLLEX PWA INSTALL PROMPT
- * Shows install prompt every 5 visits if user hasn't installed the app
+ * Shows install prompt for all users with clear instructions
  */
 
 (function() {
     'use strict';
 
-    const VISIT_COUNT_KEY = 'sparkllex_visit_count';
     const INSTALLED_KEY = 'sparkllex_app_installed';
-    const DISMISSED_KEY = 'sparkllex_prompt_dismissed';
-    const PROMPT_INTERVAL = 5;
+    const DISMISSED_SESSION_KEY = 'sparkllex_pwa_dismissed_session';
 
     let deferredPrompt = null;
 
     // Get current language
     function getLang() {
-        return localStorage.getItem('preferredLang') || 'en';
+        return localStorage.getItem('sparkllex_language') || localStorage.getItem('preferredLang') || 'en';
     }
 
-    // Translations
+    // Translations with detailed iOS instructions
     const translations = {
         en: {
-            title: 'Add Sparkllex to Home Screen',
-            description: 'Install our app for quick access to your premium home services!',
+            title: 'Install Sparkllex App',
+            description: 'Get quick access to your premium home services!',
             installBtn: 'Install App',
-            dismissBtn: 'Not Now',
-            iosInstructions: 'Tap <strong>Share</strong> <i class="fas fa-share-square"></i> then <strong>"Add to Home Screen"</strong>',
-            androidInstructions: 'Tap the menu and select "Add to Home Screen"'
+            dismissBtn: 'Maybe Later',
+            iosTitle: 'Install on iPhone',
+            iosStep1: '1. Tap the <strong>Share</strong> button <i class="fas fa-share-from-square"></i> at the bottom of Safari',
+            iosStep2: '2. Scroll down and tap <strong>"Add to Home Screen"</strong> <i class="fas fa-plus-square"></i>',
+            iosStep3: '3. Tap <strong>"Add"</strong> in the top right corner',
+            androidInstructions: 'Tap the menu ⋮ and select "Add to Home Screen"'
         },
         es: {
-            title: 'Añadir Sparkllex a Inicio',
-            description: '¡Instala nuestra app para acceder rápidamente a tus servicios premium del hogar!',
+            title: 'Instalar App Sparkllex',
+            description: '¡Acceso rápido a tus servicios premium del hogar!',
             installBtn: 'Instalar App',
-            dismissBtn: 'Ahora No',
-            iosInstructions: 'Toca <strong>Compartir</strong> <i class="fas fa-share-square"></i> luego <strong>"Añadir a Inicio"</strong>',
-            androidInstructions: 'Toca el menú y selecciona "Añadir a pantalla de inicio"'
+            dismissBtn: 'Quizás Después',
+            iosTitle: 'Instalar en iPhone',
+            iosStep1: '1. Toca el botón <strong>Compartir</strong> <i class="fas fa-share-from-square"></i> en la parte inferior de Safari',
+            iosStep2: '2. Desplázate y toca <strong>"Añadir a Inicio"</strong> <i class="fas fa-plus-square"></i>',
+            iosStep3: '3. Toca <strong>"Añadir"</strong> en la esquina superior derecha',
+            androidInstructions: 'Toca el menú ⋮ y selecciona "Añadir a pantalla de inicio"'
+        },
+        fr: {
+            title: 'Installer l\'App Sparkllex',
+            description: 'Accès rapide à vos services premium à domicile!',
+            installBtn: 'Installer l\'App',
+            dismissBtn: 'Plus Tard',
+            iosTitle: 'Installer sur iPhone',
+            iosStep1: '1. Appuyez sur le bouton <strong>Partager</strong> <i class="fas fa-share-from-square"></i> en bas de Safari',
+            iosStep2: '2. Faites défiler et appuyez sur <strong>"Sur l\'écran d\'accueil"</strong> <i class="fas fa-plus-square"></i>',
+            iosStep3: '3. Appuyez sur <strong>"Ajouter"</strong> en haut à droite',
+            androidInstructions: 'Appuyez sur le menu ⋮ et sélectionnez "Ajouter à l\'écran d\'accueil"'
+        },
+        pt: {
+            title: 'Instalar App Sparkllex',
+            description: 'Acesso rápido aos seus serviços premium para casa!',
+            installBtn: 'Instalar App',
+            dismissBtn: 'Talvez Depois',
+            iosTitle: 'Instalar no iPhone',
+            iosStep1: '1. Toque no botão <strong>Compartilhar</strong> <i class="fas fa-share-from-square"></i> na parte inferior do Safari',
+            iosStep2: '2. Role para baixo e toque em <strong>"Adicionar à Tela de Início"</strong> <i class="fas fa-plus-square"></i>',
+            iosStep3: '3. Toque em <strong>"Adicionar"</strong> no canto superior direito',
+            androidInstructions: 'Toque no menu ⋮ e selecione "Adicionar à tela inicial"'
+        },
+        de: {
+            title: 'Sparkllex App Installieren',
+            description: 'Schneller Zugriff auf Ihre Premium-Haushaltsservices!',
+            installBtn: 'App Installieren',
+            dismissBtn: 'Vielleicht Später',
+            iosTitle: 'Auf iPhone Installieren',
+            iosStep1: '1. Tippen Sie auf <strong>Teilen</strong> <i class="fas fa-share-from-square"></i> unten in Safari',
+            iosStep2: '2. Scrollen Sie und tippen Sie auf <strong>"Zum Home-Bildschirm"</strong> <i class="fas fa-plus-square"></i>',
+            iosStep3: '3. Tippen Sie oben rechts auf <strong>"Hinzufügen"</strong>',
+            androidInstructions: 'Tippen Sie auf das Menü ⋮ und wählen Sie "Zum Startbildschirm hinzufügen"'
+        },
+        it: {
+            title: 'Installa App Sparkllex',
+            description: 'Accesso rapido ai tuoi servizi premium per la casa!',
+            installBtn: 'Installa App',
+            dismissBtn: 'Forse Dopo',
+            iosTitle: 'Installa su iPhone',
+            iosStep1: '1. Tocca il pulsante <strong>Condividi</strong> <i class="fas fa-share-from-square"></i> in basso su Safari',
+            iosStep2: '2. Scorri verso il basso e tocca <strong>"Aggiungi a Home"</strong> <i class="fas fa-plus-square"></i>',
+            iosStep3: '3. Tocca <strong>"Aggiungi"</strong> in alto a destra',
+            androidInstructions: 'Tocca il menu ⋮ e seleziona "Aggiungi a schermata Home"'
         }
     };
 
@@ -50,7 +98,7 @@
         return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     }
 
-    // Check if should show prompt
+    // Check if should show prompt - NOW SHOWS FOR ALL USERS
     function shouldShowPrompt() {
         // Already installed
         if (isStandalone()) {
@@ -63,19 +111,13 @@
             return false;
         }
 
-        // User dismissed permanently
-        if (localStorage.getItem(DISMISSED_KEY) === 'permanent') {
+        // Dismissed this session only (will show again on next visit)
+        if (sessionStorage.getItem(DISMISSED_SESSION_KEY) === 'true') {
             return false;
         }
 
-        // Check visit count
-        let visitCount = parseInt(localStorage.getItem(VISIT_COUNT_KEY) || '0');
-        visitCount++;
-        localStorage.setItem(VISIT_COUNT_KEY, visitCount.toString());
-
-        // Show on first visit, then every 5 visits
-        if (visitCount === 1) return true;
-        return visitCount % PROMPT_INTERVAL === 0;
+        // Show for everyone!
+        return true;
     }
 
     // Create and show the prompt modal
@@ -93,28 +135,51 @@
                         <div class="w-16 h-16 bg-white rounded-2xl mx-auto flex items-center justify-center shadow-lg mb-4">
                             <img src="./images/logo.png" alt="Sparkllex" class="w-12 h-12 object-contain">
                         </div>
-                        <h3 class="text-white text-xl font-black">${t.title}</h3>
+                        <h3 class="text-white text-xl font-black">${isIOSDevice ? t.iosTitle : t.title}</h3>
                     </div>
                     
                     <!-- Content -->
-                    <div class="p-6 text-center">
-                        <p class="text-gray-600 mb-6">${t.description}</p>
-                        
+                    <div class="p-6">
                         ${isIOSDevice ? `
-                            <div class="bg-blue-50 border border-blue-100 rounded-2xl p-4 mb-6">
-                                <p class="text-blue-700 text-sm">${t.iosInstructions}</p>
+                            <!-- iOS Step-by-step instructions -->
+                            <div class="space-y-4 mb-6">
+                                <div class="flex items-start gap-3 p-4 bg-blue-50 rounded-2xl border border-blue-100">
+                                    <div class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold text-sm">1</div>
+                                    <p class="text-blue-800 text-sm leading-relaxed">${t.iosStep1}</p>
+                                </div>
+                                <div class="flex items-start gap-3 p-4 bg-blue-50 rounded-2xl border border-blue-100">
+                                    <div class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold text-sm">2</div>
+                                    <p class="text-blue-800 text-sm leading-relaxed">${t.iosStep2}</p>
+                                </div>
+                                <div class="flex items-start gap-3 p-4 bg-blue-50 rounded-2xl border border-blue-100">
+                                    <div class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold text-sm">3</div>
+                                    <p class="text-blue-800 text-sm leading-relaxed">${t.iosStep3}</p>
+                                </div>
                             </div>
-                        ` : ''}
+                            
+                            <!-- Visual indicator pointing to share button -->
+                            <div class="text-center mb-4">
+                                <i class="fas fa-arrow-down text-blue-500 text-2xl animate-bounce"></i>
+                            </div>
+                        ` : `
+                            <p class="text-gray-600 text-center mb-6">${t.description}</p>
+                        `}
                         
                         <div class="flex flex-col gap-3">
                             ${!isIOSDevice ? `
                                 <button id="pwa-install-btn" class="w-full py-4 bg-teal-600 text-white rounded-2xl font-black text-sm uppercase tracking-wider hover:bg-teal-700 transition flex items-center justify-center gap-2">
                                     <i class="fas fa-download"></i> ${t.installBtn}
                                 </button>
+                            ` : `
+                                <button id="pwa-dismiss-btn" class="w-full py-4 bg-teal-600 text-white rounded-2xl font-black text-sm uppercase tracking-wider hover:bg-teal-700 transition">
+                                    OK, Got it!
+                                </button>
+                            `}
+                            ${!isIOSDevice ? `
+                                <button id="pwa-dismiss-btn" class="w-full py-3 text-gray-500 font-bold text-sm uppercase tracking-wider hover:text-gray-700 transition">
+                                    ${t.dismissBtn}
+                                </button>
                             ` : ''}
-                            <button id="pwa-dismiss-btn" class="w-full py-3 text-gray-500 font-bold text-sm uppercase tracking-wider hover:text-gray-700 transition">
-                                ${t.dismissBtn}
-                            </button>
                         </div>
                     </div>
                     
@@ -170,6 +235,8 @@
         const dismissBtn = document.getElementById('pwa-dismiss-btn');
         if (dismissBtn) {
             dismissBtn.addEventListener('click', () => {
+                // Only dismiss for this session - will show again on next visit
+                sessionStorage.setItem(DISMISSED_SESSION_KEY, 'true');
                 closeModal();
             });
         }
@@ -179,6 +246,7 @@
         if (modal) {
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
+                    sessionStorage.setItem(DISMISSED_SESSION_KEY, 'true');
                     closeModal();
                 }
             });
@@ -194,23 +262,26 @@
         }
     }
 
-    // Listen for beforeinstallprompt event (Chrome, Edge)
+    // Listen for beforeinstallprompt event (Chrome, Edge, Android)
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
         
-        // Check if should show prompt
+        // Show prompt for all users
         if (shouldShowPrompt()) {
-            setTimeout(() => showInstallPrompt(), 2000); // Delay 2s after page load
+            setTimeout(() => showInstallPrompt(), 1500); // Delay 1.5s after page load
         }
     });
 
-    // For iOS, check on page load
-    if (isIOS() && shouldShowPrompt()) {
-        window.addEventListener('load', () => {
-            setTimeout(() => showInstallPrompt(), 2000);
-        });
-    }
+    // For iOS and other browsers without beforeinstallprompt, check on page load
+    window.addEventListener('load', () => {
+        // Wait a bit before showing
+        setTimeout(() => {
+            if (shouldShowPrompt() && !document.getElementById('pwa-install-modal')) {
+                showInstallPrompt();
+            }
+        }, 2000);
+    });
 
     // Track when app is installed
     window.addEventListener('appinstalled', () => {
