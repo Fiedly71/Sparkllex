@@ -381,6 +381,10 @@
                 backToTop.classList.remove('opacity-100');
             }
         });
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
     </script>
 
     <!-- Floating AI Chat Button & Modal -->
