@@ -6,32 +6,20 @@
 (function() {
     'use strict';
 
-    // Available languages with flags (using emoji for simplicity)
+    // Available languages with flags (only EN and ES have full translations)
     const LANGUAGES = {
         en: { name: 'English', flag: '🇺🇸', region: 'US' },
-        es: { name: 'Español', flag: '🇨🇱', region: 'CL' },
-        fr: { name: 'Français', flag: '🇫🇷', region: 'FR' },
-        pt: { name: 'Português', flag: '🇧🇷', region: 'BR' },
-        de: { name: 'Deutsch', flag: '🇩🇪', region: 'DE' },
-        it: { name: 'Italiano', flag: '🇮🇹', region: 'IT' }
+        es: { name: 'Español', flag: '🇨🇱', region: 'CL' }
     };
 
-    // Country to language mapping for auto-detection
+    // Country to language mapping for auto-detection (only EN and ES)
     const COUNTRY_TO_LANG = {
         // English-speaking countries
         'US': 'en', 'GB': 'en', 'CA': 'en', 'AU': 'en', 'NZ': 'en', 'IE': 'en',
         // Spanish-speaking countries
         'CL': 'es', 'ES': 'es', 'MX': 'es', 'AR': 'es', 'CO': 'es', 'PE': 'es', 
         'VE': 'es', 'EC': 'es', 'BO': 'es', 'UY': 'es', 'PY': 'es', 'CR': 'es',
-        'PA': 'es', 'DO': 'es', 'GT': 'es', 'HN': 'es', 'SV': 'es', 'NI': 'es',
-        // French-speaking countries
-        'FR': 'fr', 'BE': 'fr', 'CH': 'fr', 'LU': 'fr', 'MC': 'fr',
-        // Portuguese-speaking countries
-        'BR': 'pt', 'PT': 'pt', 'AO': 'pt', 'MZ': 'pt',
-        // German-speaking countries
-        'DE': 'de', 'AT': 'de',
-        // Italian-speaking countries
-        'IT': 'it'
+        'PA': 'es', 'DO': 'es', 'GT': 'es', 'HN': 'es', 'SV': 'es', 'NI': 'es'
     };
 
     const STORAGE_KEY = 'sparkllex_language';
