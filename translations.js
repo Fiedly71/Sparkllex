@@ -1445,13 +1445,103 @@ const translations = {
         
         // About
         about_mission_title: "Notre Mission",
+        about_mission_text: "Fournir des services de nettoyage premium qui transforment les espaces et dépassent les attentes.",
         about_vision_title: "Notre Vision",
+        about_vision_text: "Devenir le nom le plus fiable en services de nettoyage premium dans les Amériques.",
         about_values_title: "Nos Valeurs",
+        about_values_subtitle: "Les principes qui guident tout ce que nous faisons",
         value_quality: "Qualité",
+        value_quality_text: "Excellence dans chaque détail, à chaque fois.",
         value_trust: "Confiance",
+        value_trust_text: "Construire des relations durables par l'honnêteté.",
         value_eco: "Écologique",
+        value_eco_text: "Pratiques durables pour une planète meilleure.",
         value_care: "Soin",
-        cta_start_today: "Commencer Aujourd'hui"
+        value_care_text: "Traiter chaque maison comme la nôtre.",
+        stat_clients: "Clients Satisfaits",
+        stat_cleanings: "Nettoyages Effectués",
+        about_cta_title: "Prêt à Découvrir la Différence Sparkllex?",
+        about_cta_text: "Rejoignez des milliers de clients satisfaits.",
+        cta_start_today: "Commencer Aujourd'hui",
+        
+        // Plan Features
+        planBasicoTitle: "Essentiel",
+        planBasicoFeature1: "1 Nettoyage Standard/mois",
+        planBasicoFeature2: "1 Lessive OU Repassage",
+        planBasicoFeature3: "Support Standard",
+        planProTitle: "Pro",
+        planProFeature1: "2 Nettoyages Standard/mois",
+        planProFeature2: "2 Sessions Lessive/Repassage",
+        planProFeature3: "1 Maintenance/Réparation",
+        planProFeature4: "Support Prioritaire",
+        planFamiliarTitle: "Famille",
+        planFamiliarFeature1: "4 Nettoyages/mois",
+        planFamiliarFeature2: "Lessive/Repassage Fair Use",
+        planFamiliarFeature3: "2 Maintenances/Réparations",
+        planFamiliarFeature4: "Support VIP 24/7",
+        fairUseNote: "Chaque plan est soumis à une politique d'utilisation équitable.",
+        
+        // Privacy & Legal
+        privacyTitle: "Politique de Confidentialité",
+        privacyIntro: "Votre vie privée est importante pour nous.",
+        termsTitle: "Conditions Générales",
+        cookieTitle: "Politique de Cookies",
+        lastUpdated: "Dernière mise à jour: Janvier 2026",
+        
+        // Success Page
+        paymentSuccess: "Paiement Réussi!",
+        successTitle: "Bienvenue chez Sparkllex!",
+        successMessage: "Votre abonnement a été activé.",
+        nextSteps: "Prochaines Étapes",
+        btnGoAccount: "Aller à mon compte",
+        
+        // Members - More keys
+        manageReservations: "Gérez vos réservations Sparkllex.",
+        newAppointment: "Nouveau Rendez-vous",
+        loadingAppointments: "Chargement des rendez-vous...",
+        noScheduledAppointments: "Aucun rendez-vous prévu",
+        bookFirstService: "Réservez votre premier service maintenant.",
+        selectService: "Sélectionnez votre",
+        bookService: "Service",
+        premiumLaundry: "Blanchisserie Premium",
+        schedulePickup: "Planifier le Ramassage",
+        specialInstructions: "Instructions Spéciales",
+        allSet: "C'est prêt!",
+        bookingSuccess: "Réservation Réussie!",
+        bookingSuccessMessage: "Votre ramassage a été planifié.",
+        viewMyAppointments: "Voir Mes Rendez-vous",
+        planStatus: "Statut du Plan",
+        memberId: "ID Membre",
+        activeUserPlan: "Plan Actif",
+        managePlan: "Gérer la Facturation",
+        fullName: "Nom Complet",
+        accessEmail: "Email d'Accès",
+        newPassword: "Nouveau Mot de Passe",
+        updatePassword: "Mettre à Jour le Mot de Passe",
+        
+        // FAQ Questions
+        faq_q1: "Comment réserver un service de nettoyage?",
+        faq_a1: "Inscrivez-vous sur notre site, sélectionnez votre plan et choisissez un créneau horaire.",
+        faq_q2: "Quelles zones desservez-vous?",
+        faq_a2: "Nous desservons les grandes zones métropolitaines aux États-Unis et au Chili.",
+        faq_q3: "Dois-je être à la maison pendant le nettoyage?",
+        faq_a3: "Non, vous pouvez fournir des instructions d'accès. Tous nos nettoyeurs sont vérifiés.",
+        faq_q4: "Qu'est-ce qui est inclus dans un nettoyage standard?",
+        faq_a4: "Dépoussiérage, aspiration, serpillage, nettoyage des sanitaires et cuisines.",
+        
+        // Contact Full
+        contact_hero_title: "Contactez-<span class=\"text-teal-primary\">Nous</span>",
+        contact_hero_subtitle: "Envoyez-nous un message et nous répondrons rapidement.",
+        contact_info_title: "Informations de Contact",
+        contact_hours: "Heures d'Ouverture",
+        contact_quick_response: "Réponse Rapide",
+        view_faq: "Voir la FAQ",
+        
+        // Blog More
+        blog_hero_desc: "Conseils d'experts et guides de nettoyage pour votre maison.",
+        blog_featured: "Article en Vedette",
+        blog_latest: "Derniers Articles",
+        blog_newsletter_title: "Recevez des Conseils par Email"
     },
 
     // Portuguese - Full translations
@@ -1618,13 +1708,103 @@ const translations = {
         
         // About
         about_mission_title: "Nossa Missão",
+        about_mission_text: "Fornecer serviços de limpeza premium que transformam espaços e superam expectativas.",
         about_vision_title: "Nossa Visão",
+        about_vision_text: "Tornar-se o nome mais confiável em serviços de limpeza premium nas Américas.",
         about_values_title: "Nossos Valores",
+        about_values_subtitle: "Os princípios que guiam tudo o que fazemos",
         value_quality: "Qualidade",
+        value_quality_text: "Excelência em cada detalhe, sempre.",
         value_trust: "Confiança",
+        value_trust_text: "Construindo relacionamentos duradouros com honestidade.",
         value_eco: "Ecológico",
+        value_eco_text: "Práticas sustentáveis para um planeta melhor.",
         value_care: "Cuidado",
-        cta_start_today: "Começar Hoje"
+        value_care_text: "Tratando cada casa como a nossa.",
+        stat_clients: "Clientes Satisfeitos",
+        stat_cleanings: "Limpezas Realizadas",
+        about_cta_title: "Pronto para Experimentar a Diferença Sparkllex?",
+        about_cta_text: "Junte-se a milhares de clientes satisfeitos.",
+        cta_start_today: "Começar Hoje",
+        
+        // Plan Features
+        planBasicoTitle: "Essencial",
+        planBasicoFeature1: "1 Limpeza Padrão/mês",
+        planBasicoFeature2: "1 Lavanderia OU Passadoria",
+        planBasicoFeature3: "Suporte Padrão",
+        planProTitle: "Pro",
+        planProFeature1: "2 Limpezas Padrão/mês",
+        planProFeature2: "2 Sessões Lavanderia/Passadoria",
+        planProFeature3: "1 Manutenção/Reparo",
+        planProFeature4: "Suporte Prioritário",
+        planFamiliarTitle: "Família",
+        planFamiliarFeature1: "4 Limpezas/mês",
+        planFamiliarFeature2: "Lavanderia/Passadoria Fair Use",
+        planFamiliarFeature3: "2 Manutenções/Reparos",
+        planFamiliarFeature4: "Suporte VIP 24/7",
+        fairUseNote: "Cada plano está sujeito a uma política de uso justo.",
+        
+        // Privacy & Legal
+        privacyTitle: "Política de Privacidade",
+        privacyIntro: "Sua privacidade é importante para nós.",
+        termsTitle: "Termos e Condições",
+        cookieTitle: "Política de Cookies",
+        lastUpdated: "Última atualização: Janeiro 2026",
+        
+        // Success Page
+        paymentSuccess: "Pagamento Realizado!",
+        successTitle: "Bem-vindo à Sparkllex!",
+        successMessage: "Sua assinatura foi ativada.",
+        nextSteps: "Próximos Passos",
+        btnGoAccount: "Ir para minha conta",
+        
+        // Members - More keys
+        manageReservations: "Gerencie suas reservas Sparkllex.",
+        newAppointment: "Novo Agendamento",
+        loadingAppointments: "Carregando agendamentos...",
+        noScheduledAppointments: "Nenhum agendamento marcado",
+        bookFirstService: "Reserve seu primeiro serviço agora.",
+        selectService: "Selecione seu",
+        bookService: "Serviço",
+        premiumLaundry: "Lavanderia Premium",
+        schedulePickup: "Agendar Coleta",
+        specialInstructions: "Instruções Especiais",
+        allSet: "Tudo pronto!",
+        bookingSuccess: "Reserva Confirmada!",
+        bookingSuccessMessage: "Sua coleta foi agendada.",
+        viewMyAppointments: "Ver Meus Agendamentos",
+        planStatus: "Status do Plano",
+        memberId: "ID do Membro",
+        activeUserPlan: "Plano Ativo",
+        managePlan: "Gerenciar Faturamento",
+        fullName: "Nome Completo",
+        accessEmail: "Email de Acesso",
+        newPassword: "Nova Senha",
+        updatePassword: "Atualizar Senha",
+        
+        // FAQ Questions
+        faq_q1: "Como reservo um serviço de limpeza?",
+        faq_a1: "Cadastre-se em nosso site, selecione seu plano e escolha um horário.",
+        faq_q2: "Quais áreas vocês atendem?",
+        faq_a2: "Atendemos grandes áreas metropolitanas nos Estados Unidos e Chile.",
+        faq_q3: "Preciso estar em casa durante a limpeza?",
+        faq_a3: "Não, você pode fornecer instruções de acesso. Todos os nossos profissionais são verificados.",
+        faq_q4: "O que está incluído em uma limpeza padrão?",
+        faq_a4: "Remoção de poeira, aspiração, esfregão, limpeza de banheiros e cozinhas.",
+        
+        // Contact Full
+        contact_hero_title: "Entre em <span class=\"text-teal-primary\">Contato</span>",
+        contact_hero_subtitle: "Envie-nos uma mensagem e responderemos rapidamente.",
+        contact_info_title: "Informações de Contato",
+        contact_hours: "Horário de Funcionamento",
+        contact_quick_response: "Resposta Rápida",
+        view_faq: "Ver FAQ",
+        
+        // Blog More
+        blog_hero_desc: "Dicas de especialistas e guias de limpeza para sua casa.",
+        blog_featured: "Artigo em Destaque",
+        blog_latest: "Últimos Artigos",
+        blog_newsletter_title: "Receba Dicas por Email"
     },
 
     // German - Full translations
@@ -1791,13 +1971,103 @@ const translations = {
         
         // About
         about_mission_title: "Unsere Mission",
+        about_mission_text: "Premium-Reinigungsservices liefern, die Räume verwandeln und Erwartungen übertreffen.",
         about_vision_title: "Unsere Vision",
+        about_vision_text: "Der vertrauenswürdigste Name für Premium-Reinigungsservices in Amerika zu werden.",
         about_values_title: "Unsere Werte",
+        about_values_subtitle: "Die Prinzipien, die alles leiten, was wir tun",
         value_quality: "Qualität",
+        value_quality_text: "Exzellenz in jedem Detail, jedes Mal.",
         value_trust: "Vertrauen",
+        value_trust_text: "Dauerhafte Beziehungen durch Ehrlichkeit aufbauen.",
         value_eco: "Umweltfreundlich",
+        value_eco_text: "Nachhaltige Praktiken für einen besseren Planeten.",
         value_care: "Fürsorge",
-        cta_start_today: "Heute Starten"
+        value_care_text: "Jedes Zuhause wie unser eigenes behandeln.",
+        stat_clients: "Zufriedene Kunden",
+        stat_cleanings: "Durchgeführte Reinigungen",
+        about_cta_title: "Bereit, den Sparkllex-Unterschied zu erleben?",
+        about_cta_text: "Schließen Sie sich Tausenden zufriedener Kunden an.",
+        cta_start_today: "Heute Starten",
+        
+        // Plan Features
+        planBasicoTitle: "Basis",
+        planBasicoFeature1: "1 Standard-Reinigung/Monat",
+        planBasicoFeature2: "1 Wäsche ODER Bügeln",
+        planBasicoFeature3: "Standard-Support",
+        planProTitle: "Pro",
+        planProFeature1: "2 Standard-Reinigungen/Monat",
+        planProFeature2: "2 Wäsche/Bügel-Sitzungen",
+        planProFeature3: "1 Wartung/Reparatur",
+        planProFeature4: "Prioritäts-Support",
+        planFamiliarTitle: "Familie",
+        planFamiliarFeature1: "4 Reinigungen/Monat",
+        planFamiliarFeature2: "Wäsche/Bügeln Fair Use",
+        planFamiliarFeature3: "2 Wartungen/Reparaturen",
+        planFamiliarFeature4: "24/7 VIP-Support",
+        fairUseNote: "Jeder Plan unterliegt einer Fair-Use-Richtlinie.",
+        
+        // Privacy & Legal
+        privacyTitle: "Datenschutzrichtlinie",
+        privacyIntro: "Ihre Privatsphäre ist uns wichtig.",
+        termsTitle: "Allgemeine Geschäftsbedingungen",
+        cookieTitle: "Cookie-Richtlinie",
+        lastUpdated: "Letzte Aktualisierung: Januar 2026",
+        
+        // Success Page
+        paymentSuccess: "Zahlung Erfolgreich!",
+        successTitle: "Willkommen bei Sparkllex!",
+        successMessage: "Ihr Abonnement wurde aktiviert.",
+        nextSteps: "Nächste Schritte",
+        btnGoAccount: "Zu meinem Konto",
+        
+        // Members - More keys
+        manageReservations: "Verwalten Sie Ihre Sparkllex-Buchungen.",
+        newAppointment: "Neuer Termin",
+        loadingAppointments: "Termine werden geladen...",
+        noScheduledAppointments: "Keine geplanten Termine",
+        bookFirstService: "Buchen Sie jetzt Ihren ersten Service.",
+        selectService: "Wählen Sie Ihren",
+        bookService: "Service",
+        premiumLaundry: "Premium-Wäscherei",
+        schedulePickup: "Abholung Planen",
+        specialInstructions: "Besondere Anweisungen",
+        allSet: "Alles bereit!",
+        bookingSuccess: "Buchung Erfolgreich!",
+        bookingSuccessMessage: "Ihre Abholung wurde geplant.",
+        viewMyAppointments: "Meine Termine Ansehen",
+        planStatus: "Plan-Status",
+        memberId: "Mitglieds-ID",
+        activeUserPlan: "Aktiver Plan",
+        managePlan: "Abrechnung Verwalten",
+        fullName: "Vollständiger Name",
+        accessEmail: "Zugangs-E-Mail",
+        newPassword: "Neues Passwort",
+        updatePassword: "Passwort Aktualisieren",
+        
+        // FAQ Questions
+        faq_q1: "Wie buche ich einen Reinigungsservice?",
+        faq_a1: "Registrieren Sie sich auf unserer Website, wählen Sie Ihren Plan und wählen Sie ein Zeitfenster.",
+        faq_q2: "Welche Gebiete bedienen Sie?",
+        faq_a2: "Wir bedienen große Metropolregionen in den USA und Chile.",
+        faq_q3: "Muss ich während der Reinigung zu Hause sein?",
+        faq_a3: "Nein, Sie können Zugangsanweisungen bereitstellen. Alle unsere Reinigungskräfte sind überprüft.",
+        faq_q4: "Was ist in einer Standardreinigung enthalten?",
+        faq_a4: "Staubwischen, Staubsaugen, Wischen, Reinigung von Badezimmern und Küchen.",
+        
+        // Contact Full
+        contact_hero_title: "Kontaktieren Sie <span class=\"text-teal-primary\">Uns</span>",
+        contact_hero_subtitle: "Senden Sie uns eine Nachricht und wir antworten schnell.",
+        contact_info_title: "Kontaktinformationen",
+        contact_hours: "Öffnungszeiten",
+        contact_quick_response: "Schnelle Antwort",
+        view_faq: "FAQ Ansehen",
+        
+        // Blog More
+        blog_hero_desc: "Experten-Tipps und Reinigungsanleitungen für Ihr Zuhause.",
+        blog_featured: "Featured Artikel",
+        blog_latest: "Neueste Artikel",
+        blog_newsletter_title: "Tipps per E-Mail Erhalten"
     },
 
     // Italian - Full translations
@@ -1964,13 +2234,103 @@ const translations = {
         
         // About
         about_mission_title: "La Nostra Missione",
+        about_mission_text: "Fornire servizi di pulizia premium che trasformano gli spazi e superano le aspettative.",
         about_vision_title: "La Nostra Visione",
+        about_vision_text: "Diventare il nome più affidabile nei servizi di pulizia premium nelle Americhe.",
         about_values_title: "I Nostri Valori",
+        about_values_subtitle: "I principi che guidano tutto ciò che facciamo",
         value_quality: "Qualità",
+        value_quality_text: "Eccellenza in ogni dettaglio, ogni volta.",
         value_trust: "Fiducia",
+        value_trust_text: "Costruire relazioni durature attraverso l'onestà.",
         value_eco: "Eco-Friendly",
+        value_eco_text: "Pratiche sostenibili per un pianeta migliore.",
         value_care: "Cura",
-        cta_start_today: "Inizia Oggi"
+        value_care_text: "Trattare ogni casa come la nostra.",
+        stat_clients: "Clienti Soddisfatti",
+        stat_cleanings: "Pulizie Completate",
+        about_cta_title: "Pronto a Scoprire la Differenza Sparkllex?",
+        about_cta_text: "Unisciti a migliaia di clienti soddisfatti.",
+        cta_start_today: "Inizia Oggi",
+        
+        // Plan Features
+        planBasicoTitle: "Base",
+        planBasicoFeature1: "1 Pulizia Standard/mese",
+        planBasicoFeature2: "1 Lavanderia O Stiratura",
+        planBasicoFeature3: "Supporto Standard",
+        planProTitle: "Pro",
+        planProFeature1: "2 Pulizie Standard/mese",
+        planProFeature2: "2 Sessioni Lavanderia/Stiratura",
+        planProFeature3: "1 Manutenzione/Riparazione",
+        planProFeature4: "Supporto Prioritario",
+        planFamiliarTitle: "Famiglia",
+        planFamiliarFeature1: "4 Pulizie/mese",
+        planFamiliarFeature2: "Lavanderia/Stiratura Fair Use",
+        planFamiliarFeature3: "2 Manutenzioni/Riparazioni",
+        planFamiliarFeature4: "Supporto VIP 24/7",
+        fairUseNote: "Ogni piano è soggetto a una politica di fair use.",
+        
+        // Privacy & Legal
+        privacyTitle: "Informativa sulla Privacy",
+        privacyIntro: "La tua privacy è importante per noi.",
+        termsTitle: "Termini e Condizioni",
+        cookieTitle: "Politica sui Cookie",
+        lastUpdated: "Ultimo aggiornamento: Gennaio 2026",
+        
+        // Success Page
+        paymentSuccess: "Pagamento Riuscito!",
+        successTitle: "Benvenuto in Sparkllex!",
+        successMessage: "Il tuo abbonamento è stato attivato.",
+        nextSteps: "Prossimi Passi",
+        btnGoAccount: "Vai al mio account",
+        
+        // Members - More keys
+        manageReservations: "Gestisci le tue prenotazioni Sparkllex.",
+        newAppointment: "Nuovo Appuntamento",
+        loadingAppointments: "Caricamento appuntamenti...",
+        noScheduledAppointments: "Nessun appuntamento programmato",
+        bookFirstService: "Prenota il tuo primo servizio ora.",
+        selectService: "Seleziona il tuo",
+        bookService: "Servizio",
+        premiumLaundry: "Lavanderia Premium",
+        schedulePickup: "Programma Ritiro",
+        specialInstructions: "Istruzioni Speciali",
+        allSet: "Tutto pronto!",
+        bookingSuccess: "Prenotazione Riuscita!",
+        bookingSuccessMessage: "Il tuo ritiro è stato programmato.",
+        viewMyAppointments: "Vedi I Miei Appuntamenti",
+        planStatus: "Stato del Piano",
+        memberId: "ID Membro",
+        activeUserPlan: "Piano Attivo",
+        managePlan: "Gestisci Fatturazione",
+        fullName: "Nome Completo",
+        accessEmail: "Email di Accesso",
+        newPassword: "Nuova Password",
+        updatePassword: "Aggiorna Password",
+        
+        // FAQ Questions
+        faq_q1: "Come prenoto un servizio di pulizia?",
+        faq_a1: "Registrati sul nostro sito, seleziona il tuo piano e scegli una fascia oraria.",
+        faq_q2: "Quali aree servite?",
+        faq_a2: "Serviamo le principali aree metropolitane negli Stati Uniti e in Cile.",
+        faq_q3: "Devo essere a casa durante la pulizia?",
+        faq_a3: "No, puoi fornire istruzioni di accesso. Tutti i nostri addetti sono verificati.",
+        faq_q4: "Cosa è incluso in una pulizia standard?",
+        faq_a4: "Spolveratura, aspirazione, lavaggio pavimenti, pulizia di bagni e cucine.",
+        
+        // Contact Full
+        contact_hero_title: "Contattaci <span class=\"text-teal-primary\">Ora</span>",
+        contact_hero_subtitle: "Inviaci un messaggio e risponderemo rapidamente.",
+        contact_info_title: "Informazioni di Contatto",
+        contact_hours: "Orari di Apertura",
+        contact_quick_response: "Risposta Rapida",
+        view_faq: "Vedi FAQ",
+        
+        // Blog More
+        blog_hero_desc: "Consigli esperti e guide per la pulizia della tua casa.",
+        blog_featured: "Articolo in Evidenza",
+        blog_latest: "Ultimi Articoli",
+        blog_newsletter_title: "Ricevi Consigli via Email"
     }
 };
 
