@@ -16,6 +16,7 @@ const urlsToCache = [
   '/images/elite.jpg',
   '/styles.css',
   '/translations.js',
+  '/apply-translations.js',
   '/language-selector.js',
   '/cookie-consent.js',
   'https://cdn.tailwindcss.com',

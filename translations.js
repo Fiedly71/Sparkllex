@@ -1281,172 +1281,696 @@ const translations = {
         footer_rights: "Todos los derechos reservados."
     },
 
-    // French - Core translations (others fallback to English)
+    // French - Full translations
     fr: {
+        // Navigation & Headers
         btnAccess: "Connexion",
         indexTitle: "Luxe et Perfection",
         indexSubtitle: "Services premium sur mesure pour votre style de vie",
+        
+        // Call-to-action buttons
         getStarted: "Commencer",
         viewServices: "Voir les Services",
+        
+        // Stats section
         clients: "Clients Satisfaits",
         rating: "Évaluation",
         support: "Support",
         guarantee: "Satisfaction",
+        
+        // Services section
         ourServices: "Nos Services Premium",
         deepCleaning: "Nettoyage en Profondeur",
         eliteLaundry: "Blanchisserie Élite",
         masterIroning: "Repassage Expert",
         maintenance: "Entretien Maison",
+        
+        // Why Choose Sparkllex
         whyChooseSparkllex: "Pourquoi Choisir Sparkllex?",
         totalTrust: "Confiance Totale",
+        rigorouslySelected: "Personnel rigoureusement sélectionné et formé selon nos standards.",
         premiumQuality: "Qualité Premium",
+        highEndProducts: "Nous n'utilisons que des produits de nettoyage haut de gamme et écologiques.",
         flexibility: "Flexibilité Totale",
+        plansAdapted: "Plans personnalisés qui s'adaptent parfaitement à votre emploi du temps.",
+        
+        // Subscription Plans
         subscriptionPlans: "Plans d'Abonnement",
         basicPlan: "Essentiel",
-        proPlan: "Professionnel",
-        familiarPlan: "Famille",
         perMonth: "/mois",
+        basicSubtitle: "Parfait pour les petits appartements.",
+        seeMore1: "Voir Plus",
+        choosePlan1: "Choisir",
         mostPopular: "Plus Populaire",
+        proPlan: "Professionnel",
+        perMonth2: "/mois",
+        proSubtitle: "Idéal pour les professionnels occupés.",
+        seeMore2: "Voir Plus",
+        choosePlan2: "Choisir",
+        familiarPlan: "Famille",
+        perMonth3: "/mois",
+        familiarSubtitle: "Soin complet pour votre maison familiale.",
+        seeMore3: "Voir Plus",
+        choosePlan3: "Choisir",
+        
+        // Contact section
         contact: "Contactez-Nous",
         callUs: "Appelez-Nous",
+        
+        // Navigation
         homeNav: "Accueil",
         servicesNav: "Services",
         plansNav: "Plans",
         howItWorksNav: "Comment ça marche",
-        logout: "Déconnexion",
-        settings: "Paramètres",
+        mobileNavHome: "Accueil",
+        mobileNavServices: "Services",
+        mobileNavPlans: "Plans",
+        mobileHowItWorks: "Comment ça marche",
+        
+        // Footer
+        footNavHome: "Accueil",
+        footNavServices: "Services",
+        footNavPlans: "Plans",
+        footHowItWorks: "Comment ça marche",
+        footPrivacy: "Politique de Confidentialité",
+        footTerms: "Conditions Générales",
+        footCookies: "Cookies",
+        footLinksTitle: "Liens",
+        footLegalTitle: "Légal",
+        footPaymentsTitle: "Paiements",
+        footFollowUs: "Suivez-Nous",
+        footAbout: "Élever l'entretien du foyer au rang d'art. Découvrez la différence Sparkllex.",
+        footerRights: "© 2026 Sparkllex. Tous droits réservés.",
+        whatsappLabel: "WhatsApp",
+        
+        // Reviews
+        reviewsLabel: "Ce Que Disent Nos Clients",
+        reviewsTitle: "Avis Clients",
+        reviewsSubtitle: "Expériences réelles de nos précieux membres qui font confiance à Sparkllex.",
+        viewAllReviews: "Voir Tous les Avis",
+        leaveReview: "Laisser un Avis",
+        shareExperience: "Partagez Votre Expérience",
+        yourRating: "Votre Note",
+        serviceType: "Type de Service",
+        yourComment: "Votre Commentaire",
+        submitReview: "Envoyer l'Avis",
+        
+        // Login/Signup
         loginTitle: "Bienvenue",
         loginButton: "Se Connecter",
+        labelEmail: "Votre Email",
+        labelPassword: "Mot de Passe",
+        forgotPassword: "Oublié?",
+        dontHaveAccount: "Pas de compte?",
+        signUpHere: "Inscrivez-vous",
         signupTitle: "Créer un Compte",
-        reviewsTitle: "Avis Clients",
-        leaveReview: "Laisser un Avis",
-        footerRights: "© 2026 Sparkllex. Tous droits réservés."
+        signupSubtitle: "Inscrivez-vous pour activer votre plan premium",
+        labelName: "Nom Complet",
+        labelPhone: "Téléphone",
+        labelPlan: "Plan Sélectionné",
+        termsText: "En vous inscrivant, vous acceptez nos Conditions et Politique de Confidentialité.",
+        
+        // Members App
+        logout: "Déconnexion",
+        booking: "Réserver",
+        membershipStatus: "Tableau de Bord",
+        myAppointments: "Mes Rendez-vous",
+        yourHistory: "Historique",
+        settings: "Paramètres",
+        aISupport: "Support IA",
+        upcomingServices: "Services à Venir",
+        bookNow: "Réserver",
+        newBooking: "Nouvelle Réservation",
+        confirmBooking: "Confirmer la Réservation",
+        
+        // How it works
+        howItWorksTitle: "Votre temps est précieux",
+        howItWorksSubtitle: "Découvrez comment Sparkllex transforme la gestion de votre maison en une expérience de luxe.",
+        step1Title: "Réservez en quelques secondes",
+        step1Desc: "Depuis notre plateforme ou WhatsApp, choisissez le service et l'horaire qui vous convient.",
+        step2Title: "Service Premium",
+        step2Desc: "Un concierge Sparkllex viendra chez vous pour collecter vos articles ou commencer les tâches.",
+        step3Title: "Soins Premium",
+        step3Desc: "Nous appliquons les standards les plus élevés: blanchisserie écologique et nettoyage en profondeur.",
+        step4Title: "Livraison et Confirmation",
+        step4Desc: "Recevez vos services à temps. Nous vous informons par App et WhatsApp.",
+        
+        // Pricing
+        pricingTitle1: "Plans",
+        pricingTitle2: "Premium",
+        pricingSubtitle: "Choisissez le niveau de soin que votre maison mérite.",
+        whatsIncluded: "Qu'est-ce qui est inclus?",
+        choosePlan: "Choisir ce Plan",
+        
+        // 404
+        error_404_title: "Oups! Page Non Trouvée",
+        back_home: "Retour à l'Accueil",
+        contact_us: "Contactez-Nous",
+        
+        // Blog
+        blog_subtitle: "Conseils et Guides",
+        blog_read_more: "Lire Plus",
+        blog_subscribe: "S'abonner",
+        
+        // Contact
+        contact_form_title: "Envoyez-nous un Message",
+        form_name: "Nom",
+        form_email: "Email",
+        form_message: "Message",
+        form_send: "Envoyer",
+        
+        // FAQ
+        faq_hero_title: "Questions <span class=\"text-teal-primary\">Fréquentes</span>",
+        faq_cta_title: "Encore des Questions?",
+        
+        // About
+        about_mission_title: "Notre Mission",
+        about_vision_title: "Notre Vision",
+        about_values_title: "Nos Valeurs",
+        value_quality: "Qualité",
+        value_trust: "Confiance",
+        value_eco: "Écologique",
+        value_care: "Soin",
+        cta_start_today: "Commencer Aujourd'hui"
     },
 
-    // Portuguese - Core translations (others fallback to English)
+    // Portuguese - Full translations
     pt: {
+        // Navigation & Headers
         btnAccess: "Entrar",
         indexTitle: "Luxo e Perfeição",
         indexSubtitle: "Serviços premium personalizados para seu estilo de vida",
+        
+        // Call-to-action buttons
         getStarted: "Começar",
         viewServices: "Ver Serviços",
+        
+        // Stats section
         clients: "Clientes Satisfeitos",
         rating: "Avaliação",
         support: "Suporte",
         guarantee: "Satisfação",
+        
+        // Services section
         ourServices: "Nossos Serviços Premium",
         deepCleaning: "Limpeza Profunda",
         eliteLaundry: "Lavanderia Elite",
         masterIroning: "Passadoria Mestre",
         maintenance: "Manutenção Residencial",
+        
+        // Why Choose Sparkllex
         whyChooseSparkllex: "Por que Escolher Sparkllex?",
         totalTrust: "Confiança Total",
+        rigorouslySelected: "Equipe rigorosamente selecionada e treinada segundo nossos padrões.",
         premiumQuality: "Qualidade Premium",
+        highEndProducts: "Usamos apenas produtos de limpeza de alta qualidade e ecológicos.",
         flexibility: "Flexibilidade Total",
+        plansAdapted: "Planos personalizados que se adaptam perfeitamente à sua agenda.",
+        
+        // Subscription Plans
         subscriptionPlans: "Planos de Assinatura",
         basicPlan: "Essencial",
-        proPlan: "Profissional",
-        familiarPlan: "Família",
         perMonth: "/mês",
+        basicSubtitle: "Perfeito para apartamentos pequenos.",
+        seeMore1: "Ver Mais",
+        choosePlan1: "Escolher",
         mostPopular: "Mais Popular",
+        proPlan: "Profissional",
+        perMonth2: "/mês",
+        proSubtitle: "Ideal para profissionais ocupados.",
+        seeMore2: "Ver Mais",
+        choosePlan2: "Escolher",
+        familiarPlan: "Família",
+        perMonth3: "/mês",
+        familiarSubtitle: "Cuidado completo para sua casa.",
+        seeMore3: "Ver Mais",
+        choosePlan3: "Escolher",
+        
+        // Contact section
         contact: "Entre em Contato",
         callUs: "Ligue Agora",
+        
+        // Navigation
         homeNav: "Início",
         servicesNav: "Serviços",
         plansNav: "Planos",
         howItWorksNav: "Como Funciona",
-        logout: "Sair",
-        settings: "Configurações",
+        mobileNavHome: "Início",
+        mobileNavServices: "Serviços",
+        mobileNavPlans: "Planos",
+        mobileHowItWorks: "Como Funciona",
+        
+        // Footer
+        footNavHome: "Início",
+        footNavServices: "Serviços",
+        footNavPlans: "Planos",
+        footHowItWorks: "Como Funciona",
+        footPrivacy: "Política de Privacidade",
+        footTerms: "Termos e Condições",
+        footCookies: "Cookies",
+        footLinksTitle: "Links",
+        footLegalTitle: "Legal",
+        footPaymentsTitle: "Pagamentos",
+        footFollowUs: "Siga-Nos",
+        footAbout: "Elevando o cuidado do lar a uma forma de arte. Experimente a diferença Sparkllex.",
+        footerRights: "© 2026 Sparkllex. Todos os direitos reservados.",
+        whatsappLabel: "WhatsApp",
+        
+        // Reviews
+        reviewsLabel: "O Que Nossos Clientes Dizem",
+        reviewsTitle: "Avaliações",
+        reviewsSubtitle: "Experiências reais de nossos valiosos membros que confiam na Sparkllex.",
+        viewAllReviews: "Ver Todas as Avaliações",
+        leaveReview: "Deixar Avaliação",
+        shareExperience: "Compartilhe Sua Experiência",
+        yourRating: "Sua Nota",
+        serviceType: "Tipo de Serviço",
+        yourComment: "Seu Comentário",
+        submitReview: "Enviar Avaliação",
+        
+        // Login/Signup
         loginTitle: "Bem-vindo",
         loginButton: "Entrar",
+        labelEmail: "Seu Email",
+        labelPassword: "Senha",
+        forgotPassword: "Esqueceu?",
+        dontHaveAccount: "Não tem conta?",
+        signUpHere: "Cadastre-se",
         signupTitle: "Criar Conta",
-        reviewsTitle: "Avaliações",
-        leaveReview: "Deixar Avaliação",
-        footerRights: "© 2026 Sparkllex. Todos os direitos reservados."
+        signupSubtitle: "Cadastre-se para ativar seu plano premium",
+        labelName: "Nome Completo",
+        labelPhone: "Telefone",
+        labelPlan: "Plano Selecionado",
+        termsText: "Ao se cadastrar, você aceita nossos Termos e Política de Privacidade.",
+        
+        // Members App
+        logout: "Sair",
+        booking: "Reservar",
+        membershipStatus: "Painel",
+        myAppointments: "Meus Agendamentos",
+        yourHistory: "Histórico",
+        settings: "Configurações",
+        aISupport: "Suporte IA",
+        upcomingServices: "Próximos Serviços",
+        bookNow: "Reservar",
+        newBooking: "Nova Reserva",
+        confirmBooking: "Confirmar Reserva",
+        
+        // How it works
+        howItWorksTitle: "Seu tempo é precioso",
+        howItWorksSubtitle: "Descubra como a Sparkllex transforma a gestão do lar em uma experiência de luxo.",
+        step1Title: "Agende em segundos",
+        step1Desc: "Pela nossa plataforma ou WhatsApp, escolha o serviço e horário que preferir.",
+        step2Title: "Serviço Premium",
+        step2Desc: "Um concierge Sparkllex visitará sua casa para coletar itens ou iniciar tarefas.",
+        step3Title: "Cuidado Premium",
+        step3Desc: "Aplicamos os mais altos padrões: lavanderia ecológica e limpeza profunda.",
+        step4Title: "Entrega e Confirmação",
+        step4Desc: "Receba seus serviços no horário. Informamos por App e WhatsApp.",
+        
+        // Pricing
+        pricingTitle1: "Planos",
+        pricingTitle2: "Premium",
+        pricingSubtitle: "Escolha o nível de cuidado que sua casa merece.",
+        whatsIncluded: "O que está incluído?",
+        choosePlan: "Escolher Este Plano",
+        
+        // 404
+        error_404_title: "Ops! Página Não Encontrada",
+        back_home: "Voltar ao Início",
+        contact_us: "Contato",
+        
+        // Blog
+        blog_subtitle: "Dicas e Guias",
+        blog_read_more: "Ler Mais",
+        blog_subscribe: "Inscrever-se",
+        
+        // Contact
+        contact_form_title: "Envie uma Mensagem",
+        form_name: "Nome",
+        form_email: "Email",
+        form_message: "Mensagem",
+        form_send: "Enviar",
+        
+        // FAQ
+        faq_hero_title: "Perguntas <span class=\"text-teal-primary\">Frequentes</span>",
+        faq_cta_title: "Ainda Tem Perguntas?",
+        
+        // About
+        about_mission_title: "Nossa Missão",
+        about_vision_title: "Nossa Visão",
+        about_values_title: "Nossos Valores",
+        value_quality: "Qualidade",
+        value_trust: "Confiança",
+        value_eco: "Ecológico",
+        value_care: "Cuidado",
+        cta_start_today: "Começar Hoje"
     },
 
-    // German - Core translations (others fallback to English)
+    // German - Full translations
     de: {
+        // Navigation & Headers
         btnAccess: "Anmelden",
         indexTitle: "Luxus und Perfektion",
         indexSubtitle: "Premium-Services maßgeschneidert für Ihren Lebensstil",
+        
+        // Call-to-action buttons
         getStarted: "Loslegen",
         viewServices: "Services Ansehen",
+        
+        // Stats section
         clients: "Zufriedene Kunden",
         rating: "Bewertung",
         support: "Support",
         guarantee: "Zufriedenheit",
+        
+        // Services section
         ourServices: "Unsere Premium-Services",
         deepCleaning: "Tiefenreinigung",
         eliteLaundry: "Elite-Wäscherei",
         masterIroning: "Meister-Bügeln",
         maintenance: "Hauswartung",
+        
+        // Why Choose Sparkllex
         whyChooseSparkllex: "Warum Sparkllex Wählen?",
         totalTrust: "Volles Vertrauen",
+        rigorouslySelected: "Personal sorgfältig ausgewählt und nach unseren Standards geschult.",
         premiumQuality: "Premium-Qualität",
+        highEndProducts: "Wir verwenden nur hochwertige, umweltfreundliche Reinigungsprodukte.",
         flexibility: "Volle Flexibilität",
+        plansAdapted: "Maßgeschneiderte Pläne, die sich perfekt an Ihren Zeitplan anpassen.",
+        
+        // Subscription Plans
         subscriptionPlans: "Abonnement-Pläne",
         basicPlan: "Basis",
-        proPlan: "Professionell",
-        familiarPlan: "Familie",
         perMonth: "/Monat",
+        basicSubtitle: "Perfekt für kleine Wohnungen.",
+        seeMore1: "Mehr Sehen",
+        choosePlan1: "Wählen",
         mostPopular: "Beliebteste",
+        proPlan: "Professionell",
+        perMonth2: "/Monat",
+        proSubtitle: "Ideal für vielbeschäftigte Profis.",
+        seeMore2: "Mehr Sehen",
+        choosePlan2: "Wählen",
+        familiarPlan: "Familie",
+        perMonth3: "/Monat",
+        familiarSubtitle: "Komplette Pflege für Ihr Familienheim.",
+        seeMore3: "Mehr Sehen",
+        choosePlan3: "Wählen",
+        
+        // Contact section
         contact: "Kontakt",
         callUs: "Jetzt Anrufen",
+        
+        // Navigation
         homeNav: "Startseite",
         servicesNav: "Services",
         plansNav: "Pläne",
         howItWorksNav: "So funktioniert's",
-        logout: "Abmelden",
-        settings: "Einstellungen",
+        mobileNavHome: "Startseite",
+        mobileNavServices: "Services",
+        mobileNavPlans: "Pläne",
+        mobileHowItWorks: "So funktioniert's",
+        
+        // Footer
+        footNavHome: "Startseite",
+        footNavServices: "Services",
+        footNavPlans: "Pläne",
+        footHowItWorks: "So funktioniert's",
+        footPrivacy: "Datenschutz",
+        footTerms: "AGB",
+        footCookies: "Cookies",
+        footLinksTitle: "Links",
+        footLegalTitle: "Rechtliches",
+        footPaymentsTitle: "Zahlungen",
+        footFollowUs: "Folgen Sie Uns",
+        footAbout: "Hauspflege zur Kunstform erheben. Erleben Sie den Sparkllex-Unterschied.",
+        footerRights: "© 2026 Sparkllex. Alle Rechte vorbehalten.",
+        whatsappLabel: "WhatsApp",
+        
+        // Reviews
+        reviewsLabel: "Was Unsere Kunden Sagen",
+        reviewsTitle: "Kundenbewertungen",
+        reviewsSubtitle: "Echte Erfahrungen unserer geschätzten Mitglieder, die Sparkllex vertrauen.",
+        viewAllReviews: "Alle Bewertungen",
+        leaveReview: "Bewertung Schreiben",
+        shareExperience: "Teilen Sie Ihre Erfahrung",
+        yourRating: "Ihre Bewertung",
+        serviceType: "Service-Typ",
+        yourComment: "Ihr Kommentar",
+        submitReview: "Bewertung Senden",
+        
+        // Login/Signup
         loginTitle: "Willkommen",
         loginButton: "Anmelden",
+        labelEmail: "Ihre E-Mail",
+        labelPassword: "Passwort",
+        forgotPassword: "Vergessen?",
+        dontHaveAccount: "Kein Konto?",
+        signUpHere: "Registrieren",
         signupTitle: "Konto Erstellen",
-        reviewsTitle: "Kundenbewertungen",
-        leaveReview: "Bewertung Schreiben",
-        footerRights: "© 2026 Sparkllex. Alle Rechte vorbehalten."
+        signupSubtitle: "Registrieren Sie sich für Ihren Premium-Plan",
+        labelName: "Vollständiger Name",
+        labelPhone: "Telefon",
+        labelPlan: "Ausgewählter Plan",
+        termsText: "Mit der Anmeldung akzeptieren Sie unsere AGB und Datenschutzrichtlinie.",
+        
+        // Members App
+        logout: "Abmelden",
+        booking: "Buchen",
+        membershipStatus: "Dashboard",
+        myAppointments: "Meine Termine",
+        yourHistory: "Verlauf",
+        settings: "Einstellungen",
+        aISupport: "KI-Support",
+        upcomingServices: "Kommende Services",
+        bookNow: "Jetzt Buchen",
+        newBooking: "Neue Buchung",
+        confirmBooking: "Buchung Bestätigen",
+        
+        // How it works
+        howItWorksTitle: "Ihre Zeit ist wertvoll",
+        howItWorksSubtitle: "Entdecken Sie, wie Sparkllex die Hausverwaltung in ein Luxuserlebnis verwandelt.",
+        step1Title: "In Sekunden buchen",
+        step1Desc: "Von unserer Plattform oder WhatsApp, wählen Sie Service und Zeit.",
+        step2Title: "Premium-Service",
+        step2Desc: "Ein Sparkllex-Concierge besucht Ihr Zuhause für Abholung oder Aufgaben.",
+        step3Title: "Premium-Pflege",
+        step3Desc: "Wir wenden höchste Standards an: umweltfreundliche Wäsche und Tiefenreinigung.",
+        step4Title: "Lieferung und Bestätigung",
+        step4Desc: "Erhalten Sie Ihre Services pünktlich. Wir informieren per App und WhatsApp.",
+        
+        // Pricing
+        pricingTitle1: "Premium",
+        pricingTitle2: "Pläne",
+        pricingSubtitle: "Wählen Sie das Pflegeniveau, das Ihr Zuhause verdient.",
+        whatsIncluded: "Was ist enthalten?",
+        choosePlan: "Diesen Plan Wählen",
+        
+        // 404
+        error_404_title: "Ups! Seite Nicht Gefunden",
+        back_home: "Zur Startseite",
+        contact_us: "Kontakt",
+        
+        // Blog
+        blog_subtitle: "Tipps und Anleitungen",
+        blog_read_more: "Mehr Lesen",
+        blog_subscribe: "Abonnieren",
+        
+        // Contact
+        contact_form_title: "Nachricht Senden",
+        form_name: "Name",
+        form_email: "E-Mail",
+        form_message: "Nachricht",
+        form_send: "Senden",
+        
+        // FAQ
+        faq_hero_title: "Häufig Gestellte <span class=\"text-teal-primary\">Fragen</span>",
+        faq_cta_title: "Noch Fragen?",
+        
+        // About
+        about_mission_title: "Unsere Mission",
+        about_vision_title: "Unsere Vision",
+        about_values_title: "Unsere Werte",
+        value_quality: "Qualität",
+        value_trust: "Vertrauen",
+        value_eco: "Umweltfreundlich",
+        value_care: "Fürsorge",
+        cta_start_today: "Heute Starten"
     },
 
-    // Italian - Core translations (others fallback to English)
+    // Italian - Full translations
     it: {
+        // Navigation & Headers
         btnAccess: "Accedi",
         indexTitle: "Lusso e Perfezione",
         indexSubtitle: "Servizi premium su misura per il tuo stile di vita",
-        getStarted: "Inizia",
+        
+        // Call-to-action buttons
+        getStarted: "Inizia Ora",
         viewServices: "Vedi Servizi",
+        
+        // Stats section
         clients: "Clienti Soddisfatti",
         rating: "Valutazione",
         support: "Supporto",
         guarantee: "Soddisfazione",
+        
+        // Services section
         ourServices: "I Nostri Servizi Premium",
         deepCleaning: "Pulizia Profonda",
         eliteLaundry: "Lavanderia Elite",
-        masterIroning: "Stiratura Professionale",
+        masterIroning: "Stiratura Esperta",
         maintenance: "Manutenzione Casa",
+        
+        // Why Choose Sparkllex
         whyChooseSparkllex: "Perché Scegliere Sparkllex?",
         totalTrust: "Fiducia Totale",
+        rigorouslySelected: "Personale selezionato rigorosamente e formato secondo i nostri standard.",
         premiumQuality: "Qualità Premium",
+        highEndProducts: "Utilizziamo solo prodotti di pulizia eco-friendly di alta gamma.",
         flexibility: "Flessibilità Totale",
+        plansAdapted: "Piani su misura che si adattano perfettamente al tuo ritmo.",
+        
+        // Subscription Plans
         subscriptionPlans: "Piani di Abbonamento",
-        basicPlan: "Essenziale",
-        proPlan: "Professionale",
-        familiarPlan: "Famiglia",
-        perMonth: "/mese",
+        basicPlan: "Base",
+        perMonth: "/Mese",
+        basicSubtitle: "Perfetto per piccoli appartamenti.",
+        seeMore1: "Vedi Altro",
+        choosePlan1: "Scegli",
         mostPopular: "Più Popolare",
-        contact: "Contattaci",
-        callUs: "Chiamaci Ora",
+        proPlan: "Professionale",
+        perMonth2: "/Mese",
+        proSubtitle: "Ideale per professionisti impegnati.",
+        seeMore2: "Vedi Altro",
+        choosePlan2: "Scegli",
+        familiarPlan: "Famiglia",
+        perMonth3: "/Mese",
+        familiarSubtitle: "Cura completa per la tua casa familiare.",
+        seeMore3: "Vedi Altro",
+        choosePlan3: "Scegli",
+        
+        // Contact section
+        contact: "Contatto",
+        callUs: "Chiama Ora",
+        
+        // Navigation
         homeNav: "Home",
         servicesNav: "Servizi",
         plansNav: "Piani",
         howItWorksNav: "Come Funziona",
-        logout: "Esci",
-        settings: "Impostazioni",
+        mobileNavHome: "Home",
+        mobileNavServices: "Servizi",
+        mobileNavPlans: "Piani",
+        mobileHowItWorks: "Come Funziona",
+        
+        // Footer
+        footNavHome: "Home",
+        footNavServices: "Servizi",
+        footNavPlans: "Piani",
+        footHowItWorks: "Come Funziona",
+        footPrivacy: "Privacy",
+        footTerms: "Termini",
+        footCookies: "Cookie",
+        footLinksTitle: "Link",
+        footLegalTitle: "Legale",
+        footPaymentsTitle: "Pagamenti",
+        footFollowUs: "Seguici",
+        footAbout: "Elevare la cura della casa a forma d'arte. Scopri la differenza Sparkllex.",
+        footerRights: "© 2026 Sparkllex. Tutti i diritti riservati.",
+        whatsappLabel: "WhatsApp",
+        
+        // Reviews
+        reviewsLabel: "Cosa Dicono i Nostri Clienti",
+        reviewsTitle: "Recensioni dei Clienti",
+        reviewsSubtitle: "Esperienze reali dei nostri stimati membri che si fidano di Sparkllex.",
+        viewAllReviews: "Vedi Tutte le Recensioni",
+        leaveReview: "Lascia una Recensione",
+        shareExperience: "Condividi la Tua Esperienza",
+        yourRating: "La Tua Valutazione",
+        serviceType: "Tipo di Servizio",
+        yourComment: "Il Tuo Commento",
+        submitReview: "Invia Recensione",
+        
+        // Login/Signup
         loginTitle: "Benvenuto",
         loginButton: "Accedi",
+        labelEmail: "La Tua Email",
+        labelPassword: "Password",
+        forgotPassword: "Dimenticata?",
+        dontHaveAccount: "Non hai un account?",
+        signUpHere: "Registrati",
         signupTitle: "Crea Account",
-        reviewsTitle: "Recensioni Clienti",
-        leaveReview: "Lascia Recensione",
-        footerRights: "© 2026 Sparkllex. Tutti i diritti riservati."
+        signupSubtitle: "Registrati per il tuo piano premium",
+        labelName: "Nome Completo",
+        labelPhone: "Telefono",
+        labelPlan: "Piano Selezionato",
+        termsText: "Registrandoti, accetti i nostri Termini di Servizio e la Privacy Policy.",
+        
+        // Members App
+        logout: "Esci",
+        booking: "Prenota",
+        membershipStatus: "Dashboard",
+        myAppointments: "I Miei Appuntamenti",
+        yourHistory: "Cronologia",
+        settings: "Impostazioni",
+        aISupport: "Supporto IA",
+        upcomingServices: "Prossimi Servizi",
+        bookNow: "Prenota Ora",
+        newBooking: "Nuova Prenotazione",
+        confirmBooking: "Conferma Prenotazione",
+        
+        // How it works
+        howItWorksTitle: "Il tuo tempo è prezioso",
+        howItWorksSubtitle: "Scopri come Sparkllex trasforma la gestione della casa in un'esperienza di lusso.",
+        step1Title: "Prenota in pochi secondi",
+        step1Desc: "Dalla nostra piattaforma o WhatsApp, scegli il servizio e l'orario.",
+        step2Title: "Servizio Premium",
+        step2Desc: "Un concierge Sparkllex visita la tua casa per ritiri o servizi.",
+        step3Title: "Cura Premium",
+        step3Desc: "Applichiamo i più alti standard: lavaggio eco-friendly e pulizia profonda.",
+        step4Title: "Consegna e conferma",
+        step4Desc: "Ricevi i tuoi servizi puntuali. Ti notifichiamo via app e WhatsApp.",
+        
+        // Pricing
+        pricingTitle1: "Piani",
+        pricingTitle2: "Premium",
+        pricingSubtitle: "Scegli il livello di cura che la tua casa merita.",
+        whatsIncluded: "Cosa è incluso?",
+        choosePlan: "Scegli Questo Piano",
+        
+        // 404
+        error_404_title: "Ops! Pagina Non Trovata",
+        back_home: "Torna alla Home",
+        contact_us: "Contattaci",
+        
+        // Blog
+        blog_subtitle: "Consigli e guide",
+        blog_read_more: "Leggi di Più",
+        blog_subscribe: "Iscriviti",
+        
+        // Contact
+        contact_form_title: "Invia un Messaggio",
+        form_name: "Nome",
+        form_email: "Email",
+        form_message: "Messaggio",
+        form_send: "Invia",
+        
+        // FAQ
+        faq_hero_title: "Domande <span class=\"text-teal-primary\">Frequenti</span>",
+        faq_cta_title: "Hai Altre Domande?",
+        
+        // About
+        about_mission_title: "La Nostra Missione",
+        about_vision_title: "La Nostra Visione",
+        about_values_title: "I Nostri Valori",
+        value_quality: "Qualità",
+        value_trust: "Fiducia",
+        value_eco: "Eco-Friendly",
+        value_care: "Cura",
+        cta_start_today: "Inizia Oggi"
     }
 };
 

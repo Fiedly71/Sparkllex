@@ -11,7 +11,7 @@
 
 (function () {
     const STORAGE_KEY = 'sparkllex_language';
-    const SUPPORTED_LANGS = ['en', 'es'];
+    const SUPPORTED_LANGS = ['en', 'es', 'fr', 'pt', 'de', 'it'];
 
     function normalizeLang(lang) {
         if (!lang) return null;
