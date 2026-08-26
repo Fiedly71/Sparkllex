@@ -5,15 +5,15 @@ const STRIPE_CONFIG = {
 const STRIPE_PRICING_PLANS = {
     basico: { 
         priceId: 'price_1Ss6yTIccQ4MNulwrZnZFdTx', 
-        url: 'https://buy.stripe.com/fZu6oHdNz5dCdRX2Fkb3q06' 
+        url: 'https://buy.stripe.com/28EcN5cJv0Xm0175Rwb3q0a' 
     },
     pro: { 
         priceId: 'price_1Ss6zEIccQ4MNulwvkTloCjn', 
-        url: 'https://buy.stripe.com/8x29AT5h30Xm6pveo2b3q07' 
+        url: 'https://buy.stripe.com/cNi7sL38V0Xm7tz93Ib3q0b' 
     },
     familiar: { 
         priceId: 'price_1Ss703IccQ4MNulwaKlBAh5R', 
-        url: 'https://buy.stripe.com/cNi14nbFr35u6pv5Rwb3q08' 
+        url: 'https://buy.stripe.com/8x29ATdNzcG415bdjYb3q0c' 
     }
 };
 

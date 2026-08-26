@@ -213,7 +213,7 @@
 
             // Logic MRR
             const counts = active.reduce((acc, p) => { acc[normalizePlan(p.plan)]++; return acc; }, { family: 0, pro: 0, basic: 0 });
-            const mrr = (counts.family * 249) + (counts.pro * 149) + (counts.basic * 79);
+            const mrr = (counts.family * 299) + (counts.pro * 179) + (counts.basic * 99);
             
             // Logic UI
             document.getElementById('total-revenue').textContent = formatter.format(mrr);
